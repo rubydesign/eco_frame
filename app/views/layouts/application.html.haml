@@ -8,4 +8,14 @@
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
   %body
+    %header
     = yield
+    %footer
+      .logo
+        %h3 ECOFRAMEHOUSE
+        %p Fiskarsintie 847, 10480 Antskog
+        %p info@ecoframe.house    tel 040 730 8052
+      .form
+        Form
+      .map
+        Map
