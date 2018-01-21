@@ -15,7 +15,7 @@
  * specialized for dragging svg objects.
  */
 Vue.component('draggable', {
-    props: ['model', 'constraint'],
+    props: ['model', 'constraint', 'constrainx', 'constrainy'],
     template: `
        <g :class="classList"
           :transform='"translate(" + [this.model.x, this.model.y] + ")"'
@@ -63,8 +63,8 @@ Vue.component('draggable', {
             if (rect.left <= domCoords.x && domCoords.x < rect.right
                 && rect.top <= domCoords.y && domCoords.y < rect.bottom
                 && (this.constraint === undefined || this.constraint(newX, newY))) {
-                this.model.x = newX;
-                this.model.y = newY;
+                if(this.constrainx == null) this.model.x = newX;
+                if(this.constrainy == null) this.model.y = newY;
             }
         },
         mousedown: function(e) {
