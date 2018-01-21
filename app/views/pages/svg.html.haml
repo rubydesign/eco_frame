@@ -2,13 +2,38 @@
   %svg{:viewbox => "0 0 500 500" , class:  :index_graph}
     %rect{ ":width": "end" , ":height": "end", fill: "none",
           stroke: "#000000",  "stroke-width": "1" }
+    %line{ "x1": "0" ,    ":y1": "end + 10" ,
+           ":x2": "end" , ":y2": "end + 10 " ,
+             "stroke": "rgb(0,0,0)" , "stroke-width": 2}
+    %text{":y": "end + 28" , ":x": "(end - start) / 2 - 10" , fill: "#000"}
+      {{ point.x.toFixed(0) }}
+    %text{":y": "end + 28" , ":x": "(end - start) / 2 + 20" , fill: "#000"}
+      {{ point.y.toFixed(0) }}
+    %draggable{ ":model": "point"}
+      %circle{ "r": 10 }
 
 :ruby2js
+  class Post
+    def initialize(pos = 100)
+      @size = 0
+      @position = pos
+    end
+  end
+  class Frame
+    def initialize(trusses = 1)
+      @size = 0
+      @start = 0
+      @trusses = []
+      0.upto(trusses) { |i| @trusses << Post.new(i * 100)}
+    end
+  end
   class Graph < Vue
     el ".graph_app"
     def initialize
+      @point = {x: 10 , y: 10}
       @start = 3
       @end = 100
+      @frame = Frame.new
     end
 
     def line
