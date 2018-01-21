@@ -1,0 +1,5 @@
+require "ruby2js"
+require "ruby2js/es2015"
+require "ruby2js/filter/functions"
+require "ruby2js/haml"
+require "ruby2js/filter/vue"

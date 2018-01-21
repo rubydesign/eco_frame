@@ -1,0 +1,22 @@
+.graph_app
+  %svg{:viewbox => "0 0 500 500" , class:  :index_graph}
+    %rect{ ":width": "end" , ":height": "end", fill: "none",
+          stroke: "#000000",  "stroke-width": "1" }
+
+:ruby2js
+  class Graph < Vue
+    el ".graph_app"
+    def initialize
+      @start = 3
+      @end = 100
+    end
+
+    def line
+     return [ [@start,@start] ,
+              [@end,@start] ,
+              [@end,@end] ,
+              [@start,@end],
+              [@start, @start]].join(" ")
+    end
+  end
+  gra = Graph

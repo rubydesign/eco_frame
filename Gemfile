@@ -12,6 +12,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem "high_voltage"
 gem "haml"
+gem 'ruby2js'  , git: "https://github.com/rubys/ruby2js"
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
