@@ -5,16 +5,30 @@
       %rect.frame{ ":width": "length" , ":height": "width", fill: "none",
             stroke: "#000000",  "stroke-width": "3" }
 
-    %line.slider{ x1: 0 ,y1: 0 , x2: 0 , ":y2": "width/3" ,
+    %line.slider{ x1: 2 ,y1: 0 , x2: 2 , ":y2": "width/3" ,
+                  "stroke": "rgb(0,0,0)" , "stroke-width": 3}
+    %line.slider{ x1: 2 ,":y1": "2*width/3" , x2: 2 , ":y2": "width" ,
                   "stroke": "rgb(0,0,0)" , "stroke-width": 3}
     %text{x: 0 , ":y": "width / 2" , fill: "#000"}
       %tspan Width
       %tspan{x: 0, dy: 15} {{ width_slider.y.toFixed(0) }}
       %tspan{x: 0, dy: 15} cm
-    %line.slider{ x1: 0 ,":y1": "2*width/3" , x2: 0 , ":y2": "width" ,
-                  "stroke": "rgb(0,0,0)" , "stroke-width": 3}
     %draggable{ ":model": "width_slider" , constrainx: 1}
       %circle{ "r": 10 }
+
+    %line.slider{ x1: 0 ,":y1": "total_width - 10" ,
+                  ":x2": "total_length / 3" , ":y2": "total_width - 10" ,
+                  "stroke": "rgb(0,0,0)" , "stroke-width": 3}
+    %line.slider{ ":x1": "2*length / 3" ,":y1": "total_width - 10" ,
+                  ":x2": "total_length " , ":y2": "total_width - 10" ,
+                  "stroke": "rgb(0,0,0)" , "stroke-width": 3}
+    %text{":x": "total_length / 3 + 10" , ":y": "total_width - 10" , fill: "#000"}
+      %tspan Length
+      %tspan {{ length_slider.x.toFixed(0) }}
+      %tspan cm
+    %draggable{ ":model": "length_slider" , constrainy: 1}
+      %circle{ "r": 10 }
+
 
 :ruby2js
   class Graph < Vue
@@ -25,7 +39,8 @@
       @frame = {trusses: true , posts: false}
       @width = 300
       @length = 3*300
-      @width_slider = {x: 10 , y: @width}
+      @width_slider = {x: 0 , y: @width}
+      @length_slider = {x: (@length + @padd - 7), y: @width + @padd / 2}
     end
 
     def total_width
