@@ -1,4 +1,7 @@
 .graph_app
+  .stats
+    Cubic meters: {{cubes}}
+    %br
   %svg{ ":width": "total_length" , ":height": "total_width",
         ":viewbox": "'0 0 ' + total_width + ' ' + total_length" , class:  :index_graph}
     %g.frame{ ":transform": "`translate(${padd},0)`"}
@@ -47,23 +50,35 @@
     def initialize
       @posts = 3
       @padd = 30
-      @frame = {trusses: true , posts: false , size: 15}
-      @width = 300
-      @width_slider = {x: 0 , y: @width}
-      @length = @posts*300
-      @length_slider = {x: @length , y: 0 }
+      @frame = {trusses: true , size: 15 , height: 250}
+      @width_slider = {x: 0 , y: 300}
+      @length_slider = {x: 3*300 , y: 0 }
+    end
+    def width
+      return @width_slider.y
+    end
+    def length
+      return @length_slider.x
     end
     def posts_positions
       arr = []
-      0.upto(@posts - 1){ |i| arr << Math.floor(i * (@length-@frame.size)/(@posts - 1))}
-      arr << @length - @frame.size
+      0.upto(@posts - 1){ |i| arr << Math.floor(i * (self.length - @frame.size)/(@posts - 1))}
+      arr << self.length - @frame.size
       arr
     end
     def total_width
-      return @width + @padd
+      return self.width + @padd
     end
     def total_length
-      return @length + @padd
+      return self.length + @padd
+    end
+    def cubes
+      sum = @posts * @frame.size * @frame.size * @frame.height + truss_cubes
+      return (sum / (100*100*100)).toFixed(2)
+    end
+    def truss_cubes
+      return 0 unless @frame.trusses
+      @posts * @frame.size * @frame.size * self.width
     end
   end
   gra = Graph
