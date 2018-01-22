@@ -4,6 +4,12 @@
     %br
   %svg{ ":width": "total_length" , ":height": "total_width",
         ":viewbox": "'0 0 ' + total_width + ' ' + total_length" , class:  :index_graph}
+    %g{ ":transform": "`translate(${3*padd},${3*padd})`"}
+      %text{":x": "0" , ":y": "0" }
+        %tspan Spacing
+        %tspan {{ spacing }}
+        %tspan cm
+
     %g.frame{ ":transform": "`translate(${padd},0)`"}
       %rect.frame{ ":width": "length" , ":height": "width"}
       %template{ "v-for": "pos in posts_positions"}
@@ -43,13 +49,20 @@
     %draggable{ ":model": "width_slider" , constrainx: 1}
       %circle{ "r": 10 }
   .post_control
-    %a{ "@click" => "posts += 1"}
-      =image_tag "plus.png"
-    \&nbsp;
-    %span {{posts}}
-    \&nbsp;
-    %a{ "@click" => "posts -= 1"}
-      =image_tag "minus.png"
+    %table
+      %thead
+        %th
+        %th Posts
+        %th
+      %tbody
+        %tr
+          %td
+            %a{ "@click" => "posts -= 1"}
+              =image_tag "minus.png"
+          %td.center {{posts}}
+          %td
+            %a{ "@click" => "posts += 1"}
+              =image_tag "plus.png"
 
 :ruby2js
   class Graph < Vue
@@ -66,6 +79,9 @@
     end
     def length
       return @length_slider.x
+    end
+    def spacing
+      return (self.length / @posts).toFixed(0)
     end
     def posts_positions
       arr = []
@@ -87,7 +103,7 @@
       return @posts * @frame.size * @frame.size * @frame.height
     end
     def plate_cubes
-      meters = 2 * self.length 
+      meters = 2 * self.length
       meters += 2 * self.width unless @frame.trusses
       return @frame.size * @frame.size * meters
     end
