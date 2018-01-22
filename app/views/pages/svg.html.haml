@@ -25,7 +25,7 @@
                     ":x2": "total_length / 3" , ":y2": "0" }
       %line.slider{ ":x1": "2*length / 3" ,":y1": "0" ,
                     ":x2": "total_length " , ":y2": "0" }
-      %text{":x": "(total_length ) / 2 " , ":y": "0" }
+      %text{":x": "total_length / 3 + padd" , ":y": "0" }
         %tspan Length
         %tspan {{ length_slider.x.toFixed(0) }}
         %tspan cm
@@ -42,7 +42,14 @@
       %tspan{x: 0, dy: 15} cm
     %draggable{ ":model": "width_slider" , constrainx: 1}
       %circle{ "r": 10 }
-
+  .post_control
+    %a{ "@click" => "posts += 1"}
+      =image_tag "plus.png"
+    \&nbsp;
+    %span {{posts}}
+    \&nbsp;
+    %a{ "@click" => "posts -= 1"}
+      =image_tag "minus.png"
 
 :ruby2js
   class Graph < Vue
@@ -73,12 +80,20 @@
       return self.length + @padd
     end
     def cubes
-      sum = @posts * @frame.size * @frame.size * @frame.height + truss_cubes
+      sum = post_cubes + truss_cubes + plate_cubes
       return (sum / (100*100*100)).toFixed(2)
+    end
+    def post_cubes
+      return @posts * @frame.size * @frame.size * @frame.height
+    end
+    def plate_cubes
+      meters = 2 * self.length 
+      meters += 2 * self.width unless @frame.trusses
+      return @frame.size * @frame.size * meters
     end
     def truss_cubes
       return 0 unless @frame.trusses
-      @posts * @frame.size * @frame.size * self.width
+      return @posts * @frame.size * @frame.size * (self.width * 2) #for now
     end
   end
   gra = Graph
