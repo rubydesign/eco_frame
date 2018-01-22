@@ -54,6 +54,10 @@
         %th
         %th Posts
         %th
+        %th
+        %th Post (cm)
+        %th Size (in)
+        %th
       %tbody
         %tr
           %td
@@ -62,6 +66,14 @@
           %td.center {{posts}}
           %td
             %a{ "@click" => "posts += 1"}
+              =image_tag "plus.png"
+          %td
+            %a{ "@click" => "frame.size -= 2.5"}
+              =image_tag "minus.png"
+          %td.center {{frame.size}}
+          %td.center {{(frame.size /2.5).toFixed(0) }}
+          %td
+            %a{ "@click" => "frame.size += 2.5"}
               =image_tag "plus.png"
 
 :ruby2js
