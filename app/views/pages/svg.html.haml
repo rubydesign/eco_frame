@@ -3,19 +3,31 @@
         ":viewbox": "'0 0 ' + total_width + ' ' + total_length" , class:  :index_graph}
     %g.frame{ ":transform": "`translate(${padd},0)`"}
       %rect.frame{ ":width": "length" , ":height": "width"}
-      %rect.post{ ":width": "frame.size" , ":height": "frame.size" }
-      %rect.post{ ":width": "frame.size" , ":height": "frame.size",
-                  ":transform": "`translate(0,${width - frame.size})`"}
-    %line.slider{ ":x1": "padd" ,":y1": "total_width - 10" ,
-                  ":x2": "total_length / 3" , ":y2": "total_width - 10" }
-    %line.slider{ ":x1": "2*length / 3" ,":y1": "total_width - 10" ,
-                  ":x2": "total_length " , ":y2": "total_width - 10" }
-    %text{":x": "(total_length -padd) / 2 - padd" , ":y": "total_width " }
-      %tspan Length
-      %tspan {{ length_slider.x.toFixed(0) - padd}}
-      %tspan cm
-    %draggable{ ":model": "length_slider" , constrainy: 1}
-      %circle{ "r": 10 }
+      %template{ "v-for": "pos in posts_positions"}
+        %g{ ":transform": "`translate(${pos},0)`" }
+          %rect.post{ ":width": "frame.size" , ":height": "frame.size" }
+          %line.fine{ ":x1": "0" ,":y1": "0" ,
+                      ":x2": "frame.size" , ":y2": "frame.size" }
+          %line.fine{ ":x1": "0" ,":y1": "frame.size" ,
+                      ":x2": "frame.size" , ":y2": "0" }
+          %g{":transform": "`translate(0,${width - frame.size})`"}
+            %rect.post{ ":width": "frame.size" , ":height": "frame.size"}
+            %line.fine{ ":x1": "0" ,":y1": "0" ,
+                        ":x2": "frame.size" , ":y2": "frame.size" }
+            %line.fine{ ":x1": "0" ,":y1": "frame.size" ,
+                        ":x2": "frame.size" , ":y2": "0" }
+
+    %g.frame{ ":transform": "`translate(${padd - 10 },${total_width - 10})`"}
+      %line.slider{ ":x1": "10" ,":y1": "0" ,
+                    ":x2": "total_length / 3" , ":y2": "0" }
+      %line.slider{ ":x1": "2*length / 3" ,":y1": "0" ,
+                    ":x2": "total_length " , ":y2": "0" }
+      %text{":x": "(total_length ) / 2 " , ":y": "0" }
+        %tspan Length
+        %tspan {{ length_slider.x.toFixed(0) }}
+        %tspan cm
+      %draggable{ ":model": "length_slider" , constrainy: 1}
+        %circle{ "r": 10 }
 
     %line.slider{ x1: 2 ,y1: 0 , x2: 2 , ":y2": "width/3" ,
                   "stroke": "rgb(0,0,0)" , "stroke-width": 3}
@@ -33,27 +45,25 @@
   class Graph < Vue
     el ".graph_app"
     def initialize
-      no = 3
+      @posts = 3
       @padd = 30
       @frame = {trusses: true , posts: false , size: 15}
       @width = 300
-      @length = 3*300
       @width_slider = {x: 0 , y: @width}
-      @length_slider = {x: @length + @padd, y: @width + @padd / 2}
+      @length = @posts*300
+      @length_slider = {x: @length , y: 0 }
     end
-
+    def posts_positions
+      arr = []
+      0.upto(@posts - 1){ |i| arr << Math.floor(i * (@length-@frame.size)/(@posts - 1))}
+      arr << @length - @frame.size
+      arr
+    end
     def total_width
       return @width + @padd
     end
     def total_length
       return @length + @padd
-    end
-    def line
-     return [ [@start,@start] ,
-              [@end,@start] ,
-              [@end,@end] ,
-              [@start,@end],
-              [@start, @start]].join(" ")
     end
   end
   gra = Graph
