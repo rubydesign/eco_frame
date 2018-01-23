@@ -4,11 +4,15 @@
     %br
   %svg{ ":width": "total_length" , ":height": "total_width",
         ":viewbox": "'0 0 ' + total_width + ' ' + total_length" , class:  :index_graph}
-    %g{ ":transform": "`translate(${3*padd},${3*padd})`"}
-      %text{":x": "0" , ":y": "0" }
+    %g{ ":transform": "`translate(${spacing -20},${width})`"}
+      %text{":x": "-50" , ":y": "-50" }
         %tspan Spacing
         %tspan {{ spacing }}
         %tspan cm
+        %tspan{dy: 25 , dx: -80} Drag:
+    %g{ ":transform": "`translate(${padd },${-padd})`"}
+      %draggable{ ":model": "size_slider" }
+        %circle{ "r": 10 }
 
     %g.frame{ ":transform": "`translate(${padd},0)`"}
       %rect.frame{ ":width": "length" , ":height": "width"}
@@ -33,10 +37,8 @@
                     ":x2": "total_length " , ":y2": "0" }
       %text{":x": "total_length / 3 + padd" , ":y": "0" }
         %tspan Length
-        %tspan {{ length_slider.x.toFixed(0) }}
+        %tspan {{ length.toFixed(0) }}
         %tspan cm
-      %draggable{ ":model": "length_slider" , constrainy: 1}
-        %circle{ "r": 10 }
 
     %line.slider{ x1: 2 ,y1: 0 , x2: 2 , ":y2": "width/3" ,
                   "stroke": "rgb(0,0,0)" , "stroke-width": 3}
@@ -44,10 +46,8 @@
                   "stroke": "rgb(0,0,0)" , "stroke-width": 3}
     %text{x: 0 , ":y": "(width - padd ) / 2" }
       %tspan Width
-      %tspan{x: 0, dy: 15} {{ width_slider.y.toFixed(0) }}
+      %tspan{x: 0, dy: 15} {{ width.toFixed(0) }}
       %tspan{x: 0, dy: 15} cm
-    %draggable{ ":model": "width_slider" , constrainx: 1}
-      %circle{ "r": 10 }
   .post_control
     %table
       %thead
@@ -61,11 +61,11 @@
       %tbody
         %tr
           %td
-            %a{ "@click" => "posts -= 1"}
+            %a{ "@click" => "frame.posts -= 1"}
               =image_tag "minus.png"
-          %td.center {{posts}}
+          %td.center {{frame.posts}}
           %td
-            %a{ "@click" => "posts += 1"}
+            %a{ "@click" => "frame.posts += 1"}
               =image_tag "plus.png"
           %td
             %a{ "@click" => "frame.size -= 2.5"}
@@ -80,24 +80,22 @@
   class Graph < Vue
     el ".graph_app"
     def initialize
-      @posts = 3
       @padd = 30
-      @frame = {trusses: true , size: 15 , height: 250}
-      @width_slider = {x: 0 , y: 300}
-      @length_slider = {x: 3*300 , y: 0 }
+      @frame = {trusses: true , size: 15 , height: 250, posts: 3}
+      @size_slider = {x: 450 , y: 300}
     end
     def width
-      return @width_slider.y
+      return @size_slider.y
     end
     def length
-      return @length_slider.x
+      return self.spacing * (@frame.posts - 1 )
     end
     def spacing
-      return (self.length / @posts).toFixed(0)
+      return @size_slider.x
     end
     def posts_positions
       arr = []
-      0.upto(@posts - 1){ |i| arr << Math.floor(i * (self.length - @frame.size)/(@posts - 1))}
+      0.upto(@frame.posts - 1){ |i| arr << Math.floor(i * (self.length - @frame.size)/(@frame.posts - 1))}
       arr << self.length - @frame.size
       arr
     end
@@ -112,7 +110,7 @@
       return (sum / (100*100*100)).toFixed(2)
     end
     def post_cubes
-      return @posts * @frame.size * @frame.size * @frame.height
+      return @frame.posts * @frame.size * @frame.size * @frame.height
     end
     def plate_cubes
       meters = 2 * self.length
@@ -121,7 +119,7 @@
     end
     def truss_cubes
       return 0 unless @frame.trusses
-      return @posts * @frame.size * @frame.size * (self.width * 2) #for now
+      return @frame.posts * @frame.size * @frame.size * (self.width * 2) #for now
     end
   end
   gra = Graph
