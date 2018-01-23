@@ -2,7 +2,7 @@
   .stats
     Cubic meters: {{cubes}}
     %br
-  %svg{ ":width": "total_length" , ":height": "total_width",
+  %svg.main{ ":width": "total_length" , ":height": "total_width",
         ":viewbox": "'0 0 ' + total_width + ' ' + total_length" , class:  :index_graph}
     %g{ ":transform": "`translate(${spacing -20},${width})`"}
       %text{":x": "-50" , ":y": "-50" }
@@ -76,24 +76,24 @@
           %td
             %a{ "@click" => "frame.size += 2.5"}
               =image_tag "plus.png"
-    .front
-      %svg{ ":width": "spacing + padd" , ":height": "frame_height + padd",
-            ":viewbox": "'0 0 ' + total_width + ' ' + (frame_height + padd)" }
-        %g{"v-if": "frame.trusses"}
-          %line{  ":x1": 0 , ":y1":"frame.truss_height" ,
-                  ":x2":"spacing / 2" , ":y2": 0  }
-          %line{  ":x1":"spacing / 2" , ":y1": 0 ,
-                  ":x2":"spacing" , ":y2": "frame.truss_height"  }
-          %line{  ":x1": "frame.size" , ":y1":"frame.truss_height" ,
-                  ":x2":"spacing / 2" , ":y2": "frame.size"  }
-          %line{  ":x1":"spacing / 2" , ":y1": "frame.size" ,
-                  ":x2":"spacing - frame.size" , ":y2": "frame.truss_height"  }
-        %g.frame{ ":transform": "`translate(0,${frame.truss_height})`"}
-          %rect.frame{ ":width": "spacing" , ":height": "frame.size"}
-          %rect.frame{ ":x": "spacing - frame.size", ":y": "frame.size" ,
-                      ":width": "frame.size" , ":height": "frame.height"}
-          %rect.frame{ ":x": "0", ":y": "frame.size" ,
-                      ":width": "frame.size" , ":height": "frame.height"}
+  .front
+    %svg{ ":width": "spacing + padd" , ":height": "frame_height + padd",
+          ":viewbox": "'0 0 ' + total_width + ' ' + (frame_height + padd)" }
+      %g{"v-if": "frame.trusses"}
+        %line{  ":x1": 0 , ":y1":"frame.truss_height" ,
+                ":x2":"spacing / 2" , ":y2": 0  }
+        %line{  ":x1":"spacing / 2" , ":y1": 0 ,
+                ":x2":"spacing" , ":y2": "frame.truss_height"  }
+        %line{  ":x1": "frame.size" , ":y1":"frame.truss_height" ,
+                ":x2":"spacing / 2" , ":y2": "frame.size"  }
+        %line{  ":x1":"spacing / 2" , ":y1": "frame.size" ,
+                ":x2":"spacing - frame.size" , ":y2": "frame.truss_height"  }
+      %g.frame{ ":transform": "`translate(0,${frame.truss_height})`"}
+        %rect.frame{ ":width": "spacing" , ":height": "frame.size"}
+        %rect.frame{ ":x": "spacing - frame.size", ":y": "frame.size" ,
+                    ":width": "frame.size" , ":height": "frame.height"}
+        %rect.frame{ ":x": "0", ":y": "frame.size" ,
+                    ":width": "frame.size" , ":height": "frame.height"}
 
 :ruby2js
   class Graph < Vue
