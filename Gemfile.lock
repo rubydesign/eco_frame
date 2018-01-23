@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/rubys/ruby2js
-  revision: 93327d97759b8dd992382b9cdc3348f3a4a719e3
+  revision: 42427347630a3bac2e07ba5489b34f693507fa02
   specs:
-    ruby2js (2.1.24)
+    ruby2js (3.0.1)
       parser
 
 GEM

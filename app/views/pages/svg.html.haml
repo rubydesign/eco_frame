@@ -39,6 +39,7 @@
         %tspan Length
         %tspan {{ length.toFixed(0) }}
         %tspan cm
+        %tspan {{ truss_x.toFixed(0) }}
 
     %line.slider{ x1: 2 ,y1: 0 , x2: 2 , ":y2": "width/3" ,
                   "stroke": "rgb(0,0,0)" , "stroke-width": 3}
@@ -77,23 +78,24 @@
             %a{ "@click" => "frame.size += 2.5"}
               =image_tag "plus.png"
   .front
-    %svg{ ":width": "spacing + padd" , ":height": "frame_height + padd",
-          ":viewbox": "'0 0 ' + total_width + ' ' + (frame_height + padd)" }
-      %g{"v-if": "frame.trusses"}
+    %svg{ ":width":"width + padd" , ":height":"frame_height + padd",
+          ":viewbox":"'0 0 ' + total_width + ' ' + frame_height" }
+      %g{"v-if":"frame.trusses"}
         %line{  ":x1": 0 , ":y1":"frame.truss_height" ,
-                ":x2":"spacing / 2" , ":y2": 0  }
-        %line{  ":x1":"spacing / 2" , ":y1": 0 ,
-                ":x2":"spacing" , ":y2": "frame.truss_height"  }
-        %line{  ":x1": "frame.size" , ":y1":"frame.truss_height" ,
-                ":x2":"spacing / 2" , ":y2": "frame.size"  }
-        %line{  ":x1":"spacing / 2" , ":y1": "frame.size" ,
-                ":x2":"spacing - frame.size" , ":y2": "frame.truss_height"  }
-      %g.frame{ ":transform": "`translate(0,${frame.truss_height})`"}
-        %rect.frame{ ":width": "spacing" , ":height": "frame.size"}
-        %rect.frame{ ":x": "spacing - frame.size", ":y": "frame.size" ,
-                    ":width": "frame.size" , ":height": "frame.height"}
-        %rect.frame{ ":x": "0", ":y": "frame.size" ,
-                    ":width": "frame.size" , ":height": "frame.height"}
+                ":x2":"width / 2" , ":y2": 0  }
+        %line{  ":x1":"width / 2" , ":y1": 0 ,
+                ":x2":"width" , ":y2":"frame.truss_height"  }
+        %line{  ":x1":"truss_x" , ":y1":"frame.truss_height" ,
+                ":x2":"width / 2" , ":y2":"truss_x"  }
+        %line{  ":x1":"width / 2" , ":y1":"truss_x" ,
+                ":x2":"width - truss_x" , ":y2":"frame.truss_height"  }
+
+      %g.frame{ ":transform":"`translate(0,${frame.truss_height})`"}
+        %rect.frame{ ":width":"width" , ":height":"frame.size"}
+        %rect.frame{ ":x":"width - frame.size", ":y": "frame.size" ,
+                    ":width":"frame.size" , ":height": "frame.height"}
+        %rect.frame{ ":x":"0", ":y":"frame.size" ,
+                    ":width":"frame.size" , ":height":"frame.height"}
 
 :ruby2js
   class Graph < Vue
@@ -104,8 +106,12 @@
                 truss_height: 140 , posts: 3}
       @size_slider = {x: 450 , y: 300}
     end
-    def width
-      return @size_slider.y
+    def truss_x
+        x = self.width / @frame.truss_height
+        return @frame.size * Math.sqrt( 1 + x * x / 4)
+    end
+    def angle
+      return @frame.height / @size_slider.x
     end
     def length
       return self.spacing * (@frame.posts - 1 )
@@ -121,6 +127,9 @@
       0.upto(@frame.posts - 1){ |i| arr << Math.floor(i * (self.length - @frame.size)/(@frame.posts - 1))}
       arr << self.length - @frame.size
       arr
+    end
+    def width
+      return @size_slider.y
     end
     def total_width
       return self.width + @padd
