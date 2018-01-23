@@ -85,8 +85,8 @@
         %line{  ":x1":"width / 2" , ":y1": 0 ,
                 ":x2":"width" , ":y2":"truss_height"  }
         %line{  ":x1":"truss_x" , ":y1":"truss_height" ,
-                ":x2":"width / 2" , ":y2":"truss_x"  }
-        %line{  ":x1":"width / 2" , ":y1":"truss_x" ,
+                ":x2":"width / 2" , ":y2":"truss_y"  }
+        %line{  ":x1":"width / 2" , ":y1":"truss_y" ,
                 ":x2":"width - truss_x" , ":y2":"truss_height"  }
 
       %g.frame{ ":transform":"`translate(0,${truss_height})`"}
@@ -100,6 +100,7 @@
           %tspan {{ truss_height.toFixed(0) }}
           %tspan cm
           %tspan {{ truss_x.toFixed(0) }}
+          %tspan {{ truss_y.toFixed(0) }}
 
         %draggable{ ":model": "truss_slider" }
           %circle{ "r": 10 }
@@ -115,8 +116,12 @@
       @truss_slider = {x: 150 , y: 150}
     end
     def truss_x
-        x = self.width / self.truss_height
-        return @frame.size * Math.sqrt( 1 + x * x / 4)
+      x = self.width / self.truss_height
+      return @frame.size * Math.sqrt( 1 + x * x / 4)
+    end
+    def truss_y
+      x =  self.truss_height / self.width
+      return @frame.size * Math.sqrt( 1 + 4 * x * x )
     end
     def truss_height
       return @truss_slider.y
