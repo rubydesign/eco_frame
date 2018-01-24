@@ -78,26 +78,12 @@
             %a{ "@click" => "frame.size += 2.5"}
               =image_tag "plus.png"
   .front
-    %svg{ ":width":"frame.width" , ":height":"frame_height + padd ",
+    %svg{ ":width":"frame.width + 2" , ":height":"frame_height + padd ",
           ":viewbox":"'0 0 ' + frame.width + ' ' + frame_height" }
       %g.frame{ ":transform":"`translate(${0},${2*padd})`"}
         %draggable{ ":startx":"frame.height / 2" ,":starty":"frame.truss_height" ,
                     "v-on:dragged":"moveHeight" }
           %circle{ "r": 10 }
-      %g{"v-if":"frame.trusses"}
-        %line{  ":x1": 0 , ":y1":"frame.truss_height" ,
-                ":x2":"frame.width / 2" , ":y2": 0  }
-        %line{  ":x1":"frame.width / 2" , ":y1": 0 ,
-                ":x2":"frame.width" , ":y2":"frame.truss_height"  }
-        %line{  ":x1":"truss_x" , ":y1":"frame.truss_height" ,
-                ":x2":"frame.width / 2" , ":y2":"truss_y"  }
-        %line{  ":x1":"frame.width / 2" , ":y1":"truss_y" ,
-                ":x2":"frame.width - truss_x" , ":y2":"frame.truss_height"  }
-        %line{  ":x1":"frame.width/2 - frame.size/2" , ":y1":"hit_y" ,
-                ":x2":"frame.width/2 - frame.size/2" , ":y2":"frame.truss_height"  }
-        %line{  ":x1":"frame.width/2 + frame.size/2" , ":y1":"hit_y" ,
-                ":x2":"frame.width/2 + frame.size/2" , ":y2":"frame.truss_height"  }
-
       %g.frame{ ":transform":"`translate(0,${frame.truss_height})`"}
         %rect.frame{ ":width":"frame.width" , ":height":"frame.size"}
         %rect.frame{ ":x":"frame.width - frame.size", ":y":"frame.size" ,
@@ -112,6 +98,39 @@
           %tspan {{ frame.height.toFixed(0) }}
           %tspan{dx: "-50", dy: 20} angle
           %tspan {{ angle }}
+      %g{"v-if":"frame.trusses"}
+        %line{  ":x1": 0 , ":y1":"frame.truss_height" ,
+                ":x2":"frame.width / 2" , ":y2": 0  }
+        %line{  ":x1":"frame.width / 2" , ":y1": 0 ,
+                ":x2":"frame.width" , ":y2":"frame.truss_height"  }
+        %line{  ":x1":"truss_x" , ":y1":"frame.truss_height" ,
+                ":x2":"frame.width / 2" , ":y2":"truss_y"  }
+        %line{  ":x1":"frame.width / 2" , ":y1":"truss_y" ,
+                ":x2":"frame.width - truss_x" , ":y2":"frame.truss_height"  }
+        %line{  ":x1":"frame.width/2 - frame.size/2" , ":y1":"hit_y" ,
+                ":x2":"frame.width/2 - frame.size/2" , ":y2":"frame.truss_height"  }
+        %line{  ":x1":"frame.width/2 + frame.size/2" , ":y1":"hit_y" ,
+                ":x2":"frame.width/2 + frame.size/2" , ":y2":"frame.truss_height"  }
+
+        %g{ ":transform":"`translate(0,${frame.truss_height})`" }
+          %line{  ":x1":"frame.width/ 2 - frame.size/2" ,
+                  ":y1":"-frame.size" ,
+                  ":x2":"dx" ,
+                  ":y2":"-dy"}
+          %line{  ":x1":"frame.width/2 + frame.size/2" ,
+                  ":y1":"-frame.size" ,
+                  ":x2":"frame.width-dx" ,
+                  ":y2":"-dy"}
+
+          %line{  ":x1":"frame.width/2 + frame.size/2" ,
+                  ":y1":"-frame.size - 0.75*truss_y" ,
+                  ":x2":"frame.width - dx - 0.5*truss_x" ,
+                  ":y2":"-dy - 0.5*truss_y"}
+          %line{  ":x1":"frame.width/2 - frame.size/2" ,
+                  ":y1":"-frame.size - 0.75*truss_y" ,
+                  ":x2":"dx + 0.5*truss_x" ,
+                  ":y2":"-dy - 0.5*truss_y"}
+
 
 :ruby2js
   class Graph < Vue
@@ -119,7 +138,13 @@
     def initialize
       @padd = 30
       @frame = {trusses: true , size: 15 , height: 250, spacing: 450,
-                truss_height: 150, width: 300 , posts: 3}
+                truss_height: 120, width: 300 , posts: 3}
+    end
+    def dx
+      return 1.1*@frame.width / 4
+    end
+    def dy
+      return (self.dx - self.truss_x) * Math.tan(angle)
     end
     def moveSize(x,y)
       @frame.spacing = x
@@ -128,7 +153,6 @@
     def moveHeight(x,y)
       @frame.truss_height = y
       @frame.height = 2*x
-      puts "Moved Height (" + x + " , " + y + ")"
     end
     def angle
       return Math.atan(2*@frame.truss_height / @frame.width)
