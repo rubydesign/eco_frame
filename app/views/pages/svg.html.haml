@@ -121,7 +121,6 @@
                   ":y1":"-frame.size" ,
                   ":x2":"frame.width-dx" ,
                   ":y2":"-dy"}
-
           %line{  ":x1":"frame.width/2 + frame.size/2" ,
                   ":y1":"-frame.size - 0.75*truss_y" ,
                   ":x2":"frame.width - dx - 0.5*truss_x" ,
@@ -131,20 +130,31 @@
                   ":x2":"dx + 0.5*truss_x" ,
                   ":y2":"-dy - 0.5*truss_y"}
 
+          %line{  ":x1":"frame.size" ,
+                  ":y1":"brace" ,
+                  ":x2":"brace" ,
+                  ":y2":"frame.size"}
+          %line{  ":x1":"frame.size" ,
+                  ":y1":"brace + frame.size*1.414" ,
+                  ":x2":"brace + frame.size*1.414" ,
+                  ":y2":"frame.size"}
 
 :ruby2js
   class Graph < Vue
     el ".graph_app"
     def initialize
       @padd = 30
-      @frame = {trusses: true , size: 15 , height: 250, spacing: 450,
-                truss_height: 120, width: 300 , posts: 3}
+      @frame = {trusses: true , size: 15 , height: 250, spacing: 300,
+                truss_height: 120, width: 300 , posts: 4}
     end
     def dx
       return 1.1*@frame.width / 4
     end
     def dy
       return (self.dx - self.truss_x) * Math.tan(angle)
+    end
+    def brace
+      return 3* Math.min(@frame.height, @frame.width/2) / 8
     end
     def moveSize(x,y)
       @frame.spacing = x
