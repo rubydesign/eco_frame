@@ -2,20 +2,21 @@
   .stats
     Cubic meters: {{cubes}}
     %br
-  %svg.main{ ":width": "total_length" , ":height": "total_width",
-        ":viewbox": "'0 0 ' + total_width + ' ' + total_length" , class:  :index_graph}
-    %g{ ":transform": "`translate(${spacing -20},${width})`"}
-      %text{":x": "-50" , ":y": "-50" }
+  %svg.main{ ":width":"total_length" , ":height":"total_width",
+        ":viewbox":"'0 0 ' + total_width + ' ' + total_length" , class:  :index_graph}
+    %g{ ":transform":"`translate(${frame.spacing -20},${frame.width})`"}
+      %text{":x":"-50" , ":y":"-50" }
         %tspan Spacing
-        %tspan {{ spacing }}
+        %tspan {{ frame.spacing }}
         %tspan cm
         %tspan{dy: 25 , dx: -80} Drag:
     %g{ ":transform": "`translate(${padd },${-padd})`"}
-      %draggable{ ":model":"size_slider" , "v-on:dragged":"moveSize"}
+      %draggable{ ":startx":"frame.spacing" ,":starty":"frame.width" ,
+                  "v-on:dragged":"moveSize"}
         %circle{ "r": 10 }
 
     %g.frame{ ":transform": "`translate(${padd},0)`"}
-      %rect.frame{ ":width": "length" , ":height": "width"}
+      %rect.frame{ ":width": "length" , ":height": "frame.width"}
       %template{ "v-for": "pos in posts_positions"}
         %g{ ":transform": "`translate(${pos},0)`" }
           %rect.post{ ":width": "frame.size" , ":height": "frame.size" }
@@ -23,30 +24,30 @@
                       ":x2": "frame.size" , ":y2": "frame.size" }
           %line.fine{ ":x1": "0" ,":y1": "frame.size" ,
                       ":x2": "frame.size" , ":y2": "0" }
-          %g{":transform": "`translate(0,${width - frame.size})`"}
+          %g{":transform": "`translate(0,${frame.width - frame.size})`"}
             %rect.post{ ":width": "frame.size" , ":height": "frame.size"}
             %line.fine{ ":x1": "0" ,":y1": "0" ,
                         ":x2": "frame.size" , ":y2": "frame.size" }
             %line.fine{ ":x1": "0" ,":y1": "frame.size" ,
                         ":x2": "frame.size" , ":y2": "0" }
 
-    %g.frame{ ":transform": "`translate(${padd - 10 },${total_width - 10})`"}
-      %line.slider{ ":x1": "10" ,":y1": "0" ,
-                    ":x2": "total_length / 3" , ":y2": "0" }
-      %line.slider{ ":x1": "2*length / 3" ,":y1": "0" ,
-                    ":x2": "total_length " , ":y2": "0" }
-      %text{":x": "total_length / 3 + padd" , ":y": "0" }
+    %g.frame{ ":transform":"`translate(${padd - 10 },${total_width - 10})`"}
+      %line.slider{ ":x1":"10" ,":y1": "0" ,
+                    ":x2":"total_length / 3" , ":y2":"0" }
+      %line.slider{ ":x1":"2*length / 3" ,":y1":"0" ,
+                    ":x2":"total_length " , ":y2":"0" }
+      %text{":x":"total_length / 3 + padd" , ":y":"0" }
         %tspan Length
         %tspan {{ length.toFixed(0) }}
         %tspan cm
 
-    %line.slider{ x1: 2 ,y1: 0 , x2: 2 , ":y2": "width/3" ,
-                  "stroke": "rgb(0,0,0)" , "stroke-width": 3}
-    %line.slider{ x1: 2 ,":y1": "2*width/3" , x2: 2 , ":y2": "width" ,
-                  "stroke": "rgb(0,0,0)" , "stroke-width": 3}
-    %text{x: 0 , ":y": "(width - padd ) / 2" }
+    %line.slider{ x1: 2 ,y1: 0 , x2: 2 , ":y2":"frame.width/3" ,
+                  "stroke":"rgb(0,0,0)" , "stroke-width": 3}
+    %line.slider{ x1: 2 ,":y1":"2*frame.width/3" , x2: 2 , ":y2":"frame.width" ,
+                  "stroke":"rgb(0,0,0)" , "stroke-width": 3}
+    %text{x: 0 , ":y":"(frame.width - padd ) / 2" }
       %tspan Width
-      %tspan{x: 0, dy: 15} {{ width.toFixed(0) }}
+      %tspan{x: 0, dy: 15} {{ frame.width.toFixed(0) }}
       %tspan{x: 0, dy: 15} cm
 
   .post_control
@@ -77,71 +78,65 @@
             %a{ "@click" => "frame.size += 2.5"}
               =image_tag "plus.png"
   .front
-    %svg{ ":width":"width + padd" , ":height":"frame_height + padd",
-          ":viewbox":"'0 0 ' + width + ' ' + frame_height" }
+    %svg{ ":width":"frame.width" , ":height":"frame_height + padd ",
+          ":viewbox":"'0 0 ' + frame.width + ' ' + frame_height" }
+      %g.frame{ ":transform":"`translate(${0},${2*padd})`"}
+        %draggable{ ":startx":"frame.height / 2" ,":starty":"frame.truss_height" ,
+                    "v-on:dragged":"moveHeight" }
+          %circle{ "r": 10 }
       %g{"v-if":"frame.trusses"}
         %line{  ":x1": 0 , ":y1":"frame.truss_height" ,
-                ":x2":"width / 2" , ":y2": 0  }
-        %line{  ":x1":"width / 2" , ":y1": 0 ,
-                ":x2":"width" , ":y2":"frame.truss_height"  }
+                ":x2":"frame.width / 2" , ":y2": 0  }
+        %line{  ":x1":"frame.width / 2" , ":y1": 0 ,
+                ":x2":"frame.width" , ":y2":"frame.truss_height"  }
         %line{  ":x1":"truss_x" , ":y1":"frame.truss_height" ,
-                ":x2":"width / 2" , ":y2":"truss_y"  }
-        %line{  ":x1":"width / 2" , ":y1":"truss_y" ,
-                ":x2":"width - truss_x" , ":y2":"frame.truss_height"  }
+                ":x2":"frame.width / 2" , ":y2":"truss_y"  }
+        %line{  ":x1":"frame.width / 2" , ":y1":"truss_y" ,
+                ":x2":"frame.width - truss_x" , ":y2":"frame.truss_height"  }
 
       %g.frame{ ":transform":"`translate(0,${frame.truss_height})`"}
-        %rect.frame{ ":width":"width" , ":height":"frame.size"}
-        %rect.frame{ ":x":"width - frame.size", ":y": "frame.size" ,
-                    ":width":"frame.size" , ":height": "frame.height"}
+        %rect.frame{ ":width":"frame.width" , ":height":"frame.size"}
+        %rect.frame{ ":x":"frame.width - frame.size", ":y":"frame.size" ,
+                    ":width":"frame.size" , ":height":"frame.height"}
         %rect.frame{ ":x":"0", ":y":"frame.size" ,
                     ":width":"frame.size" , ":height":"frame.height"}
-        %text{":x": "width / 4" , ":y": "padd" }
+        %text{":x":"frame.width / 4" , ":y":"padd" }
           %tspan Truss Heigth
           %tspan {{ frame.truss_height.toFixed(0) }}
           %tspan cm
           %tspan {{ truss_x.toFixed(0) }}
           %tspan {{ truss_y.toFixed(0) }}
 
-        %draggable{ ":startx": "frame.width / 2" ,":starty": "frame.truss_height" ,
-                    "v-on:dragged":"moveHeight" }
-          %circle{ "r": 10 }
-
 :ruby2js
   class Graph < Vue
     el ".graph_app"
     def initialize
       @padd = 30
-      @frame = {trusses: true , size: 15 , height: 250,
-                 truss_height: 150, width: 300 , posts: 3}
-      @size_slider = {x: 450 , y: 300}
+      @frame = {trusses: true , size: 15 , height: 250, spacing: 450,
+                truss_height: 150, width: 300 , posts: 3}
     end
     def moveSize(x,y)
-      puts "Moved Size (" + x + " , " + y + ")"
+      @frame.spacing = x
+      @frame.width = y
     end
     def moveHeight(x,y)
-      @frame.width = 2*x
       @frame.truss_height = y
+      @frame.height = 2*x
       puts "Moved Height (" + x + " , " + y + ")"
     end
     def truss_x
-      x = self.width / @frame.truss_height
+      x = @frame.width / @frame.truss_height
       return @frame.size * Math.sqrt( 1 + x * x / 4)
     end
     def truss_y
-      x =  @frame.truss_height / self.width
+      x =  @frame.truss_height / @frame.width
       return @frame.size * Math.sqrt( 1 + 4 * x * x )
     end
-    def angle
-      return @frame.height / @size_slider.x
-    end
     def length
-      return self.spacing * (@frame.posts - 1 )
+      return @frame.spacing * (@frame.posts - 1 )
     end
     def frame_height
       return @frame.height + (@frame.trusses ? @frame.truss_height : 0)
-    end
-    def spacing
-      return @size_slider.x
     end
     def posts_positions
       arr = []
@@ -149,11 +144,8 @@
       arr << self.length - @frame.size
       arr
     end
-    def width
-      return @size_slider.y
-    end
     def total_width
-      return self.width + @padd
+      return @frame.width + @padd
     end
     def total_length
       return self.length + @padd
@@ -167,12 +159,11 @@
     end
     def plate_cubes
       meters = 2 * self.length
-      meters += 2 * self.width unless @frame.trusses
+      meters += 2 * @frame.width unless @frame.trusses
       return @frame.size * @frame.size * meters
     end
     def truss_cubes
       return 0 unless @frame.trusses
-      return @frame.posts * @frame.size * @frame.size * (self.width * 2) #for now
+      return @frame.posts * @frame.size * @frame.size * (@frame.width * 2) #for now
     end
   end
-  gra = Graph
