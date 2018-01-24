@@ -11,7 +11,7 @@
         %tspan cm
         %tspan{dy: 25 , dx: -80} Drag:
     %g{ ":transform": "`translate(${padd },${-padd})`"}
-      %draggable{ ":model": "size_slider" }
+      %draggable{ ":model":"size_slider" , "v-on:dragged":"moveSize"}
         %circle{ "r": 10 }
 
     %g.frame{ ":transform": "`translate(${padd},0)`"}
@@ -80,16 +80,16 @@
     %svg{ ":width":"width + padd" , ":height":"frame_height + padd",
           ":viewbox":"'0 0 ' + width + ' ' + frame_height" }
       %g{"v-if":"frame.trusses"}
-        %line{  ":x1": 0 , ":y1":"truss_height" ,
+        %line{  ":x1": 0 , ":y1":"frame.truss_height" ,
                 ":x2":"width / 2" , ":y2": 0  }
         %line{  ":x1":"width / 2" , ":y1": 0 ,
-                ":x2":"width" , ":y2":"truss_height"  }
-        %line{  ":x1":"truss_x" , ":y1":"truss_height" ,
+                ":x2":"width" , ":y2":"frame.truss_height"  }
+        %line{  ":x1":"truss_x" , ":y1":"frame.truss_height" ,
                 ":x2":"width / 2" , ":y2":"truss_y"  }
         %line{  ":x1":"width / 2" , ":y1":"truss_y" ,
-                ":x2":"width - truss_x" , ":y2":"truss_height"  }
+                ":x2":"width - truss_x" , ":y2":"frame.truss_height"  }
 
-      %g.frame{ ":transform":"`translate(0,${truss_height})`"}
+      %g.frame{ ":transform":"`translate(0,${frame.truss_height})`"}
         %rect.frame{ ":width":"width" , ":height":"frame.size"}
         %rect.frame{ ":x":"width - frame.size", ":y": "frame.size" ,
                     ":width":"frame.size" , ":height": "frame.height"}
@@ -97,12 +97,13 @@
                     ":width":"frame.size" , ":height":"frame.height"}
         %text{":x": "width / 4" , ":y": "padd" }
           %tspan Truss Heigth
-          %tspan {{ truss_height.toFixed(0) }}
+          %tspan {{ frame.truss_height.toFixed(0) }}
           %tspan cm
           %tspan {{ truss_x.toFixed(0) }}
           %tspan {{ truss_y.toFixed(0) }}
 
-        %draggable{ ":model": "truss_slider" }
+        %draggable{ ":startx": "frame.width / 2" ,":starty": "frame.truss_height" ,
+                    "v-on:dragged":"moveHeight" }
           %circle{ "r": 10 }
 
 :ruby2js
@@ -111,20 +112,24 @@
     def initialize
       @padd = 30
       @frame = {trusses: true , size: 15 , height: 250,
-                 posts: 3}
+                 truss_height: 150, width: 300 , posts: 3}
       @size_slider = {x: 450 , y: 300}
-      @truss_slider = {x: 150 , y: 150}
+    end
+    def moveSize(x,y)
+      puts "Moved Size (" + x + " , " + y + ")"
+    end
+    def moveHeight(x,y)
+      @frame.width = 2*x
+      @frame.truss_height = y
+      puts "Moved Height (" + x + " , " + y + ")"
     end
     def truss_x
-      x = self.width / self.truss_height
+      x = self.width / @frame.truss_height
       return @frame.size * Math.sqrt( 1 + x * x / 4)
     end
     def truss_y
-      x =  self.truss_height / self.width
+      x =  @frame.truss_height / self.width
       return @frame.size * Math.sqrt( 1 + 4 * x * x )
-    end
-    def truss_height
-      return @truss_slider.y
     end
     def angle
       return @frame.height / @size_slider.x
@@ -133,7 +138,7 @@
       return self.spacing * (@frame.posts - 1 )
     end
     def frame_height
-      return @frame.height + (@frame.trusses ? self.truss_height : 0)
+      return @frame.height + (@frame.trusses ? @frame.truss_height : 0)
     end
     def spacing
       return @size_slider.x
