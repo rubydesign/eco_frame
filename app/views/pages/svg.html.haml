@@ -104,8 +104,8 @@
           %tspan Truss Heigth
           %tspan {{ frame.truss_height.toFixed(0) }}
           %tspan cm
-          %tspan {{ truss_x.toFixed(0) }}
-          %tspan {{ truss_y.toFixed(0) }}
+          %tspan{dx: "-50", dy: 20} Height
+          %tspan {{ frame.height.toFixed(0) }}
 
 :ruby2js
   class Graph < Vue
