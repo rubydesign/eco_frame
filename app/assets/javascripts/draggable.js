@@ -1,24 +1,27 @@
 /** Draggable svg object
  *
- * Use: <a-draggable :model="...">...svg...</draggable>
+ * Use: <a-draggable :startx="..." :starty=>...svg...
+ *          v-on:dragged="updateFunction"</draggable>
  *
  * Creates a <g class="draggable"> that's positioned at the x,y
  * coordinates in the model object. The contained svg object should be
  * drawn at 0,0, not at x,y.
  *
- * When the svg object is dragged, it will update the x,y fields in
- * the model object, and move the <g>. If a constraint= property is
+ * When the svg object is dragged, it will emit an event, "dragged"
+ * If you listen to it, the method will receive updated x,y args.
+ * The component will move the <g>. If a constraint= property is
  * set, it should return a function(x,y) that returns true if the
  * position (x,y) is an allowed position for the object.
+ * Also constrainx and constrainy may be set to restrict axis movement
  *
  * A Vue component version of http://www.redblobgames.com/js/draggable.js
  * specialized for dragging svg objects.
  */
 Vue.component('draggable', {
-    props: ['model', 'constraint', 'constrainx', 'constrainy'],
+    props: ['startx', 'starty' ,'constraint', 'constrainx', 'constrainy'],
     template: `
        <g :class="classList"
-          :transform='"translate(" + [this.model.x, this.model.y] + ")"'
+          :transform='"translate(" + [this.x, this.y] + ")"'
           @mousedown.left.stop.prevent="mousedown"
           @touchstart.stop.prevent="touchstart"
           @touchmove.stop.prevent="touchmove"
@@ -29,6 +32,8 @@ Vue.component('draggable', {
         return {
             startTouchCoords: [],
             startTouchModel: [],
+            x: this.startx ,
+            y: this.starty,
             dragging: 0
         };
     },
@@ -63,13 +68,14 @@ Vue.component('draggable', {
             if (rect.left <= domCoords.x && domCoords.x < rect.right
                 && rect.top <= domCoords.y && domCoords.y < rect.bottom
                 && (this.constraint === undefined || this.constraint(newX, newY))) {
-                if(this.constrainx == null) this.model.x = newX;
-                if(this.constrainy == null) this.model.y = newY;
+                if(this.constrainx == null) this.x = newX;
+                if(this.constrainy == null) this.y = newY;
+                this.$emit('dragged' , newX , newY)
             }
         },
         mousedown: function(e) {
             const startCoords = this.coords(e);
-            const startModel = {x: this.model.x, y: this.model.y};
+            const startModel = {x: this.x, y: this.y};
 
             const mousemove = (e) => {
                 this.moveTo(startCoords, startModel, this.coords(e));
@@ -94,7 +100,7 @@ Vue.component('draggable', {
             for (let i = 0; i < e.changedTouches.length; i++) {
                 const touch = e.changedTouches[i], id = touch.identifier;
                 this.startTouchCoords[id] = this.coords(touch);
-                this.startTouchModel[id] = {x: this.model.x, y: this.model.y};
+                this.startTouchModel[id] = {x: this.x, y: this.y};
             }
         },
         touchmove: function(e) {
