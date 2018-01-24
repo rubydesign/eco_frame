@@ -60,6 +60,8 @@
         %th Post (cm)
         %th Size (in)
         %th
+        %th Braces
+        %th Tusses
       %tbody
         %tr
           %td
@@ -77,6 +79,11 @@
           %td
             %a{ "@click" => "frame.size += 2.5"}
               =image_tag "plus.png"
+          %td
+            %input{type:"checkbox", "v-model":"frame.braces"}/
+          %td
+            %input{type:"checkbox", "v-model":"frame.trusses"}/
+
   .front
     %svg{ ":width":"frame.width + 2" , ":height":"frame_height + padd ",
           ":viewbox":"'0 0 ' + frame.width + ' ' + frame_height" }
@@ -84,7 +91,7 @@
         %draggable{ ":startx":"frame.height / 2" ,":starty":"frame.truss_height" ,
                     "v-on:dragged":"moveHeight" }
           %circle{ "r": 10 }
-      %g.frame{ ":transform":"`translate(0,${frame.truss_height})`"}
+      %g.frame{ ":transform":"`translate(0,${frame.truss_height})`" }
         %rect.frame{ ":width":"frame.width" , ":height":"frame.size"}
         %rect.frame{ ":x":"frame.width - frame.size", ":y":"frame.size" ,
                     ":width":"frame.size" , ":height":"frame.height"}
@@ -96,8 +103,8 @@
           %tspan cm
           %tspan{dx: "-50", dy: 20} Height
           %tspan {{ frame.height.toFixed(0) }}
-          %tspan{dx: "-50", dy: 20} angle
-          %tspan {{ angle }}
+          %tspan{dx: "-50", dy: 20} braces
+          %tspan {{ frame.braces }}
       %g{"v-if":"frame.trusses"}
         %line{  ":x1": 0 , ":y1":"frame.truss_height" ,
                 ":x2":"frame.width / 2" , ":y2": 0  }
@@ -129,15 +136,25 @@
                   ":y1":"-frame.size - 0.75*truss_y" ,
                   ":x2":"dx + 0.5*truss_x" ,
                   ":y2":"-dy - 0.5*truss_y"}
+      %g{ ":transform":"`translate(0,${frame.truss_height})`" ,
+          "v-if":"frame.braces"}
+        %line{  ":x1":"frame.size" ,
+                ":y1":"brace" ,
+                ":x2":"brace" ,
+                ":y2":"frame.size"}
+        %line{  ":x1":"frame.size" ,
+                ":y1":"brace + frame.size*1.414" ,
+                ":x2":"brace + frame.size*1.414" ,
+                ":y2":"frame.size"}
 
-          %line{  ":x1":"frame.size" ,
-                  ":y1":"brace" ,
-                  ":x2":"brace" ,
-                  ":y2":"frame.size"}
-          %line{  ":x1":"frame.size" ,
-                  ":y1":"brace + frame.size*1.414" ,
-                  ":x2":"brace + frame.size*1.414" ,
-                  ":y2":"frame.size"}
+        %line{  ":x1":"frame.width - frame.size" ,
+                ":y1":"brace" ,
+                ":x2":"frame.width - brace" ,
+                ":y2":"frame.size"}
+        %line{  ":x1":"frame.width - frame.size" ,
+                ":y1":"brace + frame.size*1.414" ,
+                ":x2":"frame.width - brace - frame.size*1.414" ,
+                ":y2":"frame.size"}
 
 :ruby2js
   class Graph < Vue
@@ -145,7 +162,7 @@
     def initialize
       @padd = 30
       @frame = {trusses: true , size: 15 , height: 250, spacing: 300,
-                truss_height: 120, width: 300 , posts: 4}
+                truss_height: 120, width: 300 , posts: 4 , braces: true}
     end
     def dx
       return 1.1*@frame.width / 4
