@@ -93,9 +93,9 @@
                 ":x2":"frame.width / 2" , ":y2":"truss_y"  }
         %line{  ":x1":"frame.width / 2" , ":y1":"truss_y" ,
                 ":x2":"frame.width - truss_x" , ":y2":"frame.truss_height"  }
-        %line{  ":x1":"frame.width/2 - frame.size/2" , ":y1":"truss_y*1.5 - 4" ,
+        %line{  ":x1":"frame.width/2 - frame.size/2" , ":y1":"hit_y" ,
                 ":x2":"frame.width/2 - frame.size/2" , ":y2":"frame.truss_height"  }
-        %line{  ":x1":"frame.width/2 + frame.size/2" , ":y1":"truss_y*1.5 - 4" ,
+        %line{  ":x1":"frame.width/2 + frame.size/2" , ":y1":"hit_y" ,
                 ":x2":"frame.width/2 + frame.size/2" , ":y2":"frame.truss_height"  }
 
       %g.frame{ ":transform":"`translate(0,${frame.truss_height})`"}
@@ -110,6 +110,8 @@
           %tspan cm
           %tspan{dx: "-50", dy: 20} Height
           %tspan {{ frame.height.toFixed(0) }}
+          %tspan{dx: "-50", dy: 20} angle
+          %tspan {{ angle }}
 
 :ruby2js
   class Graph < Vue
@@ -128,13 +130,17 @@
       @frame.height = 2*x
       puts "Moved Height (" + x + " , " + y + ")"
     end
+    def angle
+      return Math.atan(2*@frame.truss_height / @frame.width)
+    end
     def truss_x
-      x = @frame.width / @frame.truss_height
-      return @frame.size * Math.sqrt( 1 + x * x / 4)
+      return @frame.size / Math.sin( self.angle)
     end
     def truss_y
-      x =  @frame.truss_height / @frame.width
-      return @frame.size * Math.sqrt( 1 + 4 * x * x )
+      return @frame.size / Math.cos( self.angle)
+    end
+    def hit_y
+      return truss_y + @frame.truss_height - (@frame.width - @frame.size)*0.5*Math.tan(angle)
     end
     def length
       return @frame.spacing * (@frame.posts - 1 )
