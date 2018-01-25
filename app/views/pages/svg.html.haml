@@ -2,20 +2,10 @@
   .stats
     Cubic meters: {{cubes}}
     %br
-  %svg.main{ ":width":"total_length" , ":height":"total_width",
-        ":viewbox":"'0 0 ' + total_width + ' ' + total_length" , class:  :index_graph}
-    %g{ ":transform":"`translate(${frame.spacing -20},${frame.width})`"}
-      %text{":x":"-50" , ":y":"-50" }
-        %tspan Spacing
-        %tspan {{ frame.spacing }}
-        %tspan cm
-        %tspan{dy: 25 , dx: -80} Drag:
-    %g{ ":transform": "`translate(${padd },${-padd})`"}
-      %draggable{ ":startx":"frame.spacing" ,":starty":"frame.width" ,
-                  "v-on:dragged":"moveSize"}
-        %circle{ "r": 10 }
+  %svg.main{ ":width":"length" , ":height":"frame.width",
+        ":viewbox":"'0 0 ' + frame.width + ' ' + length" , class:  :index_graph}
 
-    %g.frame{ ":transform": "`translate(${padd},0)`"}
+    %g.frame{ ":transform": "`translate(${0},0)`"}
       %rect.frame{ ":width": "length" , ":height": "frame.width"}
       %template{ "v-for": "pos in posts_positions"}
         %g{ ":transform": "`translate(${pos},0)`" }
@@ -30,25 +20,6 @@
                         ":x2": "frame.size" , ":y2": "frame.size" }
             %line.fine{ ":x1": "0" ,":y1": "frame.size" ,
                         ":x2": "frame.size" , ":y2": "0" }
-
-    %g.frame{ ":transform":"`translate(${padd - 10 },${total_width - 10})`"}
-      %line.slider{ ":x1":"10" ,":y1": "0" ,
-                    ":x2":"total_length / 3" , ":y2":"0" }
-      %line.slider{ ":x1":"2*length / 3" ,":y1":"0" ,
-                    ":x2":"total_length " , ":y2":"0" }
-      %text{":x":"total_length / 3 + padd" , ":y":"0" }
-        %tspan Length
-        %tspan {{ length.toFixed(0) }}
-        %tspan cm
-
-    %line.slider{ x1: 2 ,y1: 0 , x2: 2 , ":y2":"frame.width/3" ,
-                  "stroke":"rgb(0,0,0)" , "stroke-width": 3}
-    %line.slider{ x1: 2 ,":y1":"2*frame.width/3" , x2: 2 , ":y2":"frame.width" ,
-                  "stroke":"rgb(0,0,0)" , "stroke-width": 3}
-    %text{x: 0 , ":y":"(frame.width - padd ) / 2" }
-      %tspan Width
-      %tspan{x: 0, dy: 15} {{ frame.width.toFixed(0) }}
-      %tspan{x: 0, dy: 15} cm
 
   .post_control
     .rangeslider.height
@@ -84,19 +55,15 @@
       %input{type:"checkbox", "v-model":"frame.trusses"}
 
   .front{ ":style":"`perspective: ${150}px;`"}
-    %svg{ ":width":"frame.width + 2" , ":height":"frame_height + padd ",
+    %svg{ ":width":"frame.width + 2" , ":height":"frame_height ",
           ":viewbox":"'0 0 ' + frame.width + ' ' + frame_height" }
-      %g.frame{ ":transform":"`translate(${0},${2*padd})`"}
-        %draggable{ ":startx":"frame.height / 2" ,":starty":"frame.truss_height" ,
-                    "v-on:dragged":"moveHeight" }
-          %circle{ "r": 10 }
       %g.frame{ ":transform":"`translate(0,${frame.truss_height})`" }
         %rect.frame{ ":width":"frame.width" , ":height":"frame.size"}
         %rect.frame{ ":x":"frame.width - frame.size", ":y":"frame.size" ,
                     ":width":"frame.size" , ":height":"frame.height"}
         %rect.frame{ ":x":"0", ":y":"frame.size" ,
                     ":width":"frame.size" , ":height":"frame.height"}
-        %text{":x":"frame.width / 4" , ":y":"padd" }
+        %text{":x":"frame.width / 4" , ":y":"0" }
           %tspan Truss Heigth
           %tspan {{ frame.truss_height.toFixed(0) }}
           %tspan cm
@@ -160,7 +127,6 @@
   class Graph < Vue
     el ".graph_app"
     def initialize
-      @padd = 30
       @slider = 45
       @frame = {trusses: true , size: 15 , height: 250, spacing: 300,
                 truss_height: 120, width: 300 , posts: 4 , braces: true}
@@ -208,12 +174,6 @@
       0.upto(@frame.posts - 1){ |i| arr << Math.floor(i * (self.length - @frame.size)/(@frame.posts - 1))}
       arr << self.length - @frame.size
       arr
-    end
-    def total_width
-      return @frame.width + @padd
-    end
-    def total_length
-      return self.length + @padd
     end
     def cubes
       sum = post_cubes + truss_cubes + plate_cubes

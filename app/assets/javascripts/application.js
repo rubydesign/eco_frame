@@ -2,4 +2,3 @@
 // listed below.
 
 //= require_self
-//= require draggable
