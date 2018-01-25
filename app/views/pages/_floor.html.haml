@@ -1,0 +1,18 @@
+%svg.main{ ":width":"length" , ":height":"frame.width",
+      ":viewbox":"'0 0 ' + frame.width + ' ' + length" , class:  :index_graph}
+
+  %g.frame{ ":transform": "`translate(${0},0)`"}
+    %rect.frame{ ":width": "length" , ":height": "frame.width"}
+    %template{ "v-for": "pos in posts_positions"}
+      %g{ ":transform": "`translate(${pos},0)`" }
+        %rect.post{ ":width": "frame.size" , ":height": "frame.size" }
+        %line.fine{ ":x1": "0" ,":y1": "0" ,
+                    ":x2": "frame.size" , ":y2": "frame.size" }
+        %line.fine{ ":x1": "0" ,":y1": "frame.size" ,
+                    ":x2": "frame.size" , ":y2": "0" }
+        %g{":transform": "`translate(0,${frame.width - frame.size})`"}
+          %rect.post{ ":width": "frame.size" , ":height": "frame.size"}
+          %line.fine{ ":x1": "0" ,":y1": "0" ,
+                      ":x2": "frame.size" , ":y2": "frame.size" }
+          %line.fine{ ":x1": "0" ,":y1": "frame.size" ,
+                      ":x2": "frame.size" , ":y2": "0" }
