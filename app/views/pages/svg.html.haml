@@ -1,26 +1,4 @@
 .graph_app
-  .stats
-    Cubic meters: {{cubes}}
-    %br
-  %svg.main{ ":width":"length" , ":height":"frame.width",
-        ":viewbox":"'0 0 ' + frame.width + ' ' + length" , class:  :index_graph}
-
-    %g.frame{ ":transform": "`translate(${0},0)`"}
-      %rect.frame{ ":width": "length" , ":height": "frame.width"}
-      %template{ "v-for": "pos in posts_positions"}
-        %g{ ":transform": "`translate(${pos},0)`" }
-          %rect.post{ ":width": "frame.size" , ":height": "frame.size" }
-          %line.fine{ ":x1": "0" ,":y1": "0" ,
-                      ":x2": "frame.size" , ":y2": "frame.size" }
-          %line.fine{ ":x1": "0" ,":y1": "frame.size" ,
-                      ":x2": "frame.size" , ":y2": "0" }
-          %g{":transform": "`translate(0,${frame.width - frame.size})`"}
-            %rect.post{ ":width": "frame.size" , ":height": "frame.size"}
-            %line.fine{ ":x1": "0" ,":y1": "0" ,
-                        ":x2": "frame.size" , ":y2": "frame.size" }
-            %line.fine{ ":x1": "0" ,":y1": "frame.size" ,
-                        ":x2": "frame.size" , ":y2": "0" }
-
   .post_control
     .rangeslider.height
       %b Height {{frame.height}}
@@ -43,16 +21,44 @@
             "v-bind:value":"frame.posts",
             "v-on:input":"frame.posts = parseInt($event.target.value)"}
     .rangeslider.size
-      %b Size {{frame.size}}
+      %b Size {{frame.size}}cm ({{(frame.size/2.5).toFixed(0)}}in)
       %input{min:"10", max:"25", step:"2.5" , type:"range" ,
             "v-bind:value":"frame.size",
             "v-on:input":"frame.size = parseFloat($event.target.value)"}
-    %td
-      %th Braces
-      %input{type:"checkbox", "v-model":"frame.braces"}
-    %span
-      Trusses
-      %input{type:"checkbox", "v-model":"frame.trusses"}
+    .rangeslider
+      %div
+        %b Braces
+        %input{type:"checkbox", "v-model":"frame.braces"}
+      %span
+        %b Trusses
+        %input{type:"checkbox", "v-model":"frame.trusses"}
+    .rangeslider
+      %div
+        %b Length
+        {{length}}
+      %div
+        %b Cubic meters:
+        {{cubes}}
+
+
+  %svg.main{ ":width":"length" , ":height":"frame.width",
+        ":viewbox":"'0 0 ' + frame.width + ' ' + length" , class:  :index_graph}
+
+    %g.frame{ ":transform": "`translate(${0},0)`"}
+      %rect.frame{ ":width": "length" , ":height": "frame.width"}
+      %template{ "v-for": "pos in posts_positions"}
+        %g{ ":transform": "`translate(${pos},0)`" }
+          %rect.post{ ":width": "frame.size" , ":height": "frame.size" }
+          %line.fine{ ":x1": "0" ,":y1": "0" ,
+                      ":x2": "frame.size" , ":y2": "frame.size" }
+          %line.fine{ ":x1": "0" ,":y1": "frame.size" ,
+                      ":x2": "frame.size" , ":y2": "0" }
+          %g{":transform": "`translate(0,${frame.width - frame.size})`"}
+            %rect.post{ ":width": "frame.size" , ":height": "frame.size"}
+            %line.fine{ ":x1": "0" ,":y1": "0" ,
+                        ":x2": "frame.size" , ":y2": "frame.size" }
+            %line.fine{ ":x1": "0" ,":y1": "frame.size" ,
+                        ":x2": "frame.size" , ":y2": "0" }
 
   .front{ ":style":"`perspective: ${150}px;`"}
     %svg{ ":width":"frame.width + 2" , ":height":"frame_height ",
