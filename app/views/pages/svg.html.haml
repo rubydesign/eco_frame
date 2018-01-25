@@ -11,10 +11,10 @@
             "v-bind:value":"frame.width",
             "v-on:input":"frame.width = parseInt($event.target.value)"}
     .rangeslider.spacing
-      %b Spacing {{frame.spacing}}
-      %input{min:"100", max:"650", step: "10", type:"range" ,
-            "v-bind:value":"frame.spacing",
-            "v-on:input":"frame.spacing = parseInt($event.target.value)"}
+      %b perspective {{perspective}}
+      %input{min:"1", max:"600", step: "10", type:"range" ,
+            "v-bind:value":"perspective",
+            "v-on:input":"perspective = parseInt($event.target.value)"}
     .rangeslider.posts
       %b Posts {{frame.posts}}
       %input{min:"2", max:"10", type:"range" ,
@@ -40,100 +40,74 @@
         %b Cubic meters:
         {{cubes}}
 
+  .front{ ":style":"`perspective: ${10*perspective}px;`" }
+    .child{ "v-for":"i in frame.posts" ,
+            ":style":"`transform: translateZ(${40*i}px) translateY(10px);`"}
+      %svg{ ":width":"frame.width + 2" , ":height":"frame_height ",
+            ":viewbox":"'0 0 ' + frame.width + ' ' + frame_height" }
+        %g.frame{ ":transform":"`translate(0,${frame.truss_height})`" }
+          %rect.frame{ ":width":"frame.width" , ":height":"frame.size"}
+          %rect.frame{ ":x":"frame.width - frame.size", ":y":"frame.size" ,
+                      ":width":"frame.size" , ":height":"frame.height"}
+          %rect.frame{ ":x":"0", ":y":"frame.size" ,
+                      ":width":"frame.size" , ":height":"frame.height"}
+        %g.trusses{"v-if":"frame.trusses"}
+          %line{  ":x1": 0 , ":y1":"frame.truss_height" ,
+                  ":x2":"frame.width / 2" , ":y2": 0  }
+          %line{  ":x1":"frame.width / 2" , ":y1": 0 ,
+                  ":x2":"frame.width" , ":y2":"frame.truss_height"  }
+          %line{  ":x1":"truss_x" , ":y1":"frame.truss_height" ,
+                  ":x2":"frame.width / 2" , ":y2":"truss_y"  }
+          %line{  ":x1":"frame.width / 2" , ":y1":"truss_y" ,
+                  ":x2":"frame.width - truss_x" , ":y2":"frame.truss_height"  }
+          %line{  ":x1":"frame.width/2 - frame.size/2" , ":y1":"hit_y" ,
+                  ":x2":"frame.width/2 - frame.size/2" , ":y2":"frame.truss_height"  }
+          %line{  ":x1":"frame.width/2 + frame.size/2" , ":y1":"hit_y" ,
+                  ":x2":"frame.width/2 + frame.size/2" , ":y2":"frame.truss_height"  }
 
-  %svg.main{ ":width":"length" , ":height":"frame.width",
-        ":viewbox":"'0 0 ' + frame.width + ' ' + length" , class:  :index_graph}
+          %g{ ":transform":"`translate(0,${frame.truss_height})`" }
+            %line{  ":x1":"frame.width/ 2 - frame.size/2" ,
+                    ":y1":"-frame.size" ,
+                    ":x2":"dx" ,
+                    ":y2":"-dy"}
+            %line{  ":x1":"frame.width/2 + frame.size/2" ,
+                    ":y1":"-frame.size" ,
+                    ":x2":"frame.width-dx" ,
+                    ":y2":"-dy"}
+            %line{  ":x1":"frame.width/2 + frame.size/2" ,
+                    ":y1":"-frame.size - 0.75*truss_y" ,
+                    ":x2":"frame.width - dx - 0.5*truss_x" ,
+                    ":y2":"-dy - 0.5*truss_y"}
+            %line{  ":x1":"frame.width/2 - frame.size/2" ,
+                    ":y1":"-frame.size - 0.75*truss_y" ,
+                    ":x2":"dx + 0.5*truss_x" ,
+                    ":y2":"-dy - 0.5*truss_y"}
+        %g{ ":transform":"`translate(0,${frame.truss_height})`" ,
+            "v-if":"frame.braces"}
+          %line{  ":x1":"frame.size" ,
+                  ":y1":"brace" ,
+                  ":x2":"brace" ,
+                  ":y2":"frame.size"}
+          %line{  ":x1":"frame.size" ,
+                  ":y1":"brace + frame.size*1.414" ,
+                  ":x2":"brace + frame.size*1.414" ,
+                  ":y2":"frame.size"}
 
-    %g.frame{ ":transform": "`translate(${0},0)`"}
-      %rect.frame{ ":width": "length" , ":height": "frame.width"}
-      %template{ "v-for": "pos in posts_positions"}
-        %g{ ":transform": "`translate(${pos},0)`" }
-          %rect.post{ ":width": "frame.size" , ":height": "frame.size" }
-          %line.fine{ ":x1": "0" ,":y1": "0" ,
-                      ":x2": "frame.size" , ":y2": "frame.size" }
-          %line.fine{ ":x1": "0" ,":y1": "frame.size" ,
-                      ":x2": "frame.size" , ":y2": "0" }
-          %g{":transform": "`translate(0,${frame.width - frame.size})`"}
-            %rect.post{ ":width": "frame.size" , ":height": "frame.size"}
-            %line.fine{ ":x1": "0" ,":y1": "0" ,
-                        ":x2": "frame.size" , ":y2": "frame.size" }
-            %line.fine{ ":x1": "0" ,":y1": "frame.size" ,
-                        ":x2": "frame.size" , ":y2": "0" }
-
-  .front{ ":style":"`perspective: ${150}px;`"}
-    %svg{ ":width":"frame.width + 2" , ":height":"frame_height ",
-          ":viewbox":"'0 0 ' + frame.width + ' ' + frame_height" }
-      %g.frame{ ":transform":"`translate(0,${frame.truss_height})`" }
-        %rect.frame{ ":width":"frame.width" , ":height":"frame.size"}
-        %rect.frame{ ":x":"frame.width - frame.size", ":y":"frame.size" ,
-                    ":width":"frame.size" , ":height":"frame.height"}
-        %rect.frame{ ":x":"0", ":y":"frame.size" ,
-                    ":width":"frame.size" , ":height":"frame.height"}
-        %text{":x":"frame.width / 4" , ":y":"0" }
-          %tspan Truss Heigth
-          %tspan {{ frame.truss_height.toFixed(0) }}
-          %tspan cm
-          %tspan{dx: "-50", dy: 20} Height
-          %tspan {{ frame.height.toFixed(0) }}
-          %tspan{dx: "-50", dy: 20} braces
-          %tspan {{ frame.braces }}
-      %g{"v-if":"frame.trusses"}
-        %line{  ":x1": 0 , ":y1":"frame.truss_height" ,
-                ":x2":"frame.width / 2" , ":y2": 0  }
-        %line{  ":x1":"frame.width / 2" , ":y1": 0 ,
-                ":x2":"frame.width" , ":y2":"frame.truss_height"  }
-        %line{  ":x1":"truss_x" , ":y1":"frame.truss_height" ,
-                ":x2":"frame.width / 2" , ":y2":"truss_y"  }
-        %line{  ":x1":"frame.width / 2" , ":y1":"truss_y" ,
-                ":x2":"frame.width - truss_x" , ":y2":"frame.truss_height"  }
-        %line{  ":x1":"frame.width/2 - frame.size/2" , ":y1":"hit_y" ,
-                ":x2":"frame.width/2 - frame.size/2" , ":y2":"frame.truss_height"  }
-        %line{  ":x1":"frame.width/2 + frame.size/2" , ":y1":"hit_y" ,
-                ":x2":"frame.width/2 + frame.size/2" , ":y2":"frame.truss_height"  }
-
-        %g{ ":transform":"`translate(0,${frame.truss_height})`" }
-          %line{  ":x1":"frame.width/ 2 - frame.size/2" ,
-                  ":y1":"-frame.size" ,
-                  ":x2":"dx" ,
-                  ":y2":"-dy"}
-          %line{  ":x1":"frame.width/2 + frame.size/2" ,
-                  ":y1":"-frame.size" ,
-                  ":x2":"frame.width-dx" ,
-                  ":y2":"-dy"}
-          %line{  ":x1":"frame.width/2 + frame.size/2" ,
-                  ":y1":"-frame.size - 0.75*truss_y" ,
-                  ":x2":"frame.width - dx - 0.5*truss_x" ,
-                  ":y2":"-dy - 0.5*truss_y"}
-          %line{  ":x1":"frame.width/2 - frame.size/2" ,
-                  ":y1":"-frame.size - 0.75*truss_y" ,
-                  ":x2":"dx + 0.5*truss_x" ,
-                  ":y2":"-dy - 0.5*truss_y"}
-      %g{ ":transform":"`translate(0,${frame.truss_height})`" ,
-          "v-if":"frame.braces"}
-        %line{  ":x1":"frame.size" ,
-                ":y1":"brace" ,
-                ":x2":"brace" ,
-                ":y2":"frame.size"}
-        %line{  ":x1":"frame.size" ,
-                ":y1":"brace + frame.size*1.414" ,
-                ":x2":"brace + frame.size*1.414" ,
-                ":y2":"frame.size"}
-
-        %line{  ":x1":"frame.width - frame.size" ,
-                ":y1":"brace" ,
-                ":x2":"frame.width - brace" ,
-                ":y2":"frame.size"}
-        %line{  ":x1":"frame.width - frame.size" ,
-                ":y1":"brace + frame.size*1.414" ,
-                ":x2":"frame.width - brace - frame.size*1.414" ,
-                ":y2":"frame.size"}
+          %line{  ":x1":"frame.width - frame.size" ,
+                  ":y1":"brace" ,
+                  ":x2":"frame.width - brace" ,
+                  ":y2":"frame.size"}
+          %line{  ":x1":"frame.width - frame.size" ,
+                  ":y1":"brace + frame.size*1.414" ,
+                  ":x2":"frame.width - brace - frame.size*1.414" ,
+                  ":y2":"frame.size"}
 
 :ruby2js
 
   class Graph < Vue
     el ".graph_app"
     def initialize
-      @slider = 45
+      @perspective = 100
       @frame = {trusses: true , size: 15 , height: 250, spacing: 300,
                 truss_height: 120, width: 300 , posts: 4 , braces: true}
     end
@@ -195,6 +169,6 @@
     end
     def truss_cubes
       return 0 unless @frame.trusses
-      return @frame.posts * @frame.size * @frame.size * (@frame.width * 2) #for now
+      return @frame.posts * @frame.size * @frame.size * (@frame.width * 2)
     end
   end
