@@ -51,40 +51,39 @@
       %tspan{x: 0, dy: 15} cm
 
   .post_control
-    %table
-      %thead
-        %th
-        %th Posts
-        %th
-        %th
-        %th Post (cm)
-        %th Size (in)
-        %th
-        %th Braces
-        %th Tusses
-      %tbody
-        %tr
-          %td
-            %a{ "@click" => "frame.posts -= 1"}
-              =image_tag "minus.png"
-          %td.center {{frame.posts}}
-          %td
-            %a{ "@click" => "frame.posts += 1"}
-              =image_tag "plus.png"
-          %td
-            %a{ "@click" => "frame.size -= 2.5"}
-              =image_tag "minus.png"
-          %td.center {{frame.size}}
-          %td.center {{(frame.size /2.5).toFixed(0) }}
-          %td
-            %a{ "@click" => "frame.size += 2.5"}
-              =image_tag "plus.png"
-          %td
-            %input{type:"checkbox", "v-model":"frame.braces"}/
-          %td
-            %input{type:"checkbox", "v-model":"frame.trusses"}/
+    .rangeslider.height
+      %b Height {{frame.height}}
+      %input{min:"100", max:"350", step: "5", type:"range" ,
+            "v-bind:value":"frame.height",
+            "v-on:input":"frame.height = parseInt($event.target.value)"}
+    .rangeslider.width
+      %b Width {{frame.width}}
+      %input{min:"100", max:"650", step: "10", type:"range" ,
+            "v-bind:value":"frame.width",
+            "v-on:input":"frame.width = parseInt($event.target.value)"}
+    .rangeslider.spacing
+      %b Spacing {{frame.spacing}}
+      %input{min:"100", max:"650", step: "10", type:"range" ,
+            "v-bind:value":"frame.spacing",
+            "v-on:input":"frame.spacing = parseInt($event.target.value)"}
+    .rangeslider.posts
+      %b Posts {{frame.posts}}
+      %input{min:"2", max:"10", type:"range" ,
+            "v-bind:value":"frame.posts",
+            "v-on:input":"frame.posts = parseInt($event.target.value)"}
+    .rangeslider.size
+      %b Size {{frame.size}}
+      %input{min:"10", max:"25", step:"2.5" , type:"range" ,
+            "v-bind:value":"frame.size",
+            "v-on:input":"frame.size = parseFloat($event.target.value)"}
+    %td
+      %th Braces
+      %input{type:"checkbox", "v-model":"frame.braces"}
+    %span
+      Trusses
+      %input{type:"checkbox", "v-model":"frame.trusses"}
 
-  .front
+  .front{ ":style":"`perspective: ${150}px;`"}
     %svg{ ":width":"frame.width + 2" , ":height":"frame_height + padd ",
           ":viewbox":"'0 0 ' + frame.width + ' ' + frame_height" }
       %g.frame{ ":transform":"`translate(${0},${2*padd})`"}
@@ -157,12 +156,17 @@
                 ":y2":"frame.size"}
 
 :ruby2js
+
   class Graph < Vue
     el ".graph_app"
     def initialize
       @padd = 30
+      @slider = 45
       @frame = {trusses: true , size: 15 , height: 250, spacing: 300,
                 truss_height: 120, width: 300 , posts: 4 , braces: true}
+    end
+    def slide(event)
+      puts event.target.value
     end
     def dx
       return 1.1*@frame.width / 4
