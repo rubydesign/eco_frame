@@ -40,23 +40,29 @@
         %b Cubic meters:
         {{cubes}}
       %b perspective {{perspective}}
-      %input{min:"1", max:"600", step: "1", type:"range" ,
+      %input{min:"50", max:"1000", step: "10", type:"range" ,
             "v-bind:value":"perspective",
             "v-on:input":"perspective = parseInt($event.target.value)"}
+      %b background {{bg}}
+      %input{min:"1", max:"255", step: "1", type:"range" ,
+            "v-bind:value":"bg",
+            "v-on:input":"bg = parseInt($event.target.value)"}
+
+  %svg{ ":width":"frame.width + 2" , ":height":"frame_height ",
+        ":viewbox":"'0 0 ' + frame.width + ' ' + frame_height" }
+    %defs
+      %mask#mask_rest
+        %polyline{":points":"`${frame.width/2},0 ${frame.width},${frame.truss_height} ${frame.width},${frame.truss_height+frame.height} 0,${frame.truss_height+frame.height}  0,${frame.truss_height}`",
+                  ":style":"`fill: rgb(225,225,225);`"}
 
   .front{ ":style":"`perspective: ${10*perspective}px;`" }
     .child{ "v-for":"i in frame.posts" ,
             ":style":"`transform: translateZ(${40*i}px) translateY(10px);`"}
       %svg{ ":width":"frame.width + 2" , ":height":"frame_height ",
             ":viewbox":"'0 0 ' + frame.width + ' ' + frame_height" }
-        %defs
-          %mask#mask
-            %polyline{":points":"`0,0 0,${frame.truss_height} ${frame.width/2},0`",
-                      style:"fill: #33cc33;"}
-            %polyline{":points":"`${frame.width},0 ${frame.width},${frame.truss_height} ${frame.width/2},0`",
-                      style:"fill: #33cc33;"}
         %g.frame{ ":transform":"`translate(0,${frame.truss_height})`"  }
-          %rect.frame{ ":width":"frame.width" , ":height":"frame.size"}
+          %rect.frame{ ":width":"frame.width" , ":height":"frame.size" ,
+                      ":style":"`fill: rgb(${bg},${bg},${bg});`"}
           %rect.frame{ ":x":"frame.width - frame.size", ":y":"frame.size" ,
                       ":width":"frame.size" , ":height":"frame.height"}
           %rect.frame{ ":x":"0", ":y":"frame.size" ,
@@ -118,6 +124,7 @@
     el ".graph_app"
     def initialize
       @perspective = 100
+      @bg = 100
       @frame = {trusses: true , size: 15 , height: 250, spacing: 300,
                 truss_height: 120, width: 300 , posts: 4 , braces: true}
     end
