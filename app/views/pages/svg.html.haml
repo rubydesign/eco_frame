@@ -11,10 +11,10 @@
             "v-bind:value":"frame.width",
             "v-on:input":"frame.width = parseInt($event.target.value)"}
     .rangeslider.spacing
-      %b perspective {{perspective}}
-      %input{min:"1", max:"600", step: "10", type:"range" ,
-            "v-bind:value":"perspective",
-            "v-on:input":"perspective = parseInt($event.target.value)"}
+      %b Spacing {{frame.spacing}}
+      %input{min:"100", max:"650", step: "10", type:"range" ,
+          "v-bind:value":"frame.spacing",
+          "v-on:input":"frame.spacing = parseInt($event.target.value)"}
     .rangeslider.posts
       %b Posts {{frame.posts}}
       %input{min:"2", max:"10", type:"range" ,
@@ -39,13 +39,23 @@
       %div
         %b Cubic meters:
         {{cubes}}
+      %b perspective {{perspective}}
+      %input{min:"1", max:"600", step: "1", type:"range" ,
+            "v-bind:value":"perspective",
+            "v-on:input":"perspective = parseInt($event.target.value)"}
 
   .front{ ":style":"`perspective: ${10*perspective}px;`" }
     .child{ "v-for":"i in frame.posts" ,
             ":style":"`transform: translateZ(${40*i}px) translateY(10px);`"}
       %svg{ ":width":"frame.width + 2" , ":height":"frame_height ",
             ":viewbox":"'0 0 ' + frame.width + ' ' + frame_height" }
-        %g.frame{ ":transform":"`translate(0,${frame.truss_height})`" }
+        %defs
+          %mask#mask
+            %polyline{":points":"`0,0 0,${frame.truss_height} ${frame.width/2},0`",
+                      style:"fill: #33cc33;"}
+            %polyline{":points":"`${frame.width},0 ${frame.width},${frame.truss_height} ${frame.width/2},0`",
+                      style:"fill: #33cc33;"}
+        %g.frame{ ":transform":"`translate(0,${frame.truss_height})`"  }
           %rect.frame{ ":width":"frame.width" , ":height":"frame.size"}
           %rect.frame{ ":x":"frame.width - frame.size", ":y":"frame.size" ,
                       ":width":"frame.size" , ":height":"frame.height"}
