@@ -1,10 +1,10 @@
 .graph_app
   .post_control
     .rangeslider.height
-      %b Truss Height {{frame.truss_height}}
+      %b Truss Height {{frame.truss.height}}
       %input{min:"50", max:"250", step: "5", type:"range" ,
-            "v-bind:value":"frame.truss_height",
-            "v-on:input":"frame.truss_height = parseInt($event.target.value)"}
+            "v-bind:value":"frame.truss.height",
+            "v-on:input":"frame.truss.height = parseInt($event.target.value)"}
     .rangeslider.height
       %b Post Height {{frame.height}}
       %input{min:"100", max:"350", step: "5", type:"range" ,
@@ -36,7 +36,7 @@
         %input{type:"checkbox", "v-model":"frame.braces"}
       %span
         %b Trusses
-        %input{type:"checkbox", "v-model":"frame.trusses"}
+        %input{type:"checkbox", "v-model":"frame.truss.on"}
       %div
         %b Length
         {{length}}
@@ -50,37 +50,41 @@
             "v-on:input":"div = parseFloat($event.target.value)"}
 
 
-  .front{ ":style":"`height: ${frame.height + frame.truss_height}px; margin-left: ${1000-frame.width}px;`" }
+  .front{ ":style":"`height: ${frame.height + frame.truss.height}px; margin-left: ${1150 - frame.width}px;`" }
     .child{ "v-for":"i in frame.posts" ,
             ":style":"transform_post(i)"}
       %svg{ ":width":"frame.width + 2" , ":height":"frame_height  ",
-              "mask": "url(#mask_rest)",
+              ":mask":"`url(#mask_${frame.truss.on ? 'all':'frame'})`",
             ":viewbox":"'0 0 ' + frame.width + ' ' + frame_height" }
         %defs
-          %mask#mask_rest
-            %polyline{":points":"`${frame.width/2},0 ${frame.width},${frame.truss_height} ${frame.width},${frame.truss_height+frame.height} 0,${frame.truss_height+frame.height}  0,${frame.truss_height}`",
+          %mask#mask_all
+            %polyline{":points":"`${frame.width/2},0 ${frame.width},${frame.truss.height} ${frame.width},${frame.truss.height+frame.height} 0,${frame.truss.height+frame.height}  0,${frame.truss.height}`",
                       ":style":"`fill: rgb(225,225,225);`"}
-        %g.frame{ ":transform":"`translate(0,${frame.truss_height})`"  }
+          %mask#mask_frame
+            %polyline{":points":"`${frame.width},0 ${frame.width},${frame.height} 0,${frame.height}  0,0`",
+                      ":style":"`fill: rgb(225,225,225);`"}
+
+        %g.frame{ ":transform":"truss_transform"  }
           %rect.frame{ ":width":"frame.width" , ":height":"frame.size" }
           %rect.frame{ ":x":"frame.width - frame.size", ":y":"frame.size" ,
                       ":width":"frame.size" , ":height":"frame.height"}
           %rect.frame{ ":x":"0", ":y":"frame.size" ,
                       ":width":"frame.size" , ":height":"frame.height"}
-        %g.trusses{"v-if":"frame.trusses"}
-          %line{  ":x1": 0 , ":y1":"frame.truss_height" ,
+        %g.trusses{"v-if":"frame.truss.on"}
+          %line{  ":x1": 0 , ":y1":"frame.truss.height" ,
                   ":x2":"frame.width / 2" , ":y2": 0  }
           %line{  ":x1":"frame.width / 2" , ":y1": 0 ,
-                  ":x2":"frame.width" , ":y2":"frame.truss_height"  }
-          %line{  ":x1":"truss_x" , ":y1":"frame.truss_height" ,
+                  ":x2":"frame.width" , ":y2":"frame.truss.height"  }
+          %line{  ":x1":"truss_x" , ":y1":"frame.truss.height" ,
                   ":x2":"frame.width / 2" , ":y2":"truss_y"  }
           %line{  ":x1":"frame.width / 2" , ":y1":"truss_y" ,
-                  ":x2":"frame.width - truss_x" , ":y2":"frame.truss_height"  }
+                  ":x2":"frame.width - truss_x" , ":y2":"frame.truss.height"  }
           %line{  ":x1":"frame.width/2 - frame.size/2" , ":y1":"hit_y" ,
-                  ":x2":"frame.width/2 - frame.size/2" , ":y2":"frame.truss_height"  }
+                  ":x2":"frame.width/2 - frame.size/2" , ":y2":"frame.truss.height"  }
           %line{  ":x1":"frame.width/2 + frame.size/2" , ":y1":"hit_y" ,
-                  ":x2":"frame.width/2 + frame.size/2" , ":y2":"frame.truss_height"  }
+                  ":x2":"frame.width/2 + frame.size/2" , ":y2":"frame.truss.height"  }
 
-          %g{ ":transform":"`translate(0,${frame.truss_height})`" }
+          %g{ ":transform":"truss_transform" }
             %line{  ":x1":"frame.width/ 2 - frame.size/2" ,
                     ":y1":"-frame.size" ,
                     ":x2":"dx" ,
@@ -97,7 +101,7 @@
                     ":y1":"-frame.size - 0.75*truss_y" ,
                     ":x2":"dx + 0.5*truss_x" ,
                     ":y2":"-dy - 0.5*truss_y"}
-        %g{ ":transform":"`translate(0,${frame.truss_height})`" ,
+        %g{ ":transform":"truss_transform" ,
             "v-if":"frame.braces"}
           %line{  ":x1":"frame.size" ,
                   ":y1":"brace" ,
@@ -123,8 +127,12 @@
     el ".graph_app"
     def initialize
       @div = 5
-      @frame = {trusses: true , size: 15 , height: 250, spacing: 300,
-                truss_height: 120, width: 300 , posts: 4 , braces: true}
+      @frame = {truss: {height: 120, type: :harja , on: true} , size: 15 , height: 250, spacing: 300,
+                width: 300 , posts: 4 , braces: true}
+    end
+    def truss_transform
+      h = @frame.truss.on ? @frame.truss.height : 0
+      return "translate(0," + h + ")"
     end
     def transform_post(i)
       posts_max =  500 + self.length * 0.4
@@ -151,7 +159,7 @@
       return 3* Math.min(@frame.height, @frame.width/2) / 8
     end
     def angle
-      return Math.atan(2*@frame.truss_height / @frame.width)
+      return Math.atan(2*@frame.truss.height / @frame.width)
     end
     def truss_x
       return @frame.size / Math.sin( self.angle)
@@ -160,19 +168,13 @@
       return @frame.size / Math.cos( self.angle)
     end
     def hit_y
-      return truss_y + @frame.truss_height - (@frame.width - @frame.size)*0.5*Math.tan(angle)
+      return truss_y + @frame.truss.height - (@frame.width - @frame.size)*0.5*Math.tan(angle)
     end
     def length
       return @frame.spacing * (@frame.posts - 1 )
     end
     def frame_height
-      return @frame.height + @frame.size + (@frame.trusses ? @frame.truss_height : 0)
-    end
-    def posts_positions
-      arr = []
-      0.upto(@frame.posts - 1){ |i| arr << Math.floor(i * (self.length - @frame.size)/(@frame.posts - 1))}
-      arr << self.length - @frame.size
-      arr
+      return @frame.height + @frame.size + (@frame.truss.on ? @frame.truss.height : 0)
     end
     def cubes
       sum = post_cubes + truss_cubes + plate_cubes
@@ -183,11 +185,11 @@
     end
     def plate_cubes
       meters = 2 * self.length
-      meters += 2 * @frame.width unless @frame.trusses
+      meters += 2 * @frame.width unless @frame.truss.on
       return @frame.size * @frame.size * meters
     end
     def truss_cubes
-      return 0 unless @frame.trusses
+      return 0 unless @frame.truss.on
       return @frame.posts * @frame.size * @frame.size * (@frame.width * 2)
     end
   end
