@@ -82,36 +82,33 @@
                                 0,${frame.height}`"} |
 
         %g.trusses{"v-if":"frame.truss.on"}
-          %line{  ":x1": 0 , ":y1":"frame.truss.height" ,
-                  ":x2":"frame.width / 2" , ":y2": 0  }
-          %line{  ":x1":"frame.width / 2" , ":y1": 0 ,
-                  ":x2":"frame.width" , ":y2":"frame.truss.height"  }
-          %line{  ":x1":"truss_x" , ":y1":"frame.truss.height" ,
-                  ":x2":"frame.width / 2" , ":y2":"truss_y"  }
-          %line{  ":x1":"frame.width / 2" , ":y1":"truss_y" ,
-                  ":x2":"frame.width - truss_x" , ":y2":"frame.truss.height"  }
-          %line{  ":x1":"frame.width/2 - frame.size/2" , ":y1":"hit_y" ,
-                  ":x2":"frame.width/2 - frame.size/2" , ":y2":"frame.truss.height"  }
-          %line{  ":x1":"frame.width/2 + frame.size/2" , ":y1":"hit_y" ,
-                  ":x2":"frame.width/2 + frame.size/2" , ":y2":"frame.truss.height"  }
+          %polyline{":points":"`0,${frame.truss.height} |
+                                ${frame.width/2},0 |
+                                ${frame.width/2},${truss_y} |
+                                ${truss_x},${frame.truss.height}`"} |
+            i
+          %polyline{":points":"`${frame.width/2},0 |
+                                ${frame.width},${frame.truss.height} |
+                                ${frame.width - truss_x},${frame.truss.height} |
+                                ${frame.width/2},${truss_y}`"} |
 
-          %g{ ":transform":"truss_transform" }
-            %line{  ":x1":"frame.width/ 2 - frame.size/2" ,
-                    ":y1":"-frame.size" ,
-                    ":x2":"dx" ,
-                    ":y2":"-dy"}
-            %line{  ":x1":"frame.width/2 + frame.size/2" ,
-                    ":y1":"-frame.size" ,
-                    ":x2":"frame.width-dx" ,
-                    ":y2":"-dy"}
-            %line{  ":x1":"frame.width/2 + frame.size/2" ,
-                    ":y1":"-frame.size - 0.75*truss_y" ,
-                    ":x2":"frame.width - dx - 0.5*truss_x" ,
-                    ":y2":"-dy - 0.5*truss_y"}
-            %line{  ":x1":"frame.width/2 - frame.size/2" ,
-                    ":y1":"-frame.size - 0.75*truss_y" ,
-                    ":x2":"dx + 0.5*truss_x" ,
-                    ":y2":"-dy - 0.5*truss_y"}
+          %g{ ":transform":"truss_transform" , "v-if":"frame.truss.type == 'harja'" }
+            %polyline{":points":"`${frame.width/2 - frame.size/2},${hit_y - frame.truss.height} |
+                                  ${frame.width/2},${truss_y - frame.truss.height} |
+                                  ${frame.width/2 + frame.size/2},${hit_y - frame.truss.height} |
+                                  ${frame.width/2 + frame.size/2},0 |
+                                  ${frame.width/2 - frame.size/2},0`"} |
+              i
+            %polyline{":points":"`${dx},${-dy} |
+                                  ${frame.width/2 - frame.size/2},${-frame.size} |
+                                  ${frame.width/2 - frame.size/2},${-frame.size - 0.75*truss_y} |
+                                  ${dx + 0.5*truss_x},${-dy - 0.5*truss_y}`"} |
+              i
+            %polyline{":points":"`${frame.width - dx},${-dy} |
+                                  ${frame.width/2 + frame.size/2},${-frame.size} |
+                                  ${frame.width/2 + frame.size/2},${-frame.size - 0.75*truss_y} |
+                                  ${frame.width - dx - 0.5*truss_x},${-dy - 0.5*truss_y}`"} |
+
         %g.braces{ ":transform":"truss_transform" , "v-if":"frame.braces"}
           %line{  ":x1":"frame.size" ,
                   ":y1":"brace" ,
