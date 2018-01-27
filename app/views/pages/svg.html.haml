@@ -1,7 +1,12 @@
 .graph_app
   .post_control
     .rangeslider.height
-      %b Height {{frame.height}}
+      %b Truss Height {{frame.truss_height}}
+      %input{min:"50", max:"250", step: "5", type:"range" ,
+            "v-bind:value":"frame.truss_height",
+            "v-on:input":"frame.truss_height = parseInt($event.target.value)"}
+    .rangeslider.height
+      %b Post Height {{frame.height}}
       %input{min:"100", max:"350", step: "5", type:"range" ,
             "v-bind:value":"frame.height",
             "v-on:input":"frame.height = parseInt($event.target.value)"}
@@ -11,7 +16,7 @@
             "v-bind:value":"frame.width",
             "v-on:input":"frame.width = parseInt($event.target.value)"}
     .rangeslider.spacing
-      %b Spacing {{frame.spacing}}
+      %b Length {{frame.posts * frame.spacing}}
       %input{min:"100", max:"650", step: "10", type:"range" ,
           "v-bind:value":"frame.spacing",
           "v-on:input":"frame.spacing = parseInt($event.target.value)"}
@@ -32,33 +37,29 @@
       %span
         %b Trusses
         %input{type:"checkbox", "v-model":"frame.trusses"}
-    .rangeslider
       %div
         %b Length
         {{length}}
       %div
         %b Cubic meters:
         {{cubes}}
-      %b perspective {{perspective}}
-      %input{min:"50", max:"1000", step: "10", type:"range" ,
-            "v-bind:value":"perspective",
-            "v-on:input":"perspective = parseInt($event.target.value)"}
-      %b background {{bg}}
-      %input{min:"1", max:"255", step: "1", type:"range" ,
-            "v-bind:value":"bg",
-            "v-on:input":"bg = parseInt($event.target.value)"}
+    .up
+      %b div {{div}}
+      %input{min:"0.5", max:"5", step: "0.1", type:"range" ,
+            "v-bind:value":"div",
+            "v-on:input":"div = parseFloat($event.target.value)"}
 
 
-  .front{ ":style":"`perspective: ${10*perspective}px;`" }
+  .front{ ":style":"`height: ${frame.height + frame.truss_height}px; margin-left: ${1000-frame.width}px;`" }
     .child{ "v-for":"i in frame.posts" ,
-            ":style":"`transform: translateZ(${40*i}px) translateY(10px);`"}
-      %svg{ ":width":"frame.width + 2" , ":height":"frame_height ",
+            ":style":"`transform: translateZ(${frame.spacing*(i-1)/div}px) rotateY(-25deg);`"}
+      %svg{ ":width":"frame.width + 2" , ":height":"frame_height  ",
               "mask": "url(#mask_rest)",
             ":viewbox":"'0 0 ' + frame.width + ' ' + frame_height" }
         %defs
           %mask#mask_rest
             %polyline{":points":"`${frame.width/2},0 ${frame.width},${frame.truss_height} ${frame.width},${frame.truss_height+frame.height} 0,${frame.truss_height+frame.height}  0,${frame.truss_height}`",
-                      ":style":"`fill: rgb(${bg},${bg},${bg});`"}
+                      ":style":"`fill: rgb(225,225,225);`"}
         %g.frame{ ":transform":"`translate(0,${frame.truss_height})`"  }
           %rect.frame{ ":width":"frame.width" , ":height":"frame.size" }
           %rect.frame{ ":x":"frame.width - frame.size", ":y":"frame.size" ,
@@ -121,8 +122,7 @@
   class Graph < Vue
     el ".graph_app"
     def initialize
-      @perspective = 100
-      @bg = 225
+      @div = 5
       @frame = {trusses: true , size: 15 , height: 250, spacing: 300,
                 truss_height: 120, width: 300 , posts: 4 , braces: true}
     end
@@ -162,7 +162,7 @@
       return @frame.spacing * (@frame.posts - 1 )
     end
     def frame_height
-      return @frame.height + (@frame.trusses ? @frame.truss_height : 0)
+      return @frame.height + @frame.size + (@frame.trusses ? @frame.truss_height : 0)
     end
     def posts_positions
       arr = []
