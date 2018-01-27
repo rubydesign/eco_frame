@@ -65,11 +65,22 @@
                       ":style":"`fill: rgb(225,225,225);`"}
 
         %g.frame{ ":transform":"truss_transform"  }
-          %rect.frame{ ":width":"frame.width" , ":height":"frame.size" }
-          %rect.frame{ ":x":"frame.width - frame.size", ":y":"frame.size" ,
-                      ":width":"frame.size" , ":height":"frame.height"}
-          %rect.frame{ ":x":"0", ":y":"frame.size" ,
-                      ":width":"frame.size" , ":height":"frame.height"}
+          %polyline{":points":"`0,0 |
+                                ${frame.width},0 |
+                                ${frame.width},${frame.size} |
+                                0,${frame.size}`"} |
+            i
+          %polyline{":points":"`${frame.width - frame.size},${frame.size} |
+                                ${frame.width},${frame.size} |
+                                ${frame.width},${frame.height} |
+                                ${frame.width - frame.size},${frame.height}`"} |
+
+            i
+          %polyline{":points":"`0,${frame.size} |
+                                ${frame.size},${frame.size} |
+                                ${frame.size},${frame.height} |
+                                0,${frame.height}`"} |
+
         %g.trusses{"v-if":"frame.truss.on"}
           %line{  ":x1": 0 , ":y1":"frame.truss.height" ,
                   ":x2":"frame.width / 2" , ":y2": 0  }
@@ -101,8 +112,7 @@
                     ":y1":"-frame.size - 0.75*truss_y" ,
                     ":x2":"dx + 0.5*truss_x" ,
                     ":y2":"-dy - 0.5*truss_y"}
-        %g{ ":transform":"truss_transform" ,
-            "v-if":"frame.braces"}
+        %g.braces{ ":transform":"truss_transform" , "v-if":"frame.braces"}
           %line{  ":x1":"frame.size" ,
                   ":y1":"brace" ,
                   ":x2":"brace" ,
