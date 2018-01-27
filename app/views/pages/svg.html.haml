@@ -64,7 +64,7 @@
             %polyline{":points":"`${frame.width},0 ${frame.width},${frame.height} 0,${frame.height}  0,0`",
                       ":style":"`fill: rgb(225,225,225);`"}
 
-        %g.frame{ ":transform":"truss_transform"  }
+        %g{ ":transform":"truss_transform"  }
           %polyline{":points":"`0,0 |
                                 ${frame.width},0 |
                                 ${frame.width},${frame.size} |
@@ -74,13 +74,11 @@
                                 ${frame.width},${frame.size} |
                                 ${frame.width},${frame.height} |
                                 ${frame.width - frame.size},${frame.height}`"} |
-
             i
           %polyline{":points":"`0,${frame.size} |
                                 ${frame.size},${frame.size} |
                                 ${frame.size},${frame.height} |
                                 0,${frame.height}`"} |
-
         %g.trusses{"v-if":"frame.truss.on"}
           %polyline{":points":"`0,${frame.truss.height} |
                                 ${frame.width/2},0 |
@@ -91,7 +89,6 @@
                                 ${frame.width},${frame.truss.height} |
                                 ${frame.width - truss_x},${frame.truss.height} |
                                 ${frame.width/2},${truss_y}`"} |
-
           %g{ ":transform":"truss_transform" , "v-if":"frame.truss.type == 'harja'" }
             %polyline{":points":"`${frame.width/2 - frame.size/2},${hit_y - frame.truss.height} |
                                   ${frame.width/2},${truss_y - frame.truss.height} |
@@ -108,19 +105,16 @@
                                   ${frame.width/2 + frame.size/2},${-frame.size} |
                                   ${frame.width/2 + frame.size/2},${-frame.size - 0.75*truss_y} |
                                   ${frame.width - dx - 0.5*truss_x},${-dy - 0.5*truss_y}`"} |
-
         %g.braces{ ":transform":"truss_transform" , "v-if":"frame.braces"}
           %polyline{":points":"`${frame.size},${brace} |
                                 ${brace},${frame.size} |
                                 ${brace + frame.size*1.414},${frame.size} |
                                 ${frame.size},${brace + frame.size*1.414}`"} |
             i
-
           %polyline{":points":"`${frame.width - brace},${frame.size}  |
                                 ${frame.width - frame.size},${brace}  |
                                 ${frame.width - frame.size},${brace + frame.size*1.414} |
                                 ${frame.width - brace - frame.size*1.414},${frame.size} `"} |
-
 :ruby2js
 
   class Graph < Vue
