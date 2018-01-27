@@ -1,0 +1,26 @@
+%script{'type'=>"text/x-template", id: 'brace-outline'}
+  %g.braces{ ":transform":"truss_transform" , "v-if":"frame.braces"}
+    %polyline{":points":"`${frame.size},${brace} |
+                          ${brace},${frame.size} |
+                          ${brace + frame.size*1.414},${frame.size} |
+                          ${frame.size},${brace + frame.size*1.414}`"} |
+      i
+    %polyline{":points":"`${frame.width - brace},${frame.size}  |
+                          ${frame.width - frame.size},${brace}  |
+                          ${frame.width - frame.size},${brace + frame.size*1.414} |
+                          ${frame.width - brace - frame.size*1.414},${frame.size} `"} |
+
+:ruby2js
+  class BraceOutline < Vue
+    template "#brace-outline"
+    props [:frame]
+    def initialize
+    end
+    def truss_transform
+      h = self.frame.truss.on ? self.frame.truss.height : 0
+      return "translate(0," + h + ")"
+    end
+    def brace
+      return 3* Math.min(self.frame.height, self.frame.width/2) / 8
+    end
+  end

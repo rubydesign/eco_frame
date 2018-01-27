@@ -65,18 +65,10 @@
                       ":style":"`fill: rgb(225,225,225);`"}
         %g{ "is":"frame-outline", ":frame":"frame"}
         %g{ "is":"truss-harja", ":frame":"frame"}
+        %g{ "is":"brace-outline" , ":frame":"frame" , "v-if":"frame.braces"}
 
-        %g.braces{ ":transform":"truss_transform" , "v-if":"frame.braces"}
-          %polyline{":points":"`${frame.size},${brace} |
-                                ${brace},${frame.size} |
-                                ${brace + frame.size*1.414},${frame.size} |
-                                ${frame.size},${brace + frame.size*1.414}`"} |
-            i
-          %polyline{":points":"`${frame.width - brace},${frame.size}  |
-                                ${frame.width - frame.size},${brace}  |
-                                ${frame.width - frame.size},${brace + frame.size*1.414} |
-                                ${frame.width - brace - frame.size*1.414},${frame.size} `"} |
 = render "vue/frame_outline"
+= render "vue/brace_outline"
 = render "vue/truss_harja"
 
 :ruby2js
@@ -87,10 +79,6 @@
       @div = 5
       @frame = {truss: {height: 120, type: :harja , on: true} , size: 15 , height: 250, spacing: 300,
                 width: 300 , posts: 4 , braces: true}
-    end
-    def truss_transform
-      h = @frame.truss.on ? @frame.truss.height : 0
-      return "translate(0," + h + ")"
     end
     def transform_post(i)
       posts_max =  500 + self.length * 0.4
@@ -103,15 +91,6 @@
       old_length = self.length
       @frame.spacing = Math.floor(old_length / (num - 1))
       @frame.posts = num
-    end
-    def slide(event)
-      puts event.target.value
-    end
-    def brace
-      return 3* Math.min(@frame.height, @frame.width/2) / 8
-    end
-    def angle
-      return Math.atan(2*@frame.truss.height / @frame.width)
     end
     def length
       return @frame.spacing * (@frame.posts - 1 )
