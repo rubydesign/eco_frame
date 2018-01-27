@@ -1,0 +1,27 @@
+%script{'type'=>"text/x-template", id: 'frame-outline'}
+  %g{ ":transform":"truss_transform"  }
+    %polyline{":points":"`0,0 |
+                          ${frame.width},0 |
+                          ${frame.width},${frame.size} |
+                          0,${frame.size}`"} |
+      i
+    %polyline{":points":"`${frame.width - frame.size},${frame.size} |
+                          ${frame.width},${frame.size} |
+                          ${frame.width},${frame.height} |
+                          ${frame.width - frame.size},${frame.height}`"} |
+      i
+    %polyline{":points":"`0,${frame.size} |
+                          ${frame.size},${frame.size} |
+                          ${frame.size},${frame.height} |
+                          0,${frame.height}`"} |
+:ruby2js
+  class FrameOutline < Vue
+    template "#frame-outline"
+    props [:frame]
+    def initialize
+    end
+    def truss_transform
+      h = self.frame.truss.on ? self.frame.truss.height : 0
+      return "translate(0," + h + ")"
+    end
+  end

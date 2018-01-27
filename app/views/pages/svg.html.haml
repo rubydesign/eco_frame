@@ -63,22 +63,7 @@
           %mask#mask_frame
             %polyline{":points":"`${frame.width},0 ${frame.width},${frame.height} 0,${frame.height}  0,0`",
                       ":style":"`fill: rgb(225,225,225);`"}
-
-        %g{ ":transform":"truss_transform"  }
-          %polyline{":points":"`0,0 |
-                                ${frame.width},0 |
-                                ${frame.width},${frame.size} |
-                                0,${frame.size}`"} |
-            i
-          %polyline{":points":"`${frame.width - frame.size},${frame.size} |
-                                ${frame.width},${frame.size} |
-                                ${frame.width},${frame.height} |
-                                ${frame.width - frame.size},${frame.height}`"} |
-            i
-          %polyline{":points":"`0,${frame.size} |
-                                ${frame.size},${frame.size} |
-                                ${frame.size},${frame.height} |
-                                0,${frame.height}`"} |
+        %g{ "is":"frame-outline", ":frame":"frame"}
         %g.trusses{"v-if":"frame.truss.on"}
           %polyline{":points":"`0,${frame.truss.height} |
                                 ${frame.width/2},0 |
@@ -115,6 +100,8 @@
                                 ${frame.width - frame.size},${brace}  |
                                 ${frame.width - frame.size},${brace + frame.size*1.414} |
                                 ${frame.width - brace - frame.size*1.414},${frame.size} `"} |
+= render "vue/frame_outline"
+
 :ruby2js
 
   class Graph < Vue
