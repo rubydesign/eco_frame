@@ -110,23 +110,16 @@
                                   ${frame.width - dx - 0.5*truss_x},${-dy - 0.5*truss_y}`"} |
 
         %g.braces{ ":transform":"truss_transform" , "v-if":"frame.braces"}
-          %line{  ":x1":"frame.size" ,
-                  ":y1":"brace" ,
-                  ":x2":"brace" ,
-                  ":y2":"frame.size"}
-          %line{  ":x1":"frame.size" ,
-                  ":y1":"brace + frame.size*1.414" ,
-                  ":x2":"brace + frame.size*1.414" ,
-                  ":y2":"frame.size"}
+          %polyline{":points":"`${frame.size},${brace} |
+                                ${brace},${frame.size} |
+                                ${brace + frame.size*1.414},${frame.size} |
+                                ${frame.size},${brace + frame.size*1.414}`"} |
+            i
 
-          %line{  ":x1":"frame.width - frame.size" ,
-                  ":y1":"brace" ,
-                  ":x2":"frame.width - brace" ,
-                  ":y2":"frame.size"}
-          %line{  ":x1":"frame.width - frame.size" ,
-                  ":y1":"brace + frame.size*1.414" ,
-                  ":x2":"frame.width - brace - frame.size*1.414" ,
-                  ":y2":"frame.size"}
+          %polyline{":points":"`${frame.width - brace},${frame.size}  |
+                                ${frame.width - frame.size},${brace}  |
+                                ${frame.width - frame.size},${brace + frame.size*1.414} |
+                                ${frame.width - brace - frame.size*1.414},${frame.size} `"} |
 
 :ruby2js
 
