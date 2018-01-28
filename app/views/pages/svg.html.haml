@@ -31,23 +31,27 @@
             "v-bind:value":"frame.size",
             "v-on:input":"frame.size = parseFloat($event.target.value)"}
     .rangeslider
+      %b Perspective {{frame.perspective}}%
+      %input{min:"0", max:"100", step: "1", type:"range" ,
+            "v-bind:value":"frame.perspective",
+            "v-on:input":"frame.perspective = parseFloat($event.target.value)"}
+    .rangeslider
       %div
         %b Braces
         %input{type:"checkbox", "v-model":"frame.braces"}
       %span
         %b Trusses
         %input{type:"checkbox", "v-model":"frame.truss.on"}
+    .rangeslider
       %div
-        %b Length
-        {{length}}
+        %b Joints
+        {{joins}}
       %div
         %b Cubic meters:
         {{cubes}}
-    .up
-      %b Perspective {{frame.perspective}}%
-      %input{min:"0", max:"100", step: "1", type:"range" ,
-            "v-bind:value":"frame.perspective",
-            "v-on:input":"frame.perspective = parseFloat($event.target.value)"}
+      %div
+        %b Money
+        {{Math.floor(joins * 4*45 + cubes * 1.2*650)}}
 
 
   .front{ ":style":"`width: 100vw; |
@@ -124,5 +128,18 @@
       meters = @frame.width
       meters += @frame.width + 3*@frame.truss.height if @frame.truss.on
       return @frame.posts * @frame.size * @frame.size * meters
+    end
+    def joins
+      return post_joins + truss_joins + plate_joins
+    end
+    def post_joins
+      return @frame.braces ? 4 : 2
+    end
+    def plate_joins
+      return 2 * (@frame.posts - 1)
+    end
+    def truss_joins
+      return 0 unless @frame.truss.on
+      return @frame.posts * 9
     end
   end
