@@ -2,9 +2,6 @@
   margin-top: 50px
   margin-left: 100px
   margin-bottom: 50px
-  display: grid
-  grid-gap: 10px
-  grid-auto-rows: minmax(100px, auto)
   .up
     position: absolute
     top: 0
@@ -12,23 +9,16 @@
     width: 200px
     z-index: 2
   .main
-    grid-row: 3
-    grid-column: 1
     width: 100vw
     overflow-y: hidden
     display: none
   .post_control
-    grid-row: 1
-    grid-column: 1
   .hidden
     display: none
   .front
-    grid-row: 2
-    grid-column: 1
     position: relative
     display: inline-block
-    perspective: 2500px
-    perspective-origin: 200% -25%
+    perspective: 2000px
     .child
       position: absolute
       svg
