@@ -44,20 +44,20 @@
         %b Cubic meters:
         {{cubes}}
     .up
-      %b perspective {{frame.perspective}}
-      %input{min:"0", max:"1", step: ".01", type:"range" ,
+      %b Perspective {{frame.perspective}}%
+      %input{min:"0", max:"100", step: "1", type:"range" ,
             "v-bind:value":"frame.perspective",
             "v-on:input":"frame.perspective = parseFloat($event.target.value)"}
 
 
   .front{ ":style":"`width: 100vw; |
                      margin-left: ${ww - frame.width -200}px; |
-                     perspective-origin: ${2*frame.width}px 0px`"} |
+                     perspective-origin: ${2*frame.width}px 0px; |
+                     perspective: ${200000/frame.perspective}px`"} |
     .child{ "v-for":"i in frame.posts" ,
-            ":style":"transform_post(i) + 'height: ' + frame.height*frame.perspective + 'px;'"}
+            ":style":"`${transform_post(i)}`"}
       %svg{ "width":"100%" ,
-            ":height":"`${frame.perspective*frame_height}px`",
-            "preserveAspectRatio": "xMinYMid meet" ,
+            ":height":"`${frame_height}px`",
             ":mask":"`url(#mask_${frame.truss.on ? 'all':'frame'})`" ,
             ":viewbox":"'0 0 ' + frame.width + ' ' + frame_height"}
         %defs
@@ -87,7 +87,7 @@
     el ".graph_app"
     def initialize
       @frame = {truss: {height: 120, type: :harja , on: true} , size: 15 , height: 250, spacing: 300,
-                width: 300 , posts: 4 , braces: true , perspective: 0.8}
+                width: 300 , posts: 4 , braces: true , perspective: 100}
     end
     def ww
       return window.innerWidth
