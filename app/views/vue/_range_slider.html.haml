@@ -1,0 +1,30 @@
+%script{'type'=>"text/x-template", id: 'range-slider'}
+  .rangeslider
+    %slot
+      %b
+        {{value}}
+    %input{":min":"min_v", ":max":"max", ":step":"step_v", type:"range" ,
+          "v-bind:value":"value",
+          "v-on:input":"handleValue($event)"}
+
+:ruby2js
+  class RangeSlider < Vue
+    template "#range-slider"
+    props [:value , :max , :text , :min , :type]
+    def initialize
+    end
+    def min_v
+      return (self.min == null) ? 0 : self.min
+    end
+    def step_v
+      return self.step ? self.step : self.value / 100
+    end
+    def handleValue(event)
+      value = event.target.value
+      if( self.type == null)
+        Vue.emit('input', parseInt(value))
+      else
+        Vue.emit('input', parseFloat(value))
+      end
+    end
+  end
