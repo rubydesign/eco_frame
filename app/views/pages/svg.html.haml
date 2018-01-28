@@ -44,25 +44,35 @@
         %b Cubic meters:
         {{cubes}}
     .up
-      %b div {{div}}
-      %input{min:"0.5", max:"5", step: "0.1", type:"range" ,
-            "v-bind:value":"div",
-            "v-on:input":"div = parseFloat($event.target.value)"}
+      %b perspective {{frame.perspective}}
+      %input{min:"0", max:"1", step: ".01", type:"range" ,
+            "v-bind:value":"frame.perspective",
+            "v-on:input":"frame.perspective = parseFloat($event.target.value)"}
 
 
-  .front{ ":style":"`height: ${frame.height + frame.truss.height}px; margin-left: ${1150 - frame.width}px;`" }
+  .front{ ":style":"`width: 100vw; |
+                     margin-left: ${ww - frame.width -200}px; |
+                     perspective-origin: ${2*frame.width}px 0px`"} |
     .child{ "v-for":"i in frame.posts" ,
-            ":style":"transform_post(i)"}
-      %svg{ ":width":"frame.width + 2" , ":height":"frame_height  ",
-              ":mask":"`url(#mask_${frame.truss.on ? 'all':'frame'})`",
-            ":viewbox":"'0 0 ' + frame.width + ' ' + frame_height" }
+            ":style":"transform_post(i) + 'height: ' + frame.height*frame.perspective + 'px;'"}
+      %svg{ "width":"100%" ,
+            ":height":"`${frame.perspective*frame_height}px`",
+            "preserveAspectRatio": "xMinYMid meet" ,
+            ":mask":"`url(#mask_${frame.truss.on ? 'all':'frame'})`" ,
+            ":viewbox":"'0 0 ' + frame.width + ' ' + frame_height"}
         %defs
           %mask#mask_all
-            %polyline{":points":"`${frame.width/2},0 ${frame.width},${frame.truss.height} ${frame.width},${frame.truss.height+frame.height} 0,${frame.truss.height+frame.height}  0,${frame.truss.height}`",
-                      ":style":"`fill: rgb(225,225,225);`"}
+            %polyline{":points":"`${frame.width/2},0 |
+                      ${frame.width},${frame.truss.height} |
+                      ${frame.width},${frame.truss.height+frame.height} |
+                      0,${frame.truss.height+frame.height}  |
+                      0,${frame.truss.height}`", |
+                      ":style":"`fill: rgb(225,225,225);`"} |
           %mask#mask_frame
-            %polyline{":points":"`${frame.width},0 ${frame.width},${frame.height} 0,${frame.height}  0,0`",
-                      ":style":"`fill: rgb(225,225,225);`"}
+            %polyline{":points":"`${frame.width},0 |
+                          ${frame.width},${frame.height} |
+                          0,${frame.height}  0,0`", |
+                      ":style":"`fill: rgb(225,225,225);`"} |
         %g{ "is":"frame-outline", ":frame":"frame"}
         %g{ "is":"truss-harja", ":frame":"frame"}
         %g{ "is":"brace-outline" , ":frame":"frame" , "v-if":"frame.braces"}
@@ -76,14 +86,14 @@
   class Graph < Vue
     el ".graph_app"
     def initialize
-      @div = 5
       @frame = {truss: {height: 120, type: :harja , on: true} , size: 15 , height: 250, spacing: 300,
-                width: 300 , posts: 4 , braces: true}
+                width: 300 , posts: 4 , braces: true , perspective: 0.8}
+    end
+    def ww
+      return window.innerWidth
     end
     def transform_post(i)
-      posts_max =  500 + self.length * 0.4
-      posts_factor = posts_max / @frame.posts
-      ret = "transform: translateZ(" +  posts_factor*(i-1)
+      ret = "transform: translateZ(" +  @frame.spacing*(i-1)
       ret = ret + "px) rotateY(-25deg);"
       return ret
     end
