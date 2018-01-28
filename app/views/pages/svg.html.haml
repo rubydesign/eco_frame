@@ -113,15 +113,16 @@
       return (sum / (100*100*100)).toFixed(2)
     end
     def post_cubes
-      return @frame.posts * @frame.size * @frame.size * @frame.height
+      meters =  @frame.height
+      meters += 1 if @frame.braces
+      return 2 * @frame.posts * @frame.size * @frame.size * meters
     end
     def plate_cubes
-      meters = 2 * self.length
-      meters += 2 * @frame.width unless @frame.truss.on
-      return @frame.size * @frame.size * meters
+      return @frame.size * @frame.size * 2 * self.length
     end
     def truss_cubes
-      return 0 unless @frame.truss.on
-      return @frame.posts * @frame.size * @frame.size * (@frame.width * 2)
+      meters = @frame.width
+      meters += @frame.width + 3*@frame.truss.height if @frame.truss.on
+      return @frame.posts * @frame.size * @frame.size * meters
     end
   end
