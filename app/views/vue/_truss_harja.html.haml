@@ -10,20 +10,20 @@
                           ${frame.width - truss_x},${truss_height} |
                           ${frame.width/2},${truss_y}`"} |
     %g{ ":transform":"truss_transform" , "v-if":"frame.truss.type == `harja`" }
-      %polyline{":points":"`${frame.width/2 - frame.size/2},${hit_y - truss_height} |
+      %polyline{":points":"`${frame.width/2 - frame_size/2},${hit_y - truss_height} |
                             ${frame.width/2},${truss_y - truss_height} |
-                            ${frame.width/2 + frame.size/2},${hit_y - truss_height} |
-                            ${frame.width/2 + frame.size/2},0 |
-                            ${frame.width/2 - frame.size/2},0`"} |
+                            ${frame.width/2 + frame_size/2},${hit_y - truss_height} |
+                            ${frame.width/2 + frame_size/2},0 |
+                            ${frame.width/2 - frame_size/2},0`"} |
         i
       %polyline{":points":"`${dx},${-dy} |
-                            ${frame.width/2 - frame.size/2},${-frame.size} |
-                            ${frame.width/2 - frame.size/2},${-frame.size - 0.75*truss_y} |
+                            ${frame.width/2 - frame_size/2},${-frame_size} |
+                            ${frame.width/2 - frame_size/2},${-frame_size - 0.75*truss_y} |
                             ${dx + 0.5*truss_x},${-dy - 0.5*truss_y}`"} |
         i
       %polyline{":points":"`${frame.width - dx},${-dy} |
-                            ${frame.width/2 + frame.size/2},${-frame.size} |
-                            ${frame.width/2 + frame.size/2},${-frame.size - 0.75*truss_y} |
+                            ${frame.width/2 + frame_size/2},${-frame_size} |
+                            ${frame.width/2 + frame_size/2},${-frame_size - 0.75*truss_y} |
                             ${frame.width - dx - 0.5*truss_x},${-dy - 0.5*truss_y}`"} |
 :ruby2js
   class TrussHarja < Vue
@@ -42,19 +42,22 @@
       return (self.dx - self.truss_x) * Math.tan(angle)
     end
     def truss_x
-      return self.frame.size / Math.sin( self.angle)
+      return self.frame_size / Math.sin( self.angle)
     end
     def truss_y
-      return self.frame.size / Math.cos( self.angle)
+      return self.frame_size / Math.cos( self.angle)
     end
     def truss_height
       return self.frame.width * Math.tan(self.frame.truss.angle * (Math.PI/180))/ 2
+    end
+    def frame_size
+      return self.frame.size*2.5
     end
     def angle
       return self.frame.truss.angle * (Math.PI / 180)
     end
     def hit_y
-      return truss_y + self.truss_height - (self.frame.width - self.frame.size)*0.5*Math.tan(angle)
+      return truss_y + self.truss_height - (self.frame.width - self.frame_size)*0.5*Math.tan(angle)
     end
 
   end

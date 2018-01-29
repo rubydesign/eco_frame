@@ -11,8 +11,8 @@
     %range-slider{"v-bind:value":"frame.posts" , "v-on:input":"set_posts($event)",
                   ":min":"2", ":max":"11", ":step":1}
       %b Posts {{frame.posts}}
-    %range-slider{"v-model":"frame.size" ,":min":"10", ":max":"25", ":step":1}
-      %b Size {{frame.size}}cm ({{(frame.size/2.5).toFixed(0)}}in)
+    %range-slider{"v-model":"frame.size" ,":min":"4", ":max":"11", ":step":1}
+      %b Size {{frame.size}}in ({{(frame_size).toFixed(0)}}cm)
     %range-slider{"v-model":"scale", ":min":30, ":max":150}
       %span
         Scale
@@ -77,7 +77,7 @@
   class Graph < Vue
     el ".graph_app"
     def initialize
-      @frame = {truss: {angle: 30, type: :harja , on: true} ,size: 15 ,height: 250,
+      @frame = {truss: {angle: 30, type: :harja , on: true} ,size: 6 ,height: 250,
                 spacing: 300, width: 400 , posts: 4 , braces: true }
       @scale = 100
     end
@@ -97,8 +97,11 @@
     def length
       return @frame.spacing * (@frame.posts - 1 )
     end
+    def frame_size
+      return @frame.size*2.5
+    end
     def frame_height
-      return @frame.height + @frame.size + (@frame.truss.on ? self.truss_height : 0)
+      return @frame.height + self.frame_size + (@frame.truss.on ? self.truss_height : 0)
     end
     def truss_height
       return @frame.width * Math.tan(@frame.truss.angle * (Math.PI/180)) / 2
@@ -110,15 +113,15 @@
     def post_cubes
       meters =  @frame.height
       meters += 1 if @frame.braces
-      return 2 * @frame.posts * @frame.size * @frame.size * meters
+      return 2 * @frame.posts * self.frame_size * self.frame_size * meters
     end
     def plate_cubes
-      return @frame.size * @frame.size * 2 * self.length
+      return self.frame_size * self.frame_size * 2 * self.length
     end
     def truss_cubes
       meters = @frame.width
       meters += @frame.width + 3*self.truss_height if @frame.truss.on
-      return @frame.posts * @frame.size * @frame.size * meters
+      return @frame.posts * self.frame_size * self.frame_size * meters
     end
     def joins
       return post_joins + truss_joins + plate_joins

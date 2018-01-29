@@ -2,17 +2,17 @@
   %g{ ":transform":"truss_transform"  }
     %polyline{":points":"`0,0 |
                           ${frame.width},0 |
-                          ${frame.width},${frame.size} |
-                          0,${frame.size}`"} |
+                          ${frame.width},${frame_size} |
+                          0,${frame_size}`"} |
       i
-    %polyline{":points":"`${frame.width - frame.size},${frame.size} |
-                          ${frame.width},${frame.size} |
+    %polyline{":points":"`${frame.width - frame_size},${frame_size} |
+                          ${frame.width},${frame_size} |
                           ${frame.width},${frame.height} |
-                          ${frame.width - frame.size},${frame.height}`"} |
+                          ${frame.width - frame_size},${frame.height}`"} |
       i
-    %polyline{":points":"`0,${frame.size} |
-                          ${frame.size},${frame.size} |
-                          ${frame.size},${frame.height} |
+    %polyline{":points":"`0,${frame_size} |
+                          ${frame_size},${frame_size} |
+                          ${frame_size},${frame.height} |
                           0,${frame.height}`"} |
 :ruby2js
   class FrameOutline < Vue
@@ -26,5 +26,8 @@
     end
     def truss_height
       return self.frame.width * Math.tan(self.frame.truss.angle * (Math.PI/180))/ 2
+    end
+    def frame_size
+      return self.frame.size*2.5
     end
   end

@@ -1,14 +1,14 @@
 %script{'type'=>"text/x-template", id: 'brace-outline'}
   %g.braces{ ":transform":"truss_transform" , "v-if":"frame.braces"}
-    %polyline{":points":"`${frame.size},${brace} |
-                          ${brace},${frame.size} |
-                          ${brace + frame.size*1.414},${frame.size} |
-                          ${frame.size},${brace + frame.size*1.414}`"} |
+    %polyline{":points":"`${frame_size},${brace} |
+                          ${brace},${frame_size} |
+                          ${brace + frame_size*1.414},${frame_size} |
+                          ${frame_size},${brace + frame_size*1.414}`"} |
       i
-    %polyline{":points":"`${frame.width - brace},${frame.size}  |
-                          ${frame.width - frame.size},${brace}  |
-                          ${frame.width - frame.size},${brace + frame.size*1.414} |
-                          ${frame.width - brace - frame.size*1.414},${frame.size} `"} |
+    %polyline{":points":"`${frame.width - brace},${frame_size}  |
+                          ${frame.width - frame_size},${brace}  |
+                          ${frame.width - frame_size},${brace + frame_size*1.414} |
+                          ${frame.width - brace - frame_size*1.414},${frame_size} `"} |
 
 :ruby2js
   class BraceOutline < Vue
@@ -22,6 +22,9 @@
     end
     def truss_height
       return self.frame.width * Math.tan(self.frame.truss.angle * (Math.PI/180))/ 2
+    end
+    def frame_size
+      return self.frame.size*2.5
     end
     def brace
       return 3* Math.min(self.frame.height, self.frame.width/2) / 8
