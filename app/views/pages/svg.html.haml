@@ -9,30 +9,34 @@
     %range-slider{"v-model":"frame.spacing" , ":min":"100", ":max":"650"}
       %b Length {{length}} (Spacing: {{frame.spacing}})
     %range-slider{"v-bind:value":"frame.posts" , "v-on:input":"set_posts($event)",
-                  ":min":"2", ":max":"10", ":step":1}
+                  ":min":"2", ":max":"11", ":step":1}
       %b Posts {{frame.posts}}
     %range-slider{"v-model":"frame.size" ,":min":"10", ":max":"25", ":step":1}
       %b Size {{frame.size}}cm ({{(frame.size/2.5).toFixed(0)}}in)
+    %range-slider{"v-model":"scale", ":min":30, ":max":150}
+      %span
+        Scale
+        %b {{scale}}
     .rangeslider
-      %div
+      %span
         %b Braces
         %input{type:"checkbox", "v-model":"frame.braces"}
+      %br
       %span
         %b Trusses
         %input{type:"checkbox", "v-model":"frame.truss.on"}
-    .rangeslider
-      %div
-        %b Joints
-        {{joins}}
-      %div
-        %b Cubic meters:
-        {{cubes}}
-      %div
-        %b Price Estimate
-        {{Math.floor(joins * 4*45 + cubes * 1.2*650)}}
-      %range-slider{"v-model":"scale", ":min":30, ":max":150}
-        %b Scale {{scale}}
-
+      %br
+      %span
+        Joints
+        %b {{joins}}
+      %br
+      %span
+        Cubic meters
+        %b {{cubes}}
+      %br
+      %span
+        Price Estimate
+        %b {{Math.floor(joins * 200 + cubes * 1000)}}
 
   .front{ ":style":"`width: 100vw; |
                      height: ${frame_height}px; |
@@ -120,13 +124,12 @@
       return post_joins + truss_joins + plate_joins
     end
     def post_joins
-      return @frame.braces ? 4 : 2
+      return @frame.posts * (@frame.braces ? 4 : 2)
     end
     def plate_joins
       return 2 * (@frame.posts - 1)
     end
     def truss_joins
-      return 0 unless @frame.truss.on
-      return @frame.posts * 9
+      return @frame.truss.on ?  @frame.posts * 9 : 0
     end
   end
