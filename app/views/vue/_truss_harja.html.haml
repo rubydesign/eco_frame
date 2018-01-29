@@ -1,18 +1,18 @@
 %script{'type'=>"text/x-template", id: 'truss-harja'}
   %g.trusses{"v-if":"frame.truss.on"}
-    %polyline{":points":"`0,${frame.truss.height} |
+    %polyline{":points":"`0,${truss_height} |
                           ${frame.width/2},0 |
                           ${frame.width/2},${truss_y} |
-                          ${truss_x},${frame.truss.height}`"} |
+                          ${truss_x},${truss_height}`"} |
       i
     %polyline{":points":"`${frame.width/2},0 |
-                          ${frame.width},${frame.truss.height} |
-                          ${frame.width - truss_x},${frame.truss.height} |
+                          ${frame.width},${truss_height} |
+                          ${frame.width - truss_x},${truss_height} |
                           ${frame.width/2},${truss_y}`"} |
     %g{ ":transform":"truss_transform" , "v-if":"frame.truss.type == `harja`" }
-      %polyline{":points":"`${frame.width/2 - frame.size/2},${hit_y - frame.truss.height} |
-                            ${frame.width/2},${truss_y - frame.truss.height} |
-                            ${frame.width/2 + frame.size/2},${hit_y - frame.truss.height} |
+      %polyline{":points":"`${frame.width/2 - frame.size/2},${hit_y - truss_height} |
+                            ${frame.width/2},${truss_y - truss_height} |
+                            ${frame.width/2 + frame.size/2},${hit_y - truss_height} |
                             ${frame.width/2 + frame.size/2},0 |
                             ${frame.width/2 - frame.size/2},0`"} |
         i
@@ -32,7 +32,7 @@
     def initialize
     end
     def truss_transform
-      h = self.frame.truss.on ? self.frame.truss.height : 0
+      h = self.frame.truss.on ? self.truss_height : 0
       return "translate(0," + h + ")"
     end
     def dx
@@ -47,11 +47,14 @@
     def truss_y
       return self.frame.size / Math.cos( self.angle)
     end
+    def truss_height
+      return self.frame.width * Math.tan(self.frame.truss.angle * (Math.PI/180))/ 2
+    end
     def angle
-      return Math.atan(2*self.frame.truss.height / self.frame.width)
+      return self.frame.truss.angle * (Math.PI / 180)
     end
     def hit_y
-      return truss_y + self.frame.truss.height - (self.frame.width - self.frame.size)*0.5*Math.tan(angle)
+      return truss_y + self.truss_height - (self.frame.width - self.frame.size)*0.5*Math.tan(angle)
     end
 
   end

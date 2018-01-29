@@ -1,20 +1,18 @@
 .graph_app
   .post_control
-    %range-slider{"v-model":"frame.truss.height" , ":min":"50", ":max":"250" }
-      %b Truss Height {{frame.truss.height}}
+    %range-slider{"v-model":"frame.truss.angle" , ":min":"10", ":max":"50" }
+      %b Truss Angle {{frame.truss.angle}}&deg; (Heigth: {{Math.floor(truss_height)}}cm)
     %range-slider{"v-model":"frame.height" , ":min":"100", ":max":"350" }
       %b Post Height {{frame.height}}
     %range-slider{"v-model":"frame.width" ,":min":"100", ":max":"650"}
       %b Width {{frame.width}}
     %range-slider{"v-model":"frame.spacing" , ":min":"100", ":max":"650"}
-      %b Length {{length}}
+      %b Length {{length}} (Spacing: {{frame.spacing}})
     %range-slider{"v-bind:value":"frame.posts" , "v-on:input":"set_posts($event)",
                   ":min":"2", ":max":"10", ":step":1}
       %b Posts {{frame.posts}}
     %range-slider{"v-model":"frame.size" ,":min":"10", ":max":"25", ":step":1}
       %b Size {{frame.size}}cm ({{(frame.size/2.5).toFixed(0)}}in)
-    %range-slider{"v-model":"frame.perspective", ":min":0, ":max":100}
-      %b Perspective {{frame.perspective}}
     .rangeslider
       %div
         %b Braces
@@ -32,13 +30,16 @@
       %div
         %b Price Estimate
         {{Math.floor(joins * 4*45 + cubes * 1.2*650)}}
+      %range-slider{"v-model":"scale", ":min":30, ":max":150}
+        %b Scale {{scale}}
 
 
   .front{ ":style":"`width: 100vw; |
                      height: ${frame_height}px; |
-                     margin-left: ${ww - frame.width -200}px; |
+                     margin-top: ${ 2*(scale - 100 )  }px; |
+                     transform: scale(${scale/100}) translateX(${300 + length/5}px); |
                      perspective-origin: ${2*frame.width}px 0px; |
-                     perspective: ${200000/frame.perspective}px`"} |
+                     perspective: ${2000 + length/2}px`"} |
     .child{ "v-for":"i in frame.posts" ,
             ":style":"`${transform_post(i)}`"}
       %svg{ "width":"100%" ,
@@ -48,10 +49,10 @@
         %defs
           %mask#mask_all
             %polyline{":points":"`${frame.width/2},0 |
-                      ${frame.width},${frame.truss.height} |
-                      ${frame.width},${frame.truss.height+frame.height} |
-                      0,${frame.truss.height+frame.height}  |
-                      0,${frame.truss.height}`", |
+                      ${frame.width},${truss_height} |
+                      ${frame.width},${truss_height+frame.height} |
+                      0,${truss_height+frame.height}  |
+                      0,${truss_height}`", |
                       ":style":"`fill: rgb(225,225,225);`"} |
           %mask#mask_frame
             %polyline{":points":"`${frame.width},0 |
@@ -72,8 +73,9 @@
   class Graph < Vue
     el ".graph_app"
     def initialize
-      @frame = {truss: {height: 120, type: :harja , on: true} , size: 15 , height: 250, spacing: 300,
-                width: 300 , posts: 4 , braces: true , perspective: 100}
+      @frame = {truss: {angle: 30, type: :harja , on: true} ,size: 15 ,height: 250,
+                spacing: 300, width: 400 , posts: 4 , braces: true }
+      @scale = 100
     end
     def ww
       return window.innerWidth
@@ -92,7 +94,10 @@
       return @frame.spacing * (@frame.posts - 1 )
     end
     def frame_height
-      return @frame.height + @frame.size + (@frame.truss.on ? @frame.truss.height : 0)
+      return @frame.height + @frame.size + (@frame.truss.on ? self.truss_height : 0)
+    end
+    def truss_height
+      return @frame.width * Math.tan(@frame.truss.angle * (Math.PI/180)) / 2
     end
     def cubes
       sum = post_cubes + truss_cubes + plate_cubes
@@ -108,7 +113,7 @@
     end
     def truss_cubes
       meters = @frame.width
-      meters += @frame.width + 3*@frame.truss.height if @frame.truss.on
+      meters += @frame.width + 3*self.truss_height if @frame.truss.on
       return @frame.posts * @frame.size * @frame.size * meters
     end
     def joins

@@ -21,7 +21,10 @@
     def initialize
     end
     def truss_transform
-      h = self.frame.truss.on ? self.frame.truss.height : 0
+      h = self.frame.truss.on ? self.truss_height : 0
       return "translate(0," + h + ")"
+    end
+    def truss_height
+      return self.frame.width * Math.tan(self.frame.truss.angle * (Math.PI/180))/ 2
     end
   end
