@@ -4,14 +4,14 @@
       %b Truss Angle {{frame.truss.angle}}&deg; (Heigth: {{Math.floor(truss_height)}}cm)
     %range-slider{"v-model":"frame.height" , ":min":"100", ":max":"350" }
       %b Post Height {{frame.height}}
-    %range-slider{"v-model":"frame.width" ,":min":"100", ":max":"650"}
+    %range-slider{"v-model":"frame.width" ,":min":"100", ":max":"660"}
       %b Width {{frame.width}}
-    %range-slider{"v-model":"frame.spacing" , ":min":"100", ":max":"650"}
+    %range-slider{"v-model":"frame.spacing" , ":min":"100", ":max":"660"}
       %b Length {{length}} (Spacing: {{frame.spacing}})
     %range-slider{"v-bind:value":"frame.posts" , "v-on:input":"set_posts($event)",
-                  ":min":"2", ":max":"11", ":step":1}
+                  ":min":"2", ":max":"11"}
       %b Posts {{frame.posts}}
-    %range-slider{"v-model":"frame.size" ,":min":"4", ":max":"11", ":step":1}
+    %range-slider{"v-model":"frame.size" ,":min":"4", ":max":"11"}
       %b Size {{frame.size}}in ({{(frame_size).toFixed(0)}}cm)
     %range-slider{"v-model":"scale", ":min":30, ":max":150}
       %span
@@ -36,7 +36,7 @@
       %br
       %span
         Price Estimate
-        %b {{Math.floor(joins * 200 + cubes * 1000)}}
+        %b {{estimate}}
 
   .front{ ":style":"`width: 100vw; |
                      height: ${frame_height}px; |
@@ -84,6 +84,11 @@
     def ww
       return window.innerWidth
     end
+    def estimate
+      base =  joins * (25 + 10 * self.frame_size)
+      base += cubes * 1000
+      return 100*Math.floor(base/100) + " - " + 100*Math.floor((base*1.09)/100)
+    end
     def transform_post(i)
       ret = "transform: translateZ(" +  @frame.spacing*(i-1)
       ret = ret + "px) rotateY(-25deg);"
@@ -112,14 +117,19 @@
     end
     def post_cubes
       meters =  @frame.height
-      meters += 1 if @frame.braces
+      meters += 1.5 if @frame.braces
       return 2 * @frame.posts * self.frame_size * self.frame_size * meters
     end
+    def meter_price(meters)
+      meters *= 1.1 if meters > 500
+      meters *= 1.1 if meters > 600
+      return meters
+    end
     def plate_cubes
-      return self.frame_size * self.frame_size * 2 * self.length
+      return self.frame_size * self.frame_size * 2 * meter_price(self.length)
     end
     def truss_cubes
-      meters = @frame.width
+      meters = meter_price(@frame.width)
       meters += @frame.width + 3*self.truss_height if @frame.truss.on
       return @frame.posts * self.frame_size * self.frame_size * meters
     end
