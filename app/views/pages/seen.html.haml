@@ -1,0 +1,46 @@
+%script{src: asset_path("seen.js")}
+%canvas#seen-canvas{width:"500px", height:"500px"}
+
+:javascript
+  var context, dragger, height, scene,shape, base, width;
+
+  width = 500;
+  height = 500;
+
+  // Create sphere shape with randomly colored surfaces
+
+  base = seen.Shapes.sphere(5).scale(height * 0.4)
+  seen.Colors.randomSurfaces2(base)
+  //base = seen.Models.default().append();
+  //base.add( seen.Shapes.rectangle(seen.P(0,0,0) , seen.P(0.15,2, 0.15) ));
+  //base.add( seen.Shapes.rectangle(seen.P(2,0,0) , seen.P(2.15,2 , 0.15)));
+  //base.add( seen.Shapes.rectangle(seen.P(0,2,0) , seen.P(2.15,2.15,0.15)));
+  //base.scale(height*.1 );
+  //  seen.Colors.randomSurfaces2(base);
+
+
+  // Create scene and add shape to model
+  scene = new seen.Scene({
+    model: seen.Models.default().add(base),
+    viewport: seen.Viewports.center(width, height)
+  });
+
+  // Create render context from canvas
+  context = seen.Context('seen-canvas', scene).render();
+
+  // Slowly rotate sphere
+  context.animate().onBefore(function(t, dt) {
+    return base.rotx(dt * 1e-4).roty(0.7 * dt * 1e-4);
+  }).start();
+
+  // Enable drag-to-rotate on the canvas
+  dragger = new seen.Drag('seen-canvas', {
+    inertia: true
+  });
+
+  dragger.on('drag.rotate', function(e) {
+    var xform;
+    xform = seen.Quaternion.xyToTransform(...e.offsetRelative);
+    base.transform(xform);
+    return context.render();
+  });
