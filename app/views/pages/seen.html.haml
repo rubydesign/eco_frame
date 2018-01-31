@@ -1,22 +1,30 @@
 %script{src: asset_path("seen.js")}
-%canvas#seen-canvas{width:"500px", height:"500px"}
+.seen_app
+  %input{"min":"1", "max":"100", ":step":"1", value: 40, type:"range" ,
+        "oninput":"update(value)"}
+
+  %canvas#seen-canvas{width:"300px", height:"300px"}
 
 :javascript
-  var context, dragger, height, scene,shape, base, width;
+  var context, dragger, height, scene, shape, base, width ,scale;
 
-  width = 500;
-  height = 500;
+  width = 300;
+  height = 300;
+  scale = 40;
 
-  // Create sphere shape with randomly colored surfaces
+  base = seen.Models.default().append();
+  frames = base.append();
+  frame1 = frames.append();
+  frame1.add( seen.Shapes.rectangle(seen.P(0,0,0) , seen.P(0.15,2, 0.15) ));
+  frame1.add( seen.Shapes.rectangle(seen.P(2,0,0) , seen.P(2.15,2 , 0.15)));
+  frame1.add( seen.Shapes.rectangle(seen.P(0,2,0) , seen.P(2.15,2.15,0.15)));
 
-  base = seen.Shapes.sphere(5).scale(height * 0.4)
-  seen.Colors.randomSurfaces2(base)
-  //base = seen.Models.default().append();
-  //base.add( seen.Shapes.rectangle(seen.P(0,0,0) , seen.P(0.15,2, 0.15) ));
-  //base.add( seen.Shapes.rectangle(seen.P(2,0,0) , seen.P(2.15,2 , 0.15)));
-  //base.add( seen.Shapes.rectangle(seen.P(0,2,0) , seen.P(2.15,2.15,0.15)));
-  //base.scale(height*.1 );
-  //  seen.Colors.randomSurfaces2(base);
+  frame1 = frames.append();
+  frame1.add( seen.Shapes.rectangle(seen.P(0,0,1) , seen.P(0.15,2, 1.15) ));
+  frame1.add( seen.Shapes.rectangle(seen.P(2,0,1) , seen.P(2.15,2 , 1.15)));
+  frame1.add( seen.Shapes.rectangle(seen.P(0,2,1) , seen.P(2.15,2.15,1.15)));
+
+  frames.scale( scale );
 
 
   // Create scene and add shape to model
@@ -27,11 +35,6 @@
 
   // Create render context from canvas
   context = seen.Context('seen-canvas', scene).render();
-
-  // Slowly rotate sphere
-  context.animate().onBefore(function(t, dt) {
-    return base.rotx(dt * 1e-4).roty(0.7 * dt * 1e-4);
-  }).start();
 
   // Enable drag-to-rotate on the canvas
   dragger = new seen.Drag('seen-canvas', {
@@ -44,3 +47,12 @@
     base.transform(xform);
     return context.render();
   });
+
+  function update(num){
+    scale = parseInt(num);
+    console.log(num );
+    frames.reset()
+    frames.scale(scale);
+    //scene.model.children[0] = base;
+    context.render();
+  }
