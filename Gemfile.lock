@@ -1,8 +1,8 @@
 GIT
-  remote: https://github.com/rubys/ruby2js
-  revision: 42427347630a3bac2e07ba5489b34f693507fa02
+  remote: https://github.com/rubydesign/ruby2js
+  revision: a5f4380201a938328248343d17687afd3d6a890d
   specs:
-    ruby2js (3.0.1)
+    ruby2js (3.0.2)
       parser
 
 GEM
@@ -51,7 +51,7 @@ GEM
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     arel (9.0.0)
-    ast (2.3.0)
+    ast (2.4.0)
     bindex (0.5.0)
     bootsnap (1.1.8)
       msgpack (~> 1.0)
@@ -64,6 +64,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (>= 2.0, < 4.0)
+    coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -103,6 +104,11 @@ GEM
       mini_portile2 (~> 2.3.0)
     parser (2.4.0.2)
       ast (~> 2.3)
+    pry (0.11.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
+    pry-rails (0.3.6)
+      pry (>= 0.10.4)
     public_suffix (3.0.1)
     puma (3.11.0)
     rack (2.0.3)
@@ -189,6 +195,7 @@ DEPENDENCIES
   haml
   high_voltage
   listen (>= 3.0.5, < 3.2)
+  pry-rails
   puma (~> 3.11)
   rails (~> 5.2.0.beta2)
   ruby2js!
