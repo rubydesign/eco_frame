@@ -7,25 +7,25 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-import * as THREE from 'three';
+import { Scene , Group, BoxGeometry , Mesh, MeshBasicMaterial, WebGLRenderer , PerspectiveCamera} from 'three';
 
 console.log('Hello World from You')
 
 function post( height , width , size){
-  geometry = new THREE.BoxGeometry( height, width,  size );
+  geometry = new BoxGeometry( height, width,  size );
   geometry.translate( height / 2 , width / 2 , size / 2)
-  material = new THREE.MeshBasicMaterial( { color: "rgb(230, 145, 60)" } );
-  return new THREE.Mesh( geometry, material );
+  material = new MeshBasicMaterial( { color: "rgb(230, 145, 60)" } );
+  return new Mesh( geometry, material );
 }
 var camera, scene, renderer;
 var geometry, material, mesh;
 
 
-camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 10000 );
+camera = new PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 10000 );
 camera.position.z = 1000;
 
-scene = new THREE.Scene();
-var group = new THREE.Group();
+scene = new Scene();
+var group = new Group();
 group.add( post(15 , 200 , 15) );
 var post2 = post(15 , 200 , 15).translateX( 300 );
 group.add( post2 );
@@ -35,7 +35,7 @@ group.add( beam );
 
 scene.add( group );
 
-renderer = window.WebGLRenderingContext ? new THREE.WebGLRenderer({ antialias: true }) : new THREE.CanvasRenderer(); // Fallback to canvas renderer, if necessary.
+renderer = new WebGLRenderer({ antialias: true })
 
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
