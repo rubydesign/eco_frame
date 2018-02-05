@@ -15,6 +15,7 @@ gem "high_voltage"
 gem "haml"
 gem 'ruby2js'  , git: "https://github.com/rubydesign/ruby2js"
 #gem 'ruby2js'  , path: "../ruby2js"
+gem "webpacker"
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
