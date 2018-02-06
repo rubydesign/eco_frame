@@ -10,4 +10,4 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 Rails.application.config.assets.precompile += %w( vue.js vue.min.js
-                                    scenejs.js  seen.js extra_seen.js)
+                                    xeogl.js seen.js extra_seen.js)

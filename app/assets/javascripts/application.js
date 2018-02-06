@@ -2,3 +2,5 @@
 // listed below.
 
 //= require_self
+//= require vue
+//= require xeogl
