@@ -9,7 +9,14 @@
 
 import { Scene , Group, BoxGeometry , Mesh, MeshBasicMaterial, WebGLRenderer , PerspectiveCamera} from 'three';
 
-console.log('Hello World from You')
+console.realLog = console.log;
+window.changed = true;
+console.log = function () {
+  if (arguments[0] != 'THREE.WebGLRenderer')
+          console.realLog.apply (console, arguments);
+};
+
+import "sliders"
 
 function post( height , width , size){
   geometry = new BoxGeometry( height, width,  size );
@@ -40,13 +47,10 @@ renderer = new WebGLRenderer({ antialias: true })
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
-
-function animate() {
-
-  requestAnimationFrame( animate );
-  group.rotateY(.005)
-  group.rotateX(.005)
+function changed() {
+  group.rotateY(.1)
+  group.rotateX(.1)
   renderer.render( scene, camera );
-
 }
-animate();
+window.changed = changed;
+changed();
