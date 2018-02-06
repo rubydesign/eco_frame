@@ -8,13 +8,16 @@
 // layout file, like app/views/layouts/application.html.erb
 
 import { Scene , Group, BoxGeometry , Mesh, MeshBasicMaterial, WebGLRenderer , PerspectiveCamera} from 'three';
+import Vue from "vue";
 
-console.realLog = console.log;
-window.changed = true;
-console.log = function () {
-  if (arguments[0] != 'THREE.WebGLRenderer')
-          console.realLog.apply (console, arguments);
-};
+window.app = new Vue({
+  el: ".post_control" ,
+  data: {
+    frame: {
+      size: 6,
+    }
+  }
+})
 
 import "sliders"
 
