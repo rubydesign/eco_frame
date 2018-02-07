@@ -16,7 +16,7 @@ gem "haml"
 gem 'ruby2js'  , git: "https://github.com/rubydesign/ruby2js"
 #gem 'ruby2js'  , path: "../ruby2js"
 
-gem "xeogl" , "1.0.0" , path: "../xeogl" , require: false
+#gem "xeogl" , "1.0.0" , path: "../xeogl" , require: false
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

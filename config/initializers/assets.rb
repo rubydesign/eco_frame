@@ -9,7 +9,6 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
-Rails.application.config.assets.precompile += %w( vue.js vue.min.js
-                                    xeogl.js seen.js extra_seen.js)
+Rails.application.config.assets.precompile += %w( vue.js vue.min.js xeogl.js )
 
-Rails.application.config.assets.paths << "#{Gem.loaded_specs["xeogl"].gem_dir}/src"
+#Rails.application.config.assets.paths << "#{Gem.loaded_specs["xeogl"].gem_dir}/src"
