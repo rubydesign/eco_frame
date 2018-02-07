@@ -40,27 +40,37 @@
       %span
         Price Estimate
         %b {{estimate}}
+.canvas_wrapper{style: "height: 500px; width: 100%;"}
+  %canvas#xeocanvas{style: "height: 100%; width: 100%;"}
 
 
 :javascript
-  var scene = new xeogl.Scene();
-
+  var scene = new xeogl.Scene({ canvas: "xeocanvas" });
+  scene.camera.view.eye = [0, 0, -1000];
   var material = new xeogl.PhongMaterial(scene, {
       diffuse: [ 0.6, 0.6, 0.7 ]
   });
 
-  var geometry = new xeogl.TorusGeometry(scene);
+  var geometry = new xeogl.BoxGeometry(scene, { xSize: 7.5, ySize: 100,
+          zSize: 7.5 , center:[0,0,0]});
 
   var entity = new xeogl.Entity(scene, {
       material: material,
       geometry: geometry
   });
-  entity.scene.on("tick", function () {
+  geometry = new xeogl.BoxGeometry(scene, { xSize: 7.5, ySize: 100,
+                  zSize: 7.5 ,  center:[200,0,0]});
 
-      var lookat = entity.camera.view;
+  entity = new xeogl.Entity(scene, {
+      material: material,
+      geometry: geometry
+  });
+  geometry = new xeogl.BoxGeometry(scene, { xSize: 107.5, ySize: 7.5,
+                  zSize: 7.5 ,  center:[100,100,0]});
 
-  //      lookat.rotateEyeY(0.5);
-  //      lookat.rotateEyeX(0.3);
+  entity = new xeogl.Entity(scene, {
+      material: material,
+      geometry: geometry
   });
 
 = render "vue/range_slider"
