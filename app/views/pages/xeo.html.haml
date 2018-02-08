@@ -46,26 +46,32 @@
 
 :javascript
   xeogl.scene = new xeogl.Scene({ canvas: "xeocanvas" });
+  xeogl.scene.material.diffuse = [ 0.6, 0.6, 0.7 ] ;
   xeogl.scene.camera.view.eye = [0, 0, -1000];
-  function post(height ,size  , xpos){
-    var material = new xeogl.PhongMaterial( {
-        diffuse: [ 0.6, 0.6, 0.7 ]
-    });
-    var geometry = new xeogl.BoxGeometry( { xSize: size / 2,
-            ySize: height / 2, zSize: size/2 ,
-            center:[size/2 + xpos , height / 2 , size / 2]});
-    new xeogl.Entity( { material: material, geometry: geometry });
+  new xeogl.CameraControl();
+  var frame = { truss: {angle: 30, type: 'harja' , on: true} , size: 6 , height: 250,
+              spacing: 300, width: 400 , posts: 4 , braces: true }
+
+  function post_beam(frame , truss ){
+    var zpos = i * frame.spacing + frame.size / 2
+    var geometry = new xeogl.BoxGeometry( { xSize: frame.size / 2,
+            ySize: frame.height / 2, zSize: frame.size/2 ,
+            center:[0 , 0 , zpos]});
+    new xeogl.Entity( {  geometry: geometry });
+    var geometry = new xeogl.BoxGeometry( { xSize: frame.size / 2,
+            ySize: frame.height / 2, zSize: frame.size/2 ,
+            center:[frame.width , 0 , zpos]});
+    new xeogl.Entity( {  geometry: geometry });
+    geometry = new xeogl.BoxGeometry( { xSize: frame.width / 2,
+          ySize: frame.size / 2, zSize: frame.size/2 ,
+          center:[frame.width / 2 ,frame.height/2 ,zpos]});
+    new xeogl.Entity( {  geometry: geometry });
   }
-  post( 200 , 15 , 0);
-  post( 200 , 15 , 300);
+  for(var i=0; i < frame.posts; i++){
+    console.log(i)
+    post_beam( frame , i);
+  }
 
-  var geometry = new xeogl.BoxGeometry( { xSize: 157.5, ySize: 7.5,
-                  zSize: 7.5 ,  center:[157.5,200,0]});
-
-  entity = new xeogl.Entity( {
-      material: new xeogl.PhongMaterial( { diffuse: [ 0.6, 0.6, 0.7 ] }),
-      geometry: geometry
-  });
 
 = render "vue/range_slider"
 
