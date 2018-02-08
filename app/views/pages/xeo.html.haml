@@ -1,5 +1,4 @@
 = javascript_include_tag 'vue'
-= javascript_include_tag 'xeogl'
 
 .graph_app
   .post_control
@@ -43,34 +42,7 @@
 .canvas_wrapper{style: "height: 500px; width: 100%;"}
   %canvas#xeocanvas{style: "height: 100%; width: 100%;"}
 
-
-:javascript
-  xeogl.scene = new xeogl.Scene({ canvas: "xeocanvas" });
-  xeogl.scene.material.diffuse = [ 0.6, 0.6, 0.7 ] ;
-  xeogl.scene.camera.view.eye = [0, 0, -1000];
-  new xeogl.CameraControl();
-  var frame = { truss: {angle: 30, type: 'harja' , on: true} , size: 6 , height: 250,
-              spacing: 300, width: 400 , posts: 4 , braces: true }
-
-  function post_beam(frame , truss ){
-    var zpos = i * frame.spacing + frame.size / 2
-    var geometry = new xeogl.BoxGeometry( { xSize: frame.size / 2,
-            ySize: frame.height / 2, zSize: frame.size/2 ,
-            center:[0 , 0 , zpos]});
-    new xeogl.Entity( {  geometry: geometry });
-    var geometry = new xeogl.BoxGeometry( { xSize: frame.size / 2,
-            ySize: frame.height / 2, zSize: frame.size/2 ,
-            center:[frame.width , 0 , zpos]});
-    new xeogl.Entity( {  geometry: geometry });
-    geometry = new xeogl.BoxGeometry( { xSize: frame.width / 2,
-          ySize: frame.size / 2, zSize: frame.size/2 ,
-          center:[frame.width / 2 ,frame.height/2 ,zpos]});
-    new xeogl.Entity( {  geometry: geometry });
-  }
-  for(var i=0; i < frame.posts; i++){
-    console.log(i)
-    post_beam( frame , i);
-  }
+= javascript_include_tag 'frame'
 
 
 = render "vue/range_slider"
