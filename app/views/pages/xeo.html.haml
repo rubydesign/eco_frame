@@ -45,31 +45,25 @@
 
 
 :javascript
-  var scene = new xeogl.Scene({ canvas: "xeocanvas" });
-  scene.camera.view.eye = [0, 0, -1000];
-  var material = new xeogl.PhongMaterial(scene, {
-      diffuse: [ 0.6, 0.6, 0.7 ]
-  });
+  xeogl.scene = new xeogl.Scene({ canvas: "xeocanvas" });
+  xeogl.scene.camera.view.eye = [0, 0, -1000];
+  function post(height ,size  , xpos){
+    var material = new xeogl.PhongMaterial( {
+        diffuse: [ 0.6, 0.6, 0.7 ]
+    });
+    var geometry = new xeogl.BoxGeometry( { xSize: size / 2,
+            ySize: height / 2, zSize: size/2 ,
+            center:[size/2 + xpos , height / 2 , size / 2]});
+    new xeogl.Entity( { material: material, geometry: geometry });
+  }
+  post( 200 , 15 , 0);
+  post( 200 , 15 , 300);
 
-  var geometry = new xeogl.BoxGeometry(scene, { xSize: 7.5, ySize: 100,
-          zSize: 7.5 , center:[0,0,0]});
+  var geometry = new xeogl.BoxGeometry( { xSize: 157.5, ySize: 7.5,
+                  zSize: 7.5 ,  center:[157.5,200,0]});
 
-  var entity = new xeogl.Entity(scene, {
-      material: material,
-      geometry: geometry
-  });
-  geometry = new xeogl.BoxGeometry(scene, { xSize: 7.5, ySize: 100,
-                  zSize: 7.5 ,  center:[200,0,0]});
-
-  entity = new xeogl.Entity(scene, {
-      material: material,
-      geometry: geometry
-  });
-  geometry = new xeogl.BoxGeometry(scene, { xSize: 107.5, ySize: 7.5,
-                  zSize: 7.5 ,  center:[100,100,0]});
-
-  entity = new xeogl.Entity(scene, {
-      material: material,
+  entity = new xeogl.Entity( {
+      material: new xeogl.PhongMaterial( { diffuse: [ 0.6, 0.6, 0.7 ] }),
       geometry: geometry
   });
 
