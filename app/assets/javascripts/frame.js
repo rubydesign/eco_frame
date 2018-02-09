@@ -9,10 +9,11 @@ new xeogl.CameraControl();
 
 eco.Frame = xeogl.Model.extend({
     frame: { truss: {angle: 30, type: 'harja' , on: true} , size: 6 , height: 250,
-              spacing: 300, width: 400 , posts: 4 , braces: true },
+              spacing: 300, width: 400 , posts: 5 , braces: true },
 
     _init: function(){
-      xeogl.Model.prototype._init.apply(this , [{}]); // super()
+      this._super({});
+      //xeogl.Model.prototype._init.apply(this , [{}]); // super()
       for(var i=0; i < this.frame.posts; i++){
         console.log(i)
         post = new eco.PostBeam()

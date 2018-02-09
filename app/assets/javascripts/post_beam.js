@@ -7,10 +7,12 @@ eco.PostBeam = xeogl.Model.extend({
   width: 300,
   braces: true,
   _init: function( ){
-    xeogl.Model.prototype._init.apply(this , [{}]); // super()
+    this._super({});
+    //xeogl.Model.prototype._init.apply(this , [{}]); // super()
     this.add_post_at(this.width/2)
     this.add_post_at(- this.width/2)
     this.add_beam()
+    //this.add_brace()
   },
   add_post_at: function(at){
     var post = new xeogl.BoxGeometry( { xSize: this.size / 2,
