@@ -1,4 +1,4 @@
-//= require xeogl
+//= require xeo
 //= require post_beam
 
 
