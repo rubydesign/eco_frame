@@ -53,9 +53,6 @@
 //= require component.js
 //= require scene.js
 
-//= require animation/morphTargets.js
-//= require animation/cameraFlightAnimation.js
-
 //= require camera/camera.js
 
 //= require canvas/canvas.js
@@ -69,25 +66,12 @@
 //= require controls/inputControl.js
 //= require controls/cameraControl.js
 //= require controls/cameraController.js
-//= require controls/keyboardAxisCamera.js
-//= require controls/keyboardRotateCamera.js
-//= require controls/keyboardPanCamera.js
-//= require controls/keyboardZoomCamera.js
-//= require controls/mouseRotateCamera.js
-//= require controls/mousePanCamera.js
-//= require controls/mousePickEntity.js
-//= require controls/mouseZoomCamera.js
 
 //= require geometry/geometry.js
 //= require geometry/boxGeometry.js
-//= require geometry/torusGeometry.js
-//= require geometry/sphereGeometry.js
 //= require geometry/obbGeometry.js
 //= require geometry/aabbGeometry.js
-//= require geometry/pathGeometry.js
-//= require geometry/cylinderGeometry.js
 //= require geometry/planeGeometry.js
-//= require geometry/latheGeometry.js
 
 //= require input/input.js
 
@@ -96,7 +80,6 @@
 //= require lighting/dirLight.js
 //= require lighting/pointLight.js
 //= require lighting/spotLight.js
-//= require lighting/cubeTexture.js
 //= require lighting/shadow.js
 
 //= require models/model.js
@@ -106,8 +89,6 @@
 
 //= require materials/material.js
 //= require materials/phongMaterial.js
-//= require materials/specularMaterial.js
-//= require materials/metallicMaterial.js
 //= require materials/texture.js
 //= require materials/fresnel.js
 
