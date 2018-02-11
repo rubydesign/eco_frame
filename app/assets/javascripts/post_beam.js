@@ -1,6 +1,5 @@
-eco = {}
 
-eco.PostBeam = xeogl.Model.extend({
+PostBeam = xeogl.Model.extend({
   type: "eco.PostBeam",
   size: 6,
   height: 200,
@@ -12,7 +11,7 @@ eco.PostBeam = xeogl.Model.extend({
     this.add_post_at(this.width/2)
     this.add_post_at(- this.width/2)
     this.add_beam()
-    //this.add_brace()
+    this.add_brace()
   },
   add_post_at: function(at){
     var post = new xeogl.BoxGeometry( { xSize: this.size / 2,
@@ -26,7 +25,20 @@ eco.PostBeam = xeogl.Model.extend({
           center:[0 ,this.height/2 ,0]});
     this.add(new xeogl.Entity( {  geometry: beam }))
   },
-
+  add_brace: function(){
+    var brace = new xeogl.BoxGeometry( { xSize: this.size / 2,
+            ySize: 50, zSize: this.size / 2 ,
+            center:[ 25 , 0 , 0]});
+    var be = new xeogl.Entity( {  geometry: brace })
+    var translate = new xeogl.Translate({
+                xyz: [95,48, 0] // Translate along -X axis
+                });
+    be.transform = new xeogl.Rotate({
+          parent: translate,
+           xyz: [0, 0, 1], // Rotate 30 degrees about y axis
+           angle: 45 });
+    this.add( be );
+  },
   set_size:function(size){
 
   },
