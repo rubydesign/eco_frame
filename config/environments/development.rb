@@ -47,7 +47,7 @@ Rails.application.configure do
 
   config.assets.configure do |env|
     env.cache = ActiveSupport::Cache.lookup_store(:memory_store,
-                                                  { size: 32.megabytes })
+                                                  { size: 64.megabytes })
   end
 
   # Raises error for missing translations
