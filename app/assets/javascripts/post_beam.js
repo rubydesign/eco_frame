@@ -9,7 +9,8 @@ PostBeam = xeogl.Model.extend({
     this.add_post_at(this.width/2)
     this.add_post_at(- this.width/2)
     this.add_beam()
-    this.add_brace()
+    this.add_brace(1)
+    this.add_brace(-1)
   },
   add_post_at: function(at){
     var post = new xeogl.BoxGeometry( { xSize: this.size / 2,
@@ -23,30 +24,18 @@ PostBeam = xeogl.Model.extend({
           center:[0 , -this.size/2 ,0]});
     this.add(new xeogl.Entity( {  geometry: beam }))
   },
-  add_brace: function(){
+  add_brace: function(turn){
     var brace = new xeogl.BoxGeometry( { xSize: this.size / 2,
             ySize: 50, zSize: this.size / 2 ,
-            center:[ this.size / 2 , 50 , 0]});
+            center:[ turn * this.size / 2 , 50 , 0]});
     var be = new xeogl.Entity( {  geometry: brace })
     var translate = new xeogl.Translate({
-                xyz: [(this.width - this.size) / 2, -(50 + this.size/2)*1.41, 0]
+                xyz: [turn*(this.width - this.size) / 2, -(50 + this.size/2)*1.41, 0]
                 });
     be.transform = new xeogl.Rotate({
           parent: translate,
            xyz: [0, 0, 1], // Rotate 45 degrees about y axis
-          angle: 45 });
-    this.add( be );
-    brace = new xeogl.BoxGeometry( { xSize: this.size / 2,
-            ySize: 50, zSize: this.size / 2 ,
-            center:[ -this.size / 2 , 50 , 0]});
-    be = new xeogl.Entity( {  geometry: brace })
-    translate = new xeogl.Translate({
-                xyz: [-(this.width - this.size) / 2, -(50 + this.size/2)*1.41, 0]
-                });
-    be.transform = new xeogl.Rotate({
-          parent: translate,
-           xyz: [0, 0, 1], // Rotate -45 degrees about y axis
-           angle: -45 });
+          angle: turn*45 });
     this.add( be );
   },
   set_size:function(size){
