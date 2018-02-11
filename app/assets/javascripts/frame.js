@@ -26,7 +26,7 @@ Frame = xeogl.Model.extend({
 eco_init = function(){
   xeogl.scene = new xeogl.Scene({ canvas: "xeocanvas" });
   xeogl.scene.material.diffuse = [ 0.6, 0.6, 0.7 ] ;
-  xeogl.scene.camera.view.eye = [00, 00, -1000];
+  xeogl.scene.camera.view.eye = [-400, 200, -1000];
   new xeogl.CameraControl();
   new Frame()
   console.log("eco int");

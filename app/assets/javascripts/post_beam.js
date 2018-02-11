@@ -35,8 +35,20 @@ PostBeam = xeogl.Model.extend({
                 });
     be.transform = new xeogl.Rotate({
           parent: translate,
-           xyz: [0, 0, 1], // Rotate 30 degrees about y axis
+           xyz: [0, 0, 1], // Rotate 45 degrees about y axis
            angle: 45 });
+    this.add( be );
+    brace = new xeogl.BoxGeometry( { xSize: this.size / 2,
+            ySize: 50, zSize: this.size / 2 ,
+            center:[ 25 , 0 , 0]});
+    be = new xeogl.Entity( {  geometry: brace })
+    translate = new xeogl.Translate({
+                xyz: [-130,83, 0] // Translate along -X axis
+                });
+    be.transform = new xeogl.Rotate({
+          parent: translate,
+           xyz: [0, 0, 1], // Rotate -45 degrees about y axis
+           angle: -45 });
     this.add( be );
   },
   set_size:function(size){
