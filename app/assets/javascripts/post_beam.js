@@ -1,6 +1,6 @@
 PostBeam = xeogl.Model.extend({
   type: "eco.PostBeam",
-  size: 6,
+  size: 15,
   height: 200,
   width: 300,
   braces: true,
