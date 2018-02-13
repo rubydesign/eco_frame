@@ -1,6 +1,7 @@
 //= require xeo
 //= require post_beam
 //= require truss
+//= require plate
 
 Frame = xeogl.Model.extend({
     frame: { truss: {angle: 30, type: 'harja' , on: true} , size: 15 , height: 250,
@@ -9,7 +10,7 @@ Frame = xeogl.Model.extend({
     _init: function(){
       this._super({});
       for(var i=0; i < this.frame.posts; i++){
-        console.log(i)
+        this.add( new Plate() );
         post = new PostBeam()
         var offset = this.frame.spacing *(this.frame.posts / 2 - i)
         post.transform = new xeogl.Translate({ xyz: [0 , 0, offset] });
