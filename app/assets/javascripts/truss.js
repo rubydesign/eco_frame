@@ -1,4 +1,5 @@
-
+var XBoxGeometry = xeogl.BoxGeometry;
+var XEntity = xeogl.Entity ;
 Truss = xeogl.Model.extend({
   type: "eco.Truss",
   size: 15,

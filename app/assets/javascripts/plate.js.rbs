@@ -1,0 +1,37 @@
+class Plate < xeogl::Model
+
+  def initialize()
+    super({})
+  end
+  def _init()
+    super({})
+    @spacing = 300
+    @width = 300
+    @size =  15
+    @posts =  5
+    puts "caled init #{@width}"
+    self.add_plate(@width / 2)
+    self.add_plate(- @width / 2)
+  end
+  def add_plate(at)
+    plate = new XBoxGeometry( { xSize: @size / 2,
+               ySize: @size / 2, zSize: @spacing*(@posts-1)/2 ,
+               center:[ at , -@size/2 , @spacing*(@posts-1)/8]})
+    self.add(new XEntity( {  geometry: plate }))
+  end
+
+end
+
+  #   _init: function(){
+  #     this._super({});
+  #     this.add_plate(this.width / 2);
+  #     this.add_plate(- this.width / 2);
+  #   },
+  #
+  #   add_plate: function(at){
+  #     var plate = new xeogl.BoxGeometry( { xSize: this.size / 2,
+  #             ySize: this.size / 2, zSize: this.spacing*(this.posts-1)/2 ,
+  #             center:[ at , -this.size/2 , this.spacing*(this.posts-1)/8]});
+  #     this.add(new xeogl.Entity( {  geometry: plate }));
+  #   },
+  # });

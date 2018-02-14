@@ -28,7 +28,7 @@ Frame = xeogl.Model.extend({
 eco_init = function(){
   xeogl.scene = new xeogl.Scene({ canvas: "xeocanvas" });
   xeogl.scene.material.diffuse = [ 0.6, 0.6, 0.7 ] ;
-  xeogl.scene.camera.view.eye = [-400, 200, -500];
+  xeogl.scene.camera.view.eye = [-400, 200, -1000];
   new xeogl.CameraControl();
   new Frame()
 }
