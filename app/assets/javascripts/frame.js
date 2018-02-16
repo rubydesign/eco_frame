@@ -1,7 +1,7 @@
 //= require claygl.min
 // require post_beam
 // require truss
-// require plate
+//= require plate
 
 var frame = { truss: {angle: 30, type: 'harja' , on: true} , size: 15 , height: 250,
           spacing: 300, width: 400 , posts: 5 , braces: true }
@@ -23,12 +23,9 @@ Frame = function(){
 var app = clay.application.create('#claycanvas', {
       init: function (app) {
           this._camera = app.createCamera([-400, 200, -1000], [0, 0, 0]);
-          this._cube = app.createCube();
-          this._cube.material.set("color" , "salmon")
-          this._cube.scale.set(300, 300, 300);
-          this._cube.position.set(2,  2, 0);
           this._mainLight = app.createDirectionalLight([400, -600, 2000]);
           app.createAmbientLight('white', 0.1);
+          new Plate(app);
           app.scene.update();
           app._doRender(app.renderer, app.scene);
           app.timeline.stop();
