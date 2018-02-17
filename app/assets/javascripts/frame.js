@@ -1,6 +1,6 @@
 //= require claygl.min
 //= require post_beam
-// require truss
+//= require truss
 //= require plate
 
 var frame = { truss: {angle: 30, type: 'harja' , on: true} , size: 15 , height: 250,
@@ -12,9 +12,7 @@ Frame = function(app){
     app._plate = new Plate(app ) ;
     var offset = this.frame.spacing *(this.frame.posts / 2 - i)
     app._post = new PostBeam(app , i , offset )
-    //truss = new Truss()
-    //truss.transform = new xeogl.Translate({ xyz: [0 , 0, offset] });
-    //this.add( truss );
+    app._truss = new Truss(app , i , offset)
   }
 };
 var app = clay.application.create('#claycanvas', {
