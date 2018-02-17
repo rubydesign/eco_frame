@@ -1,0 +1,43 @@
+class Frame
+  def initialize(app)
+    @frame = { truss: {angle: 30, type: 'harja' , on: true} , size: 15 , height: 250,
+              spacing: 300, width: 400 , posts: 5 , braces: true }
+    @app = app
+    @posts = Array.new(5)
+    @trusses = Array.new(5)
+    0.upto(4) do | i|
+      @posts[i]  = PostBeam.new(self , i )
+      @trusses[i] = Truss.new(self , i)
+    end
+    @plate = Plate.new( self )
+  end
+
+  def spacing
+    return @frame.spacing
+  end
+  def size
+    return @frame.size
+  end
+  def height
+    return @frame.height
+  end
+  def width
+    return @frame.width
+  end
+  def angle
+    return @frame.truss.angle
+  end
+  def posts
+    return @posts.length
+  end
+  def cube()
+    cube = @app.createCube()
+    cube.material.set("color" , "salmon")
+    return cube
+  end
+  def update()
+    @plate.update()
+    @posts.each{|p| p.update()}
+    @truss.each{|t| t.update()}
+  end
+end

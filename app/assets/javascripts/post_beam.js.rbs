@@ -1,39 +1,35 @@
 class PostBeam
-  def initialize( app , index , offset )
-    @size = 15
-    @height = 200
-    @width = 300
+  def initialize( frame , index  )
     @braces = true
-    @app = app
-    @offset = offset
+    @frame = frame
     @index = index
-    self.add_post_at(@width/2)
-    self.add_post_at(- @width/2)
-    self.add_beam()
-    self.add_brace(1)
-    self.add_brace(-1)
+    @post1 = frame.cube()
+    @post2 = frame.cube()
+    @beam  = frame.cube()
+    @brace1 = frame.cube()
+    @brace2 = frame.cube()
+    self.update()
   end
-  def add_post_at(at)
-    @post = @app.createCube()
-    @post.position.set( at , -@height / 2 , @offset )
-    @post.scale.set( @size / 2,@height / 2, @size/2)
-    @post.material.set("color" , "salmon")
+  def update()
+    self.update_post_at(@post1,  1)
+    self.update_post_at(@post2, -1)
+    self.update_brace_at(@brace1 , 1)
+    self.update_brace_at(@brace2 , -1)
+    @beam.position.set(0 , -@frame.size/2 ,self.offset)
+    @beam.scale.set( @frame.width / 2 + @frame.size / 2,@frame.size / 2,  @frame.size/2 )
   end
-  def add_beam()
-    @beam = @app.createCube()
-    @beam.position.set(0 , -@size/2 ,@offset)
-    @beam.scale.set( @width / 2 + @size / 2,@size / 2,  @size/2 )
-    @beam.material.set("color" , "salmon")
+  def update_post_at(post , side)
+    post.position.set( side * @frame.width/2 , -@frame.height / 2 , self.offset )
+    post.scale.set( @frame.size / 2,@frame.height / 2, @frame.size/2)
   end
-  def add_brace(turn)
-    @brace = @app.createCube()
-    @brace.scale.set( @size / 2, 50, @size / 2)
-    @brace.material.set("color" , "salmon")
-    @brace.rotation.rotateZ(turn*Math.PI/4)
-    @brace.position.set( turn*(@width/2 - 50 + @size ),
-                          -50 + @size / 2, @offset )
+  def update_brace_at( brace , side )
+    brace.scale.set( @frame.size / 2, 50, @frame.size / 2)
+    brace.rotation.rotateZ(side*Math.PI/4)
+    brace.position.set( side*(@frame.width/2 - 50 + @frame.size ),
+                          -50 + @frame.size / 2, self.offset )
   end
-  def set_size(size)
 
+  def offset
+    return @frame.spacing * (@frame.posts / 2 - @index)
   end
 end

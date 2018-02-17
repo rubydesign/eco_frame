@@ -1,40 +1,35 @@
 class Truss
 
-  def initialize( app , index , offset )
-    @app = app
-    @offset = offset
+  def initialize( frame , index )
     @index = index
-    @spacing = 300
-    @width = 300
-    @size =  15
-    @angle = 30
-    self.add_king()
-    self.add_rafter( 1 )
-    self.add_rafter( -1 )
+    @frame =  frame
+    @king = frame.cube()
+    @rafter1 = frame.cube()
+    @rafter2 = frame.cube()
+    self.update()
   end
-  def rad()
-    return @angle * (Math.PI / 180)
+
+  def update()
+    truss_height = Math.tan(self.rad()) * @frame.width / 2
+    @king.position.set( 0 , truss_height/2, self.offset )
+    @king.scale.set( @frame.size / 2,truss_height / 2,  @frame.size/2 )
+    self.update_rafter_at( @rafter1 , 1 )
+    self.update_rafter_at( @rafter2 , -1 )
   end
-  def add_king()
-    @king = @app.createCube()
-    @king.material.set("color" , "salmon")
-    truss_height = Math.tan(self.rad()) * @width / 2
-    @king.scale.set( @size / 2,truss_height / 2,  @size/2 )
-    @king.position.set( 0 , truss_height/2, @offset )
-  end
-  def add_rafter( turn )
-    @rafter = @app.createCube()
-    @rafter.material.set("color" , "salmon")
+  def update_rafter_at(rafter , side)
     # rafter_length so the rafters meet at the bottom (?)
-    rafter_length = @width/( 2 * Math.cos(self.rad()))
-    @rafter.scale.set( @size / 2, rafter_length / 2,  @size/ 2 )
-    @rafter.position.set( turn * (@width + @size) / 4  ,
-                        (rafter_length - 2*@size) / 4 , @offset)
-    @rafter.rotation.rotateZ(turn*(Math.PI/2 - self.rad() ) )
+    rafter_length = @frame.width/( 2 * Math.cos(self.rad()))
+    rafter.position.set( side * (@frame.width + @frame.size) / 4  ,
+                        (rafter_length - 2*@frame.size) / 4 , self.offset)
+    rafter.scale.set( @frame.size / 2, rafter_length / 2,  @frame.size/ 2 )
+    rafter.rotation.rotateZ(side*(Math.PI/2 - self.rad() ) )
   end
 
-  def set_size(size)
-
+  def rad()
+    return @frame.angle * (Math.PI / 180)
+  end
+  def offset
+    return @frame.spacing * (@frame.posts / 2 - @index)
   end
 
 end
