@@ -56,7 +56,8 @@ class Frame
     cube.material.set("color" , "salmon")
     return cube
   end
-  def update()
+  def update( frame )
+    @frame = frame
     @plate.update()
     @posts.each{|p| p.update()}
     @trusses.each{|t| t.update()}
