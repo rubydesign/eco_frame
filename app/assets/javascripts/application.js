@@ -7,8 +7,10 @@
 //= require truss
 //= require plate
 //= require frame
-
+//= require range_slider
+//= require vue_app
 //= require_self
+
 var app = clay.application.create('#claycanvas', {
       init: function (app) {
         app._camera = app.createCamera([-400, 200, -1000], [0, 0, 0]);
