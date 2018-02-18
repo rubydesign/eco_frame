@@ -13,8 +13,9 @@ class Plate
   end
 
   def update_plate_at(plate , side)
-    plate.position.set(side * @frame.width / 2 , -@frame.size/2 , @frame.spacing*(@frame.posts-1)/8)
-    plate.scale.set( @frame.size / 2, @frame.size / 2, @frame.spacing*(@frame.posts-1)/2 )
+    plate.position.set(side * @frame.width / 2 , -@frame.size/2 ,
+      @frame.spacing*(@frame.posts+1) / 2 )
+    plate.scale.set( @frame.size / 2, @frame.size / 2,  @frame.spacing*(@frame.posts-1)/2 )
   end
 
 end

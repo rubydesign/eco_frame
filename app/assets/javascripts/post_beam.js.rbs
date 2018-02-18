@@ -8,6 +8,8 @@ class PostBeam
     @beam  = frame.cube()
     @brace1 = frame.cube()
     @brace2 = frame.cube()
+    @brace1.rotation.rotateZ(1*Math.PI/4)
+    @brace2.rotation.rotateZ(-1*Math.PI/4)
     self.update()
   end
   def update()
@@ -15,21 +17,24 @@ class PostBeam
     self.update_post_at(@post2, -1)
     self.update_brace_at(@brace1 , 1)
     self.update_brace_at(@brace2 , -1)
-    @beam.position.set(0 , -@frame.size/2 ,self.offset)
+    @beam.position.set(0 , -@frame.size/2 ,@frame.offset(@index))
     @beam.scale.set( @frame.width / 2 + @frame.size / 2,@frame.size / 2,  @frame.size/2 )
   end
   def update_post_at(post , side)
-    post.position.set( side * @frame.width/2 , -@frame.height / 2 , self.offset )
+    post.position.set( side * @frame.width/2 , -@frame.height / 2 , @frame.offset(@index) )
     post.scale.set( @frame.size / 2,@frame.height / 2, @frame.size/2)
   end
   def update_brace_at( brace , side )
     brace.scale.set( @frame.size / 2, 50, @frame.size / 2)
-    brace.rotation.rotateZ(side*Math.PI/4)
     brace.position.set( side*(@frame.width/2 - 50 + @frame.size ),
-                          -50 + @frame.size / 2, self.offset )
+                          -50 + @frame.size / 2, @frame.offset(@index) )
   end
-
-  def offset
-    return @frame.spacing * (@frame.posts / 2 - @index)
+  def remove()
+    scene = @frame.app.scene
+    scene.removeFromScene(@post1)
+    scene.removeFromScene(@post2)
+    scene.removeFromScene(@beam)
+    scene.removeFromScene(@brace1)
+    scene.removeFromScene(@brace2)
   end
 end

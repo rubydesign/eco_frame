@@ -1,17 +1,35 @@
 class Frame
   def initialize(app)
-    @frame = { truss: {angle: 30, type: 'harja' , on: true} , size: 15 , height: 250,
-              spacing: 300, width: 400 , posts: 5 , braces: true }
+    @frame = {truss: {angle: 30, type: :harja , on: true} ,size: 15 ,height: 250,
+              spacing: 300, width: 400 , braces: true }
     @app = app
-    @posts = Array.new(5)
-    @trusses = Array.new(5)
-    0.upto(4) do | i|
+    @posts = Array.new(4)
+    @trusses = Array.new(4)
+    0.upto(3) do | i|
+      puts i
       @posts[i]  = PostBeam.new(self , i )
       @trusses[i] = Truss.new(self , i)
     end
     @plate = Plate.new( self )
   end
-
+  def set_posts(num , spacing)
+    @frame.spacing = spacing #precalculated in app
+    puts spacing
+    puts num
+    return if num == self.posts
+    if(num < self.posts)
+      @posts[num].remove()
+      @posts.pop()
+      @trusses[num].remove()
+      @trusses.pop()
+    else
+      @posts << PostBeam.new(self , num - 1 )
+      @trusses << Truss.new(self , num - 1)
+    end
+  end
+  def offset(at)
+    return @frame.spacing * (@posts.length - at)
+  end
   def spacing
     return @frame.spacing
   end
@@ -30,6 +48,9 @@ class Frame
   def posts
     return @posts.length
   end
+  def app
+    return @app
+  end
   def cube()
     cube = @app.createCube()
     cube.material.set("color" , "salmon")
@@ -38,6 +59,6 @@ class Frame
   def update()
     @plate.update()
     @posts.each{|p| p.update()}
-    @truss.each{|t| t.update()}
+    @trusses.each{|t| t.update()}
   end
 end

@@ -3,9 +3,10 @@ class Graph < Vue
   options watch:  { frame: {handler: lambda{|arg| console.log(app)},
                              deep: true } }
   def initialize
-    @frame = {truss: {angle: 30, type: :harja , on: true} ,size: 6 ,height: 250,
-              spacing: 300, width: 400 , posts: 4 , braces: true }
+    @frame = {truss: {angle: 30, type: :harja , on: true} ,size: 15 ,height: 250,
+              spacing: 300, width: 400 , braces: true }
     @scale = 100
+    @posts = 4
   end
   def ww
     return window.innerWidth
@@ -23,10 +24,13 @@ class Graph < Vue
   def set_posts(num)
     old_length = self.length
     @frame.spacing = Math.floor(old_length / (num - 1))
-    @frame.posts = num
+    @posts = num
+    app._frame.set_posts(num , @frame.spacing)
+    app._frame.update()
+    app._doRender(app.renderer, app.scene);
   end
   def length
-    return @frame.spacing * (@frame.posts - 1 )
+    return @frame.spacing * (@posts - 1 )
   end
   def frame_size
     return @frame.size*2.5
@@ -44,7 +48,7 @@ class Graph < Vue
   def post_cubes
     meters =  @frame.height
     meters += 1.5 if @frame.braces
-    return 2 * @frame.posts * self.frame_size * self.frame_size * meters
+    return 2 * @posts * self.frame_size * self.frame_size * meters
   end
   def meter_price(meters)
     meters *= 1.1 if meters > 500
@@ -57,18 +61,18 @@ class Graph < Vue
   def truss_cubes
     meters = meter_price(@frame.width)
     meters += @frame.width + 3*self.truss_height if @frame.truss.on
-    return @frame.posts * self.frame_size * self.frame_size * meters
+    return @posts * self.frame_size * self.frame_size * meters
   end
   def joins
     return post_joins + truss_joins + plate_joins
   end
   def post_joins
-    return @frame.posts * (@frame.braces ? 4 : 2)
+    return @posts * (@frame.braces ? 4 : 2)
   end
   def plate_joins
-    return 2 * (@frame.posts - 1)
+    return 2 * (@posts - 1)
   end
   def truss_joins
-    return @frame.truss.on ?  @frame.posts * 9 : 0
+    return @frame.truss.on ?  @posts * 9 : 0
   end
 end

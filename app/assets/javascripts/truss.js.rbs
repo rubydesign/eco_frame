@@ -11,7 +11,7 @@ class Truss
 
   def update()
     truss_height = Math.tan(self.rad()) * @frame.width / 2
-    @king.position.set( 0 , truss_height/2, self.offset )
+    @king.position.set( 0 , truss_height/2, @frame.offset(@index) )
     @king.scale.set( @frame.size / 2,truss_height / 2,  @frame.size/2 )
     self.update_rafter_at( @rafter1 , 1 )
     self.update_rafter_at( @rafter2 , -1 )
@@ -20,16 +20,20 @@ class Truss
     # rafter_length so the rafters meet at the bottom (?)
     rafter_length = @frame.width/( 2 * Math.cos(self.rad()))
     rafter.position.set( side * (@frame.width + @frame.size) / 4  ,
-                        (rafter_length - 2*@frame.size) / 4 , self.offset)
+                        (rafter_length - 2*@frame.size) / 4 , @frame.offset(@index))
     rafter.scale.set( @frame.size / 2, rafter_length / 2,  @frame.size/ 2 )
+    rafter.rotation.identity()
     rafter.rotation.rotateZ(side*(Math.PI/2 - self.rad() ) )
+  end
+  def remove()
+    scene = @frame.app.scene
+    scene.removeFromScene(@rafter1)
+    scene.removeFromScene(@rafter2)
+    scene.removeFromScene(@king)
   end
 
   def rad()
     return @frame.angle * (Math.PI / 180)
-  end
-  def offset
-    return @frame.spacing * (@frame.posts / 2 - @index)
   end
 
 end
