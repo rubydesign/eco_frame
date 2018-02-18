@@ -1,4 +1,4 @@
-class Graph < Vue
+class VueFrame < Vue
   el ".graph_app"
   options watch:  { frame: {handler: lambda{|arg| self.rerender()},
                              deep: true } }
@@ -7,9 +7,6 @@ class Graph < Vue
               spacing: 300, width: 400 , braces: true }
     @scale = 100
     @posts = 4
-  end
-  def ww
-    return window.innerWidth
   end
   def estimate
     base =  joins * (25 + 10 * @frame.size)

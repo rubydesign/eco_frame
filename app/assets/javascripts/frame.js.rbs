@@ -1,12 +1,10 @@
 class Frame
-  def initialize(app)
-    @frame = {truss: {angle: 30, type: :harja , on: true} ,size: 15 ,height: 250,
-              spacing: 300, width: 400 , braces: true }
+  def initialize(app , frame , posts)
+    @frame = frame
     @app = app
-    @posts = Array.new(4)
-    @trusses = Array.new(4)
-    0.upto(3) do | i|
-      puts i
+    @posts = Array.new(posts)
+    @trusses = Array.new(posts)
+    0.upto(posts - 1) do | i|
       @posts[i]  = PostBeam.new(self , i )
       @trusses[i] = Truss.new(self , i)
     end
@@ -14,8 +12,6 @@ class Frame
   end
   def set_posts(num , spacing)
     @frame.spacing = spacing #precalculated in app
-    puts spacing
-    puts num
     return if num == self.posts
     if(num < self.posts)
       @posts[num].remove()

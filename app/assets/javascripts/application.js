@@ -8,7 +8,7 @@
 //= require plate
 //= require frame
 //= require range_slider
-//= require vue_app
+//= require vue_frame
 //= require_self
 
 var app = clay.application.create('#claycanvas', {
@@ -16,7 +16,7 @@ var app = clay.application.create('#claycanvas', {
         app._camera = app.createCamera([-400, 200, -1000], [0, 0, 0]);
         app._mainLight = app.createDirectionalLight([400, 600, 2000]);
         app.createAmbientLight('white', 0.1);
-        app._frame = new Frame(app);
+        app._frame = new Frame(app , VueFrame._data.frame , VueFrame._data.posts);
         app._doRender(app.renderer, app.scene);
         app._control = new clay.plugin.OrbitControl({target: app._camera,domElement: app.renderer.canvas });
         app.timeline.pause();
@@ -28,6 +28,6 @@ var app = clay.application.create('#claycanvas', {
   });
 
 window.reload = function(){
-  app._frame = new Frame(app);
+  app._frame = new Frame(app , VueFrame._data.frame , VueFrame._data.posts);
   app._doRender(app.renderer, app.scene);
 }
