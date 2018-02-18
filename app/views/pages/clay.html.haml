@@ -11,8 +11,8 @@
     %range-slider{"v-bind:value":"posts" , "v-on:input":"set_posts($event)",
                   ":min":"2", ":max":"11"}
       %b Posts {{posts}}
-    %range-slider{"v-model":"frame.size" ,":min":"4", ":max":"11"}
-      %b Size {{frame.size}}in ({{(frame_size).toFixed(0)}}cm)
+    %range-slider{"v-model":"frame.size" ,":min":"10", ":max":"25" , ":step":"2.5"}
+      %b Size {{frame.size}}cm ({{(frame_size)}}in)
     %range-slider{"v-model":"scale", ":min":30, ":max":150}
       %span
         Scale
