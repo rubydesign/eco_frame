@@ -34,9 +34,6 @@ class Graph < Vue
   def length
     return @frame.spacing * (@posts - 1 )
   end
-  def frame_size
-    return (@frame.size/2.5).toFixed(1)
-  end
   def frame_height
     return @frame.height + @frame.size + (@frame.truss.on ? self.truss_height : 0)
   end

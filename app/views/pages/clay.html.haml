@@ -12,7 +12,7 @@
                   ":min":"2", ":max":"11"}
       %b Posts {{posts}}
     %range-slider{"v-model":"frame.size" ,":min":"10", ":max":"25" , ":step":"2.5"}
-      %b Size {{frame.size}}cm ({{(frame_size)}}in)
+      %b Size {{frame.size}}cm ({{(frame.size/2.5).toFixed(1)}}in)
     %range-slider{"v-model":"scale", ":min":30, ":max":150}
       %span
         Scale
