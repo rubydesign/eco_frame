@@ -28,7 +28,7 @@ class Frame
     end
   end
   def offset(at)
-    return @frame.spacing * (@posts.length - at)
+    return @frame.spacing * ((@posts.length - 1)/2 - at)
   end
   def spacing
     return @frame.spacing
