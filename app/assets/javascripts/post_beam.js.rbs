@@ -25,9 +25,13 @@ class PostBeam
     post.scale.set( @frame.size / 2,@frame.height / 2, @frame.size/2)
   end
   def update_brace_at( brace , side )
-    brace.scale.set( @frame.size / 2, 50, @frame.size / 2)
-    brace.position.set( side*(@frame.width/2 - 50 + @frame.size ),
-                          -50 + @frame.size / 2, @frame.offset(@index) )
+    brace.scale.set( @frame.size / 2, self.brace_size, @frame.size / 2)
+    brace.position.set( side*(@frame.width/2 - self.brace_size/1.41 ),
+                          -self.brace_size/1.41 - @frame.size/2 , @frame.offset(@index) )
+  end
+  def brace_size
+    size = Math.min(@frame.width / 2 , @frame.height)
+    return Math.max(size / 3 , 50)
   end
   def remove()
     scene = @frame.app.scene
