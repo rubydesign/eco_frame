@@ -18,12 +18,13 @@ class Truss
   end
   def update_rafter_at(rafter , side)
     # rafter_length so the rafters meet at the bottom (?)
-    rafter_length = @frame.width/( 2 * Math.cos(self.rad()))
-    rafter.position.set( side * (@frame.width + @frame.size) / 4  ,
-                        (rafter_length - 2*@frame.size) / 4 , @frame.offset(@index))
-    rafter.scale.set( @frame.size / 2, rafter_length / 2,  @frame.size/ 2 )
     rafter.rotation.identity()
     rafter.rotation.rotateZ(side*(Math.PI/2 - self.rad() ) )
+    rafter_length = @frame.width/( 2 * Math.cos(self.rad()))
+    rafter.position.set( side * (@frame.width + 4*Math.sin(self.rad()*@frame.size)) / 4  ,
+                        Math.tan(self.rad())*@frame.width/4 - Math.cos(self.rad())*@frame.size/2  ,
+                        @frame.offset(@index))
+    rafter.scale.set( @frame.size / 2, rafter_length / 2,  @frame.size/ 2 )
   end
   def remove()
     scene = @frame.app.scene
