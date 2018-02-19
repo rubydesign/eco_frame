@@ -23,6 +23,18 @@ class Frame
       @trusses << Truss.new(self , num - 1)
     end
   end
+  def rad()
+    return self.angle * (Math.PI / 180)
+  end
+  def tan()
+    return Math.tan(self.rad())
+  end
+  def sin()
+    return Math.sin(self.rad())
+  end
+  def cos()
+    return Math.cos(self.rad())
+  end
   def offset(at)
     return @frame.spacing * ((@posts.length - 1)/2 - at)
   end
