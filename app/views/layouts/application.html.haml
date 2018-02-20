@@ -3,10 +3,6 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title EcoFrame
-    %script
-      window.LiveReloadOptions = { host: 'localhost' , port: '35729', mindelay: 1000000};
-    %script{src: "/hotswap.js"}
-    %script{src: "/livereload.js"}
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all'
   %body{class: params[:id]}
