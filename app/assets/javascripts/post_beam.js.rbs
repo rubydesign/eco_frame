@@ -5,6 +5,10 @@ class PostBeam
     @index = index
     @post1 = frame.cube()
     @post2 = frame.cube()
+    @foot1 = frame.cube("grey")
+    @foot2 = frame.cube("grey")
+    @foot1.scale.set( @frame.size ,@frame.size ,  @frame.size )
+    @foot2.scale.set( @frame.size ,@frame.size ,  @frame.size )
     @beam  = frame.cube()
     @brace1 = frame.cube()
     @brace2 = frame.cube()
@@ -19,6 +23,8 @@ class PostBeam
     self.update_brace_at(@brace2 , -1)
     @beam.position.set(0 , -@frame.size/2 ,@frame.offset(@index))
     @beam.scale.set( @frame.width / 2 + @frame.size / 2,@frame.size / 2,  @frame.size/2 )
+    @foot1.position.set( @frame.width/2 ,-@frame.height  ,  @frame.offset(@index) )
+    @foot2.position.set( -@frame.width/2 ,-@frame.height ,  @frame.offset(@index))
   end
   def update_post_at(post , side)
     post.position.set( side * @frame.width/2 , -@frame.height / 2 , @frame.offset(@index) )

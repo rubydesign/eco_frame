@@ -51,6 +51,9 @@ class Frame
   def width
     return @frame.width
   end
+  def length
+    return @frame.spacing*(self.posts - 1)
+  end
   def angle
     return @frame.truss.angle
   end
@@ -60,9 +63,9 @@ class Frame
   def app
     return @app
   end
-  def cube()
+  def cube( color = "salmon")
     cube = @app.createCube()
-    cube.material.set("color" , "salmon")
+    cube.material.set("color" , color)
     return cube
   end
   def update( frame )

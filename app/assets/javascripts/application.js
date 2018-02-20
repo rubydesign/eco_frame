@@ -16,7 +16,7 @@ var app = clay.application.create('#claycanvas', {
       init: function (app) {
         app._camera = app.createCamera([-700,100, -1000], [0, 0, 0]);
         app._mainLight = app.createDirectionalLight([400, 600, 2000]);
-        app.createAmbientLight('white', 0.2);
+        app._ambientLight = app.createAmbientLight('white', 0.2);
         app._frame = new Frame(app , VueFrame._data.frame , VueFrame._data.posts);
         app._doRender(app.renderer, app.scene);
         app._control = new clay.plugin.OrbitControl({
