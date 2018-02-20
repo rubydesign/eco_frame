@@ -10,7 +10,7 @@ class Truss
   end
 
   def update()
-    truss_height = @frame.tan() * @frame.width / 2
+    truss_height = @frame.tan * @frame.width / 2
     puts @frame.rad()
     @king.position.set( 0 , truss_height/2, @frame.offset(@index) )
     @king.scale.set( @frame.size / 2,truss_height / 2,  @frame.size/2 )
@@ -21,9 +21,9 @@ class Truss
     # rafter_length so the rafters meet at the bottom (?)
     rafter.rotation.identity()
     rafter.rotation.rotateZ(side*(Math.PI/2 - @frame.rad() ) )
-    rafter_length = @frame.width/( 2 * @frame.cos())
-    rafter.position.set( side * (@frame.width + @frame.sin()*@frame.size) / 4  ,
-                        @frame.tan()*@frame.width/4 - @frame.cos()*@frame.size/2  ,
+    rafter_length = @frame.width/( 2 * @frame.cos)
+    rafter.position.set( side * (@frame.width + @frame.sin*@frame.size) / 4  ,
+                        @frame.tan*@frame.width/4 - @frame.cos*@frame.size/2  ,
                         @frame.offset(@index))
     rafter.scale.set( @frame.size / 2, rafter_length / 2,  @frame.size/ 2 )
   end

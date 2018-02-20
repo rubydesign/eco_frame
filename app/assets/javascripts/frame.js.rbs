@@ -26,13 +26,13 @@ class Frame
   def rad()
     return self.angle * (Math.PI / 180)
   end
-  def tan()
+  def tan
     return Math.tan(self.rad())
   end
-  def sin()
+  def sin
     return Math.sin(self.rad())
   end
-  def cos()
+  def cos
     return Math.cos(self.rad())
   end
   def offset(at)
