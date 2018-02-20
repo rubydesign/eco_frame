@@ -18,6 +18,10 @@ class VueFrame < Vue
     ret = ret + "px) rotateY(-25deg);"
     return ret
   end
+  def set_scale(num)
+    app._control._zoomSpeed = 10*(@scale - num)
+    @scale = num
+  end
   def set_posts(num)
     old_length = self.length
     @frame.spacing = Math.floor(old_length / (num - 1))
