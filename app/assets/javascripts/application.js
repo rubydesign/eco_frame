@@ -6,6 +6,7 @@
 //= require post_beam
 //= require truss
 //= require plate
+//= require floor
 //= require frame
 //= require range_slider
 //= require vue_frame
@@ -13,7 +14,7 @@
 
 var app = clay.application.create('#claycanvas', {
       init: function (app) {
-        app._camera = app.createCamera([-600, 200, -1000], [0, 0, 0]);
+        app._camera = app.createCamera([-700,100, -1000], [0, 0, 0]);
         app._mainLight = app.createDirectionalLight([400, 600, 2000]);
         app.createAmbientLight('white', 0.2);
         app._frame = new Frame(app , VueFrame._data.frame , VueFrame._data.posts);

@@ -1,0 +1,14 @@
+class Floor
+  def initialize(frame)
+    @frame = frame
+    @plane = frame.app.createPlane({color: [23/255,121/255,32/255, 0.1]})
+    @plane.geometry.generateTangents();
+    @plane.rotation.rotateX(-Math.PI / 2);
+    @plane.scale.set(100000, 10000, 10);
+    self.update()
+  end
+
+  def update()
+    @plane.position.set(0, -@frame.height, 0);
+  end
+end
