@@ -8,7 +8,7 @@ class Floor
   end
 
   def update()
-    @floor.scale.set(@frame.width , (@frame.length + @frame.width) / 2  , 10)
+    @floor.scale.set(@frame.width/2 + 200 , @frame.length/2 + 200  , 10)
     @floor.position.set(0, -@frame.height - @frame.size , 0);
   end
 end
