@@ -62,6 +62,21 @@ class Harja
     scene.removeFromScene(@king)
     scene.removeFromScene(@brace1)
     scene.removeFromScene(@brace2)
+
+    scene.remove(@rafter1)
+    scene.remove(@rafter2)
+    scene.remove(@king)
+    scene.remove(@brace1)
+    scene.remove(@brace2)
   end
 
+end
+
+class NoTruss
+  def initialize( frame , index )
+  end
+  def update()
+  end
+  def remove()
+  end
 end

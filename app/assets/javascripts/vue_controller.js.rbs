@@ -1,4 +1,4 @@
-class VueFrame < Vue
+class VueController < Vue
   el ".graph_app"
   options watch:  { frame: {handler: lambda{|arg| self.rerender() } ,deep: true },
                     braces: {handler: lambda{|arg| self.set_brace(arg)}} ,
@@ -27,6 +27,7 @@ class VueFrame < Vue
   end
   def set_truss(arg)
     clay_app._frame.set_truss(arg)
+    self.rerender()
   end
   def set_brace(on)
     clay_app._frame.set_brace(on)
@@ -46,7 +47,7 @@ class VueFrame < Vue
     return @frame.spacing * (@posts - 1 )
   end
   def frame_height
-    return @frame.height + @frame.size + (@frame.truss.on ? self.truss_height : 0)
+    return @frame.height + @frame.size + (@frame.truss == :harja ? self.truss_height : 0)
   end
   def truss_height
     return @frame.width * Math.tan(@frame.truss.angle * (Math.PI/180)) / 2
@@ -70,7 +71,7 @@ class VueFrame < Vue
   end
   def truss_cubes
     meters = meter_price(@frame.width)
-    meters += @frame.width + 3*self.truss_height if @frame.truss.on
+    meters += @frame.width + 3*self.truss_height if @frame.truss == :harja
     return @posts * @frame.size * @frame.size * meters
   end
   def joins

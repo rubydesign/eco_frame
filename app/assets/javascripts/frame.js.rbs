@@ -4,9 +4,10 @@ class Frame
     @clay_app = clay_app
     @posts = Array.new(posts)
     @trusses = Array.new()
+    @truss = :harja
     0.upto(posts - 1) do | i|
       @posts[i]  = PostBeam.new(self , i , true)
-      self.add_truss_at(i )
+      @trusses[i] = self.new_truss(i)
     end
     @floor = Floor.new( self )
     @plate = Plate.new( self )
@@ -24,14 +25,20 @@ class Frame
       @trusses.pop()
     else
       @posts << PostBeam.new(self , num - 1 , @posts[0].braces)
-      self.add_truss_at(num-1)
+      @trusses << self.new_truss( num - 1 )
     end
   end
   def set_truss(arg)
-    puts arg
+    @truss = arg
+    0.upto(self.posts - 1) do | i|
+      @trusses[i].remove()
+      @trusses[i] = self.new_truss(i)
+    end
+    self.update(@frame)
   end
-  def add_truss_at(num)
-    @trusses << Harja.new(self , num )
+  def new_truss(at)
+    return Harja.new(self , at) if @truss == :harja
+    return NoTruss.new(self,at)
   end
   def rad
     return self.angle * (Math.PI / 180)
