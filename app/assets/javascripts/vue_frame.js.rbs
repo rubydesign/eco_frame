@@ -1,12 +1,13 @@
 class VueFrame < Vue
   el ".graph_app"
-  options watch:  { frame: {handler: lambda{|arg| self.rerender()},
-                             deep: true } }
+  options watch:  { frame: {handler: lambda{|arg| self.rerender() } ,deep: true },
+                    braces: {handler: lambda{|arg| self.set_brace(arg)}} }
   def initialize
     @frame = {truss: {angle: 30, type: :harja , on: true} ,size: 15 ,height: 250,
-              spacing: 300, width: 400 , braces: true }
+              spacing: 300, width: 400  }
     @scale = 100
     @posts = 4
+    @braces = true
   end
   def estimate
     base =  joins * (25 + 10 * @frame.size)
@@ -21,6 +22,10 @@ class VueFrame < Vue
   def set_scale(num)
     app._control._zoomSpeed = 10*(@scale - num)
     @scale = num
+  end
+  def set_brace(on)
+    app._frame.set_brace(on)
+    self.rerender()
   end
   def set_posts(num)
     old_length = self.length

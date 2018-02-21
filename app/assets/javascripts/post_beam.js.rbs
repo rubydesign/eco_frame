@@ -1,6 +1,5 @@
 class PostBeam
-  def initialize( frame , index  )
-    @braces = true
+  def initialize( frame , index  , braced )
     @frame = frame
     @index = index
     @post1 = frame.cube()
@@ -9,18 +8,23 @@ class PostBeam
     @foot2 = frame.cube("grey")
     @foot1.scale.set( @frame.size ,@frame.size ,  @frame.size )
     @foot2.scale.set( @frame.size ,@frame.size ,  @frame.size )
-    @beam  = frame.cube()
-    @brace1 = frame.cube()
-    @brace2 = frame.cube()
-    @brace1.rotation.rotateZ(1*Math.PI/4)
-    @brace2.rotation.rotateZ(-1*Math.PI/4)
+    @beam = frame.cube()
+    self.add_braces() if braced != nil
     self.update()
+  end
+  def braces
+    return @brace1 != nil
+  end
+  def set_brace(on)
+    on ?  self.add_braces() : self.remove_braces()
   end
   def update()
     self.update_post_at(@post1,  1)
     self.update_post_at(@post2, -1)
-    self.update_brace_at(@brace1 , 1)
-    self.update_brace_at(@brace2 , -1)
+    if(self.braces)
+      self.update_brace_at(@brace1 , 1)
+      self.update_brace_at(@brace2 , -1)
+    end
     @beam.position.set(0 , -@frame.size/2 ,@frame.offset(@index))
     @beam.scale.set( @frame.width / 2 + @frame.size / 2,@frame.size / 2,  @frame.size/2 )
     @foot1.position.set( @frame.width/2 ,-@frame.height  ,  @frame.offset(@index) )
@@ -39,12 +43,28 @@ class PostBeam
     size = Math.min(@frame.width / 2 , @frame.height)
     return Math.max(size / 3 , 50)
   end
+  def add_braces()
+    return if self.braces
+    @brace1 = @frame.cube()
+    @brace2 = @frame.cube()
+    @brace1.rotation.rotateZ(1*Math.PI/4)
+    @brace2.rotation.rotateZ(-1*Math.PI/4)
+  end
+  def remove_braces()
+    return unless self.braces
+    scene = @frame.app.scene
+    scene.removeFromScene(@brace1)
+    scene.removeFromScene(@brace2)
+    scene.remove(@brace1)
+    scene.remove(@brace2)
+    @brace1 = nil
+    @brace2 = nil
+  end
   def remove()
+    self.remove_braces( )
     scene = @frame.app.scene
     scene.removeFromScene(@post1)
     scene.removeFromScene(@post2)
     scene.removeFromScene(@beam)
-    scene.removeFromScene(@brace1)
-    scene.removeFromScene(@brace2)
   end
 end

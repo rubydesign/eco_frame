@@ -5,11 +5,14 @@ class Frame
     @posts = Array.new(posts)
     @trusses = Array.new(posts)
     0.upto(posts - 1) do | i|
-      @posts[i]  = PostBeam.new(self , i )
+      @posts[i]  = PostBeam.new(self , i , true)
       @trusses[i] = Truss.new(self , i)
     end
     @floor = Floor.new( self )
     @plate = Plate.new( self )
+  end
+  def set_brace(on)
+    @posts.each{|p| p.set_brace(on)}
   end
   def set_posts(num , spacing)
     @frame.spacing = spacing #precalculated in app
@@ -20,7 +23,7 @@ class Frame
       @trusses[num].remove()
       @trusses.pop()
     else
-      @posts << PostBeam.new(self , num - 1 )
+      @posts << PostBeam.new(self , num - 1 , @posts[0].braces)
       @trusses << Truss.new(self , num - 1)
     end
   end
