@@ -1,12 +1,12 @@
 class Frame
-  def initialize(app , frame , posts)
+  def initialize(clay_app , frame , posts)
     @frame = frame
-    @app = app
+    @clay_app = clay_app
     @posts = Array.new(posts)
-    @trusses = Array.new(posts)
+    @trusses = Array.new()
     0.upto(posts - 1) do | i|
       @posts[i]  = PostBeam.new(self , i , true)
-      @trusses[i] = Truss.new(self , i)
+      self.add_truss_at(i )
     end
     @floor = Floor.new( self )
     @plate = Plate.new( self )
@@ -24,8 +24,14 @@ class Frame
       @trusses.pop()
     else
       @posts << PostBeam.new(self , num - 1 , @posts[0].braces)
-      @trusses << Truss.new(self , num - 1)
+      self.add_truss_at(num-1)
     end
+  end
+  def set_truss(arg)
+    puts arg
+  end
+  def add_truss_at(num)
+    @trusses << Harja.new(self , num )
   end
   def rad
     return self.angle * (Math.PI / 180)
@@ -63,11 +69,11 @@ class Frame
   def posts
     return @posts.length
   end
-  def app
-    return @app
+  def clay_app
+    return @clay_app
   end
   def cube( color = "salmon")
-    cube = @app.createCube()
+    cube = @clay_app.createCube()
     cube.material.set("color" , color)
     return cube
   end

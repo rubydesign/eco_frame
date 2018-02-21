@@ -52,7 +52,7 @@ class PostBeam
   end
   def remove_braces()
     return unless self.braces
-    scene = @frame.app.scene
+    scene = @frame.clay_app.scene
     scene.removeFromScene(@brace1)
     scene.removeFromScene(@brace2)
     scene.remove(@brace1)
@@ -62,7 +62,7 @@ class PostBeam
   end
   def remove()
     self.remove_braces( )
-    scene = @frame.app.scene
+    scene = @frame.clay_app.scene
     scene.removeFromScene(@post1)
     scene.removeFromScene(@post2)
     scene.removeFromScene(@beam)

@@ -1,13 +1,15 @@
 class VueFrame < Vue
   el ".graph_app"
   options watch:  { frame: {handler: lambda{|arg| self.rerender() } ,deep: true },
-                    braces: {handler: lambda{|arg| self.set_brace(arg)}} }
+                    braces: {handler: lambda{|arg| self.set_brace(arg)}} ,
+                    truss: {handler: lambda{|arg| self.set_truss(arg)}}}
   def initialize
-    @frame = {truss: {angle: 30, type: :harja , on: true} ,size: 15 ,height: 250,
+    @frame = {truss: {angle: 30} ,size: 15 ,height: 250,
               spacing: 300, width: 400  }
     @scale = 100
     @posts = 4
     @braces = true
+    @truss = :harja
   end
   def estimate
     base =  joins * (25 + 10 * @frame.size)
@@ -20,22 +22,25 @@ class VueFrame < Vue
     return ret
   end
   def set_scale(num)
-    app._control._zoomSpeed = 10*(@scale - num)
+    clay_app._control._zoomSpeed = 10*(@scale - num)
     @scale = num
   end
+  def set_truss(arg)
+    clay_app._frame.set_truss(arg)
+  end
   def set_brace(on)
-    app._frame.set_brace(on)
+    clay_app._frame.set_brace(on)
     self.rerender()
   end
   def set_posts(num)
     old_length = self.length
     @frame.spacing = Math.floor(old_length / (num - 1))
     @posts = num
-    app._frame.set_posts(num , @frame.spacing)
+    clay_app._frame.set_posts(num , @frame.spacing)
   end
   def rerender(_)
-    app._frame.update(@frame)
-    app._doRender(app.renderer, app.scene);
+    clay_app._frame.update(@frame)
+    clay_app._doRender(clay_app.renderer, clay_app.scene);
   end
   def length
     return @frame.spacing * (@posts - 1 )

@@ -23,8 +23,9 @@
         %input{type:"checkbox", "v-model":"braces"}
       %br
       %span
-        %b Trusses
-        %input{type:"checkbox", "v-model":"frame.truss.on"}
+        %select{"v-model":"truss"}
+          %option{ value:"none"} No Truss
+          %option{ value:"harja", selected:"selected"} Harja
       %br
       %span
         Joints

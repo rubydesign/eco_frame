@@ -4,15 +4,15 @@
 //= require vue
 //= require claygl.min
 //= require post_beam
-//= require truss
+//= require harja
 //= require plate
 //= require floor
 //= require frame
 //= require range_slider
-//= require vue_frame
+//= require vue_controller
 //= require_self
 
-var app = clay.application.create('#claycanvas', {
+var clay_app = clay.application.create('#claycanvas', {
       init: function (app) {
         app._camera = app.createCamera([-700,100, -1000], [0, 0, 0]);
         app._mainLight = app.createDirectionalLight([400, 600, 2000]);
@@ -30,8 +30,3 @@ var app = clay.application.create('#claycanvas', {
           app._control.update(app.frameTime);
       }
   });
-
-window.reload = function(){
-  app._frame = new Frame(app , VueFrame._data.frame , VueFrame._data.posts);
-  app._doRender(app.renderer, app.scene);
-}

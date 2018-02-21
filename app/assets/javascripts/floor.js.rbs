@@ -1,7 +1,7 @@
 class Floor
   def initialize(frame)
     @frame = frame
-    @floor = frame.app.createPlane()
+    @floor = frame.clay_app.createPlane()
     @floor.material.set("color" , "palegreen")
     @floor.rotation.rotateX(-Math.PI / 2)
     self.update()

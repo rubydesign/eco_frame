@@ -1,4 +1,4 @@
-class Truss
+class Harja
 
   def initialize( frame , index )
     @index = index
@@ -56,7 +56,7 @@ class Truss
     rafter.scale.set( @frame.size / 2, self.rafter_length / 2,  @frame.size/ 2 )
   end
   def remove()
-    scene = @frame.app.scene
+    scene = @frame.clay_app.scene
     scene.removeFromScene(@rafter1)
     scene.removeFromScene(@rafter2)
     scene.removeFromScene(@king)
