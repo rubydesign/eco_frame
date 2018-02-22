@@ -11,16 +11,6 @@ class VueController < Vue
     @braces = true
     @truss = :harja
   end
-  def estimate
-    base =  joins * (25 + 10 * @frame.size)
-    base += cubes * 1000
-    return 100*Math.floor(base/100) + " - " + 100*Math.floor((base*1.09)/100)
-  end
-  def transform_post(i)
-    ret = "transform: translateZ(" +  @frame.spacing*(i-1)
-    ret = ret + "px) rotateY(-25deg);"
-    return ret
-  end
   def set_scale(num)
     clay_app._control._zoomSpeed = 10*(@scale - num)
     @scale = num
@@ -46,11 +36,10 @@ class VueController < Vue
   def length
     return @frame.spacing * (@posts - 1 )
   end
-  def frame_height
-    return @frame.height + @frame.size + (@frame.truss == :harja ? self.truss_height : 0)
-  end
-  def truss_height
-    return @frame.width * Math.tan(@frame.truss.angle * (Math.PI/180)) / 2
+  def estimate
+    base =  joins * (25 + 10 * @frame.size)
+    base += cubes * 1000
+    return 100*Math.floor(base/100) + " - " + 100*Math.floor((base*1.09)/100)
   end
   def cubes
     sum = post_cubes + truss_cubes + plate_cubes
@@ -58,32 +47,36 @@ class VueController < Vue
   end
   def post_cubes
     meters =  @frame.height
-    meters += 1.5 if @frame.braces
+    meters += 1.5 if @braces
     return 2 * @posts * @frame.size * @frame.size * meters
-  end
-  def meter_price(meters)
-    meters *= 1.1 if meters > 500
-    meters *= 1.1 if meters > 600
-    return meters
-  end
-  def plate_cubes
-    return @frame.size * @frame.size * 2 * meter_price(self.length)
   end
   def truss_cubes
     meters = meter_price(@frame.width)
-    meters += @frame.width + 3*self.truss_height if @frame.truss == :harja
+    if @truss == :harja
+      truss_height = @frame.width * Math.tan(@frame.truss.angle * (Math.PI/180)) / 2
+      meters += @frame.width + 3*truss_height
+    end
     return @posts * @frame.size * @frame.size * meters
+  end
+  def plate_cubes
+    return @frame.size * @frame.size * 2 * meter_price(self.length)
   end
   def joins
     return post_joins + truss_joins + plate_joins
   end
   def post_joins
-    return @posts * (@frame.braces ? 4 : 2)
+    return @posts * (@braces ? 4 : 2)
   end
   def plate_joins
     return 2 * (@posts - 1)
   end
   def truss_joins
-    return @frame.truss.on ?  @posts * 9 : 0
+    return @truss == :harja ?  @posts * 9 : 0
+  end
+
+  def meter_price(meters)
+    meters *= 1.1 if meters > 500
+    meters *= 1.1 if meters > 600
+    return meters
   end
 end
