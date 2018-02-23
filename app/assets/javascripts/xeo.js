@@ -1,18 +1,12 @@
 //= require xeogl.js
 
-//= require libs/canvas2image.js
-
 //= require _utils/inheritance.js
 //= require _utils/map.js
 
-//= require math/_module.js
 //= require math/math.js
 //= require math/mathBoundaries.js
 //= require math/mathGeometry.js
 //= require math/mathGeometryBuild.js
-//= require math/mathCurves.js
-//= require math/mathRays.js
-//= require math/mathKDTree.js
 
 //= require renderer/renderer.js
 //= require renderer/webgl.js
@@ -26,74 +20,41 @@
 //= require renderer/arrayBuffer.js
 //= require renderer/attribute.js
 //= require renderer/renderBuffer.js
-
 //= require renderer/drawRenderer.js
 //= require renderer/drawShaderSource.js
-//= require renderer/outlineRenderer.js
-//= require renderer/outlineShaderSource.js
-//= require renderer/pickObjectRenderer.js
-//= require renderer/pickObjectShaderSource.js
-//= require renderer/pickTriangleRenderer.js
-//= require renderer/pickTriangleShaderSource.js
 //= require renderer/shadowRenderer.js
-//= require renderer/shadowShaderSource.js
-//= require renderer/ghostFillRenderer.js
-//= require renderer/ghostFillShaderSource.js
-//= require renderer/ghostVerticesRenderer.js
-//= require renderer/ghostVerticesShaderSource.js
-//= require renderer/ghostEdgesRenderer.js
-//= require renderer/ghostEdgesShaderSource.js
 
 //= require component.js
 //= require scene.js
-//= require animation/_module.js
 //= require animation/cameraFlightAnimation.js
 
 //= require canvas/canvas.js
 //= require canvas/spinner.js
-//= require clipping/_module.js
 //= require clipping/clip.js
 //= require clipping/clips.js
-//= require controls/_module.js
 //= require controls/cameraControl.js
-//= require geometry/_module.js
 //= require geometry/geometry.js
 //= require geometry/boxGeometry.js
-//= require geometry/torusGeometry.js
-//= require geometry/sphereGeometry.js
 //= require geometry/obbGeometry.js
 //= require geometry/aabbGeometry.js
-//= require geometry/pathGeometry.js
 //= require geometry/cylinderGeometry.js
 //= require geometry/planeGeometry.js
-//= require input/_module.js
 //= require input/input.js
-//= require lighting/_module.js
 //= require lighting/lights.js
 //= require lighting/ambientLight.js
 //= require lighting/dirLight.js
 //= require lighting/pointLight.js
-//= require lighting/spotLight.js
 //= require lighting/cubeTexture.js
 //= require lighting/shadow.js
-//= require models/_module.js
 //= require models/model.js
-//= require models/glTFModel.js
-//= require materials/_module.js
 //= require materials/material.js
 //= require materials/phongMaterial.js
 //= require materials/lambertMaterial.js
-//= require materials/specularMaterial.js
-//= require materials/metallicMaterial.js
 //= require materials/ghostMaterial.js
 //= require materials/outlineMaterial.js
 //= require materials/texture.js
-//= require materials/fresnel.js
-//= require entities/_module.js
 //= require entities/entity.js
-//= require viewport/_module.js
 //= require viewport/viewport.js
-//= require transforms/_module.js
 //= require transforms/transform.js
 //= require transforms/rotate.js
 //= require transforms/quaternion.js
