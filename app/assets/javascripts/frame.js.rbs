@@ -1,0 +1,109 @@
+class Frame < xeogl.Model
+  def initialize()
+    super({})
+    @frame = VueController._data.frame
+    @posts = Array.new(VueController._data.posts)
+    self.add( PostBeam.new(self,1,true))
+    #xeogl.Model.prototype._init.apply(this , [{}]) # super()
+    # @trusses = Array.new()
+    # @truss = :harja
+    # 0.upto(VueController._data.posts - 1) do | i|
+    #   post = PostBeam.new(self , i , true)
+    #   offset = @frame.spacing * (@frame.posts / 2 - i)
+    #   post.transform = xeogl.Translate.new({ xyz: [0 , 0, offset] })
+    #   @posts[i]  = post #probably can get rid of this at some point
+    #   self.add( post )
+    #   @trusses[i] = 1#self.new_truss(i)
+    # end
+    # @floor = 1#Floor.new( self )
+    # @plate = 1#Plate.new( self )
+
+    # for(var i=0; i < this.frame.posts; i++){
+    #   console.log(i)
+    #   post = new eco.PostBeam()
+    #   var offset = this.frame.spacing *(this.frame.posts / 2 - i)
+    #   post.transform = new xeogl.Translate({ xyz: [0 , 0, offset] });
+    #   this.add(  post );
+  end
+
+  def set_brace(on)
+    @posts.each{|p| p.set_brace(on)}
+  end
+  def set_posts(num , spacing)
+    @frame.spacing = spacing #precalculated in app
+    return if num == self.posts
+    if(num < self.posts)
+      @posts[num].remove()
+      @posts.pop()
+      @trusses[num].remove()
+      @trusses.pop()
+    else
+      @posts << PostBeam.new(self , num - 1 , @posts[0].braces)
+      @trusses << self.new_truss( num - 1 )
+    end
+  end
+  def set_truss(arg)
+    @truss = arg
+    0.upto(self.posts - 1) do | i|
+      @trusses[i].remove()
+      @trusses[i] = self.new_truss(i)
+    end
+    self.update(@frame)
+  end
+  def new_truss(at)
+    return Harja.new(self , at) if @truss == :harja
+    return NoTruss.new(self,at)
+  end
+  def rad
+    return self.angle * (Math.PI / 180)
+  end
+  def tan
+    return Math.tan(self.rad)
+  end
+  def sin
+    return Math.sin(self.rad)
+  end
+  def cos
+    return Math.cos(self.rad)
+  end
+  def offset(at)
+    return @frame.spacing * ((@posts.length - 1)/2 - at)
+  end
+  def spacing
+    return @frame.spacing
+  end
+  def size
+    return @frame.size
+  end
+  def height
+    return @frame.height
+  end
+  def width
+    return @frame.width
+  end
+  def length
+    return @frame.spacing*(self.posts - 1)
+  end
+  def angle
+    return @frame.truss.angle
+  end
+  def posts
+    return @posts.length
+  end
+  def clay_app
+    return @clay_app
+  end
+  def cube_for( model , color = "salmon")
+    cube = model.add(xeogl.Entity.new( {  geometry: xeogl.BoxGeometry.new(
+      {xSize:20 , ySize: 100 , zSize: 20}) }));
+    #cube.material.diffuse =  color
+    return cube
+  end
+  def update( frame )
+    @frame = frame
+    #@plate.update()
+    #@floor.update()
+    @posts.each{|p| p.update()}
+    @trusses.each{|t| t.update()}
+  end
+end

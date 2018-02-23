@@ -1,6 +1,5 @@
-GIT
-  remote: https://github.com/rubydesign/ruby2js
-  revision: f07ffcb9b583e309e75670602114e796848b23d3
+PATH
+  remote: ../ruby2js
   specs:
     ruby2js (3.0.2)
       parser
@@ -107,8 +106,8 @@ GEM
     nio4r (2.2.0)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
-    parser (2.4.0.2)
-      ast (~> 2.3)
+    parser (2.5.0.2)
+      ast (~> 2.4.0)
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)

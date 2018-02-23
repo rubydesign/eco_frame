@@ -1,0 +1,82 @@
+class Harja
+
+  def initialize( frame , index )
+    @index = index
+    @frame =  frame
+    @king = frame.cube()
+    @rafter1 = frame.cube()
+    @rafter2 = frame.cube()
+    @brace1 = frame.cube()
+    @brace2 = frame.cube()
+    self.update()
+  end
+
+  def update()
+    truss_height = @frame.tan * @frame.width / 2
+    @king.position.set( 0 , truss_height/2, @frame.offset(@index) )
+    @king.scale.set( @frame.size / 2,truss_height / 2,  @frame.size/2 )
+    self.update_rafter_at( @rafter1 , 1 )
+    self.update_rafter_at( @rafter2 , -1 )
+    self.update_brace_at(@brace1 , 1)
+    self.update_brace_at(@brace2 , -1)
+  end
+  def update_brace_at( brace , side )
+    brace.rotation.identity()
+    brace.rotation.rotateZ(side*self.brace_rad  )
+    brace.scale.set( @frame.size / 2, self.brace_length, @frame.size / 2)
+    brace.position.set( -side*(self.brace_length*self.brace_cosm + self.brace_sin*@frame.size/4)  ,
+                (self.brace_length*self.brace_sinm ) + 3*@frame.size/4,
+                @frame.offset(@index))
+  end
+  def brace_rad
+    return 45* Math.PI / 180
+  end
+  def brace_sin
+    return Math.sin(self.brace_rad)
+  end
+  def brace_sinm
+    return Math.sin(Math.PI/2 - self.brace_rad)
+  end
+  def brace_cosm
+    return Math.cos(Math.PI/2 - self.brace_rad)
+  end
+  def brace_length
+    return  @frame.sin * @frame.width / 4 - @frame.size/2
+  end
+  def rafter_length
+    return  @frame.width/( 2 * @frame.cos)
+  end
+  def update_rafter_at(rafter , side)
+    # rafter_length so the rafters meet at the bottom (?)
+    rafter.rotation.identity()
+    rafter.rotation.rotateZ(side* (Math.PI / 2 - @frame.rad)  )
+    rafter.position.set( side * (@frame.width + @frame.cos*@frame.size) / 4  ,
+                        @frame.tan*@frame.width/4 - @frame.cos*@frame.size/2  ,
+                        @frame.offset(@index))
+    rafter.scale.set( @frame.size / 2, self.rafter_length / 2,  @frame.size/ 2 )
+  end
+  def remove()
+    scene = @frame.clay_app.scene
+    scene.removeFromScene(@rafter1)
+    scene.removeFromScene(@rafter2)
+    scene.removeFromScene(@king)
+    scene.removeFromScene(@brace1)
+    scene.removeFromScene(@brace2)
+
+    scene.remove(@rafter1)
+    scene.remove(@rafter2)
+    scene.remove(@king)
+    scene.remove(@brace1)
+    scene.remove(@brace2)
+  end
+
+end
+
+class NoTruss
+  def initialize( frame , index )
+  end
+  def update()
+  end
+  def remove()
+  end
+end

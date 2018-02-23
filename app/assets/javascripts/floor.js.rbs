@@ -1,0 +1,14 @@
+class Floor
+  def initialize(frame)
+    @frame = frame
+    @floor = frame.clay_app.createPlane()
+    @floor.material.set("color" , "palegreen")
+    @floor.rotation.rotateX(-Math.PI / 2)
+    self.update()
+  end
+
+  def update()
+    @floor.scale.set(@frame.width/2 + 200 , @frame.length/2 + 200  , 10)
+    @floor.position.set(0, -@frame.height - @frame.size , 0);
+  end
+end

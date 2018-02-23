@@ -1,0 +1,21 @@
+class Plate
+
+  def initialize(frame)
+    @frame =  frame
+    @plate1 = frame.cube()
+    @plate2 = frame.cube()
+    self.update()
+  end
+
+  def update()
+    self.update_plate_at(@plate1, 1)
+    self.update_plate_at(@plate2 , -1)
+  end
+
+  def update_plate_at(plate , side)
+    plate.position.set(side * @frame.width / 2 , -@frame.size/2 ,
+      @frame.offset(@frame.posts/2 - 0.5) )
+    plate.scale.set( @frame.size / 2, @frame.size / 2,  @frame.spacing*(@frame.posts-1)/2 )
+  end
+
+end
