@@ -26,8 +26,8 @@ class Frame < xeogl.Model
   def set_brace(on)
     @posts.each{|p| p.set_brace(on)}
   end
-  def set_posts(num , spacing)
-    @frame.spacing = spacing #precalculated in app
+  def set_posts(num , frame)
+    self.update(frame)
     return if num == self.posts
     if(num < self.posts)
       self._remove(@posts[num])#.remove()
@@ -52,7 +52,7 @@ class Frame < xeogl.Model
     return NoTruss.new(self,at)
   end
   def rad
-    return self.angle * (Math.PI / 180)
+    return @frame.angle * (Math.PI / 180)
   end
   def tan
     return Math.tan(self.rad)
@@ -82,7 +82,7 @@ class Frame < xeogl.Model
     return @frame.spacing*(self.posts - 1)
   end
   def angle
-    return @frame.truss.angle
+    return @frame.angle
   end
   def posts
     return @posts.length

@@ -1,8 +1,8 @@
 
 .graph_app
   .post_control
-    %range-slider{"v-model":"frame.truss.angle" , ":min":"10", ":max":"50" }
-      %b Truss Angle {{frame.truss.angle}}&deg; (Heigth: {{Math.floor(truss_height)}}cm)
+    %range-slider{"v-model":"frame.angle" , ":min":"10", ":max":"50" }
+      %b Truss Angle {{frame.angle}}&deg; (Heigth: {{Math.floor(truss_height)}}cm)
     %range-slider{"v-model":"frame.height" , ":min":"100", ":max":"350" }
       %b Post Height {{frame.height}}
     %range-slider{"v-model":"frame.width" ,":min":"100", ":max":"660"}
@@ -25,7 +25,7 @@
       %br
       %span
         %b Trusses
-        %input{type:"checkbox", "v-model":"frame.truss.on"}
+        %input{type:"checkbox", "v-model":"truss"}
       %br
       %span
         Joints

@@ -4,7 +4,7 @@ class VueController < Vue
                     braces: {handler: lambda{|arg| self.set_brace(arg)}} ,
                     truss: {handler: lambda{|arg| self.set_truss(arg)}}}
   def initialize
-    @frame = {truss: {angle: 30} ,size: 15 ,height: 250,
+    @frame = {angle: 30 ,size: 15 ,height: 250,
               spacing: 300, width: 400  }
     @scale = 100
     @posts = 4
@@ -25,7 +25,10 @@ class VueController < Vue
   end
   def set_posts(num)
     old_length = self.length
-    @frame.spacing = Math.floor(old_length / (num - 1))
+    spacing = Math.floor(old_length / (num - 1))
+    spacing = 120 if spacing < 120
+    spacing = 650 if spacing > 650
+    @frame.spacing = spacing
     @posts = num
     eco_frame.set_posts(num , @frame.spacing)
   end
@@ -50,7 +53,7 @@ class VueController < Vue
     return 2 * @posts * @frame.size * @frame.size * meters
   end
   def truss_height
-    return @frame.width * Math.tan(@frame.truss.angle * (Math.PI/180)) / 2
+    return @frame.width * Math.tan(@frame.angle * (Math.PI/180)) / 2
   end
   def truss_cubes
     meters = meter_price(@frame.width)
