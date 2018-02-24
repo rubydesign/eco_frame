@@ -1,6 +1,10 @@
 class Frame < xeogl.Model
   def initialize()
     super({})
+    @materials = {
+      wood:  xeogl.LambertMaterial.new({ color: [230/255, 145/255, 60/255]}),
+      floor: xeogl.LambertMaterial.new({ color: [125/255, 125/255, 125/255]})
+    }
     @frame = VueController._data.frame
     @posts = Array.new(VueController._data.posts)
     self.add( PostBeam.new(self,0,true))
@@ -93,13 +97,22 @@ class Frame < xeogl.Model
   def clay_app
     return @clay_app
   end
-  def cube_for( model , color = "salmon")
+  def transforms
     translate = xeogl.Translate.new( id: "pos" + Math.random())
     rotate = xeogl.Rotate.new({xyz: [0,0,1] , parent: translate, id: "rot" + Math.random()})
-    scale = xeogl.Scale.new( {parent: rotate, id: "scale" + Math.random()})
-    cube = model.add(xeogl.Entity.new( {  transform: scale }));
-    #cube.material.diffuse =  color
+    return xeogl.Scale.new( {parent: rotate, id: "scale" + Math.random()})
+  end
+  def cube_for( model , color = "wood")
+    cube = model.add(xeogl.Entity.new( {  transform: self.transforms ,
+                                          material:  @materials[color]}))
     return cube
+  end
+  def plane_for( model , color = "floor")
+    plane =xeogl.Entity.new({ geometry: xeogl.PlaneGeometry.new({xSize:100, zSize:100,
+                                    xSegments: 10, zSegments: 10}),
+                                  transform: self.transforms ,
+                                  material:  @materials[color] })
+    return plane
   end
 
   def update( frame )

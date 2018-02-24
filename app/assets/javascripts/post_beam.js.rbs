@@ -1,6 +1,6 @@
 class PostBeam < xeogl.Model
   def initialize( frame , index  , braced )
-    super()
+    super({})
     @frame = frame
     @index = index
     @post1 = frame.cube_for(self)
@@ -12,8 +12,8 @@ class PostBeam < xeogl.Model
     @beam = frame.cube_for(self)
     @brace1 = @frame.cube_for(self)
     @brace2 = @frame.cube_for(self)
-    @brace1.rotZ(45)
-    @brace2.rotZ(-45)
+    @brace1.rotateZ(45)
+    @brace2.rotateZ(-45)
     self.update()
   end
   def braces

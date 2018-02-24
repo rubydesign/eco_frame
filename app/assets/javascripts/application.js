@@ -10,9 +10,9 @@
 
 //=require frame
 //=require post_beam
-//= require plate
+//=require plate
+//=require floor
 
-// require floor
 // require harja
 // require post_beam
 
