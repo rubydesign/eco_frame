@@ -34,8 +34,7 @@ class Frame < xeogl.Model
   def set_brace(on)
     @posts.each{|p| p.set_brace(on)}
   end
-  def set_posts(num , frame)
-    self.update(frame)
+  def set_posts(num)
     return if num == @post_num
     prev = @post_num
     @post_num = num

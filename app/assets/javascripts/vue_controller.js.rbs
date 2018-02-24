@@ -29,8 +29,9 @@ class VueController < Vue
     spacing = 120 if spacing < 120
     spacing = 650 if spacing > 650
     @frame.spacing = spacing
+    self.rerender()
     @posts = num
-    eco_frame.set_posts(num , @frame.spacing)
+    eco_frame.set_posts(num )
   end
   def rerender(_)
     eco_frame.update(@frame)

@@ -1,6 +1,7 @@
 class PostBeam < xeogl.Model
   def initialize( frame , index  , braced )
     super({})
+    puts index
     @frame = frame
     @index = index
     @post1 = frame.cube_for(self)
@@ -24,6 +25,8 @@ class PostBeam < xeogl.Model
     @brace2.visible = on
   end
   def update()
+    @foot1.position(@frame.width/2 ,-@frame.height  ,  @frame.offset(@index))
+    @foot2.position(-@frame.width/2 ,-@frame.height ,  @frame.offset(@index))
     @beam.scale(@frame.width / 2 + @frame.size / 2,
                                     @frame.size / 2, @frame.size/2)
     @beam.position(0 , -@frame.size/2 ,@frame.offset(@index))
@@ -31,8 +34,6 @@ class PostBeam < xeogl.Model
     self.update_post_at(@post2, -1)
     self.update_brace_at(@brace1 , 1)
     self.update_brace_at(@brace2 , -1)
-    @foot1.position(@frame.width/2 ,-@frame.height  ,  @frame.offset(@index))
-    @foot2.position(-@frame.width/2 ,-@frame.height ,  @frame.offset(@index))
   end
   def update_post_at(post , side)
     post.position(side * @frame.width/2 , -@frame.height / 2 , @frame.offset(@index))
@@ -53,5 +54,7 @@ class PostBeam < xeogl.Model
     self.remove(@post1)
     self.remove(@brace1)
     self.remove(@brace2)
+    self.remove(@foot1)
+    self.remove(@foot1)
   end
 end
