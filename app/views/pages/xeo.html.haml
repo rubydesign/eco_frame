@@ -21,12 +21,12 @@
     .rangeslider
       %span
         %b Braces
-        %input{type:"checkbox", "v-model":"frame.braces"}
+        %input{type:"checkbox", "v-model":"braces"}
       %br
       %span
-        %b Trusses
-        %input{type:"checkbox", "v-model":"truss"}
-      %br
+        %select{"v-model":"truss"}
+          %option{ value:"none"} No Truss
+          %option{ value:"harja", selected:"selected"} Harja
       %span
         Joints
         %b {{joins}}

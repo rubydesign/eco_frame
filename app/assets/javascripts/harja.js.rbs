@@ -64,8 +64,9 @@
 
 end
 
-class NoTruss
+class NoTruss < xeogl.Model
   def initialize( frame , index )
+    super()
   end
   def update()
   end
