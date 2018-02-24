@@ -6,20 +6,21 @@ class Frame < xeogl.Model
       floor: xeogl.LambertMaterial.new({ color: [125/255, 125/255, 125/255]})
     }
     @frame = VueController._data.frame
-    @posts = Array.new(VueController._data.posts)
+    posts = VueController._data.posts
+    @posts = Array.new(posts)
+    @trusses = Array.new(posts)
     self.add( PostBeam.new(self,0,true))
-    #xeogl.Model.prototype._init.apply(this , [{}]) # super()
-    # @trusses = Array.new()
-    # @truss = :harja
-    # 0.upto(VueController._data.posts - 1) do | i|
+
+    @truss = :harja
+    0.upto(posts - 1) do | i|
     #   post = PostBeam.new(self , i , true)
     #   offset = @frame.spacing * (@frame.posts / 2 - i)
     #   post.transform = xeogl.Translate.new({ xyz: [0 , 0, offset] })
     #   @posts[i]  = post #probably can get rid of this at some point
     #   self.add( post )
     #   @trusses[i] = 1#self.new_truss(i)
-    # end
-    # @floor = 1#Floor.new( self )
+    end
+    @floor = Floor.new( self )
     @plate = Plate.new( self )
 
     # for(var i=0; i < this.frame.posts; i++){
@@ -108,8 +109,7 @@ class Frame < xeogl.Model
     return cube
   end
   def plane_for( model , color = "floor")
-    plane =xeogl.Entity.new({ geometry: xeogl.PlaneGeometry.new({xSize:100, zSize:100,
-                                    xSegments: 10, zSegments: 10}),
+    plane =xeogl.Entity.new({ geometry: xeogl.PlaneGeometry.new(),
                                   transform: self.transforms ,
                                   material:  @materials[color] })
     return plane
