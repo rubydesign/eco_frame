@@ -12,21 +12,24 @@ class Frame < xeogl.Model
     @truss = :harja
 
     0.upto(@post_num - 1) do | i|
-      self.new_post(i, true)
-      self.new_truss(i)
+      self.new_post(true)
+      self.new_truss()
     end
     @floor = Floor.new( self )
     @plate = Plate.new( self )
+    self.update(@frame)
   end
-  def new_post(i , braced = true)
-    post = PostBeam.new(self , i , braced)
+  def new_post(braced = true)
+    post = PostBeam.new(self , braced)
     self.add( post )
+    post.transform = xeogl.Translate.new([0,0,0])
     @posts << post
     return post
   end
-  def new_truss(i)
-    truss = Harja.new(self , i) if @truss == :harja
-    truss = NoTruss.new(self,i) if truss == nil
+  def new_truss()
+    truss = Harja.new(self ) if @truss == :harja
+    truss = NoTruss.new(self) if truss == nil
+    truss.transform = xeogl.Translate.new([0,0,0])
     self.add( truss )
     @trusses << truss
     return truss
@@ -39,13 +42,14 @@ class Frame < xeogl.Model
     prev = @post_num
     @post_num = num
     if(num < prev)
+      @posts[num].remove_parts()
       self._remove(@posts[num])#.remove()
       @posts.pop()
       self._remove(@trusses[num])
       @trusses.pop()
     else
-      self.new_post(num - 1 , @posts[0].braces)
-      self.new_truss(num - 1 )
+      self.new_post( @posts[0].braces)
+      self.new_truss( )
     end
   end
   def set_truss(arg)
@@ -53,7 +57,7 @@ class Frame < xeogl.Model
     0.upto(self.posts - 1) do | i|
       truss = @trusses[i]
       self._remove(truss)
-      @trusses[i] = self.new_truss(i)
+      @trusses[i] = self.new_truss()
     end
     self.update(@frame)
   end
@@ -68,9 +72,6 @@ class Frame < xeogl.Model
   end
   def cos
     return Math.cos(self.rad)
-  end
-  def offset(at)
-    return @frame.spacing * ((@post_num - 1)/2 - at)
   end
   def spacing
     return @frame.spacing
@@ -110,11 +111,20 @@ class Frame < xeogl.Model
     return plane
   end
 
+  def offset(at)
+    return @frame.spacing * ((@post_num - 1)/2 - at)
+  end
   def update( frame )
     @frame = frame
     @plate.update()
     @floor.update()
-    @posts.each{|p| p.update()}
-    @trusses.each{|t| t.update()}
+    @posts.each_with_index do |p , i|
+      p.transform.xyz = [0,0,self.offset(i)]
+      p.update()
+    end
+    @trusses.each_with_index do |t,i|
+      t.transform.xyz = [0,0,self.offset(i)]
+      t.update()
+    end
   end
 end

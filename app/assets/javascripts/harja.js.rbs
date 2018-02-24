@@ -1,8 +1,7 @@
   class Harja < xeogl.Model
 
-  def initialize( frame , index )
+  def initialize( frame  )
     super({})
-    @index = index
     @frame =  frame
     @king = frame.cube_for(self)
     @rafter1 = frame.cube_for(self)
@@ -14,7 +13,7 @@
 
   def update()
     truss_height = @frame.tan * @frame.width / 2
-    @king.position( 0 , truss_height/2, @frame.offset(@index) )
+    @king.position( 0 , truss_height/2, 0 )
     @king.scale( @frame.size / 2,truss_height / 2,  @frame.size/2 )
     self.update_rafter_at( @rafter1 , 1 )
     self.update_rafter_at( @rafter2 , -1 )
@@ -25,8 +24,7 @@
     brace.rotateZ(side*45 )
     brace.scale( @frame.size / 2, self.brace_length, @frame.size / 2)
     brace.position( -side*(self.brace_length*self.brace_cosm + self.brace_sin*@frame.size/4)  ,
-                (self.brace_length*self.brace_sinm ) + 3*@frame.size/4,
-                @frame.offset(@index))
+                (self.brace_length*self.brace_sinm ) + 3*@frame.size/4, 0 )
   end
   def brace_rad
     return 45* Math.PI / 180
@@ -51,7 +49,7 @@
     rafter.rotateZ(side* (90 - @frame.angle)  )
     rafter.position( side * (@frame.width + @frame.cos*@frame.size) / 4  ,
                         @frame.tan*@frame.width/4 - @frame.cos*@frame.size/2  ,
-                        @frame.offset(@index))
+                        0)
     rafter.scale( @frame.size / 2, self.rafter_length / 2,  @frame.size/ 2 )
   end
   def remove_parts()
@@ -65,7 +63,7 @@
 end
 
 class NoTruss < xeogl.Model
-  def initialize( frame , index )
+  def initialize( frame  )
     super()
   end
   def update()
