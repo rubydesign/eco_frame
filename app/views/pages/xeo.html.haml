@@ -9,9 +9,9 @@
       %b Width {{frame.width}}
     %range-slider{"v-model":"frame.spacing" , ":min":"100", ":max":"660"}
       %b Length {{length}} (Spacing: {{frame.spacing}})
-    %range-slider{"v-bind:value":"frame.posts" , "v-on:input":"set_posts($event)",
+    %range-slider{"v-bind:value":"posts" , "v-on:input":"set_posts($event)",
                   ":min":"2", ":max":"11"}
-      %b Posts {{frame.posts}}
+      %b Posts {{posts}}
     %range-slider{"v-model":"frame.size" ,":min":"4", ":max":"11"}
       %b Size {{frame.size}}in ({{(frame.size).toFixed(0)}}cm)
     %range-slider{"v-model":"scale", ":min":30, ":max":150}
