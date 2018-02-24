@@ -37,15 +37,14 @@ class Frame < xeogl.Model
   def set_brace(on)
     @posts.each{|p| p.set_brace(on)}
   end
-  def set_posts(num)
+  def set_posts(num,space)
     return if num == @post_num
-    prev = @post_num
+      prev = @post_num
     @post_num = num
     if(num < prev)
-      @posts[num].remove_parts()
-      self._remove(@posts[num])#.remove()
+      @posts[num].iterate {|elem| elem.visible = false}
       @posts.pop()
-      self._remove(@trusses[num])
+      @trusses[num].iterate {|elem| elem.visible = false}
       @trusses.pop()
     else
       self.new_post( @posts[0].braces)
