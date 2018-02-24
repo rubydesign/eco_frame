@@ -24,11 +24,10 @@ class VueController < Vue
     self.rerender()
   end
   def set_posts(num)
-    old_length = self.length
-    spacing = Math.floor(old_length / (num - 1))
-    spacing = 120 if spacing < 120
-    spacing = 650 if spacing > 650
-    @frame.spacing = spacing
+    space = Math.floor(self.length / (num - 1))
+    space = 120 if space < 120
+    space = 650 if space > 650
+    @frame.spacing = space
     self.rerender()
     @posts = num
     eco_frame.set_posts(num )
