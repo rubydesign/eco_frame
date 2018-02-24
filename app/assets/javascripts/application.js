@@ -12,9 +12,7 @@
 //=require post_beam
 //=require plate
 //=require floor
-
-// require harja
-// require post_beam
+//=require harja
 
 //= require_self
 
