@@ -54,9 +54,11 @@ class Frame < xeogl.Model
   def set_truss(arg)
     @truss = arg
     0.upto(self.posts - 1) do | i|
-      truss = @trusses[i]
-      self._remove(truss)
-      @trusses[i] = self.new_truss()
+      @trusses[i].iterate {|elem| elem.visible = false}
+    end
+    @trusses = []
+    0.upto(self.posts - 1) do | i|
+      self.new_truss()
     end
     self.update(@frame)
   end
