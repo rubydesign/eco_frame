@@ -3,7 +3,7 @@ class Frame < xeogl.Model
     super({})
     @frame = VueController._data.frame
     @posts = Array.new(VueController._data.posts)
-    self.add( PostBeam.new(self,1,true))
+    self.add( PostBeam.new(self,0,true))
     #xeogl.Model.prototype._init.apply(this , [{}]) # super()
     # @trusses = Array.new()
     # @truss = :harja
@@ -94,11 +94,14 @@ class Frame < xeogl.Model
     return @clay_app
   end
   def cube_for( model , color = "salmon")
-    cube = model.add(xeogl.Entity.new( {  geometry: xeogl.BoxGeometry.new(
-      {xSize:20 , ySize: 100 , zSize: 20}) }));
+    translate = xeogl.Translate.new( id: "pos" + Math.random())
+    rotate = xeogl.Rotate.new({xyz: [0,0,1] , parent: translate, id: "rot" + Math.random()})
+    scale = xeogl.Scale.new( {parent: rotate, id: "scale" + Math.random()})
+    cube = model.add(xeogl.Entity.new( {  transform: scale }));
     #cube.material.diffuse =  color
     return cube
   end
+
   def update( frame )
     @frame = frame
     #@plate.update()

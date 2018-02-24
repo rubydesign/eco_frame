@@ -5,6 +5,7 @@
 //=require vue
 //=require range_slider
 //=require vue_controller
+//=require entity_transforms
 
 //=require frame
 //= require post_beam

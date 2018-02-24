@@ -1,86 +1,56 @@
 class PostBeam < xeogl.Model
   def initialize( frame , index  , braced )
     super()
-    @beams_g = beam = xeogl.BoxGeometry.new( { xSize: 300 / 2 + 15 / 2,
-             ySize: 15 / 2, zSize: 15/2 ,
-             center:[0 ,250/2 ,0]})
-    @beam = self.add(xeogl.Entity.new( {  geometry: @beams_g }))
     @frame = frame
     @index = index
-    #@post1 = frame.cube_for(self)
-    # @post2 = frame.cube_for(self)
-    # @foot1 = frame.cube_for(self,"grey")
-    # @foot2 = frame.cube_for(self,"grey")
-    # @foot1.xSize = @frame.size
-    # @foot1.ySize = @frame.size
-    # @foot1.zSize = @frame.size
-    # @foot2.xSize = @frame.size
-    # @foot2.ySize = @frame.size
-    # @foot2.zSize = @frame.size
-  #  @beam = frame.cube_for(self)
-    # self.add_braces() if braced != nil
-  #  self.update()
-
+    @post1 = frame.cube_for(self)
+    @post2 = frame.cube_for(self)
+    @foot1 = frame.cube_for(self,"grey")
+    @foot2 = frame.cube_for(self,"grey")
+    @foot1.scale( @frame.size, @frame.size, @frame.size)
+    @foot2.scale( @frame.size, @frame.size, @frame.size)
+    @beam = frame.cube_for(self)
+    @brace1 = @frame.cube_for(self)
+    @brace2 = @frame.cube_for(self)
+    @brace1.rotZ(45)
+    @brace2.rotZ(-45)
+    self.update()
   end
   def braces
-    return @brace1 != nil
+    return @brace1.visible
   end
   def set_brace(on)
-    on ?  self.add_braces() : self.remove_braces()
+    @brace1.visible = on
+    @brace2.visible = on
   end
   def update()
-    @beam.center = [0 , -@frame.size/2 ,@frame.offset(@index)]
-    @beam.xSize = @frame.width / 2 + @frame.size / 2
-    @beam.ySize = @frame.size / 2
-    @beam.zSize =  @frame.size/2
-    puts(@frame)
-    return
+    @beam.scale(@frame.width / 2 + @frame.size / 2,
+                                    @frame.size / 2, @frame.size/2)
+    @beam.position(0 , -@frame.size/2 ,@frame.offset(@index))
     self.update_post_at(@post1,  1)
     self.update_post_at(@post2, -1)
-    if(self.braces)
-      self.update_brace_at(@brace1 , 1)
-      self.update_brace_at(@brace2 , -1)
-    end
-    @foot1.center = [@frame.width/2 ,-@frame.height  ,  @frame.offset(@index)]
-    @foot2.center = [-@frame.width/2 ,-@frame.height ,  @frame.offset(@index)]
+    self.update_brace_at(@brace1 , 1)
+    self.update_brace_at(@brace2 , -1)
+    @foot1.position(@frame.width/2 ,-@frame.height  ,  @frame.offset(@index))
+    @foot2.position(-@frame.width/2 ,-@frame.height ,  @frame.offset(@index))
   end
   def update_post_at(post , side)
-    post.center = [side * @frame.width/2 , -@frame.height / 2 , @frame.offset(@index) ]
-    post.xSize = @frame.size / 2
-    post.ySize = @frame.height / 2
-    post.zSize = @frame.size/2
+    post.position(side * @frame.width/2 , -@frame.height / 2 , @frame.offset(@index))
+    post.scale( @frame.size / 2, @frame.height / 2 , @frame.size/2)
   end
   def update_brace_at( brace , side )
-    brace.xSize = @frame.size / 2
-    brace.ySize = self.brace_size
-    brace.zSize = @frame.size / 2
-    brace.center = [side*(@frame.width/2 - self.brace_size/1.41 ),
-                    -self.brace_size/1.41 - @frame.size/2 , @frame.offset(@index)]
+    brace.scale( @frame.size / 2, self.brace_size, @frame.size / 2)
+    brace.position(side*(@frame.width/2 - self.brace_size/1.41 ),
+                    -self.brace_size/1.41 - @frame.size/2 , @frame.offset(@index))
   end
   def brace_size
     size = Math.min(@frame.width / 2 , @frame.height)
     return Math.max(size / 3 , 50)
   end
-  def add_braces()
-    return if self.braces
-    @brace1 = @frame.cube_for(self)
-    @brace2 = @frame.cube_for(self)
-    @brace1.transform = xeogl.Rotate.new({ xyz: [0, 0, 1], angle: 45})
-    @brace1.transform = xeogl.Rotate.new({ xyz: [0, 0, 1], angle: -45})
-  end
-  def remove_braces()
-    return unless self.braces
-    scene = @frame.clay_app.scene
-    scene.removeFromScene(@brace1)
-    scene.removeFromScene(@brace2)
-    scene.remove(@brace1)
-    scene.remove(@brace2)
-    @brace1 = nil
-    @brace2 = nil
-  end
   def remove()
-    self.remove_braces( )
     scene = @frame.clay_app.scene
+    @brace1.visible = false
+    @brace2.visible = false
     scene.removeFromScene(@post1)
     scene.removeFromScene(@post2)
     scene.removeFromScene(@beam)
