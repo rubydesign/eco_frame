@@ -16,7 +16,7 @@ class Frame < xeogl.Model
     #   @trusses[i] = 1#self.new_truss(i)
     # end
     # @floor = 1#Floor.new( self )
-    # @plate = 1#Plate.new( self )
+    @plate = Plate.new( self )
 
     # for(var i=0; i < this.frame.posts; i++){
     #   console.log(i)

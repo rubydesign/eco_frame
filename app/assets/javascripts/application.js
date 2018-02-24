@@ -5,13 +5,13 @@
 //=require vue
 //=require range_slider
 //=require vue_controller
+//=require range_slider
 //=require entity_transforms
 
 //=require frame
-//= require post_beam
+//=require post_beam
+//= require plate
 
-// require plate
-// require range_slider
 // require floor
 // require harja
 // require post_beam

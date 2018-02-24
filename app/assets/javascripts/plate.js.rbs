@@ -1,9 +1,10 @@
-class Plate
+class Plate < xeogl.Model
 
   def initialize(frame)
+    super()
     @frame =  frame
-    @plate1 = frame.cube()
-    @plate2 = frame.cube()
+    @plate1 = frame.cube_for(self)
+    @plate2 = frame.cube_for(self)
     self.update()
   end
 
@@ -13,9 +14,9 @@ class Plate
   end
 
   def update_plate_at(plate , side)
-    plate.position.set(side * @frame.width / 2 , -@frame.size/2 ,
+    plate.position(side * @frame.width / 2 , -@frame.size/2 ,
       @frame.offset(@frame.posts/2 - 0.5) )
-    plate.scale.set( @frame.size / 2, @frame.size / 2,  @frame.spacing*(@frame.posts-1)/2 )
+    plate.scale( @frame.size / 2, @frame.size / 2,  @frame.spacing*(@frame.posts-1)/2 )
   end
 
 end
