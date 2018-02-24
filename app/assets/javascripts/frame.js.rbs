@@ -6,50 +6,57 @@ class Frame < xeogl.Model
       floor: xeogl.LambertMaterial.new({ color: [125/255, 125/255, 125/255]})
     }
     @frame = VueController._data.frame
-    posts = VueController._data.posts
-    @posts = Array.new(posts)
-    @trusses = Array.new(posts)
-
+    @post_num = VueController._data.posts
+    @posts = []
+    @trusses = []
     @truss = :harja
-    0.upto(posts - 1) do | i|
-       post = PostBeam.new(self , i , true)
-       #offset = @frame.spacing * (posts / 2 - i)
-       #post.transform = xeogl.Translate.new({ xyz: [0 , 0, offset] })
-       @posts[i]  = post #probably can get rid of this at some point
-       self.add( post )
-       @trusses[i] = self.new_truss(i)
+
+    0.upto(@post_num - 1) do | i|
+      self.new_post(i, true)
+      self.new_truss(i)
     end
     @floor = Floor.new( self )
     @plate = Plate.new( self )
   end
-
+  def new_post(i , braced = true)
+    post = PostBeam.new(self , i , braced)
+    self.add( post )
+    @posts << post
+    return post
+  end
+  def new_truss(i)
+    truss = Harja.new(self , i) if @truss == :harja
+    truss = NoTruss.new(self,i) if truss == nil
+    self.add( truss )
+    @trusses << truss
+    return truss
+  end
   def set_brace(on)
     @posts.each{|p| p.set_brace(on)}
   end
   def set_posts(num , frame)
     self.update(frame)
-    return if num == self.posts
-    if(num < self.posts)
+    return if num == @post_num
+    prev = @post_num
+    @post_num = num
+    if(num < prev)
       self._remove(@posts[num])#.remove()
       @posts.pop()
       self._remove(@trusses[num])
       @trusses.pop()
     else
-      @posts << PostBeam.new(self , num - 1 , @posts[0].braces)
-      @trusses << self.new_truss( num - 1 )
+      self.new_post(num - 1 , @posts[0].braces)
+      self.new_truss(num - 1 )
     end
   end
   def set_truss(arg)
     @truss = arg
     0.upto(self.posts - 1) do | i|
-      @trusses[i].remove()
+      truss = @trusses[i]
+      self._remove(truss)
       @trusses[i] = self.new_truss(i)
     end
     self.update(@frame)
-  end
-  def new_truss(at)
-    return Harja.new(self , at) if @truss == :harja
-    return NoTruss.new(self,at)
   end
   def rad
     return @frame.angle * (Math.PI / 180)
@@ -64,7 +71,7 @@ class Frame < xeogl.Model
     return Math.cos(self.rad)
   end
   def offset(at)
-    return @frame.spacing * ((@posts.length - 1)/2 - at)
+    return @frame.spacing * ((@post_num - 1)/2 - at)
   end
   def spacing
     return @frame.spacing
@@ -85,7 +92,7 @@ class Frame < xeogl.Model
     return @frame.angle
   end
   def posts
-    return @posts.length
+    return @post_num
   end
   def transforms
     translate = xeogl.Translate.new( id: "pos" + Math.random())
