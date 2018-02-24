@@ -12,26 +12,25 @@ class VueController < Vue
     @truss = :harja
   end
   def set_scale(num)
-    clay_app._control._zoomSpeed = 10*(@scale - num)
+    #clay_app._control._zoomSpeed = 10*(@scale - num)
     @scale = num
   end
   def set_truss(arg)
-    clay_app._frame.set_truss(arg)
+    eco_frame.set_truss(arg)
     self.rerender()
   end
   def set_brace(on)
-    clay_app._frame.set_brace(on)
+    eco_frame.set_brace(on)
     self.rerender()
   end
   def set_posts(num)
     old_length = self.length
     @frame.spacing = Math.floor(old_length / (num - 1))
     @posts = num
-    clay_app._frame.set_posts(num , @frame.spacing)
+    eco_frame.set_posts(num , @frame.spacing)
   end
   def rerender(_)
-    clay_app._frame.update(@frame)
-    clay_app._doRender(clay_app.renderer, clay_app.scene);
+    eco_frame.update(@frame)
   end
   def length
     return @frame.spacing * (@posts - 1 )
