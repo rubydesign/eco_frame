@@ -28,6 +28,9 @@ class Frame < xeogl.Model
   end
   def new_truss()
     truss = Harja.new(self ) if @truss == :harja
+    if @truss == :pulp
+      truss = Pulpetti.new(self )
+    end
     truss = NoTruss.new(self) if truss == nil
     truss.transform = xeogl.Translate.new([0,0,0])
     self.add( truss )
@@ -52,6 +55,12 @@ class Frame < xeogl.Model
     end
   end
   def set_truss(arg)
+    if(arg == :pulp && @frame.angle > 15)
+      @frame.angle = 10
+    end
+    if(arg == :harja && @frame.angle < 15)
+      @frame.angle = 30
+    end
     @truss = arg
     0.upto(self.posts - 1) do | i|
       @trusses[i].iterate {|elem| elem.visible = false}

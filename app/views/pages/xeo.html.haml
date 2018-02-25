@@ -1,7 +1,6 @@
-
 .graph_app
   .post_control
-    %range-slider{"v-model":"frame.angle" , ":min":"10", ":max":"50" }
+    %range-slider{"v-model":"frame.angle" , ":min":"5", ":max":"46" }
       %b Truss Angle {{frame.angle}}&deg; (Heigth: {{Math.floor(truss_height)}}cm)
     %range-slider{"v-model":"frame.height" , ":min":"100", ":max":"350" }
       %b Post Height {{frame.height}}
@@ -27,6 +26,7 @@
         %select{"v-model":"truss"}
           %option{ value:"none"} No Truss
           %option{ value:"harja", selected:"selected"} Harja
+          %option{ value:"pulp"} Pulpetti
       %span
         Joints
         %b {{joins}}
