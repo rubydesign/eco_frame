@@ -3,7 +3,8 @@ class Frame < xeogl.Model
     super({})
     @materials = {
       wood:  xeogl.LambertMaterial.new({ color: [230/255, 145/255, 60/255]}),
-      floor: xeogl.LambertMaterial.new({ color: [125/255, 125/255, 125/255]})
+      floor:  xeogl.LambertMaterial.new({ color: [20/255, 15/255, 60/255]}),
+      grey: xeogl.LambertMaterial.new({ color: [125/255, 125/255, 125/255]})
     }
     @frame = VueController._data.frame
     @post_num = VueController._data.posts
@@ -109,7 +110,8 @@ class Frame < xeogl.Model
     rotate = xeogl.Rotate.new({xyz: [0,0,1] , parent: translate, id: "rot" + Math.random()})
     return xeogl.Scale.new( {parent: rotate, id: "scale" + Math.random()})
   end
-  def cube_for( model , color = "wood")
+  def cube_for( model , color )
+    color ="wood" unless color
     cube = model.add(xeogl.Entity.new( {  transform: self.transforms ,
                                           material:  @materials[color]}))
     return cube
