@@ -1,6 +1,6 @@
 class Frame < xeogl.Model
   def initialize()
-    super({})
+    super({id: "frame"})
     @materials = {
       wood:  xeogl.LambertMaterial.new({ color: [230/255, 145/255, 60/255]}),
       floor:  xeogl.LambertMaterial.new({ color: [20/255, 15/255, 60/255]}),
@@ -16,7 +16,7 @@ class Frame < xeogl.Model
       self.new_post(true)
       self.new_truss()
     end
-    @floor = Floor.new( self )
+    self.add(Floor.new( self ))
     @plate = Plate.new( self )
     self.update(@frame)
   end
@@ -110,10 +110,12 @@ class Frame < xeogl.Model
     rotate = xeogl.Rotate.new({xyz: [0,0,1] , parent: translate, id: "rot" + Math.random()})
     return xeogl.Scale.new( {parent: rotate, id: "scale" + Math.random()})
   end
-  def cube_for( model , color )
+  def cube_for( model , color , id )
     color ="wood" unless color
-    cube = model.add(xeogl.Entity.new( {  transform: self.transforms ,
-                                          material:  @materials[color]}))
+    args = {  transform: self.transforms ,
+            material:  @materials[color]}
+    args.id = id if id != nil
+    cube = model.add(xeogl.Entity.new( args ))
     return cube
   end
   def plane_for( model , color = "floor")
@@ -129,7 +131,7 @@ class Frame < xeogl.Model
   def update( frame )
     @frame = frame
     @plate.update()
-    @floor.update()
+    self.components["floor"].update()
     @posts.each_with_index do |p , i|
       p.transform.xyz = [0,0,self.offset(i)]
       p.update()

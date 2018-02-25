@@ -7,6 +7,7 @@
 //=require vue_controller
 //=require range_slider
 //=require entity_transforms
+//=require eco_model
 
 //=require frame
 //=require post_beam

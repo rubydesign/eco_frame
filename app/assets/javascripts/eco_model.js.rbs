@@ -1,8 +1,7 @@
-class Floor < EcoModel
-  def initialize(frame)
-    super(frame,  "floor")
-    frame.cube_for(self , "floor" , "floor_cube")
-    self.update()
+class EcoModel < xeogl.Model
+  def initialize(frame , id)
+    super({id: id})
+    @frame = frame
   end
 
   def update()
