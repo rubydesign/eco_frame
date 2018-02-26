@@ -2,6 +2,7 @@ class VueController < Vue
   el ".graph_app"
   options watch:  { frame: {handler: lambda{|arg| self.rerender() } ,deep: true },
                     braces: {handler: lambda{|arg| self.set_brace(arg)}} ,
+                    scale: {handler: lambda{|arg| self.set_scale(arg)}} ,
                     truss: {handler: lambda{|arg| self.set_truss(arg)}}}
   def initialize
     @frame = {angle: 30 ,size: 15 ,height: 250,
@@ -12,7 +13,9 @@ class VueController < Vue
     @truss = :harja
   end
   def set_scale(num)
+    diff = @scale - num
     @scale = num
+    xeogl.scene.camera.zoom(20*diff)
   end
   def set_truss(arg)
     eco_frame.set_truss(arg)
