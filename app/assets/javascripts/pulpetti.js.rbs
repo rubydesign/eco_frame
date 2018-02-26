@@ -1,43 +1,38 @@
-class Pulpetti < xeogl.Model
+class Pulpetti < EcoModel
 
-def initialize( frame  )
-  super({})
-  @frame =  frame
-  @king = frame.cube_for(self)
-  @rafter = frame.cube_for(self)
-end
+  def initialize( frame  )
+    super(frame)
+    self.cube("king")
+    self.cube("rafter")
+  end
 
-def update()
-  truss_height = @frame.tan * @frame.width
-  @king.position( -@frame.width/2 , truss_height/2, 0 )
-  @king.scale( @frame.size / 2,truss_height / 2,  @frame.size/2 )
-  @rafter.rotateZ( (90 - @frame.angle)  )
-  @rafter.position( ( @frame.cos*@frame.size)/4  ,
-                      @frame.tan*@frame.width/2 - @frame.cos*@frame.size/2  ,
-                      0)
-  @rafter.scale( @frame.size / 2, self.rafter_length/2 + 70 ,  @frame.size/ 2 )
-end
-def brace_rad
-  return 45* Math.PI / 180
-end
-def brace_sin
-  return Math.sin(self.brace_rad)
-end
-def brace_sinm
-  return Math.sin(Math.PI/2 - self.brace_rad)
-end
-def brace_cosm
-  return Math.cos(Math.PI/2 - self.brace_rad)
-end
-def brace_length
-  return  @frame.sin * @frame.width / 4 - @frame.size/2
-end
-def rafter_length
-  return @frame.width/ @frame.cos
-end
-def remove_parts()
-  scene.remove(@rafter)
-  scene.remove(@king)
-end
+  def update()
+    truss_height = self.tan * self.width
+    self.at("king").position( -self.width/2 , truss_height/2, 0 )
+    self.at("king").scale( self.size / 2,truss_height / 2,  self.size/2 )
+    self.at("rafter").rotateZ( (90 - self.angle)  )
+    self.at("rafter").position( ( self.cos*self.size)/4  ,
+                        self.tan*self.width/2 - self.cos*self.size/2  ,
+                        0)
+    self.at("rafter").scale( self.size / 2, self.rafter_length/2 + 70 ,  self.size/ 2 )
+  end
+  def brace_rad
+    return 45* Math.PI / 180
+  end
+  def brace_sin
+    return Math.sin(self.brace_rad)
+  end
+  def brace_sinm
+    return Math.sin(Math.PI/2 - self.brace_rad)
+  end
+  def brace_cosm
+    return Math.cos(Math.PI/2 - self.brace_rad)
+  end
+  def brace_length
+    return  self.sin * self.width / 4 - self.size/2
+  end
+  def rafter_length
+    return self.width/ self.cos
+  end
 
 end
