@@ -20,6 +20,9 @@ class Frame < xeogl.Model
     @plate = Plate.new( self )
     self.update(@frame)
   end
+  def material(kind)
+    return @materials[kind]
+  end
   def new_post(braced = true)
     post = PostBeam.new(self , braced)
     self.add( post )

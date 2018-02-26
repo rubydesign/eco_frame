@@ -3,9 +3,49 @@ class EcoModel < xeogl.Model
     super({id: id})
     @frame = frame
   end
-
-  def update()
-    self.components["floor_cube"].scale((@frame.width + 400)/2 , 10 , (@frame.length + 400)/2 )
-    self.components["floor_cube"].position(0, -@frame.height - @frame.size , 0)
+  def transforms
+    translate = xeogl.Translate.new( id: "pos" + Math.random())
+    rotate = xeogl.Rotate.new({xyz: [0,0,1] , parent: translate, id: "rot" + Math.random()})
+    return xeogl.Scale.new( {parent: rotate, id: "scale" + Math.random()})
   end
+
+  def cube( id , color  )
+    color ="wood" unless color
+    args = {  transform: self.transforms ,
+              material:  @frame.material(color),
+              id: id  }
+    return self.add(xeogl.Entity.new( args ))
+  end
+
+  def rad
+    return @frame.angle * (Math.PI / 180)
+  end
+  def tan
+    return Math.tan(self.rad)
+  end
+  def sin
+    return Math.sin(self.rad)
+  end
+  def cos
+    return Math.cos(self.rad)
+  end
+  def spacing
+    return @frame.spacing
+  end
+  def size
+    return @frame.size
+  end
+  def height
+    return @frame.height
+  end
+  def width
+    return @frame.width
+  end
+  def length
+    return @frame.spacing*(self.posts - 1)
+  end
+  def angle
+    return @frame.angle
+  end
+
 end

@@ -1,7 +1,7 @@
 class Floor < EcoModel
   def initialize(frame)
     super(frame,  "floor")
-    frame.cube_for(self , "floor" , "floor_cube")
+    self.cube( "floor_cube" , "floor")
     self.update()
   end
 
