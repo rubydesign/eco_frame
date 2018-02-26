@@ -13,7 +13,6 @@ class EcoModel < xeogl.Model
   end
   def cube( id , color  )
     color ="wood" unless color
-    puts id + "_"+ self.id
     args = {  transform: self.transforms ,
               material:  @frame.material(color),
               id: id + self.id  }

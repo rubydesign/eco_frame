@@ -1,30 +1,29 @@
-  class Harja < xeogl.Model
+  class Harja < EcoModel
 
   def initialize( frame  )
-    super({})
-    @frame =  frame
-    @king = frame.cube_for(self)
-    @rafter1 = frame.cube_for(self)
-    @rafter2 = frame.cube_for(self)
-    @brace1 = frame.cube_for(self)
-    @brace2 = frame.cube_for(self)
+    super(frame)
+    self.cube("king")
+    self.cube("rafter1")
+    self.cube("rafter2")
+    self.cube("brace1")
+    self.cube("brace2")
     self.update()
   end
 
   def update()
-    truss_height = @frame.tan * @frame.width / 2
-    @king.position( 0 , truss_height/2, 0 )
-    @king.scale( @frame.size / 2,truss_height / 2,  @frame.size/2 )
-    self.update_rafter_at( @rafter1 , 1 )
-    self.update_rafter_at( @rafter2 , -1 )
-    self.update_brace_at(@brace1 , 1)
-    self.update_brace_at(@brace2 , -1)
+    truss_height = self.tan * self.width / 2
+    self.at("king").position( 0 , truss_height/2, 0 )
+    self.at("king").scale( self.size / 2,truss_height / 2,  self.size/2 )
+    self.update_rafter_at( self.at("rafter1") , 1 )
+    self.update_rafter_at( self.at("rafter2") , -1 )
+    self.update_brace_at(self.at("brace1") , 1)
+    self.update_brace_at(self.at("brace2") , -1)
   end
   def update_brace_at( brace , side )
     brace.rotateZ(side*45 )
-    brace.scale( @frame.size / 2, self.brace_length, @frame.size / 2)
-    brace.position( -side*(self.brace_length*self.brace_cosm + self.brace_sin*@frame.size/4)  ,
-                (self.brace_length*self.brace_sinm ) + 3*@frame.size/4, 0 )
+    brace.scale( self.size / 2, self.brace_length, self.size / 2)
+    brace.position( -side*(self.brace_length*self.brace_cosm + self.brace_sin*self.size/4)  ,
+                (self.brace_length*self.brace_sinm ) + 3*self.size/4, 0 )
   end
   def brace_rad
     return 45* Math.PI / 180
@@ -39,27 +38,19 @@
     return Math.cos(Math.PI/2 - self.brace_rad)
   end
   def brace_length
-    return  @frame.sin * @frame.width / 4 - @frame.size/2
+    return  self.sin * self.width / 4 - self.size/2
   end
   def rafter_length
-    return  @frame.width/( 2 * @frame.cos)
+    return  self.width/( 2 * self.cos)
   end
   def update_rafter_at(rafter , side)
     # rafter_length so the rafters meet at the bottom (?)
-    rafter.rotateZ(side* (90 - @frame.angle)  )
-    rafter.position( side * (@frame.width + @frame.cos*@frame.size) / 4  ,
-                        @frame.tan*@frame.width/4 - @frame.cos*@frame.size/2  ,
+    rafter.rotateZ(side* (90 - self.angle)  )
+    rafter.position( side * (self.width + self.cos*self.size) / 4  ,
+                        self.tan*self.width/4 - self.cos*self.size/2  ,
                         0)
-    rafter.scale( @frame.size / 2, self.rafter_length / 2,  @frame.size/ 2 )
+    rafter.scale( self.size / 2, self.rafter_length / 2,  self.size/ 2 )
   end
-  def remove_parts()
-    scene.remove(@rafter1)
-    scene.remove(@rafter2)
-    scene.remove(@king)
-    scene.remove(@brace1)
-    scene.remove(@brace2)
-  end
-
 end
 
 class NoTruss < xeogl.Model
