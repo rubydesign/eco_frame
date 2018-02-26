@@ -1,7 +1,7 @@
 class Pulpetti < EcoModel
 
-  def initialize( frame  )
-    super(frame)
+  def initialize( data  )
+    super(data)
     self.cube("king")
     self.cube("rafter")
   end

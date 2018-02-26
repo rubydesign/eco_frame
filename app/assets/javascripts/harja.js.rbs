@@ -1,7 +1,7 @@
   class Harja < EcoModel
 
-  def initialize( frame  )
-    super(frame)
+  def initialize( data  )
+    super(data)
     self.cubes(["king","rafter1","rafter2","brace1","brace2"])
     self.update()
   end

@@ -1,6 +1,6 @@
 class PostBeam < EcoModel
-  def initialize( frame   , braced )
-    super(frame)
+  def initialize( data   , braced )
+    super(data)
     self.cubes(["post1" ,"post2", "beam" ,"brace1" ,"brace2"])
     self.cubes(["foot1" ,"foot2"] ,"grey")
 

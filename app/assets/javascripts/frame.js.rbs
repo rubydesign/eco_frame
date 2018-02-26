@@ -1,42 +1,32 @@
-class Frame < xeogl.Model
+class Frame < EcoModel
   def initialize()
-    super({id: "frame"})
-    @materials = {
-      wood:  xeogl.LambertMaterial.new({ color: [230/255, 145/255, 60/255]}),
-      floor:  xeogl.LambertMaterial.new({ color: [20/255, 15/255, 60/255]}),
-      grey: xeogl.LambertMaterial.new({ color: [125/255, 125/255, 125/255]})
-    }
-    @frame = VueController._data.frame
-    @post_num = VueController._data.posts
+    super(VueController._data ,  "frame")
     @posts = []
     @trusses = []
     @truss = :harja
 
-    0.upto(@post_num - 1) do | i|
+    0.upto(self.posts - 1) do | i|
       self.new_post(true)
       self.new_truss()
     end
-    self.add(Floor.new( self ))
-    self.add(FloorBeams.new( self ))
-    self.add(Plate.new( self ))
-    self.update(@frame)
-  end
-  def material(kind)
-    return @materials[kind]
+    self.add(Floor.new(@data ))
+    self.add(FloorBeams.new(@data ))
+    self.add(Plate.new(@data ))
+    self.update()
   end
   def new_post(braced = true)
-    post = PostBeam.new(self , braced)
+    post = PostBeam.new(@data , braced)
     self.add( post )
     post.transform = xeogl.Translate.new([0,0,0])
     @posts << post
     return post
   end
   def new_truss()
-    truss = Harja.new(self ) if @truss == :harja
+    truss = Harja.new(@data ) if @truss == :harja
     if @truss == :pulp
-      truss = Pulpetti.new(self )
+      truss = Pulpetti.new(@data )
     end
-    truss = NoTruss.new(self) if truss == nil
+    truss = NoTruss.new(@data) if truss == nil
     truss.transform = xeogl.Translate.new([0,0,0])
     self.add( truss )
     @trusses << truss
@@ -46,9 +36,8 @@ class Frame < xeogl.Model
     @posts.each{|p| p.set_brace(on)}
   end
   def set_posts(num,space)
-    return if num == @post_num
-      prev = @post_num
-    @post_num = num
+    return if num == self.posts
+    prev = @posts.length
     if(num < prev)
       @posts[num].iterate {|elem| elem.visible = false}
       @posts.pop()
@@ -60,11 +49,11 @@ class Frame < xeogl.Model
     end
   end
   def set_truss(arg)
-    if(arg == :pulp && @frame.angle > 15)
-      @frame.angle = 10
+    if(arg == :pulp && @data.frame.angle > 15)
+      @data.frame.angle = 10
     end
-    if(arg == :harja && @frame.angle < 15)
-      @frame.angle = 30
+    if(arg == :harja && @data.frame.angle < 15)
+      @data.frame.angle = 30
     end
     @truss = arg
     0.upto(self.posts - 1) do | i|
@@ -76,64 +65,7 @@ class Frame < xeogl.Model
     end
     self.update(@frame)
   end
-  def rad
-    return @frame.angle * (Math.PI / 180)
-  end
-  def tan
-    return Math.tan(self.rad)
-  end
-  def sin
-    return Math.sin(self.rad)
-  end
-  def cos
-    return Math.cos(self.rad)
-  end
-  def spacing
-    return @frame.spacing
-  end
-  def size
-    return @frame.size
-  end
-  def height
-    return @frame.height
-  end
-  def width
-    return @frame.width
-  end
-  def length
-    return @frame.spacing*(self.posts - 1)
-  end
-  def angle
-    return @frame.angle
-  end
-  def posts
-    return @post_num
-  end
-  def transforms
-    translate = xeogl.Translate.new( id: "pos" + Math.random())
-    rotate = xeogl.Rotate.new({xyz: [0,0,1] , parent: translate, id: "rot" + Math.random()})
-    return xeogl.Scale.new( {parent: rotate, id: "scale" + Math.random()})
-  end
-  def cube_for( model , color , id )
-    color ="wood" unless color
-    args = {  transform: self.transforms ,
-            material:  @materials[color]}
-    args.id = id if id != nil
-    cube = model.add(xeogl.Entity.new( args ))
-    return cube
-  end
-  def plane_for( model , color = "floor")
-    plane =xeogl.Entity.new({ geometry: xeogl.PlaneGeometry.new(),
-                                  transform: self.transforms ,
-                                  material:  @materials[color] })
-    return plane
-  end
-
-  def offset(at)
-    return @frame.spacing * ((@post_num - 1)/2 - at)
-  end
-  def update( frame )
-    @frame = frame
+  def update( )
     self.components["plate"].update()
     self.components["floor"].update()
     self.components["floor_beams"].update()

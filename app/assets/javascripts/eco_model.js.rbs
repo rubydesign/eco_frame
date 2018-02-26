@@ -1,7 +1,15 @@
 class EcoModel < xeogl.Model
-  def initialize(frame , id)
+  def initialize(data , id)
     super({id: id})
-    @frame = frame
+    @data = data
+    @materials = {
+      wood:  xeogl.LambertMaterial.new({ color: [230/255, 145/255, 60/255]}),
+      floor: xeogl.LambertMaterial.new({ color: [20/255, 15/255, 60/255]}),
+      grey:  xeogl.LambertMaterial.new({ color: [125/255, 125/255, 125/255]})
+    }
+  end
+  def material(kind)
+    return @materials[kind]
   end
   def at(id)
     return self.components[id + self.id]
@@ -17,15 +25,15 @@ class EcoModel < xeogl.Model
   def cube( id , color  )
     color ="wood" unless color
     args = {  transform: self.transforms ,
-              material:  @frame.material(color),
+              material:  self.material(color),
               id: id + self.id  }
     return self.add(xeogl.Entity.new( args ))
   end
   def offset(at)
-    return @frame.spacing * ((@frame.posts - 1)/2 - at)
+    return self.spacing * ((self.posts - 1)/2 - at)
   end
   def rad
-    return @frame.angle * (Math.PI / 180)
+    return self.angle * (Math.PI / 180)
   end
   def tan
     return Math.tan(self.rad)
@@ -37,22 +45,25 @@ class EcoModel < xeogl.Model
     return Math.cos(self.rad)
   end
   def spacing
-    return @frame.spacing
+    return @data.frame.spacing
   end
   def size
-    return @frame.size
+    return @data.frame.size
   end
   def height
-    return @frame.height
+    return @data.frame.height
   end
   def width
-    return @frame.width
+    return @data.frame.width
   end
   def length
-    return @frame.spacing*(self.posts - 1)
+    return @data.frame.spacing*(self.posts - 1)
   end
   def angle
-    return @frame.angle
+    return @data.frame.angle
+  end
+  def posts
+    return @data.posts
   end
 
 end

@@ -1,8 +1,7 @@
 class Plate < EcoModel
 
-  def initialize(frame)
-    super(frame,"plate")
-    @frame =  frame
+  def initialize(data)
+    super(data,"plate")
     self.cubes(["plate1","plate2"])
     self.update()
   end
@@ -14,8 +13,8 @@ class Plate < EcoModel
 
   def update_plate_at(plate , side)
     plate.position(side * self.width / 2 , -self.size/2 ,
-      self.offset(@frame.posts/2 - 0.5) )
-    plate.scale( self.size / 2, self.size / 2,  self.spacing*(@frame.posts-1)/2 )
+      self.offset(@data.posts/2 - 0.5) )
+    plate.scale( self.size / 2, self.size / 2,  self.spacing*(@data.posts-1)/2 )
   end
 
 end
