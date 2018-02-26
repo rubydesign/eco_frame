@@ -35,9 +35,9 @@ class Frame < EcoModel
   def set_brace(on)
     @posts.each{|p| p.set_brace(on)}
   end
-  def set_posts(num,space)
-    return if num == self.posts
+  def set_posts(num)
     prev = @posts.length
+    return if num == prev
     if(num < prev)
       @posts[num].iterate {|elem| elem.visible = false}
       @posts.pop()

@@ -12,7 +12,6 @@ class VueController < Vue
     @truss = :harja
   end
   def set_scale(num)
-    #clay_app._control._zoomSpeed = 10*(@scale - num)
     @scale = num
   end
   def set_truss(arg)
