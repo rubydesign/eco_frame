@@ -3,18 +3,28 @@ class FloorBeams < EcoModel
   def initialize(data)
     super(data,"floor_beams")
     self.cubes(["plate1","plate2"])
+    0.upto(self.posts - 1){|i| self.cube("beam" + i)}
     self.update()
   end
 
   def update()
-#    self.update_plate_at(self.at("plate1"), 1)
-#    self.update_plate_at(self.at("plate2") , -1)
+    self.update_plate_at(self.at("plate1"), 1)
+    self.update_plate_at(self.at("plate2") , -1)
+    0.upto(self.posts - 1) do |i|
+      plate = self.at("beam" + i)
+      plate = self.cube("beam" + i) unless plate
+      plate.visible = true #reenable removed ones
+      plate.position(0 ,  -self.height + self.size/2, self.offset(i) )
+      plate.scale( self.width / 2, self.size / 2,  self.size / 2 )
+    end
+    plate = self.at("beam" + self.posts)
+    plate.visible = false if plate
   end
 
   def update_plate_at(plate , side)
     plate.position(side * self.width / 2 ,  - self.height + self.size/2,
-      self.offset(@data.posts/2 - 0.5) )
-    plate.scale( self.size / 2, self.size / 2,  self.spacing*(@data.posts-1)/2 )
+      self.offset(self.posts/2 - 0.5) )
+    plate.scale( self.size / 2, self.size / 2,  self.spacing*(self.posts-1)/2 )
   end
 
 end
