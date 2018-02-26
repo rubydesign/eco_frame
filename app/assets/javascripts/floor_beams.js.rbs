@@ -7,8 +7,8 @@ class FloorBeams < EcoModel
   end
 
   def update()
-    self.update_plate_at(self.at("plate1"), 1)
-    self.update_plate_at(self.at("plate2") , -1)
+#    self.update_plate_at(self.at("plate1"), 1)
+#    self.update_plate_at(self.at("plate2") , -1)
   end
 
   def update_plate_at(plate , side)

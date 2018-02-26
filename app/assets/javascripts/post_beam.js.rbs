@@ -6,8 +6,6 @@ class PostBeam < EcoModel
 
     self.at("brace1").rotateZ(45)
     self.at("brace2").rotateZ(-45)
-    self.at("foot1").scale( self.size, self.size, self.size)
-    self.at("foot2").scale( self.size, self.size, self.size)
     self.update()
   end
   def braces
@@ -18,8 +16,10 @@ class PostBeam < EcoModel
     self.at("brace2").visible = on
   end
   def update()
-    self.at("foot1").position(self.width/2 ,-self.height - self.size  ,  0)
-    self.at("foot2").position(-self.width/2 ,-self.height - self.size,  0)
+    self.at("foot1").position(self.width/2  ,-self.height - self.size ,  0)
+    self.at("foot2").position(-self.width/2 ,-self.height - self.size ,  0)
+    self.at("foot1").scale( self.size, self.size, self.size)
+    self.at("foot2").scale( self.size, self.size, self.size)
     self.at("beam").scale(self.width / 2 + self.size / 2,
                                     self.size / 2, self.size/2)
     self.at("beam").position(0 , -self.size/2 ,0)
