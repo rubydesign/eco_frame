@@ -1,0 +1,20 @@
+class FloorBeams < EcoModel
+
+  def initialize(frame)
+    super(frame,"floor_beams")
+    self.cubes(["plate1","plate2"])
+    self.update()
+  end
+
+  def update()
+    self.update_plate_at(self.at("plate1"), 1)
+    self.update_plate_at(self.at("plate2") , -1)
+  end
+
+  def update_plate_at(plate , side)
+    plate.position(side * self.width / 2 ,  - self.height + self.size/2,
+      self.offset(@frame.posts/2 - 0.5) )
+    plate.scale( self.size / 2, self.size / 2,  self.spacing*(@frame.posts-1)/2 )
+  end
+
+end

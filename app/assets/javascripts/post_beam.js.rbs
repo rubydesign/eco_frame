@@ -18,8 +18,8 @@ class PostBeam < EcoModel
     self.at("brace2").visible = on
   end
   def update()
-    self.at("foot1").position(self.width/2 ,-self.height  ,  0)
-    self.at("foot2").position(-self.width/2 ,-self.height ,  0)
+    self.at("foot1").position(self.width/2 ,-self.height - self.size  ,  0)
+    self.at("foot2").position(-self.width/2 ,-self.height - self.size,  0)
     self.at("beam").scale(self.width / 2 + self.size / 2,
                                     self.size / 2, self.size/2)
     self.at("beam").position(0 , -self.size/2 ,0)

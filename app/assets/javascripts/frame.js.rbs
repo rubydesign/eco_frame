@@ -17,7 +17,8 @@ class Frame < xeogl.Model
       self.new_truss()
     end
     self.add(Floor.new( self ))
-    @plate = Plate.new( self )
+    self.add(FloorBeams.new( self ))
+    self.add(Plate.new( self ))
     self.update(@frame)
   end
   def material(kind)
@@ -133,8 +134,9 @@ class Frame < xeogl.Model
   end
   def update( frame )
     @frame = frame
-    @plate.update()
+    self.components["plate"].update()
     self.components["floor"].update()
+    self.components["floor_beams"].update()
     @posts.each_with_index do |p , i|
       p.transform.xyz = [0,0,self.offset(i)]
       p.update()

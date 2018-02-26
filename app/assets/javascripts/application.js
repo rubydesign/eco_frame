@@ -13,6 +13,7 @@
 //=require post_beam
 //=require plate
 //=require floor
+//=require floor_beams
 //=require harja
 //=require pulpetti
 
