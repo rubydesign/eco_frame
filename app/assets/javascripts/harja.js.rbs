@@ -2,11 +2,7 @@
 
   def initialize( frame  )
     super(frame)
-    self.cube("king")
-    self.cube("rafter1")
-    self.cube("rafter2")
-    self.cube("brace1")
-    self.cube("brace2")
+    self.cubes(["king","rafter1","rafter2","brace1","brace2"])
     self.update()
   end
 

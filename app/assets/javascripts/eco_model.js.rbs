@@ -11,6 +11,9 @@ class EcoModel < xeogl.Model
     rotate = xeogl.Rotate.new({xyz: [0,0,1] , parent: translate, id: "rot" + Math.random()})
     return xeogl.Scale.new( {parent: rotate, id: "scale" + Math.random()})
   end
+  def cubes(ids , color)
+    ids.each {|id| self.cube(id, color)}
+  end
   def cube( id , color  )
     color ="wood" unless color
     args = {  transform: self.transforms ,

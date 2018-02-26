@@ -3,8 +3,7 @@ class Plate < EcoModel
   def initialize(frame)
     super(frame,"plate")
     @frame =  frame
-    self.cube("plate1")
-    self.cube("plate2")
+    self.cubes(["plate1","plate2"])
     self.update()
   end
 
