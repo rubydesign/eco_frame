@@ -6,7 +6,7 @@ class Floor < EcoModel
   end
 
   def update()
-    self.components["floor_cube"].scale((@frame.width + 400)/2 , 10 , (@frame.length + 400)/2 )
-    self.components["floor_cube"].position(0, -@frame.height - @frame.size , 0)
+    self.at("floor_cube").scale((@frame.width + 400)/2 , 10 , (@frame.length + 400)/2 )
+    self.at("floor_cube").position(0, -@frame.height - @frame.size , 0)
   end
 end

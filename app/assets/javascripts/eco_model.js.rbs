@@ -3,20 +3,25 @@ class EcoModel < xeogl.Model
     super({id: id})
     @frame = frame
   end
+  def at(id)
+    return self.components[id + self.id]
+  end
   def transforms
     translate = xeogl.Translate.new( id: "pos" + Math.random())
     rotate = xeogl.Rotate.new({xyz: [0,0,1] , parent: translate, id: "rot" + Math.random()})
     return xeogl.Scale.new( {parent: rotate, id: "scale" + Math.random()})
   end
-
   def cube( id , color  )
     color ="wood" unless color
+    puts id + "_"+ self.id
     args = {  transform: self.transforms ,
               material:  @frame.material(color),
-              id: id  }
+              id: id + self.id  }
     return self.add(xeogl.Entity.new( args ))
   end
-
+  def offset(at)
+    return @frame.spacing * ((@frame.posts - 1)/2 - at)
+  end
   def rad
     return @frame.angle * (Math.PI / 180)
   end

@@ -1,22 +1,22 @@
-class Plate < xeogl.Model
+class Plate < EcoModel
 
   def initialize(frame)
-    super()
+    super(frame,"plate")
     @frame =  frame
-    @plate1 = frame.cube_for(self)
-    @plate2 = frame.cube_for(self)
+    self.cube("plate1")
+    self.cube("plate2")
     self.update()
   end
 
   def update()
-    self.update_plate_at(@plate1, 1)
-    self.update_plate_at(@plate2 , -1)
+    self.update_plate_at(self.at("plate1"), 1)
+    self.update_plate_at(self.at("plate2") , -1)
   end
 
   def update_plate_at(plate , side)
-    plate.position(side * @frame.width / 2 , -@frame.size/2 ,
-      @frame.offset(@frame.posts/2 - 0.5) )
-    plate.scale( @frame.size / 2, @frame.size / 2,  @frame.spacing*(@frame.posts-1)/2 )
+    plate.position(side * self.width / 2 , -self.size/2 ,
+      self.offset(@frame.posts/2 - 0.5) )
+    plate.scale( self.size / 2, self.size / 2,  self.spacing*(@frame.posts-1)/2 )
   end
 
 end
