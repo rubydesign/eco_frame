@@ -2,29 +2,55 @@ class FloorBeams < EcoModel
 
   def initialize(data)
     super(data,"floor_beams")
-    self.cubes(["plate1","plate2"])
-    0.upto(self.posts - 1){|i| self.cube("beam" + i)}
+    self.cubes(["plate1","plate2" , "joist_last"])
     self.update()
   end
 
+  def joist_num
+    Math.ceil(self.width / 60) + 1
+  end
+  def joist_spacing
+    self.width / joist_num
+  end
   def update()
     self.update_plate_at(self.at("plate1"), 1)
     self.update_plate_at(self.at("plate2") , -1)
-    0.upto(self.posts - 1) do |i|
-      plate = self.at("beam" + i)
-      plate = self.cube("beam" + i) unless plate
-      plate.visible = true #reenable removed ones
-      plate.position(0 ,  -self.height + self.size/2, self.offset(i) )
-      plate.scale( self.width / 2, self.size / 2,  self.size / 2 )
-    end
-    plate = self.at("beam" + self.posts)
-    plate.visible = false if plate
+    self.update_beams()
+    self.update_joists()
   end
 
+  def update_joists()
+    0.upto(self.joist_num ) do |i|
+      joist = self.at("joist" + i)
+      joist = self.cube("joist" + i) unless joist
+      joist.visible = true #reenable removed ones
+      joist.position(i*self.joist_spacing - self.width/2,
+                      -self.height + self.size/2 + 15, 0 )
+      joist.scale( 2.5, 15/2,  self.length / 2 )
+    end
+    joist = self.at("joist" + self.joist_num )
+    joist.visible = false if joist
+
+    joist_last = self.at("joist_last")
+    joist_last.position(self.width/2, -self.height + self.size/2 + 15, 0 )
+    joist_last.scale( 2.5, 15,  self.length / 2 )
+  end
+
+  def update_beams()
+    0.upto(self.posts - 1) do |i|
+      beam = self.at("beam" + i)
+      beam = self.cube("beam" + i) unless beam
+      beam.visible = true #reenable removed ones
+      beam.position(0 ,  -self.height + self.size/2, self.offset(i) )
+      beam.scale( self.width / 2, self.size / 2,  self.size / 2 )
+    end
+    beam = self.at("beam" + self.posts)
+    beam.visible = false if beam
+  end
   def update_plate_at(plate , side)
     plate.position(side * self.width / 2 ,  - self.height + self.size/2,
-      self.offset(self.posts/2 - 0.5) )
-    plate.scale( self.size / 2, self.size / 2,  self.spacing*(self.posts-1)/2 )
+                    self.offset(self.posts/2 - 0.5) )
+    plate.scale( self.size / 2, self.size / 2,  self.length/2 )
   end
 
 end
