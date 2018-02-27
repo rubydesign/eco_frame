@@ -2,19 +2,23 @@ class Pulpetti < EcoModel
 
   def initialize( data  )
     super(data)
-    self.cube("king")
-    self.cube("rafter")
   end
 
   def update()
+    self.update_list(  self.posts , "king" )
+    self.update_list(  self.posts , "rafter" )
+  end
+  def update_king(king,i)
     truss_height = self.tan * self.width
-    self.at("king").position( -self.width/2 , truss_height/2, 0 )
-    self.at("king").scale( self.size / 2,truss_height / 2,  self.size/2 )
-    self.at("rafter").rotateZ( (90 - self.angle)  )
-    self.at("rafter").position( ( self.cos*self.size)/4  ,
+    king.position( -self.width/2 , truss_height/2, self.offset(i) )
+    king.scale( self.size / 2,truss_height / 2,  self.size/2 )
+  end
+  def update_rafter(rafter , i , side)
+    rafter.rotateZ( (90 - self.angle)  )
+    rafter.position( ( self.cos*self.size)/4  ,
                         self.tan*self.width/2 - self.cos*self.size/2  ,
-                        0)
-    self.at("rafter").scale( self.size / 2, self.rafter_length/2 + 70 ,  self.size/ 2 )
+                        self.offset(i))
+    rafter.scale( self.size / 2, self.rafter_length/2 + 70 ,  self.size/ 2 )
   end
   def brace_rad
     return 45* Math.PI / 180
