@@ -12,12 +12,7 @@ class Floor < EcoModel
     self.update_feet()
   end
   def update_feet()
-    0.upto(self.posts - 1 ) do |i|
-      self.update_foot(i , 1)
-      self.update_foot(i , -1)
-    end
-    self.check_remove("foot" + self.posts + "-1")
-    self.check_remove("foot" + self.posts + "1")
+    self.sided( self.posts , "foot")
   end
   def update_foot(i , side)
     foot = self.for("foot" + i + "" + side)

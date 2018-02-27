@@ -23,6 +23,15 @@ class EcoModel < xeogl.Model
     obj = self.at(id)
     obj.visible = false if obj
   end
+  def sided(max , prefix)
+    update_function = self.__proto__["update_"+prefix]
+    0.upto(max - 1 ) do |i|
+      update_function.apply(self, [i,1])
+      update_function.apply(self, [i,-1])
+    end
+    self.check_remove(prefix + max + "-1")
+    self.check_remove(prefix + max + "1")
+  end
   def transforms
     translate = xeogl.Translate.new( id: "pos" + Math.random())
     rotate = xeogl.Rotate.new({xyz: [0,0,1] , parent: translate, id: "rot" + Math.random()})
