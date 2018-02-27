@@ -13,20 +13,16 @@ class Floor < EcoModel
   end
   def update_feet()
     0.upto(self.posts - 1 ) do |i|
-      self.update_foot1(i)
-      self.update_foot2(i)
+      self.update_foot(i , 1)
+      self.update_foot(i , -1)
     end
-    self.check_remove("foot1" + self.posts)
-    self.check_remove("foot2" + self.posts)
+    self.check_remove("foot" + self.posts + "-1")
+    self.check_remove("foot" + self.posts + "1")
   end
-  def update_foot1(i)
-    foot1 = self.for("foot1" + i)
-    foot1.position(self.width/2  ,-self.height - self.size ,  self.offset(i))
-    foot1.scale( self.size, self.size, self.size)
-  end
-  def update_foot2(i)
-    foot2 = self.for("foot2" + i)
-    foot2.position(-self.width/2 ,-self.height - self.size ,  self.offset(i))
-    foot2.scale( self.size, self.size, self.size)
+  def update_foot(i , side)
+    foot = self.for("foot" + i + "" + side)
+    foot.position(side * self.width/2  ,
+                  -self.height - self.size ,  self.offset(i))
+    foot.scale( self.size, self.size, self.size)
   end
 end
