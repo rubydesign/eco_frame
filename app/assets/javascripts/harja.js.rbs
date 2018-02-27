@@ -2,24 +2,32 @@
 
   def initialize( data  )
     super(data)
-    self.cubes(["king","rafter1","rafter2","brace1","brace2"])
     self.update()
   end
 
   def update()
-    truss_height = self.tan * self.width / 2
-    self.at("king").position( 0 , truss_height/2, 0 )
-    self.at("king").scale( self.size / 2,truss_height / 2,  self.size/2 )
-    self.update_rafter_at( self.at("rafter1") , 1 )
-    self.update_rafter_at( self.at("rafter2") , -1 )
-    self.update_brace_at(self.at("brace1") , 1)
-    self.update_brace_at(self.at("brace2") , -1)
+    self.update_list(  self.posts , "king" )
+    self.update_pairs( self.posts , "rafter" )
+    self.update_pairs( self.posts , "brace" )
   end
-  def update_brace_at( brace , side )
+  def update_king(king,i)
+    truss_height = self.tan * self.width / 2
+    king.position( 0 , truss_height/2, self.offset(i) )
+    king.scale( self.size / 2,truss_height / 2,  self.size/2 )
+  end
+  def update_rafter(rafter , i , side)
+    rafter.rotateZ(side* (90 - self.angle)  )
+    rafter.position( side * (self.width + self.cos*self.size) / 4  ,
+                        self.tan*self.width/4 - self.cos*self.size/2  ,
+                        self.offset(i))
+    rafter.scale( self.size / 2, self.rafter_length / 2,  self.size/ 2 )
+  end
+  def update_brace( brace , i , side )
     brace.rotateZ(side*45 )
     brace.scale( self.size / 2, self.brace_length, self.size / 2)
     brace.position( -side*(self.brace_length*self.brace_cosm + self.brace_sin*self.size/4)  ,
-                (self.brace_length*self.brace_sinm ) + 3*self.size/4, 0 )
+                  (self.brace_length*self.brace_sinm ) + 3*self.size/4,
+                   self.offset(i) )
   end
   def brace_rad
     return 45* Math.PI / 180
@@ -38,14 +46,6 @@
   end
   def rafter_length
     return  self.width/( 2 * self.cos)
-  end
-  def update_rafter_at(rafter , side)
-    # rafter_length so the rafters meet at the bottom (?)
-    rafter.rotateZ(side* (90 - self.angle)  )
-    rafter.position( side * (self.width + self.cos*self.size) / 4  ,
-                        self.tan*self.width/4 - self.cos*self.size/2  ,
-                        0)
-    rafter.scale( self.size / 2, self.rafter_length / 2,  self.size/ 2 )
   end
 end
 

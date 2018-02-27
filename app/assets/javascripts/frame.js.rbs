@@ -2,12 +2,11 @@ class Frame < EcoModel
   def initialize()
     super(VueController._data ,  "frame")
     @posts = []
-    @trusses = []
+    @trusses = Harja.new(@data)
     @truss = :harja
 
     0.upto(self.posts - 1) do | i|
       self.new_post(true)
-      self.new_truss()
     end
     self.add(Floor.new(@data ))
     self.add(FloorBeams.new(@data ))
@@ -41,11 +40,8 @@ class Frame < EcoModel
     if(num < prev)
       @posts[num].iterate {|elem| elem.visible = false}
       @posts.pop()
-      @trusses[num].iterate {|elem| elem.visible = false}
-      @trusses.pop()
     else
       self.new_post( @posts[0].braces)
-      self.new_truss( )
     end
   end
   def set_truss(arg)
@@ -73,9 +69,6 @@ class Frame < EcoModel
       p.transform.xyz = [0,0,self.offset(i)]
       p.update()
     end
-    @trusses.each_with_index do |t,i|
-      t.transform.xyz = [0,0,self.offset(i)]
-      t.update()
-    end
+    @trusses.update()
   end
 end
