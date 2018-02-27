@@ -28,7 +28,7 @@ class Frame < EcoModel
     self.update()
   end
   def update( )
-    self.components["plate"].update()
+    self.components["plates"].update()
     self.components["floor"].update()
     self.components["floor_beams"].update()
     @posts.update()

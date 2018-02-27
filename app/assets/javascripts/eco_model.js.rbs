@@ -3,9 +3,9 @@ class EcoModel < xeogl.Model
     super({id: id})
     @data = data
     @materials = {
-      wood:  xeogl.LambertMaterial.new({ color: [230/255, 145/255, 60/255]}),
-      floor: xeogl.LambertMaterial.new({ color: [20/255, 15/255, 60/255]}),
-      grey:  xeogl.LambertMaterial.new({ color: [125/255, 125/255, 125/255]})
+      wood:  xeogl.LambertMaterial.new({ color: [230/300, 145/300, 60/300]}),
+      floor: xeogl.LambertMaterial.new({ color: [0/255, 6/255, 0/255]}),
+      grey:  xeogl.LambertMaterial.new({ color: [50/255, 50/255, 50/255]})
     }
   end
   def material(kind)
