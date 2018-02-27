@@ -15,9 +15,9 @@ class Pulpetti < EcoModel
   end
   def update_rafter(rafter , i , side)
     rafter.rotateZ( (90 - self.angle)  )
-    rafter.position( ( self.cos*self.size)/4  ,
-                        self.tan*self.width/2 - self.cos*self.size/2  ,
-                        self.offset(i))
+    rafter.position( self.cos*self.size/4,
+                     self.tan*self.width/2 - self.cos*self.size/2 + self.size/2 ,
+                     self.offset(i))
     rafter.scale( self.size / 2, self.rafter_length/2 + 70 ,  self.size/ 2 )
   end
   def brace_rad
