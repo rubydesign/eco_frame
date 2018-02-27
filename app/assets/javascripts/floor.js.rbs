@@ -1,4 +1,5 @@
 class Floor < EcoModel
+
   def initialize(data)
     super(data,  "floor")
     self.cube( "floor_cube" , "floor")
@@ -12,20 +13,15 @@ class Floor < EcoModel
   end
   def update_feet()
     0.upto(self.posts - 1 ) do |i|
-      foot1 = self.at("foot1" + i) || self.cube("foot1" + i , "grey")
-      foot1.visible = true #reenable removed ones
+      foot1 = self.for("foot1" + i)
       foot1.position(self.width/2  ,-self.height - self.size ,  self.offset(i))
       foot1.scale( self.size, self.size, self.size)
 
-      foot2 = self.at("foot2" + i) || self.cube("foot2" + i ,  "grey")
-      foot2.visible = true #reenable removed ones
+      foot2 = self.for("foot2" + i)
       foot2.position(-self.width/2 ,-self.height - self.size ,  self.offset(i))
       foot2.scale( self.size, self.size, self.size)
     end
-    foot1 = self.at("foot1" + self.posts)
-    foot1.visible = false if foot1
-
-    foot2 = self.at("foot2" + self.posts)
-    foot2.visible = false if foot2
+    self.check_remove("foot1" + self.posts)
+    self.check_remove("foot2" + self.posts)
   end
 end

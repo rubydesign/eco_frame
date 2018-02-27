@@ -11,8 +11,17 @@ class EcoModel < xeogl.Model
   def material(kind)
     return @materials[kind]
   end
+  def for(id , color)
+    obj = self.at(id) || self.cube(id , "grey")
+    obj.visible = true #re-enable removed ones
+    return obj
+  end
   def at(id)
     return self.components[id + self.id]
+  end
+  def check_remove(id)
+    obj = self.at(id)
+    obj.visible = false if obj
   end
   def transforms
     translate = xeogl.Translate.new( id: "pos" + Math.random())
