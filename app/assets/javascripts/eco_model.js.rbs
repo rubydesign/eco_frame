@@ -26,11 +26,21 @@ class EcoModel < xeogl.Model
       obj.visible = false if obj
     end
   end
-  def sided(max , prefix)
+  def update_pairs(max , prefix , color)
     update_function = self.__proto__["update_"+prefix]
     0.upto(max - 1 ) do |i|
-      update_function.apply(self, [i,1])
-      update_function.apply(self, [i,-1])
+      obj = self.for(prefix + i , 1 , color)
+      update_function.apply(self, [obj,i,1])
+      obj = self.for(prefix + i , -1 , color)
+      update_function.apply(self, [obj,i,-1])
+    end
+    self.check_remove(prefix + max)
+  end
+  def update_list(max , prefix)
+    update_function = self.__proto__["update_"+prefix]
+    0.upto(max - 1 ) do |i|
+      obj = self.for("foot" + i , nil , color)
+      update_function.apply(self, [obj,i])
     end
     self.check_remove(prefix + max)
   end
