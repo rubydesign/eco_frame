@@ -1,35 +1,35 @@
 class PostBeam < EcoModel
   def initialize( data   , braced )
     super(data)
-    self.cubes(["post1" ,"post2", "beam" ,"brace1" ,"brace2"])
-    self.at("brace1").rotateZ(45)
-    self.at("brace2").rotateZ(-45)
+    @braced = braced
     self.update()
   end
-  def braces
-    return self.at("brace1").visible
-  end
-  def set_brace(on)
-    self.at("brace1").visible = on
-    self.at("brace2").visible = on
-  end
   def update()
-    self.at("beam").scale(self.width / 2 + self.size / 2,
-                                    self.size / 2, self.size/2)
-    self.at("beam").position(0 , -self.size/2 ,0)
-    self.update_post_at(self.at("post1"),  1)
-    self.update_post_at(self.at("post2"), -1)
-    self.update_brace_at(self.at("brace1") , 1)
-    self.update_brace_at(self.at("brace2") , -1)
+    self.update_list(self.posts ,"beam")
+    self.update_pairs(self.posts ,"post")
+    self.update_pairs(self.posts ,"brace")
   end
-  def update_post_at(post , side)
-    post.position(side * self.width/2 , -self.height / 2 , 0)
+  def update_beam(beam , i)
+    beam.scale(self.width / 2 + self.size / 2,
+                                    self.size / 2, self.size/2)
+    beam.position(0 , -self.size/2 ,self.offset(i))
+  end
+  def update_post(post , i, side)
+    post.position(side * self.width/2 , -self.height / 2 , self.offset(i))
     post.scale( self.size / 2, self.height / 2 , self.size/2)
   end
-  def update_brace_at( brace , side )
+  def update_brace( brace , i, side )
+    brace.visible = @braced
+    brace.rotateZ(side*45)
     brace.scale( self.size / 2, self.brace_size, self.size / 2)
     brace.position(side*(self.width/2 - self.brace_size/1.41 ),
-                    -self.brace_size/1.41 - self.size/2 , 0)
+                    -self.brace_size/1.41 - self.size/2 , self.offset(i))
+  end
+  def braces
+    return @braced
+  end
+  def set_brace(on)
+    @braced = on
   end
   def brace_size
     size = Math.min(self.width / 2 , self.height)

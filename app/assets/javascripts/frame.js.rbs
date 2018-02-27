@@ -1,24 +1,14 @@
 class Frame < EcoModel
   def initialize()
     super(VueController._data ,  "frame")
-    @posts = []
+    @posts = PostBeam.new(@data , true)
     @trusses = Harja.new(@data)
     @truss = :harja
-
-    0.upto(self.posts - 1) do | i|
-      self.new_post(true)
-    end
+    self.add(@posts)
     self.add(Floor.new(@data ))
     self.add(FloorBeams.new(@data ))
     self.add(Plate.new(@data ))
     self.update()
-  end
-  def new_post(braced = true)
-    post = PostBeam.new(@data , braced)
-    self.add( post )
-    post.transform = xeogl.Translate.new([0,0,0])
-    @posts << post
-    return post
   end
   def new_truss()
     truss = Harja.new(@data ) if @truss == :harja
@@ -32,17 +22,10 @@ class Frame < EcoModel
     return truss
   end
   def set_brace(on)
-    @posts.each{|p| p.set_brace(on)}
+    @posts.set_brace(on)
   end
   def set_posts(num)
-    prev = @posts.length
-    return if num == prev
-    if(num < prev)
-      @posts[num].iterate {|elem| elem.visible = false}
-      @posts.pop()
-    else
-      self.new_post( @posts[0].braces)
-    end
+    puts "Set posts " + num
   end
   def set_truss(arg)
     if(arg == :pulp && @data.frame.angle > 15)
@@ -65,10 +48,7 @@ class Frame < EcoModel
     self.components["plate"].update()
     self.components["floor"].update()
     self.components["floor_beams"].update()
-    @posts.each_with_index do |p , i|
-      p.transform.xyz = [0,0,self.offset(i)]
-      p.update()
-    end
+    @posts.update()
     @trusses.update()
   end
 end
