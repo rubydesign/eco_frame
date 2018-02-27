@@ -31,7 +31,7 @@ class VueController < Vue
     space = 150 if space < 150
     space = 650 if space > 650
     @posts = num
-    eco_frame.set_posts(num)
+    #avoid double rerender
     if @frame.spacing == space
       self.rerender()
     else

@@ -10,22 +10,8 @@ class Frame < EcoModel
     self.add(Plate.new(@data ))
     self.update()
   end
-  def new_truss()
-    truss = Harja.new(@data ) if @truss == :harja
-    if @truss == :pulp
-      truss = Pulpetti.new(@data )
-    end
-    truss = NoTruss.new(@data) if truss == nil
-    truss.transform = xeogl.Translate.new([0,0,0])
-    self.add( truss )
-    @trusses << truss
-    return truss
-  end
   def set_brace(on)
     @posts.set_brace(on)
-  end
-  def set_posts(num)
-    puts "Set posts " + num
   end
   def set_truss(arg)
     if(arg == :pulp && @data.frame.angle > 15)
@@ -35,14 +21,11 @@ class Frame < EcoModel
       @data.frame.angle = 30
     end
     @truss = arg
-    0.upto(self.posts - 1) do | i|
-      @trusses[i].iterate {|elem| elem.visible = false}
-    end
-    @trusses = []
-    0.upto(self.posts - 1) do | i|
-      self.new_truss()
-    end
-    self.update(@frame)
+    @trusses.iterate {|elem| elem.visible = false}
+    @trusses = Harja.new(@data ) if @truss == :harja
+    @trusses = Pulpetti.new(@data ) if @truss == :pulp
+    @trusses = NoTruss.new(@data) if @truss == :none
+    self.update()
   end
   def update( )
     self.components["plate"].update()
