@@ -11,8 +11,9 @@ class EcoModel < xeogl.Model
   def material(kind)
     return @materials[kind]
   end
-  def for(id , color)
-    obj = self.at(id) || self.cube(id , "grey")
+  def for(id , side , color)
+    id += "_" + side if side
+    obj = self.at(id) || self.cube(id , color)
     obj.visible = true #re-enable removed ones
     return obj
   end
@@ -20,8 +21,10 @@ class EcoModel < xeogl.Model
     return self.components[id + self.id]
   end
   def check_remove(id)
-    obj = self.at(id)
-    obj.visible = false if obj
+    ["" , "_1" , "_-1"].each do |suf|
+      obj = self.at(id + suf)
+      obj.visible = false if obj
+    end
   end
   def sided(max , prefix)
     update_function = self.__proto__["update_"+prefix]
@@ -29,8 +32,7 @@ class EcoModel < xeogl.Model
       update_function.apply(self, [i,1])
       update_function.apply(self, [i,-1])
     end
-    self.check_remove(prefix + max + "-1")
-    self.check_remove(prefix + max + "1")
+    self.check_remove(prefix + max)
   end
   def transforms
     translate = xeogl.Translate.new( id: "pos" + Math.random())
