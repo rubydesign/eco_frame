@@ -17,6 +17,9 @@ class EcoModel < xeogl.Model
     obj.visible = true #re-enable removed ones
     return obj
   end
+  def two_inch
+    return 5
+  end
   def at(id)
     return self.components[id + self.id]
   end

@@ -4,26 +4,40 @@ class FloorBeams < EcoModel
     super(data,"floor_beams")
     self.update()
   end
-
   def joist_num
     Math.ceil(self.width / 60) + 1
   end
   def joist_spacing
-    self.width / (joist_num - 1)
+    (self.width + 2*self.overhang + self.size - self.two_inch) / (joist_num - 1)
+  end
+  def beam_num
+    Math.ceil((self.length - 2*self.size) / 340) + 1
+  end
+  def beam_spacing
+    (self.length - 2*self.size) / (beam_num - 1)
+  end
+  def beam_offset(at)
+    return beam_spacing * ((beam_num - 1)/2 - at)
+  end
+  def overhang
+    return 50
+  end
+  def joist_height
+    return 15
   end
   def update()
     self.update_list(self.joist_num , "joist")
-    self.update_list(self.posts , "beam")
+    self.update_list(self.beam_num , "beam")
     self.update_pairs(1, "plate")
   end
   def update_joist(joist , i )
-    joist.position(i*self.joist_spacing - self.width/2,
-                    -self.height + self.size/2 + 15, 0 )
-    joist.scale( 2.5, 15/2,  self.length / 2 )
+    joist.position(i*self.joist_spacing - (self.width+self.size-self.two_inch)/2 - self.overhang,
+                    -self.height + 3*self.size/2 + self.joist_height, 0 )
+    joist.scale( 2.5, self.joist_height/2,  self.length/2 + self.overhang )
   end
   def update_beam(beam , i)
-    beam.position(0 ,  -self.height + self.size/2, self.offset(i) )
-    beam.scale( self.width / 2, self.size / 2,  self.size / 2 )
+    beam.position(0 ,  -self.height + 3*self.size/2, beam_offset(i) )
+    beam.scale((self.width + self.size)/2 + self.overhang, self.size/2, self.size/2 )
   end
   def update_plate(plate , i ,  side)
     plate.position(side * self.width / 2 ,  - self.height + self.size/2,
