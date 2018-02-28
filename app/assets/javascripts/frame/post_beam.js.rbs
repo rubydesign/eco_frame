@@ -1,6 +1,6 @@
 class PostBeam < EcoModel
   def initialize( data   , braced )
-    super(data)
+    super(data, "posts")
     @braced = braced
     self.update()
   end

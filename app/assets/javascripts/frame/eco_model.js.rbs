@@ -62,6 +62,12 @@ class EcoModel < xeogl.Model
               id: id + self.id  }
     return self.add(xeogl.Entity.new( args ))
   end
+  def overhang
+    return 50
+  end
+  def joist_length
+    return self.length/2 + self.overhang
+  end
   def offset(at)
     return self.spacing * ((self.posts - 1)/2 - at)
   end

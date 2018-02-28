@@ -1,13 +1,13 @@
 class Frame < EcoModel
   def initialize()
     super(VueController._data ,  "frame")
-    @posts = PostBeam.new(@data , true)
     @trusses = Harja.new(@data)
     @truss = :harja
-    self.add(@posts)
+    self.add(PostBeam.new(@data , true))
     self.add(Floor.new(@data ))
     self.add(FloorBeams.new(@data ))
     self.add(Plate.new(@data ))
+    self.add(Walls.new(@data ))
     self.update()
   end
   def set_brace(on)
@@ -31,7 +31,8 @@ class Frame < EcoModel
     self.components["plates"].update()
     self.components["floor"].update()
     self.components["floor_beams"].update()
-    @posts.update()
+    self.components["posts"].update()
+    self.components["walls"].update()
     @trusses.update()
   end
 end

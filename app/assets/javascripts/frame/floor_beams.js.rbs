@@ -12,7 +12,7 @@ class FloorBeams < EcoModel
     (self.width + 2*self.overhang + self.size - self.two_inch) / (joist_num - 1)
   end
   def beam_num
-    Math.ceil((self.length - 2*self.size) / 340) + 1
+    Math.ceil((self.length - 2*self.size) / self.beam_span) + 1
   end
   def beam_spacing
     (self.length - 2*self.size) / (beam_num - 1)
@@ -20,14 +20,11 @@ class FloorBeams < EcoModel
   def beam_offset(at)
     return beam_spacing * ((beam_num - 1)/2 - at)
   end
-  def overhang
-    return 50
+  def beam_span
+    return 280
   end
   def joist_height
     return 15
-  end
-  def joist_length
-    return self.length/2 + self.overhang
   end
   def beam_width
     return (self.width + self.size)/2 + self.overhang

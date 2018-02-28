@@ -6,16 +6,8 @@
 //=require range_slider
 //=require vue_controller
 //=require range_slider
-//=require entity_transforms
-//=require eco_model
 
-//=require frame
-//=require post_beam
-//=require plate
-//=require floor
-//=require floor_beams
-//=require harja
-//=require pulpetti
+//=require_directory ./frame
 
 //= require_self
 
