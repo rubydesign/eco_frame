@@ -1,0 +1,47 @@
+class Walls < EcoModel
+
+  def initialize(data)
+    super(data,"walls")
+    self.update()
+  end
+
+  def wall_num
+    Math.ceil((self.length + self.size) / 60) + 1
+  end
+  def wall_spacing
+    (self.length + self.size) / (wall_num - 1)
+  end
+  def wall_offset(i)
+    return self.wall_spacing * ((self.wall_num - 1)/2 - i)
+  end
+  def update()
+    self.update_pairs(self.wall_num, "inner")
+    self.update_pairs(self.wall_num, "outer")
+    self.update_pairs(self.wall_num, "tie1")
+    self.update_pairs(self.wall_num, "tie2")
+    self.update_pairs(self.wall_num, "tie3")
+  end
+
+  def update_tie1(tie , i , side) self.update_tie(tie , i , side , 1);end
+  def update_tie2(tie , i , side) self.update_tie(tie , i , side , 2);end
+  def update_tie3(tie , i , side) self.update_tie(tie , i , side , 3);end
+
+  def update_tie(tie , i , side , num)
+    tie.position(side * (self.width/2 + self.size/2 + self.overhang/2 + self.two_inch/2) ,
+                  (1 - num) * 80 - self.two_inch / 2,
+                  self.wall_offset(i) )
+    tie.scale( self.overhang / 2, self.two_inch / 2 , self.two_inch/2)
+  end
+
+  def update_inner(post , i , side)
+    post.position(side * (self.width/2 + self.size/2) , -self.height / 2 ,
+                  self.wall_offset(i) )
+    post.scale( self.two_inch / 2, self.height / 2 , self.two_inch/2)
+  end
+  def update_outer(post , i , side)
+    post.position(side * (self.width/2 + self.size/2 + self.overhang) , -self.height / 2 ,
+                  self.wall_offset(i))
+    post.scale( self.two_inch / 2, self.height / 2 , self.two_inch/2)
+  end
+
+end
