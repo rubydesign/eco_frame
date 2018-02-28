@@ -8,6 +8,7 @@ class Frame < EcoModel
     self.add(FloorBeams.new(@data ))
     self.add(Plate.new(@data ))
     self.add(Walls.new(@data ))
+    self.add(Slope.new(@data ))
     self.update()
   end
   def set_brace(on)
@@ -33,6 +34,7 @@ class Frame < EcoModel
     self.components["floor_beams"].update()
     self.components["posts"].update()
     self.components["walls"].update()
+    self.components["slope"].update()
     @trusses.update()
   end
 end
