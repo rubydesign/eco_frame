@@ -2,7 +2,6 @@ class PostBeam < EcoModel
   def initialize( data   , braced )
     super(data, "posts")
     @braced = braced
-    self.update()
   end
   def update()
     self.update_list(self.posts ,"beam")
@@ -10,20 +9,20 @@ class PostBeam < EcoModel
     self.update_pairs(self.posts ,"brace")
   end
   def update_beam(beam , i)
-    beam.scale(self.width_2 + self.size_2,
-                                    self.size_2, self.size_2)
-    beam.position(0 , -self.size_2 ,self.offset(i))
+    beam.scale(self.width,self.size, self.size)
+    beam.position(0 , -self.size ,self.offset(i))
   end
   def update_post(post , i, side)
-    post.position(side * self.width_2 , -self.height_2 , self.offset(i))
-    post.scale( self.size_2, self.height_2 , self.size_2)
+    post.position(side * (self.width - self.size) , -self.height , self.offset(i))
+    post.scale( self.size, self.height , self.size)
   end
   def update_brace( brace , i, side )
     brace.visible = @braced
     brace.rotateZ(side*45)
-    brace.scale( self.size_2, self.brace_size, self.size_2)
-    brace.position(side*(self.width_2 - self.brace_size/1.41 ),
-                    -self.brace_size/1.41 - self.size_2 , self.offset(i))
+    brace.scale( self.size, self.brace_size, self.size)
+    brace.position(side*(self.width - self.size - self.brace_size/1.41 ),
+                        -self.brace_size/1.41 - self.size , 
+                         self.offset(i))
   end
   def braces
     return @braced
@@ -32,7 +31,7 @@ class PostBeam < EcoModel
     @braced = on
   end
   def brace_size
-    size = Math.min(self.width_2 , self.height)
+    size = Math.min(self.width , self.height)
     return Math.max(size / 3 , 50)
   end
 end

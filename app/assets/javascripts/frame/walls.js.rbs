@@ -2,7 +2,6 @@ class Walls < EcoModel
 
   def initialize(data)
     super(data,"walls")
-    self.update()
   end
 
   def wall_length
@@ -30,21 +29,21 @@ class Walls < EcoModel
   def update_tie3(tie , i , side) self.update_tie(tie , i , side , 3);end
 
   def update_tie(tie , i , side , num)
-    tie.position(side * (self.width_2 + self.size_2 + self.wall_ins_2 + self.one_inch) ,
+    tie.position(side * (self.width + self.size + self.wall_ins + self.one_inch) ,
                   (1 - num) * 80 - self.one_inch,
                   self.wall_offset(i) )
-    tie.scale( self.wall_ins_2, self.one_inch , self.one_inch)
+    tie.scale( self.wall_ins, self.one_inch , self.one_inch)
   end
 
   def update_inner(post , i , side)
-    post.position(side * (self.width_2 + self.size_2) , -self.height_2 ,
+    post.position(side * (self.width + self.size) , -self.height ,
                   self.wall_offset(i) )
-    post.scale( self.one_inch, self.height_2 , self.one_inch)
+    post.scale( self.one_inch, self.height , self.one_inch)
   end
   def update_outer(post , i , side)
-    post.position(side * (self.width_2 + self.size_2 + self.wall_ins) , -self.height_2 ,
+    post.position(side * (self.width + self.size + self.wall_ins) , -self.height ,
                   self.wall_offset(i))
-    post.scale( self.one_inch, self.height_2 , self.one_inch)
+    post.scale( self.one_inch, self.height , self.one_inch)
   end
 
 end
