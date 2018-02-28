@@ -35,6 +35,6 @@ class Frame < EcoModel
     self.components["posts"].update()
     # self.components["walls"].update()
     # self.components["slope"].update()
-    # @trusses.update()
+    @trusses.update()
   end
 end

@@ -3,20 +3,19 @@
   def initialize( data  )
     super(data)
   end
-
   def update()
     self.update_list(  self.posts , "king" )
     self.update_pairs( self.posts , "rafter" )
     self.update_pairs( self.posts , "brace" )
   end
   def update_king(king,i)
-    truss_height = self.tan * self.width
-    king.position( 0 , truss_height/2, self.offset(i) )
-    king.scale( self.size,truss_height/2,  self.size )
+    truss_height = (self.tan * self.width - self.size)/2
+    king.position( 0 , truss_height, self.offset(i) )
+    king.scale( self.size, truss_height,  self.size )
   end
   def update_rafter(rafter , i , side)
     rafter.rotateZ(side* (90 - self.angle)  )
-    rafter.position( side * (self.width + self.cos*self.size) / 2  ,
+    rafter.position( side * (self.width/2  - self.sin*self.size)  ,
                         self.tan*self.width/2 - self.cos*self.size  ,
                         self.offset(i))
     rafter.scale( self.size, self.rafter_length / 2,  self.size )
@@ -44,7 +43,7 @@
     return  self.sin * self.width / 2 - self.size
   end
   def rafter_length
-    return  self.width/( 2 * self.cos)
+    return  self.width/self.cos
   end
 end
 
