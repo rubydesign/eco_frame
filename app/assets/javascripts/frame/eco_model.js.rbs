@@ -81,7 +81,8 @@ class EcoModel < xeogl.Model
   def width   ;return @data.frame.width;  end
   def angle   ;return @data.frame.angle;  end
   def posts   ;return @data.posts;        end
-  def overhang;return 50 ;                end
+  def wall_ins;return @data.wall_ins;   end
+  def floor_ins;return @data.floor_ins;   end
   def two_inch;return 5;                  end
 
   #screaming for some metaprogramming that i don't know yet
@@ -91,10 +92,11 @@ class EcoModel < xeogl.Model
   def width_2   ;return @data.frame.width/2;  end
   def angle_2   ;return @data.frame.angle/2;  end
   def posts_2   ;return @data.posts/2;        end
-  def overhang_2;return 50/2 ;                end
+  def wall_ins_2;return @data.wall_ins/2;     end
+  def floor_ins_2;return @data.floor_ins/2;   end
   def one_inch  ;return 5/2;                  end
 
-  def joist_length;return self.length/2 + self.overhang;end
+  def joist_length;return self.length/2 + self.wall_ins;end
   def length  ;return @data.frame.spacing*(self.posts - 1);end
 
 end

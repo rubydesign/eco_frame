@@ -9,7 +9,7 @@ class FloorBeams < EcoModel
     Math.ceil(self.width / 60) + 1
   end
   def joist_spacing
-    (self.width + 2*self.overhang + self.size - self.two_inch) / (joist_num - 1)
+    (self.width + 2*self.wall_ins + self.size - self.two_inch) / (joist_num - 1)
   end
   def beam_num
     Math.ceil((self.length - 2*self.size) / self.beam_span) + 1
@@ -27,7 +27,7 @@ class FloorBeams < EcoModel
     return 15
   end
   def beam_width
-    return self.width_2 + self.size_2 + self.overhang
+    return self.width_2 + self.size_2 + self.wall_ins
   end
   def update()
     self.update_list(self.joist_num , "joist")
@@ -37,7 +37,7 @@ class FloorBeams < EcoModel
     self.at("tuuli").position(0, -self.height  , 0)
   end
   def update_joist(joist , i )
-    joist.position(i*self.joist_spacing - (self.width+self.size-self.two_inch)/2 - self.overhang,
+    joist.position(i*self.joist_spacing - (self.width+self.size-self.two_inch)/2 - self.wall_ins,
                     -self.height + 3*self.size_2 + self.joist_height, 0 )
     joist.scale( 2.5, self.joist_height_2,  self.joist_length )
   end

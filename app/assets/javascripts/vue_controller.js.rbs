@@ -8,6 +8,8 @@ class VueController < Vue
     @frame = {angle: 30 ,size: 15 ,height: 250,
               spacing: 300, width: 400  }
     @scale = 100
+    @wall_ins = 40
+    @floor_ins = 50
     @posts = 4
     @braces = true
     @truss = :harja
