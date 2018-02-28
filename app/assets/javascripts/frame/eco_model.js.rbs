@@ -17,9 +17,6 @@ class EcoModel < xeogl.Model
     obj.visible = true #re-enable removed ones
     return obj
   end
-  def two_inch
-    return 5
-  end
   def at(id)
     return self.components[id + self.id]
   end
@@ -62,12 +59,6 @@ class EcoModel < xeogl.Model
               id: id + self.id  }
     return self.add(xeogl.Entity.new( args ))
   end
-  def overhang
-    return 50
-  end
-  def joist_length
-    return self.length/2 + self.overhang
-  end
   def offset(at)
     return self.spacing * ((self.posts - 1)/2 - at)
   end
@@ -83,26 +74,27 @@ class EcoModel < xeogl.Model
   def cos
     return Math.cos(self.rad)
   end
-  def spacing
-    return @data.frame.spacing
-  end
-  def size
-    return @data.frame.size
-  end
-  def height
-    return @data.frame.height
-  end
-  def width
-    return @data.frame.width
-  end
-  def length
-    return @data.frame.spacing*(self.posts - 1)
-  end
-  def angle
-    return @data.frame.angle
-  end
-  def posts
-    return @data.posts
-  end
+
+  def spacing ;return @data.frame.spacing;end
+  def size    ;return @data.frame.size;   end
+  def height  ;return @data.frame.height; end
+  def width   ;return @data.frame.width;  end
+  def angle   ;return @data.frame.angle;  end
+  def posts   ;return @data.posts;        end
+  def overhang;return 50 ;                end
+  def two_inch;return 5;                  end
+
+  #screaming for some metaprogramming that i don't know yet
+  def spacing_2 ;return @data.frame.spacing/2;end
+  def size_2    ;return @data.frame.size/2;   end
+  def height_2  ;return @data.frame.height/2; end
+  def width_2   ;return @data.frame.width/2;  end
+  def angle_2   ;return @data.frame.angle/2;  end
+  def posts_2   ;return @data.posts/2;        end
+  def overhang_2;return 50/2 ;                end
+  def one_inch  ;return 5/2;                  end
+
+  def joist_length;return self.length/2 + self.overhang;end
+  def length  ;return @data.frame.spacing*(self.posts - 1);end
 
 end

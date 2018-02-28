@@ -10,9 +10,9 @@ class Plate < EcoModel
   end
 
   def update_plate(plate , index , side)
-    plate.position(side * self.width / 2 , -self.size/2 ,
+    plate.position(side * self.width_2 , -self.size_2 ,
       self.offset(@data.posts/2 - 0.5) )
-    plate.scale( self.size / 2, self.size / 2,  self.spacing*(@data.posts-1)/2 )
+    plate.scale( self.size_2, self.size_2,  self.spacing*(@data.posts-1)/2 )
   end
 
 end

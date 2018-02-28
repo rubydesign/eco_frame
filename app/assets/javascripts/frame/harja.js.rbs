@@ -11,22 +11,22 @@
     self.update_pairs( self.posts , "brace" )
   end
   def update_king(king,i)
-    truss_height = self.tan * self.width / 2
+    truss_height = self.tan * self.width_2
     king.position( 0 , truss_height/2, self.offset(i) )
-    king.scale( self.size / 2,truss_height / 2,  self.size/2 )
+    king.scale( self.size_2,truss_height/2,  self.size_2 )
   end
   def update_rafter(rafter , i , side)
     rafter.rotateZ(side* (90 - self.angle)  )
-    rafter.position( side * (self.width + self.cos*self.size) / 4  ,
-                        self.tan*self.width/4 - self.cos*self.size/2  ,
+    rafter.position( side * (self.width_2 + self.cos*self.size_2) / 2  ,
+                        self.tan*self.width_2/2 - self.cos*self.size_2  ,
                         self.offset(i))
-    rafter.scale( self.size / 2, self.rafter_length / 2,  self.size/ 2 )
+    rafter.scale( self.size_2, self.rafter_length / 2,  self.size_2 )
   end
   def update_brace( brace , i , side )
     brace.rotateZ(side*45 )
-    brace.scale( self.size / 2, self.brace_length, self.size / 2)
-    brace.position( -side*(self.brace_length*self.brace_cosm + self.brace_sin*self.size/4)  ,
-                  (self.brace_length*self.brace_sinm ) + 3*self.size/4,
+    brace.scale( self.size_2, self.brace_length, self.size_2)
+    brace.position( -side*(self.brace_length*self.brace_cosm + self.brace_sin*self.size_2/2)  ,
+                  (self.brace_length*self.brace_sinm ) + 3*self.size_2/2,
                    self.offset(i) )
   end
   def brace_rad
@@ -42,7 +42,7 @@
     return Math.cos(Math.PI/2 - self.brace_rad)
   end
   def brace_length
-    return  self.sin * self.width / 4 - self.size/2
+    return  self.sin * self.width_2 / 2 - self.size_2
   end
   def rafter_length
     return  self.width/( 2 * self.cos)
