@@ -7,12 +7,12 @@ class Floor < EcoModel
 
   def update()
     self.at("floor_cube").scale((self.width + 400)/2 , self.size , (self.length + 400)/2 )
-    self.at("floor_cube").position(0, -self.height*2 - 3*self.size , 0)
+    self.at("floor_cube").position(0, -2*self.height - 5*self.size , 0)
     self.update_pairs( self.posts , "foot" , "grey")
   end
   def update_foot(foot, i , side)
     foot.position(side * (self.width - self.size) ,
-                  -self.height*2 - self.size ,  self.offset(i))
+                  -2*self.height - 2*self.size ,  self.offset(i))
     foot.scale( 2*self.size, 2*self.size, 2*self.size)
   end
 end

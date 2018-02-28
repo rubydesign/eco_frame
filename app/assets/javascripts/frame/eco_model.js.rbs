@@ -96,7 +96,7 @@ class EcoModel < xeogl.Model
   def floor_ins_2;return @data.floor_ins/2;   end
   def one_inch  ;return 5/2;                  end
 
-  def joist_length;return self.length/2 + self.wall_ins;end
+  def joist_length;return self.length/2 + 2*self.wall_ins;end
   def length  ;return @data.frame.spacing*(self.posts - 1);end
 
 end
