@@ -28,12 +28,12 @@ class Walls < EcoModel
     post.scale( self.one_inch, self.height , self.one_inch)
   end
   def update_outer(post , i , side)
-    post.position(side * (self.width - self.one_inch + 2*self.wall_ins) ,
-                  -self.height + self.cos*self.floor_ins - self.tan*self.wall_ins,
-                  self.wall_offset(i))
-    post.scale( self.one_inch,
-                self.height + 2*self.cos*self.floor_ins - 2*self.tan*self.wall_ins,
-                self.one_inch)
+    post.b_scale(side , self.one_inch,
+                        self.height + self.cos*self.floor_ins,
+                        self.one_inch)
+    post.trans(side * (self.width + 2*self.wall_ins) ,
+                       -2*self.height ,
+                       self.wall_offset(i))
   end
 
 end
