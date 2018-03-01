@@ -49,6 +49,17 @@ xeogl.Entity.prototype.rotZ = function(deg){
   return this;
 };
 
+xeogl.Entity.prototype.rotX = function(deg){
+  var rot = this.scene.components["rotx_" + this.id];
+  if(rot){
+    rot.angle = deg;
+  }else{
+    var p = get_parent(this.transform)
+    p.parent = new xeogl.Rotate({xyz: [1,0,0] , angle: deg , id: "rotx_" + this.id});
+  }
+  return this;
+};
+
 xeogl.Entity.prototype.trans = function(x,y,z){
   var trans = this.scene.components["trans_" + this.id];
   if(trans){
