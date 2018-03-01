@@ -22,11 +22,11 @@ xeogl.Entity.prototype.position = function(x,y,z){
 xeogl.Entity.prototype.b_scale = function(side , x,y,z){// bottom left
   var scale = this.scene.components["b_scale_" + this.id];
   if(scale){
-      scale.xyz = [x,y,z];
-      scale.parent.xyz = [-side*x, y, z];
+    scale.xyz = [x,y,z];
+    scale.parent.xyz = [-side*x, y, -z];
   }else{
     this.transform = new xeogl.Scale( {xyz: [x,y,z] , id: "b_scale_" + this.id,
-                    parent: new xeogl.Translate({xyz:[-side*x, y, z]}) } );
+                    parent: new xeogl.Translate({xyz:[-side*x, y, -z]}) } );
   }
   return this;
 };
