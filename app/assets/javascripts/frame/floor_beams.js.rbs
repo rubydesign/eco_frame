@@ -11,10 +11,10 @@ class FloorBeams < EcoModel
     (2*self.beam_width - self.two_inch) / (joist_num - 1)
   end
   def beam_num
-    Math.ceil((self.length - 2*self.size) / self.beam_span) + 1
+    Math.ceil((self.length - self.size) / self.beam_span) + 1
   end
   def beam_spacing
-    (self.length - 2*self.size) / (beam_num - 1)
+    (self.length - self.size) / (beam_num - 1)
   end
   def beam_offset(at)
     return beam_spacing * ((beam_num - 1)/2 - at)
@@ -47,6 +47,6 @@ class FloorBeams < EcoModel
   def update_plate(plate , i ,  side)
     plate.position(side * (self.width - self.size) , self.size - 2*self.height,
                     self.offset(self.posts/2 - 0.5) )
-    plate.scale( self.size, self.size,  self.length/2 )
+    plate.scale( self.size, self.size,  self.length )
   end
 end
