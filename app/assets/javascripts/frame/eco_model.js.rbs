@@ -76,7 +76,7 @@ class EcoModel < xeogl.Model
   end
 
   def wall_length
-    return self.length - self.one_inch
+    return self.length + self.size - self.one_inch
   end
   def wall_num
     Math.ceil(2*self.wall_length / 60) + 1
@@ -85,7 +85,7 @@ class EcoModel < xeogl.Model
     2*self.wall_length / (wall_num - 1)
   end
   def wall_offset(i)
-    return self.length + self.size + self.one_inch - self.wall_spacing * i
+    return self.length - self.wall_spacing * i
   end
 
   def spacing ;return @data.frame.spacing;end
@@ -110,6 +110,6 @@ class EcoModel < xeogl.Model
   def one_inch  ;return 5/2;                  end
 
   def joist_length;return self.length + 2*self.wall_ins;end
-  def length  ;return @data.frame.spacing*(self.posts - 1) + self.size;end
+  def length  ;return @data.frame.spacing*(self.posts - 1);end
 
 end

@@ -13,6 +13,6 @@ class Floor < EcoModel
   def update_foot(foot, i , side)
     foot.b_scale( side , 2*self.size, 2*self.size, 2*self.size)
     foot.trans(side*(self.width + self.size),
-                  -2*self.height - 4*self.size ,  self.offset(i) - self.size)
+                  -2*self.height - 4*self.size ,  self.offset(i) + self.size)
   end
 end

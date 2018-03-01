@@ -11,13 +11,13 @@ class FloorBeams < EcoModel
     (2*self.beam_width - self.two_inch) / (joist_num - 1)
   end
   def beam_num
-    Math.ceil((2*self.length - self.size) / self.beam_span) + 1
+    Math.ceil(2*self.length / self.beam_span) + 1
   end
   def beam_spacing
-    (2*self.length - self.size) / (beam_num - 1)
+    2*self.length / (beam_num - 1)
   end
   def beam_offset(at)
-    return beam_spacing * ((beam_num - 1)/2 - at)
+    return self.length - beam_spacing * at
   end
   def beam_span
     return 280
@@ -31,22 +31,22 @@ class FloorBeams < EcoModel
   def update()
     self.update_list(self.joist_num , "joist")
     self.update_list(self.beam_num , "beam")
-    self.update_pairs(1, "plate")
+    self.update_pairs(1, "floor_plate")
     self.at("tuuli").scale(self.beam_width , self.one_inch/2 , self.joist_length )
     self.at("tuuli").position(0, -2*self.height  , 0)
   end
   def update_joist(joist , i )
     joist.b_scale( 1, 2.5, self.joist_height,  self.joist_length )
     joist.trans(i*self.joist_spacing - self.beam_width + self.one_inch ,
-                   4*self.size + self.joist_height - 2*self.height, -self.joist_length )
+                   3*self.size + self.joist_height - 2*self.height,
+                   self.joist_length )
   end
   def update_beam(beam , i)
     beam.b_scale(1 , self.beam_width, self.size, self.size )
     beam.trans(self.beam_width ,  2*self.size - 2*self.height, beam_offset(i) )
   end
-  def update_plate(plate , i ,  side)
-    plate.b_scale( side , self.size, self.length , self.size )
-    plate.rotX(90)
-    plate.trans(side * self.width  , -2*(self.height - self.size), -self.length )
+  def update_floor_plate(plate , i ,  side)
+    plate.b_scale( side , self.size , self.size , self.length )
+    plate.trans(side * self.width  , -2*self.height, self.length )
   end
 end
