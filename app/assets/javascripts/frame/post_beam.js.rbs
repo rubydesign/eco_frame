@@ -14,8 +14,9 @@ class PostBeam < EcoModel
     beam.trans(self.width , 0 ,self.offset(i))
   end
   def update_post(post , i, side)
-    post.b_scale( side , self.size, self.height , self.size)
-    post.trans(side * self.width , -2*self.height , self.offset(i))
+    post.b_scale( -side , self.size, self.height , self.size)
+    post.rotZ(180)
+    post.trans(side * self.width , 0 , self.offset(i))
   end
   def update_brace( brace , i, side )
     brace.visible = @braced
