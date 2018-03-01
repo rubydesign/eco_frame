@@ -42,7 +42,7 @@ class Slope < EcoModel
   def update_outer(ceil , i , side)
     ceil.rotateZ(side* (90 - self.angle)  )
     ceil.position( side * (self.outer_width/2 - self.sin*self.one_inch)  ,
-                        self.tan*self.outer_width/2 - self.cos*self.one_inch,
+                        self.tan*self.inner_width/2 - self.cos*self.one_inch + 2*self.cos*self.floor_ins,
                         self.wall_offset(i) )
     ceil.scale( self.one_inch , self.outer_length/2 , self.one_inch)
   end
