@@ -11,8 +11,8 @@ class Floor < EcoModel
     self.update_pairs( self.posts , "foot" , "grey")
   end
   def update_foot(foot, i , side)
-    foot.position(side * (self.width - self.size) ,
-                  -2*self.height - 2*self.size ,  self.offset(i))
-    foot.scale( 2*self.size, 2*self.size, 2*self.size)
+    foot.b_scale( side , 2*self.size, 2*self.size, 2*self.size)
+    foot.trans(side*(self.width + self.size),
+                  -2*self.height - 4*self.size ,  self.offset(i) - self.size)
   end
 end

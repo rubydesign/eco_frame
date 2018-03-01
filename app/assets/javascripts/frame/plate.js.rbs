@@ -9,7 +9,6 @@ class Plate < EcoModel
   end
 
   def update_plate(plate , index , side)
-    return if side == -1
     plate.b_scale(side, self.size, self.length,  self.size )
     plate.rotX(90)
     plate.trans(side * self.width  , 0 , -self.length )
