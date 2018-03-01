@@ -6,16 +6,16 @@ class Slope < EcoModel
 
   def update()
     self.update_pairs(self.wall_num, "inner")
-#    self.update_pairs(self.wall_num, "outer")
-#    self.update_pairs(self.wall_num, "tie1")
+    self.update_pairs(self.wall_num, "outer")
+    self.update_pairs(self.wall_num, "tie1")
 #    self.update_pairs(self.wall_num, "tie2")
 #    self.update_pairs(self.wall_num, "tie3")
   end
 
   def update_tie1(tie , i , side )
     tie.rotateZ(side* self.angle  )
-    tie.position( -side * self.width/2 ,
-                  self.tan * self.width/4 + self.sin*self.wall_ins,
+    tie.position( -side * (self.width + self.floor_ins*self.sin+ self.cos*self.one_inch) ,
+                  self.cos*self.floor_ins - self.one_inch*self.sin,
                   self.wall_offset(i) )
     tie.scale( self.one_inch, self.floor_ins , self.one_inch)
   end
@@ -41,8 +41,8 @@ class Slope < EcoModel
   end
   def update_outer(ceil , i , side)
     ceil.rotateZ(side* (90 - self.angle)  )
-    ceil.position( side * (self.width + self.size + self.wall_ins + self.cos*self.one_inch) / 2  ,
-                        self.tan*(self.width + self.size + self.wall_ins )/2 - self.cos*self.two_inch,
+    ceil.position( side * (self.outer_width/2 - self.sin*self.one_inch)  ,
+                        self.tan*self.outer_width/2 - self.cos*self.one_inch,
                         self.wall_offset(i) )
     ceil.scale( self.one_inch , self.outer_length/2 , self.one_inch)
   end
@@ -55,8 +55,15 @@ class Slope < EcoModel
   def inner_length
     return  self.inner_width / self.cos
   end
+
+  def outer_width
+    return (self.width + 2*self.wall_ins)
+  end
+  def outer_height
+    return self.outer_width * self.tan
+  end
   def outer_length
-    return  (self.width + self.two_inch*self.cos + 2*self.wall_ins )/self.cos
+    return  (self.outer_width )/self.cos
   end
 
 end
