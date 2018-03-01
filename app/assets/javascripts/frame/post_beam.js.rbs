@@ -9,20 +9,21 @@ class PostBeam < EcoModel
     self.update_pairs(self.posts ,"brace")
   end
   def update_beam(beam , i)
-    beam.scale(self.width,self.size, self.size)
-    beam.position(0 , -self.size ,self.offset(i))
+    beam.b_scale(1,self.size, self.width, self.size)
+    beam.rotZ(90)
+    beam.trans(self.width , 0 ,self.offset(i))
   end
   def update_post(post , i, side)
-    post.position(side * (self.width - self.size) , -self.height , self.offset(i))
-    post.scale( self.size, self.height , self.size)
+    post.b_scale( side , self.size, self.height , self.size)
+    post.trans(side * self.width , -2*self.height , self.offset(i))
   end
   def update_brace( brace , i, side )
     brace.visible = @braced
-    brace.rotateZ(side*45)
-    brace.scale( self.size, self.brace_size, self.size)
-    brace.position(side*(self.width - self.size - self.brace_size/1.41 ),
-                        -self.brace_size/1.41 - self.size , 
-                         self.offset(i))
+    brace.b_scale(-side,self.size, self.brace_size, self.size)
+    brace.rotZ(side*45)
+    brace.trans(side*( self.width - 2*self.size),
+                      -2*self.brace_size/1.41 - 2*self.size ,
+                       self.offset(i))
   end
   def braces
     return @braced
