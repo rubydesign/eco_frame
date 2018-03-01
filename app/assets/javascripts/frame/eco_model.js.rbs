@@ -75,6 +75,19 @@ class EcoModel < xeogl.Model
     return Math.cos(self.rad)
   end
 
+  def wall_length
+    return self.length + self.size - self.one_inch
+  end
+  def wall_num
+    Math.ceil(2*self.wall_length / 60) + 1
+  end
+  def wall_spacing
+    2*self.wall_length / (wall_num - 1)
+  end
+  def wall_offset(i)
+    return self.wall_spacing * ((self.wall_num - 1)/2 - i)
+  end
+
   def spacing ;return @data.frame.spacing;end
   def size    ;return @data.frame.size;   end
   def height  ;return @data.frame.height; end

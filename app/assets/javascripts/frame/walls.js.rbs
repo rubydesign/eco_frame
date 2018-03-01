@@ -3,19 +3,6 @@ class Walls < EcoModel
   def initialize(data)
     super(data,"walls")
   end
-
-  def wall_length
-    return self.length + self.size - self.one_inch
-  end
-  def wall_num
-    Math.ceil(2*self.wall_length / 60) + 1
-  end
-  def wall_spacing
-    2*self.wall_length / (wall_num - 1)
-  end
-  def wall_offset(i)
-    return self.wall_spacing * ((self.wall_num - 1)/2 - i)
-  end
   def update()
     self.update_pairs(self.wall_num, "inner")
     self.update_pairs(self.wall_num, "outer")
@@ -30,7 +17,7 @@ class Walls < EcoModel
 
   def update_tie(tie , i , side , num)
     tie.position(side * (self.width + self.wall_ins) ,
-                  (1 - num) * 80  - 2*self.size,
+                  (1 - num) * 80  - self.one_inch,
                   self.wall_offset(i) )
     tie.scale( self.wall_ins, self.one_inch , self.one_inch)
   end
