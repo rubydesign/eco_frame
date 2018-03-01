@@ -14,11 +14,9 @@
     king.scale( self.size, truss_height,  self.size )
   end
   def update_rafter(rafter , i , side)
-    rafter.rotateZ(side* (90 - self.angle)  )
-    rafter.position( side * (self.width/2  - self.sin*self.size)  ,
-                        self.tan*self.width/2 - self.cos*self.size  ,
-                        self.offset(i))
-    rafter.scale( self.size, self.rafter_length / 2,  self.size )
+    rafter.b_scale(side , self.size, self.rafter_length / 2,  self.size)
+    rafter.rotZ(side*(90-self.angle))
+    rafter.trans( side * self.width, 0 , self.offset(i))
   end
   def update_brace( brace , i , side )
     brace.rotateZ(side*45 )

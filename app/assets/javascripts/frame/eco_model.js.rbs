@@ -28,7 +28,7 @@ class EcoModel < xeogl.Model
   end
   def update_pairs(max , prefix , color)
     update_function = self.__proto__["update_"+prefix]
-    0.upto(max - 1 ) do |i|
+    0.upto(max - 1) do |i|
       obj = self.for(prefix + i , 1 , color)
       update_function.apply(self, [obj,i,1])
       obj = self.for(prefix + i , -1 , color)
@@ -38,7 +38,7 @@ class EcoModel < xeogl.Model
   end
   def update_list(max , prefix, color)
     update_function = self.__proto__["update_"+prefix]
-    0.upto(max - 1 ) do |i|
+    0.upto(max - 1) do |i|
       obj = self.for(prefix + i , nil , color)
       update_function.apply(self, [obj,i])
     end
