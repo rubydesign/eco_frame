@@ -9,6 +9,7 @@ class Surfaces < EcoModel
     self.update_pairs( 1 , "outer_wall" , "grey")
     self.update_pairs( 1 , "inner_ceil" , "grey")
     self.update_pairs( 1 , "outer_ceil" , "grey")
+    self.update_list( self.board_num , "floor" )
   end
   def update_inner_wall(inner, i , side)
     inner.b_scale( side , 0.6, self.height, self.wall_length + self.one_inch)
@@ -33,4 +34,22 @@ class Surfaces < EcoModel
     ceil.trans(side*self.outer_width,
                 2 * self.cos*(self.floor_ins), self.length )
   end
+  def update_floor(wall, i)
+    wall.b_scale(1 , self.width,
+                     self.one_inch/2,
+                     self.three_inch - 0.2)
+    wall.trans(self.width ,
+                4*self.size + 2*self.three_inch - 2*self.height,
+                - self.board_offset(i))
+  end
+  def board_num
+    Math.ceil(self.length / self.three_inch ) + 1
+  end
+  def board_spacing
+    2*self.length / (board_num - 1 )
+  end
+  def board_offset(i)
+    return self.length - self.board_spacing * i 
+  end
+
 end
