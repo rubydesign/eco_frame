@@ -87,7 +87,12 @@ class EcoModel < xeogl.Model
   def wall_offset(i)
     return self.length - self.wall_spacing * i
   end
-
+  def outer_width
+    return (self.width + 2*(self.wall_ins))
+  end
+  def outer_length
+    return  self.outer_width/(2*self.cos)
+  end
   def spacing ;return @data.frame.spacing;end
   def size    ;return @data.frame.size;   end
   def height  ;return @data.frame.height; end

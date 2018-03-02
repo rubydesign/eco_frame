@@ -10,6 +10,7 @@ class Frame < EcoModel
     self.add(Walls.new(@data ))
     self.add(Slope.new(@data ))
     self.add(Surfaces.new(@data ))
+    self.add(Space.new(@data ))
     self.update()
   end
   def set_brace(on)
@@ -37,6 +38,7 @@ class Frame < EcoModel
     self.components["walls"].update()
     self.components["slope"].update()
     self.components["surfaces"].update()
+    self.components["space"].update()
     @trusses.update()
   end
 end

@@ -33,11 +33,4 @@ class Surfaces < EcoModel
     ceil.trans(side*self.outer_width,
                 2 * self.cos*(self.floor_ins), self.length )
   end
-  def outer_width
-    return (self.width + 2*(self.wall_ins))
-  end
-  def outer_length
-    return  self.outer_width/(2*self.cos)
-  end
-
 end

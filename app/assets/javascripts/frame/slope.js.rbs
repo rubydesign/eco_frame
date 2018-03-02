@@ -38,14 +38,4 @@ class Slope < EcoModel
                    2 * self.cos*self.floor_ins,
                        self.wall_offset(i) )
   end
-  def outer_width
-    return (self.width + 2*self.wall_ins)
-  end
-  def outer_height
-    return self.outer_width * self.tan
-  end
-  def outer_length
-    return  self.outer_width/(2*self.cos)
-  end
-
 end
