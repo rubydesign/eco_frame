@@ -1,0 +1,43 @@
+class Surfaces < EcoModel
+
+  def initialize(data)
+    super(data, "surfaces")
+  end
+
+  def update()
+    self.update_pairs( 1 , "inner_wall" , "grey")
+    self.update_pairs( 1 , "outer_wall" , "grey")
+    self.update_pairs( 1 , "inner_ceil" , "grey")
+    self.update_pairs( 1 , "outer_ceil" , "grey")
+  end
+  def update_inner_wall(inner, i , side)
+    inner.b_scale( side , 0.6, self.height, self.wall_length + self.one_inch)
+    inner.trans(side*(self.width + 1.25), -2*self.height , self.length)
+  end
+  def update_outer_wall(outer, i , side)
+    outer.b_scale( side , 0.6, self.height + self.cos*self.floor_ins,
+                  self.wall_length + self.one_inch)
+    outer.trans(side*(self.width + 2*self.wall_ins - 0.6),
+                    -2*self.height , self.length )
+  end
+  def update_inner_ceil(ceil, i , side)
+    ceil.b_scale( -side , 0.6 , self.width / (2*self.cos) + 0.6,
+                            self.wall_length + self.one_inch)
+    ceil.rotZ(side* (90 - self.angle)  )
+    ceil.trans(side*(self.width + 0.5) , 0 , self.length )
+  end
+  def update_outer_ceil(ceil, i , side)
+    ceil.b_scale( side , 0.6 , self.outer_length ,
+                      self.wall_length + self.one_inch)
+    ceil.rotZ(side* (90 - self.angle)  )
+    ceil.trans(side*self.outer_width,
+                2 * self.cos*(self.floor_ins), self.length )
+  end
+  def outer_width
+    return (self.width + 2*(self.wall_ins))
+  end
+  def outer_length
+    return  self.outer_width/(2*self.cos)
+  end
+
+end
