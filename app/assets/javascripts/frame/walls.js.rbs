@@ -18,21 +18,22 @@ class Walls < EcoModel
   def update_tie(tie , i , side , num)
     tie.b_scale( -side,  self.one_inch ,self.wall_ins, self.one_inch)
     tie.rotZ(-side*90)
-    tie.trans(side*self.width, (1 - num) * 80  , self.wall_offset(i) )
+    tie.trans(side*self.width, (1 - num) * 80  + self.two_inch , self.wall_offset(i) )
   end
 
   def update_inner(post , i , side)
-    post.b_scale(-side, self.one_inch, self.height , self.one_inch)
+    post.b_scale(side, self.one_inch, self.height , self.one_inch)
     post.rotZ(180)
-    post.trans(side*(self.width + self.two_inch) , 0, self.wall_offset(i) )
+    post.trans(side*self.width , 0, self.wall_offset(i) )
   end
   def update_outer(post , i , side)
     post.b_scale(-side, self.one_inch,
                         self.height + self.cos*self.floor_ins,
                         self.one_inch)
     post.rotZ(180)
-    post.trans(side*(self.width + 2*self.wall_ins), 2*self.cos*self.floor_ins ,
-                                                    self.wall_offset(i))
+    post.trans(side*(self.width + 2*self.wall_ins),
+                    2*self.cos*self.floor_ins,
+                    self.wall_offset(i))
   end
 
 end

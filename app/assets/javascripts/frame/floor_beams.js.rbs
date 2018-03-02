@@ -37,7 +37,7 @@ class FloorBeams < EcoModel
   end
   def update_joist(joist , i )
     joist.b_scale( 1, 2.5, self.joist_height,  self.joist_length )
-    joist.trans(i*self.joist_spacing - self.beam_width + self.one_inch ,
+    joist.trans(i*self.joist_spacing - self.beam_width + self.two_inch ,
                    3*self.size + self.joist_height - 2*self.height,
                    self.joist_length )
   end
