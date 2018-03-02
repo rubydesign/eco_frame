@@ -5,6 +5,8 @@ class EcoModel < xeogl.Model
     @materials = {
       wood:  xeogl.LambertMaterial.new({ color: [230/300, 145/300, 60/300]}),
       floor: xeogl.LambertMaterial.new({ color: [0/255, 6/255, 0/255]}),
+      red: xeogl.LambertMaterial.new({ color: [6/255, 0/255, 0/255]}),
+      black: xeogl.LambertMaterial.new({ color: [2/255, 2/255, 2/255]}),
       grey:  xeogl.LambertMaterial.new({ color: [50/255, 50/255, 50/255]})
     }
   end
@@ -102,6 +104,8 @@ class EcoModel < xeogl.Model
   def wall_ins;return @data.wall_ins;   end
   def floor_ins;return @data.floor_ins;   end
   def two_inch;return 5;                  end
+  def one_inch  ;return 5/2;                  end
+  def three_inch;return 7.5 ;             end
 
   #screaming for some metaprogramming that i don't know yet
   def spacing_2 ;return @data.frame.spacing/2;end
@@ -112,7 +116,6 @@ class EcoModel < xeogl.Model
   def posts_2   ;return @data.posts/2;        end
   def wall_ins_2;return @data.wall_ins/2;     end
   def floor_ins_2;return @data.floor_ins/2;   end
-  def one_inch  ;return 5/2;                  end
 
   def joist_length;return self.length + 2*self.wall_ins;end
   def length  ;return @data.frame.spacing*(self.posts - 1);end

@@ -1,0 +1,45 @@
+class Shell < EcoModel
+
+  def initialize(data)
+    super(data,  "shell")
+  end
+
+  def update()
+    self.update_pairs( self.board_num , "wall" , "red")
+    self.update_pairs( self.wall_num  , "roof" , "black")
+    self.update_pairs( 1  , "sheet" , "black")
+  end
+  def update_wall(wall, i,side)
+    wall.b_scale(-side, self.one_inch/2,
+                        self.height + self.cos*self.floor_ins,
+                        self.three_inch - 0.2)
+    wall.trans(side*(self.width + 2*self.wall_ins + 3),
+                    - 2*self.height - self.two_inch,
+                    - self.board_offset(i))
+  end
+  def update_roof(roof, i , side)
+    roof.b_scale( side , 1 ,
+                  self.outer_length + 2*self.wall_ins , 0.5)
+    roof.rotZ(side* (90 + self.angle)  )
+    roof.trans( 0, self.tan*self.width + 3.5 * self.cos*self.floor_ins + 10,
+                       self.wall_offset(i) - (i==0?0:self.two_inch) )
+  end
+  def update_sheet(sheet, i , side)
+    sheet.b_scale( side , 0.1 , self.outer_length + 2*self.wall_ins,
+                      self.wall_length + self.one_inch)
+    sheet.rotZ(side* (90 + self.angle)  )
+    sheet.trans(0, self.tan*self.width + 3.5 * self.cos*self.floor_ins + 8,
+                  self.length )
+
+  end
+  def board_num
+    Math.floor(self.joist_length / self.three_inch)
+  end
+  def board_spacing
+    2*self.joist_length / (board_num )
+  end
+  def board_offset(i)
+    return self.joist_length - self.board_spacing * i - 2*self.three_inch
+  end
+
+end
