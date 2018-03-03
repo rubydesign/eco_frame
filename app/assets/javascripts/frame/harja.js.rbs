@@ -9,14 +9,14 @@
     self.update_pairs( self.posts , "brace" )
   end
   def update_king(king,i)
-    truss_height = (self.tan * self.width - self.size)/2
-    king.b_scale( 0 , self.size, truss_height,  self.size )
+    truss_h = self.truss_height - self.size
+    king.b_scale( 0 , self.size, truss_h/2,  self.size )
     king.trans( 0 , 0 , self.offset(i) )
   end
   def update_rafter(rafter , i , side)
     rafter.b_scale(side , self.size, self.rafter_length / 2,  self.size)
-    rafter.rotZ(side*(90-self.angle))
-    rafter.trans( side * self.width, 0 , self.offset(i))
+    rafter.rotZ(side*(90+self.angle))
+    rafter.trans( 0, self.truss_height , self.offset(i))
   end
   def update_brace( brace , i , side )
     brace.b_scale(side, self.size, self.brace_length, self.size)
@@ -25,9 +25,6 @@
   end
   def brace_length
     return  self.sin * self.width / 2 - self.size
-  end
-  def rafter_length
-    return  self.width/self.cos
   end
 end
 

@@ -95,6 +95,12 @@ class EcoModel < xeogl.Model
   def outer_length
     return  self.outer_width/(2*self.cos)
   end
+  def rafter_length
+    return  self.width/self.cos
+  end
+  def truss_height
+    return self.tan * self.width
+  end
   def spacing ;return @data.frame.spacing;end
   def size    ;return @data.frame.size;   end
   def height  ;return @data.frame.height; end
