@@ -21,14 +21,14 @@ class Shell < EcoModel
     roof.b_scale( side , 1 ,
                   self.outer_length + 2*self.wall_ins , 0.5)
     roof.rotZ(side* (90 + self.angle)  )
-    roof.trans( 0, self.tan*self.width + 3.5 * self.cos*self.floor_ins + 10,
-                       self.wall_offset(i) - (i==0?0:self.two_inch) )
+    roof.trans( 0, self.harja_at(self.floor_ins + self.two_inch + 1),
+                       self.wall_offset(i) - self.one_inch )
   end
   def update_sheet(sheet, i , side)
-    sheet.b_scale( side , 0.1 , self.outer_length + 2*self.wall_ins,
+    sheet.b_scale( side , 0.2 , self.outer_length + 2*self.wall_ins,
                       self.wall_length + self.one_inch)
     sheet.rotZ(side* (90 + self.angle)  )
-    sheet.trans(0, self.tan*self.width + 3.5 * self.cos*self.floor_ins + 8,
+    sheet.trans(0, self.harja_at(self.floor_ins + self.two_inch + 0.5),
                   self.length )
 
   end
