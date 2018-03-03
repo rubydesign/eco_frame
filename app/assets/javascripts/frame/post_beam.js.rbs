@@ -7,6 +7,12 @@ class PostBeam < EcoModel
     self.update_list(self.posts ,"beam")
     self.update_pairs(self.posts ,"post")
     self.update_pairs(self.posts ,"brace")
+    self.update_pairs( self.posts , "foot" , "grey")
+  end
+  def update_foot(foot, i , side)
+    foot.b_scale( side , 2*self.size, 2*self.size, 2*self.size)
+    foot.trans(side*(self.width + self.size),
+                  -2*self.height - 4*self.size ,  self.offset(i) + self.size)
   end
   def update_beam(beam , i)
     beam.b_scale(1,self.size, self.width, self.size)

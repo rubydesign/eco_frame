@@ -5,11 +5,11 @@ class Shell < EcoModel
   end
 
   def update()
-    self.update_pairs( self.board_num , "wall" , "red")
+    self.update_pairs( self.board_num , "cladding" , "red")
     self.update_pairs( self.wall_num  , "roof" , "black")
     self.update_pairs( 1  , "sheet" , "black")
   end
-  def update_wall(wall, i,side)
+  def update_cladding(wall, i,side)
     wall.b_scale(-side, self.one_inch/2,
                         self.height + self.cos*self.floor_ins,
                         self.three_inch - 0.2)

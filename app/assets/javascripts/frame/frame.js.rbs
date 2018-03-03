@@ -32,15 +32,15 @@ class Frame < EcoModel
     self.update()
   end
   def update( )
+    @trusses.update()
+    self.components["posts"].update()
     self.components["plates"].update()
     self.components["floor"].update()
     self.components["floor_beams"].update()
-    self.components["posts"].update()
     self.components["walls"].update()
     self.components["slope"].update()
     self.components["surfaces"].update()
     self.components["space"].update()
     self.components["shell"].update()
-    @trusses.update()
   end
 end

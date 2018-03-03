@@ -6,7 +6,7 @@
   def update()
     self.update_list(  self.posts , "king" )
     self.update_pairs( self.posts , "rafter" )
-    self.update_pairs( self.posts , "brace" )
+    self.update_pairs( self.posts , "king_brace" )
   end
   def update_king(king,i)
     truss_h = self.truss_height - self.size
@@ -18,7 +18,7 @@
     rafter.rotZ(side*(90+self.angle))
     rafter.trans( 0, self.truss_height , self.offset(i))
   end
-  def update_brace( brace , i , side )
+  def update_king_brace( brace , i , side )
     brace.b_scale(side, self.size, self.brace_length, self.size)
     brace.rotZ( - side*45 )
     brace.trans( side*self.size, self.size/2, self.offset(i) )

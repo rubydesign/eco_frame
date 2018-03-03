@@ -4,16 +4,16 @@ class Walls < EcoModel
     super(data,"walls")
   end
   def update()
-    self.update_pairs(self.wall_num, "inner")
-    self.update_pairs(self.wall_num, "outer")
-    self.update_pairs(self.wall_num, "tie1")
-    self.update_pairs(self.wall_num, "tie2")
-    self.update_pairs(self.wall_num, "tie3")
+    self.update_pairs(self.wall_num, "inner_stud")
+    self.update_pairs(self.wall_num, "outer_stud")
+    self.update_pairs(self.wall_num, "tie1_stud")
+    self.update_pairs(self.wall_num, "tie2_stud")
+    self.update_pairs(self.wall_num, "tie3_stud")
   end
 
-  def update_tie1(tie , i , side) self.update_tie(tie , i , side , 1);end
-  def update_tie2(tie , i , side) self.update_tie(tie , i , side , 2);end
-  def update_tie3(tie , i , side) self.update_tie(tie , i , side , 3);end
+  def update_tie1_stud(tie , i , side) self.update_tie(tie , i , side , 1);end
+  def update_tie2_stud(tie , i , side) self.update_tie(tie , i , side , 2);end
+  def update_tie3_stud(tie , i , side) self.update_tie(tie , i , side , 3);end
 
   def update_tie(tie , i , side , num)
     tie.b_scale( -side,  self.one_inch ,self.wall_ins, self.one_inch)
@@ -21,12 +21,12 @@ class Walls < EcoModel
     tie.trans(side*self.width, (1 - num) * 80  + self.two_inch , self.wall_offset(i) )
   end
 
-  def update_inner(post , i , side)
+  def update_inner_stud(post , i , side)
     post.b_scale(side, self.one_inch, self.height , self.one_inch)
     post.rotZ(180)
     post.trans(side*self.width , 0, self.wall_offset(i) )
   end
-  def update_outer(post , i , side)
+  def update_outer_stud(post , i , side)
     post.b_scale(side, self.one_inch,
                         self.outer_wall_height,
                         self.one_inch)

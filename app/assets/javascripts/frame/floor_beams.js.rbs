@@ -27,7 +27,7 @@ class FloorBeams < EcoModel
   end
   def update()
     self.update_list(self.joist_num , "joist")
-    self.update_list(self.beam_num , "beam")
+    self.update_list(self.beam_num , "floor_beam")
     self.update_pairs(1, "floor_plate")
     self.at("tuuli").scale(self.beam_width , self.one_inch/2 , self.joist_length )
     self.at("tuuli").position(0, -2*self.height  , 0)
@@ -38,7 +38,7 @@ class FloorBeams < EcoModel
                    3*self.size + self.three_inch - 2*self.height,
                    self.joist_length )
   end
-  def update_beam(beam , i)
+  def update_floor_beam(beam , i)
     beam.b_scale(1 , self.beam_width, self.size, self.size )
     beam.trans(self.beam_width ,  2*self.size - 2*self.height, beam_offset(i) )
   end
