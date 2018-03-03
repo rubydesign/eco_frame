@@ -95,6 +95,9 @@ class EcoModel < xeogl.Model
   def outer_length
     return  self.outer_width/(2*self.cos)
   end
+  def outer_wall_height
+    return self.height + self.floor_ins/self.cos - self.wall_ins*self.tan
+  end
   def rafter_length
     return  self.width/self.cos
   end
