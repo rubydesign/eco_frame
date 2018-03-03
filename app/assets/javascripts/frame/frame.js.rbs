@@ -3,8 +3,8 @@ class Frame < EcoModel
     super(VueController._data ,  "frame")
     @trusses = Harja.new(@data)
     @truss = :harja
-    self.add(PostBeam.new(@data , true))
     self.add(Floor.new(@data ))
+    self.add(PostBeam.new(@data , true))
     self.add(FloorBeams.new(@data ))
     self.add(Plate.new(@data ))
     self.add(Walls.new(@data ))
@@ -32,15 +32,15 @@ class Frame < EcoModel
     self.update()
   end
   def update( )
-    @trusses.update()
+    self.components["floor"].update()
     self.components["posts"].update()
     self.components["plates"].update()
-    self.components["floor"].update()
+    @trusses.update()
     self.components["floor_beams"].update()
     self.components["walls"].update()
     self.components["slope"].update()
     self.components["tuuli"].update()
-    #self.components["space"].update()
-    #self.components["shell"].update()
+    self.components["space"].update()
+    self.components["shell"].update()
   end
 end
