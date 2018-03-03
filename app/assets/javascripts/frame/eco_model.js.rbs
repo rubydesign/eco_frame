@@ -33,23 +33,27 @@ class EcoModel < xeogl.Model
     end
     return found
   end
-  def update_pairs(max , prefix , color)
+  def _do_update(max , prefix , color , what)
     update_function = self.__proto__["update_"+prefix]
+    puts "#{prefix} #{max}"
     0.upto(max - 1) do |i|
+      what.apply(self, [update_function , i ])
+    end
+    max += 1 while(self.check_remove(prefix + max))
+  end
+  def update_pairs(max , prefix , color)
+    self._do_update(max,prefix,color) do |update_function , i|
       obj = self.for(prefix + i , 1 , color)
       update_function.apply(self, [obj,i,1])
       obj = self.for(prefix + i , -1 , color)
       update_function.apply(self, [obj,i,-1])
     end
-    max += 1 while(self.check_remove(prefix + max))
   end
   def update_list(max , prefix, color)
-    update_function = self.__proto__["update_"+prefix]
-    0.upto(max - 1) do |i|
+    self._do_update(max,prefix,color) do |update_function , i|
       obj = self.for(prefix + i , nil , color)
       update_function.apply(self, [obj,i])
     end
-    max += 1 while(self.check_remove(prefix + max))
   end
   def transforms
     translate = xeogl.Translate.new( id: "pos" + Math.random())
