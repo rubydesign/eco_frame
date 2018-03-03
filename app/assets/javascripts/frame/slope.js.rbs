@@ -13,7 +13,7 @@ class Slope < EcoModel
   end
 
   def update_tie1(tie , i , side )
-    tie.b_scale( side, self.one_inch, self.floor_ins*self.cos , self.one_inch)
+    tie.b_scale( side, self.one_inch, self.floor_ins/self.cos - self.one_inch, self.one_inch)
     tie.trans( 0, self.tan*self.width, self.wall_offset(i) )
   end
   def update_tie2(tie , i , side )
@@ -28,14 +28,12 @@ class Slope < EcoModel
   end
   def update_inner(ceil , i , side)
     ceil.b_scale( -side , self.one_inch , self.width / (2*self.cos) , self.one_inch)
-    ceil.rotZ(side* (90 - self.angle)  )
-    ceil.trans(side*self.width , 0 , self.wall_offset(i) )
+    ceil.rotZ(side* (90 + self.angle)  )
+    ceil.trans(0 , self.truss_height , self.wall_offset(i) )
   end
   def update_outer(ceil , i , side)
     ceil.b_scale(side, self.one_inch , self.outer_length , self.one_inch)
-    ceil.rotZ(side* (90 - self.angle)  )
-    ceil.trans( side * self.outer_width ,
-                   2 * self.cos*self.floor_ins,
-                       self.wall_offset(i) )
+    ceil.rotZ(side* (90 + self.angle)  )
+    ceil.trans( 0 , self.harja_at(self.floor_ins), self.wall_offset(i) )
   end
 end

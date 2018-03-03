@@ -99,7 +99,11 @@ class EcoModel < xeogl.Model
     return  self.width/self.cos
   end
   def truss_height
-    return self.tan * self.width
+    return self.harja_at(0)
+  end
+  #thick is the half thickness of the roof structure
+  def harja_at(thick)
+    return self.tan * self.width + 2*thick/self.cos
   end
   def spacing ;return @data.frame.spacing;end
   def size    ;return @data.frame.size;   end
