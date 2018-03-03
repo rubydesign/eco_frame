@@ -23,10 +23,15 @@ class EcoModel < xeogl.Model
     return self.components[id + self.id]
   end
   def check_remove(id)
+    found = false
     ["" , "_1" , "_-1"].each do |suf|
       obj = self.at(id + suf)
-      obj.visible = false if obj
+      if obj
+        obj.visible = false
+        found = true
+      end
     end
+    return found
   end
   def update_pairs(max , prefix , color)
     update_function = self.__proto__["update_"+prefix]
@@ -36,7 +41,7 @@ class EcoModel < xeogl.Model
       obj = self.for(prefix + i , -1 , color)
       update_function.apply(self, [obj,i,-1])
     end
-    self.check_remove(prefix + max)
+    max += 1 while(self.check_remove(prefix + max))
   end
   def update_list(max , prefix, color)
     update_function = self.__proto__["update_"+prefix]
@@ -44,7 +49,7 @@ class EcoModel < xeogl.Model
       obj = self.for(prefix + i , nil , color)
       update_function.apply(self, [obj,i])
     end
-    self.check_remove(prefix + max)
+    max += 1 while(self.check_remove(prefix + max))
   end
   def transforms
     translate = xeogl.Translate.new( id: "pos" + Math.random())
