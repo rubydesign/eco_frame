@@ -23,7 +23,7 @@ class FloorBeams < EcoModel
     return 280
   end
   def beam_width
-    return self.width + 2*self.wall_ins
+    return self.width + 2*self.wall_ins - self.one_inch
   end
   def update()
     self.update_list(self.joist_num , "joist")

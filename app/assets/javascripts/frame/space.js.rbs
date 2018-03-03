@@ -12,23 +12,20 @@ class Space < EcoModel
     ceil.b_scale( side , self.two_inch ,
                   self.outer_length + 2*self.wall_ins , self.one_inch)
     ceil.rotZ(side* (90 + self.angle)  )
-    ceil.trans( 0, self.tan*self.width + 3.5 * self.cos*self.floor_ins ,
+    ceil.trans( 0, self.harja_at(self.floor_ins + self.two_inch) ,
                        self.wall_offset(i) )
   end
   def update_wall(wall, i , side)
     wall.b_scale( side , 1.5 , self.two_inch , self.joist_length)
     wall.trans( side*(self.outer_width + 3),
-                    i*self.space_spacing - 2*self.space_height,
+                    i*self.space_spacing - 2*self.height,
                       self.joist_length )
   end
-  def space_height
-    return self.height + self.cos * self.floor_ins
-  end
   def space_num
-    return Math.ceil(2*self.space_height / 60) + 1
+    return Math.ceil(2*self.outer_wall_height / 60) + 1
   end
   def space_spacing
-    return (2*self.space_height - 2*self.two_inch) / (self.space_num - 1)
+    return (2*self.outer_wall_height - 2*self.two_inch) / (self.space_num - 1)
   end
 
 
