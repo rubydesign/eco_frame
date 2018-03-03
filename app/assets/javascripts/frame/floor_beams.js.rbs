@@ -2,7 +2,25 @@ class FloorBeams < EcoModel
 
   def initialize(data)
     super(data,"floor_beams")
-    self.cube( "tuuli" , "grey")
+  end
+  def update()
+    self.update_list(self.joist_num , "joist")
+    self.update_list(self.beam_num , "floor_beam")
+    self.update_pairs(1, "floor_plate")
+  end
+  def update_joist(joist , i )
+    joist.b_scale( 1, 2.5, self.three_inch,  self.joist_length )
+    joist.trans(i*self.joist_spacing - self.beam_width + self.two_inch ,
+                   3*self.size + self.three_inch - 2*self.height,
+                   self.length )
+  end
+  def update_floor_beam(beam , i)
+    beam.b_scale(1 , self.beam_width, self.size, self.size )
+    beam.trans(self.beam_width ,  2*self.size - 2*self.height, self.beam_offset(i) )
+  end
+  def update_floor_plate(plate , i ,  side)
+    plate.b_scale( side , self.size , self.size , self.length )
+    plate.trans(side * self.width  , -2*self.height, self.length )
   end
   def joist_num
     Math.ceil(2*self.beam_width / 60) + 1
@@ -24,26 +42,5 @@ class FloorBeams < EcoModel
   end
   def beam_width
     return self.width + 2*self.wall_ins - self.one_inch
-  end
-  def update()
-    self.update_list(self.joist_num , "joist")
-    self.update_list(self.beam_num , "floor_beam")
-    self.update_pairs(1, "floor_plate")
-    self.at("tuuli").scale(self.beam_width , self.one_inch/2 , self.joist_length )
-    self.at("tuuli").position(0, -2*self.height  , 0)
-  end
-  def update_joist(joist , i )
-    joist.b_scale( 1, 2.5, self.three_inch,  self.joist_length )
-    joist.trans(i*self.joist_spacing - self.beam_width + self.two_inch ,
-                   3*self.size + self.three_inch - 2*self.height,
-                   self.joist_length )
-  end
-  def update_floor_beam(beam , i)
-    beam.b_scale(1 , self.beam_width, self.size, self.size )
-    beam.trans(self.beam_width ,  2*self.size - 2*self.height, beam_offset(i) )
-  end
-  def update_floor_plate(plate , i ,  side)
-    plate.b_scale( side , self.size , self.size , self.length )
-    plate.trans(side * self.width  , -2*self.height, self.length )
   end
 end

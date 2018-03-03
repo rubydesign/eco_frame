@@ -7,7 +7,7 @@ class Shell < EcoModel
   def update()
     self.update_pairs( self.board_num , "cladding" , "red")
     self.update_pairs( self.wall_num  , "roof" , "black")
-    self.update_pairs( 1  , "sheet" , "black")
+    self.update_pairs( self.wall_num - 1 , "sheet" , "black")
   end
   def update_cladding(wall, i,side)
     wall.b_scale(-side, self.one_inch/2,
@@ -26,10 +26,10 @@ class Shell < EcoModel
   end
   def update_sheet(sheet, i , side)
     sheet.b_scale( side , 0.2 , self.outer_length + 2*self.wall_ins,
-                      self.wall_length + self.one_inch)
+                        self.wall_spacing)
     sheet.rotZ(side* (90 + self.angle)  )
     sheet.trans(0, self.harja_at(self.floor_ins + self.two_inch + 0.5),
-                  self.length )
+                   self.wall_offset(i) )
 
   end
   def board_num
