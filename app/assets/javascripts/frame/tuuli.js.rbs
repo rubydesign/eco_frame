@@ -5,12 +5,12 @@ class Tuuli < EcoModel
   end
 
   def update()
-    self.update_pairs( self.wall_num - 1 , "inner_wall" , "grey")
-    self.update_pairs( self.wall_num - 1 , "outer_wall" , "grey")
-    self.update_pairs( self.wall_num - 1 , "inner_ceil" , "grey")
-    self.update_pairs( self.wall_num - 1 , "outer_ceil" , "grey")
     self.update_pairs( self.wall_num - 1 , "outer_floor" , "grey")
     self.update_list( self.board_num , "floor_boards" )
+    self.update_pairs( self.wall_num - 1 , "inner_wall" , "grey")
+    self.update_pairs( self.wall_num - 1 , "inner_ceil" , "grey")
+    self.update_pairs( self.wall_num - 1 , "outer_wall" , "grey")
+    self.update_pairs( self.wall_num - 1 , "outer_ceil" , "grey")
   end
   def update_outer_floor(outer, i , side)
     outer.b_scale(side ,self.outer_width/2, self.one_inch/2 , self.wall_spacing/2 )

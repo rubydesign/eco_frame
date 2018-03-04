@@ -5,10 +5,10 @@ class Walls < EcoModel
   end
   def update()
     self.update_pairs(self.wall_num, "inner_stud")
-    self.update_pairs(self.wall_num, "outer_stud")
     self.update_pairs(self.wall_num, "tie1_stud")
     self.update_pairs(self.wall_num, "tie2_stud")
     self.update_pairs(self.wall_num, "tie3_stud")
+    self.update_pairs(self.wall_num, "outer_stud")
   end
 
   def update_tie1_stud(tie , i , side) self.update_tie(tie , i , side , 1);end

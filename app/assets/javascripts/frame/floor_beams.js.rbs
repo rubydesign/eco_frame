@@ -4,9 +4,9 @@ class FloorBeams < EcoModel
     super(data,"floor_beams")
   end
   def update()
-    self.update_list(self.joist_num , "joist")
-    self.update_list(self.beam_num , "floor_beam")
     self.update_pairs(1, "floor_plate")
+    self.update_list(self.beam_num , "floor_beam")
+    self.update_list(self.joist_num , "joist")
   end
   def update_joist(joist , i )
     joist.b_scale( 1, 2.5, self.three_inch,  self.joist_length )
