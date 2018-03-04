@@ -14,10 +14,17 @@
 
 xeogl.scene = new xeogl.Scene({ canvas: "xeocanvas" });
 xeogl.scene.material.diffuse = [ 0.6, 0.6, 0.7 ] ;
-xeogl.scene.camera.view.eye = [-900, 200, -700];
-xeogl.scene.camera.view.look = [0, 00, 0];
+xeogl.scene.camera.view.eye = [-830, 50, -780];
+xeogl.scene.camera.view.look = [80, -170, -100];
 var camera_control = new xeogl.CameraControl();
 var eco_que = new fQueue();
+xeogl.scene.on("tick" , function(){
+  first = eco_que.shift();
+  if (typeof first == "function"){
+    first.call()
+  }
+});
+
 var eco_frame = new Frame();
 // xeogl.scene.clips.clips = [
 //     new xeogl.Clip({
