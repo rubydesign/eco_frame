@@ -1,3 +1,10 @@
+xeogl.scene.on("tick") do
+  first = eco_que.shift()
+  if first
+    first.call() if (typeof first) == "function"
+  end
+end
+
 class EcoModel < xeogl.Model
   def initialize(data , id)
     super({id: id})
@@ -35,9 +42,11 @@ class EcoModel < xeogl.Model
   end
   def _do_update(max , prefix , color , what)
     update_function = self.__proto__["update_"+prefix]
-    puts "#{prefix} #{max}"
+    pause = Math.ceil(60 / max )
     0.upto(max - 1) do |i|
-      what.apply(self, [update_function , i ])
+      index = i #local copy
+      eco_que <<  lambda{what.apply(self, [update_function , index ])}
+      0.upto(pause) {|ii| eco_que << ii }
     end
     max += 1 while(self.check_remove(prefix + max))
   end

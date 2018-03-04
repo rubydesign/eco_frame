@@ -3,6 +3,7 @@
 
 //=require xeo
 //=require vue
+//=require fque
 //=require range_slider
 //=require vue_controller
 //=require range_slider
@@ -16,8 +17,8 @@ xeogl.scene.material.diffuse = [ 0.6, 0.6, 0.7 ] ;
 xeogl.scene.camera.view.eye = [-900, 200, -700];
 xeogl.scene.camera.view.look = [0, 00, 0];
 var camera_control = new xeogl.CameraControl();
+var eco_que = new fQueue();
 var eco_frame = new Frame();
-
 // xeogl.scene.clips.clips = [
 //     new xeogl.Clip({
 //         pos: [0, 0, -300.0],
