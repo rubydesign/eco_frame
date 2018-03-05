@@ -18,31 +18,33 @@
         Scale
         %b {{scale}}
     .rangeslider
-      %span
-        %b Animate
-        %input{type:"checkbox", "v-model":"animated"}
+      %b Animate
+      %input{type:"checkbox", "v-model":"animated"}
       %br
-      %span
-        %b Braces
-        %input{type:"checkbox", "v-model":"frame.braced"}
+    .rangeslider
+      %b Braces
+      %input{type:"checkbox", "v-model":"frame.braced"}
       %br
-      %span
-        %select{"v-model":"truss"}
-          %option{ value:"none"} No Truss
-          %option{ value:"harja", selected:"selected"} Harja
-          %option{ value:"pulp"} Pulpetti
-      %span
-        Joints
-        %b {{joins}}
+    .rangeslider
+      %select{"v-model":"truss"}
+        %option{ value:"none"} No Truss
+        %option{ value:"harja", selected:"selected"} Harja
+        %option{ value:"pulp"} Pulpetti
       %br
-      %span
-        Cubic meters
-        %b {{cubes}}
+    .rangeslider
+      Joints
+      %b {{joins}}
       %br
-      %span
-        Price Estimate
-        %b {{estimate}}
-.canvas_wrapper{style: "height: 500px; width: 100%;"}
-  %canvas#xeocanvas{style: "height: 100%; width: 100%;"}
+    .rangeslider
+      Cubic meters
+      %b {{cubes}}
+      %br
+    %br
+    .rangeslider
+      Price Estimate
+      %b {{estimate}}
+      %br
+  .canvas_wrapper
+    %canvas#xeocanvas
 
 = javascript_include_tag 'application'
