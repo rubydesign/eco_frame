@@ -1,0 +1,69 @@
+class FloorBeams < EcoModel
+
+  def initialize(data)
+    super(data,"floor_beams")
+  end
+  def update()
+    self.update_pairs(1, "floor_plate")
+    self.update_list(self.beam_num , "floor_beam")
+    self.update_list(self.joist_num , "joist")
+    self.update_pairs( self.wall_num - 1 , "outer_floor" , "grey")
+    self.update_list( self.board_num , "floor_boards" )
+  end
+  def update_floor_boards(board, i)
+    board.b_scale(1 , self.width,
+                     self.one_inch/2,
+                     self.three_inch - 0.2)
+    board.trans(self.width ,
+                4*self.size + 2*self.three_inch - 2*self.height,
+                - self.board_offset(i))
+  end
+  def board_num
+    Math.ceil(self.length / self.three_inch ) + 1
+  end
+  def board_spacing
+    2*self.length / (board_num - 1 )
+  end
+  def board_offset(i)
+    return self.length - self.board_spacing * i
+  end
+  def update_outer_floor(outer, i , side)
+    outer.b_scale(side ,self.outer_width/2, self.one_inch/2 , self.wall_spacing/2 )
+    outer.trans(0, -2*self.height  , self.wall_offset(i))
+  end
+  def update_joist(joist , i )
+    joist.b_scale( 1, 2.5, self.three_inch,  self.joist_length )
+    joist.trans(i*self.joist_spacing - self.beam_width + self.two_inch ,
+                   3*self.size + self.three_inch - 2*self.height,
+                   self.length )
+  end
+  def update_floor_beam(beam , i)
+    beam.b_scale(1 , self.beam_width, self.size, self.size )
+    beam.trans(self.beam_width ,  2*self.size - 2*self.height, self.beam_offset(i) )
+  end
+  def update_floor_plate(plate , i ,  side)
+    plate.b_scale( side , self.size , self.size , self.length )
+    plate.trans(side * self.width  , -2*self.height, self.length )
+  end
+  def joist_num
+    Math.ceil(2*self.beam_width / 60) + 1
+  end
+  def joist_spacing
+    (2*self.beam_width - self.two_inch) / (joist_num - 1)
+  end
+  def beam_num
+    Math.ceil(2*self.length / self.beam_span) + 1
+  end
+  def beam_spacing
+    2*self.length / (beam_num - 1)
+  end
+  def beam_offset(at)
+    return self.length - beam_spacing * at
+  end
+  def beam_span
+    return 280
+  end
+  def beam_width
+    return self.width + 2*self.wall_ins - self.one_inch
+  end
+end

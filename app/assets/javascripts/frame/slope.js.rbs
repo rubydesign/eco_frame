@@ -1,0 +1,39 @@
+class Slope < EcoModel
+
+  def initialize(data)
+    super(data,"slope")
+  end
+
+  def update()
+    self.update_pairs(self.wall_num, "inner_ceil")
+    self.update_pairs(self.wall_num, "tie1_ceil")
+    self.update_pairs(self.wall_num, "tie2_ceil")
+    self.update_pairs(self.wall_num, "tie3_ceil")
+    self.update_pairs(self.wall_num, "outer_ceil")
+  end
+
+  def update_inner_ceil(ceil , i , side)
+    ceil.b_scale( -side , self.one_inch , self.width / (2*self.cos) , self.one_inch)
+    ceil.rotZ(side* (90 + self.angle)  )
+    ceil.trans(0 , self.truss_height , self.wall_offset(i) )
+  end
+  def update_outer_ceil(ceil , i , side)
+    ceil.b_scale(side, self.one_inch , self.outer_length , self.one_inch)
+    ceil.rotZ(side* (90 + self.angle)  )
+    ceil.trans( 0 , self.harja_at(self.floor_ins), self.wall_offset(i) )
+  end
+  def update_tie1_ceil(tie , i , side )
+    tie.b_scale( side, self.one_inch, self.floor_ins/self.cos - self.one_inch, self.one_inch)
+    tie.trans( 0, self.tan*self.width, self.wall_offset(i) )
+  end
+  def update_tie2_ceil(tie , i , side )
+    tie.b_scale( side, self.one_inch, self.floor_ins , self.one_inch)
+    tie.rotZ(side*self.angle)
+    tie.trans( -2*side*self.width/3, (1-2/3)*self.tan*self.width, self.wall_offset(i) )
+  end
+  def update_tie3_ceil(tie , i , side )
+    tie.b_scale( side, self.one_inch, self.floor_ins , self.one_inch)
+    tie.rotZ(side*self.angle)
+    tie.trans( -1*side*self.width/3,(1-1/3)*self.tan*self.width, self.wall_offset(i) )
+  end
+end

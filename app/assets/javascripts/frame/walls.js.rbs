@@ -1,0 +1,49 @@
+class Walls < EcoModel
+
+  def initialize(data)
+    super(data,"walls")
+  end
+  def update()
+    self.update_pairs( self.wall_num - 1 , "inner_wall" , "grey")
+    self.update_pairs( self.wall_num - 1 , "inner_ceil" , "grey")
+    self.update_pairs(self.wall_num, "inner_stud")
+    self.update_pairs(self.wall_num, "tie1_stud")
+    self.update_pairs(self.wall_num, "tie2_stud")
+    self.update_pairs(self.wall_num, "tie3_stud")
+    self.update_pairs(self.wall_num, "outer_stud")
+  end
+
+  def update_inner_wall(inner, i , side)
+    inner.b_scale( side , 0.6, self.height, self.wall_spacing/2 )
+    inner.trans(side*(self.width + 1.25), -2*self.height , self.wall_offset(i))
+  end
+  def update_inner_ceil(ceil, i , side)
+    ceil.b_scale( -side , 0.6 , self.width / (2*self.cos) + 0.6,
+                            self.wall_spacing/2)
+    ceil.rotZ(side* (90 - self.angle)  )
+    ceil.trans(side*(self.width + 0.5) , 0 , self.wall_offset(i) )
+  end
+  def update_tie1_stud(tie , i , side) self.update_tie(tie , i , side , 1);end
+  def update_tie2_stud(tie , i , side) self.update_tie(tie , i , side , 2);end
+  def update_tie3_stud(tie , i , side) self.update_tie(tie , i , side , 3);end
+
+  def update_tie(tie , i , side , num)
+    tie.b_scale( -side,  self.one_inch ,self.wall_ins, self.one_inch)
+    tie.rotZ(-side*90)
+    tie.trans(side*self.width, (1 - num) * 80  + self.two_inch , self.wall_offset(i) )
+  end
+
+  def update_inner_stud(post , i , side)
+    post.b_scale(side, self.one_inch, self.height , self.one_inch)
+    post.rotZ(180)
+    post.trans(side*self.width , 0, self.wall_offset(i) )
+  end
+  def update_outer_stud(post , i , side)
+    post.b_scale(side, self.one_inch,
+                        self.outer_wall_height,
+                        self.one_inch)
+    post.trans(side*(self.width + 2*self.wall_ins),
+                    -2*self.height,
+                    self.wall_offset(i))
+  end
+end

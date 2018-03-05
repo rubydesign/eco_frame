@@ -13,8 +13,8 @@ gem "susy" ,"2.2.12"
 gem "pry-rails"
 gem "high_voltage"
 gem "haml"
-gem 'ruby2js'  , git: "https://github.com/rubydesign/ruby2js"
-#gem 'ruby2js'  , path: "../ruby2js"
+#gem 'ruby2js'  , git: "https://github.com/rubydesign/ruby2js"
+gem 'ruby2js'  , path: "../ruby2js"
 
 gem "xeogl" , "1.0.0" , path: "../xeogl" , require: false
 

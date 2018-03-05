@@ -1,0 +1,39 @@
+  class Harja < EcoModel
+
+  def initialize( data  )
+    super(data)
+  end
+  def update()
+    self.update_list(  self.posts , "king" )
+    self.update_pairs( self.posts , "rafter" )
+    self.update_pairs( self.posts , "king_brace" )
+  end
+  def update_king(king,i)
+    truss_h = self.truss_height - self.size
+    king.b_scale( 0 , self.size, truss_h/2,  self.size )
+    king.trans( 0 , 0 , self.offset(i) )
+  end
+  def update_rafter(rafter , i , side)
+    rafter.b_scale(side , self.size, self.rafter_length / 2,  self.size)
+    rafter.rotZ(side*(90+self.angle))
+    rafter.trans( 0, self.truss_height , self.offset(i))
+  end
+  def update_king_brace( brace , i , side )
+    brace.b_scale(side, self.size, self.brace_length, self.size)
+    brace.rotZ( - side*45 )
+    brace.trans( side*self.size, self.size/2, self.offset(i) )
+  end
+  def brace_length
+    return  self.sin * self.width / 2 - self.size
+  end
+end
+
+class NoTruss < xeogl.Model
+  def initialize( frame  )
+    super()
+  end
+  def update()
+  end
+  def remove()
+  end
+end

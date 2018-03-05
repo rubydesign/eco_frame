@@ -1,0 +1,20 @@
+class Floor < EcoModel
+
+  def initialize(data)
+    super(data,  "floor")
+  end
+
+  def update()
+    self.update_list(  1 , "ground" , "floor")
+  end
+  def update_ground(ground , i )
+    ground.b_scale(1, self.x_size , self.size , self.z_size )
+    ground.trans(self.x_size, -2*self.height - 6*self.size , self.z_size)
+  end
+  def x_size
+    return (self.width + 200)
+  end
+  def z_size
+    return (self.length + 200)
+  end
+end

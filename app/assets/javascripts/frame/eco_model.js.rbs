@@ -1,0 +1,147 @@
+class EcoModel < xeogl.Model
+  def initialize(data , id)
+    super({id: id})
+    @data = data
+    @materials = {
+      wood:  xeogl.LambertMaterial.new({ color: [230/300, 145/300, 60/300]}),
+      floor: xeogl.LambertMaterial.new({ color: [0/255, 6/255, 0/255]}),
+      red: xeogl.LambertMaterial.new({ color: [6/255, 0/255, 0/255]}),
+      black: xeogl.LambertMaterial.new({ color: [2/255, 2/255, 2/255]}),
+      grey:  xeogl.LambertMaterial.new({ color: [50/255, 50/255, 50/255]})
+    }
+  end
+  def material(kind)
+    return @materials[kind]
+  end
+  def for(id , side , color)
+    id += "_" + side if side
+    obj = self.at(id) || self.cube(id , color)
+    obj.visible = true #re-enable removed ones
+    return obj
+  end
+  def at(id)
+    return self.components[id + self.id]
+  end
+  def check_remove(id)
+    found = false
+    ["" , "_1" , "_-1"].each do |suf|
+      obj = self.at(id + suf)
+      if obj
+        obj.visible = false
+        found = true
+      end
+    end
+    return found
+  end
+  def _do_update(max , prefix , color , what)
+    update_function = self.__proto__["update_"+prefix]
+    pause = Math.ceil(60 / max )
+    0.upto(max - 1) do |i|
+      index = i #local copy
+      eco_que <<  lambda{what.apply(self, [update_function , index ])}
+      0.upto(pause) {|ii| eco_que << ii }
+    end
+    max += 1 while(self.check_remove(prefix + max))
+  end
+  def update_pairs(max , prefix , color)
+    self._do_update(max,prefix,color) do |update_function , i|
+      obj = self.for(prefix + i , 1 , color)
+      update_function.apply(self, [obj,i,1])
+      obj = self.for(prefix + i , -1 , color)
+      update_function.apply(self, [obj,i,-1])
+    end
+  end
+  def update_list(max , prefix, color)
+    self._do_update(max,prefix,color) do |update_function , i|
+      obj = self.for(prefix + i , nil , color)
+      update_function.apply(self, [obj,i])
+    end
+  end
+  def transforms
+    translate = xeogl.Translate.new( id: "pos" + Math.random())
+    rotate = xeogl.Rotate.new({xyz: [0,0,1] , parent: translate, id: "rot" + Math.random()})
+    return xeogl.Scale.new( {parent: rotate, id: "scale" + Math.random()})
+  end
+  def cubes(ids , color)
+    ids.each {|id| self.cube(id, color)}
+  end
+  def cube( id , color  )
+    color ="wood" unless color
+    args = {  transform: self.transforms ,
+              material:  self.material(color),
+              id: id + self.id  }
+    return self.add(xeogl.Entity.new( args ))
+  end
+  def offset(at)
+    return self.length - 2*self.spacing * at
+  end
+  def rad
+    return self.angle * (Math.PI / 180)
+  end
+  def tan
+    return Math.tan(self.rad)
+  end
+  def sin
+    return Math.sin(self.rad)
+  end
+  def cos
+    return Math.cos(self.rad)
+  end
+
+  def wall_length
+    return self.length + self.size - self.one_inch
+  end
+  def wall_num
+    Math.ceil(2*self.wall_length / 60) + 1
+  end
+  def wall_spacing
+    2*self.wall_length / (wall_num - 1)
+  end
+  def wall_offset(i)
+    return self.length - self.wall_spacing * i
+  end
+  def outer_width
+    return (self.width + 2*(self.wall_ins))
+  end
+  def outer_length
+    return  self.outer_width/(2*self.cos)
+  end
+  def outer_wall_height
+    return self.height + self.floor_ins/self.cos - self.wall_ins*self.tan
+  end
+  def rafter_length
+    return  self.width/self.cos
+  end
+  def truss_height
+    return self.harja_at(0)
+  end
+  #thick is the half thickness of the roof structure
+  def harja_at(thick)
+    return self.tan * self.width + 2*thick/self.cos
+  end
+  def spacing ;return @data.frame.spacing;end
+  def size    ;return @data.frame.size;   end
+  def height  ;return @data.frame.height; end
+  def width   ;return @data.frame.width;  end
+  def angle   ;return @data.frame.angle;  end
+  def posts   ;return @data.posts;        end
+  def wall_ins;return @data.wall_ins;   end
+  def floor_ins;return @data.floor_ins;   end
+  def two_inch;return 5;                  end
+  def one_inch  ;return 5/2;                  end
+  def three_inch;return 7.5 ;             end
+
+  #screaming for some metaprogramming that i don't know yet
+  def spacing_2 ;return @data.frame.spacing/2;end
+  def size_2    ;return @data.frame.size/2;   end
+  def height_2  ;return @data.frame.height/2; end
+  def width_2   ;return @data.frame.width/2;  end
+  def angle_2   ;return @data.frame.angle/2;  end
+  def posts_2   ;return @data.posts/2;        end
+  def wall_ins_2;return @data.wall_ins/2;     end
+  def floor_ins_2;return @data.floor_ins/2;   end
+
+  def joist_length;return self.length + self.size;end
+  def length  ;return @data.frame.spacing*(self.posts - 1);end
+
+end
