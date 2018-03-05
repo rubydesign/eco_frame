@@ -15,7 +15,6 @@ class VueController < Vue
     @animated = false
   end
   def set_anim(arg)
-    eco_que.clear();
     eco_frame.invisible()
     eco_frame.update()
   end

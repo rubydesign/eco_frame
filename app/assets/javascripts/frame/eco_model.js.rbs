@@ -38,11 +38,9 @@ class EcoModel < xeogl.Model
     pause = Math.ceil(60 / max )
     0.upto(max - 1) do |i|
       index = i #local copy
+      eco_que << lambda{what.apply(self, [update_function , index ])}
       if(@data.animated)
-        eco_que << lambda{what.apply(self, [update_function , index ])}
         0.upto(pause) {|ii| eco_que << ii }
-      else
-        what.apply(self, [update_function , index ])
       end
     end
     max += 1 while(self.check_remove(prefix + max))

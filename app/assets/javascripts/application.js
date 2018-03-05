@@ -18,10 +18,17 @@ xeogl.scene.camera.view.eye = [-830, 50, -780];
 xeogl.scene.camera.view.look = [80, -170, -100];
 var camera_control = new xeogl.CameraControl();
 var eco_que = new fQueue();
-xeogl.scene.on("tick" , function(){
+function once(){
   first = eco_que.shift();
   if (typeof first == "function"){
     first.call()
+  }
+}
+xeogl.scene.on("tick" , function(){
+  if(VueController._data.animated){
+    once();
+  }else{
+    while(eco_que.length > 0 ) once();
   }
 });
 
