@@ -30,4 +30,9 @@ class Frame < EcoModel
   def update( )
     @parts.each {|p| self.components[p].update() }
   end
+  def invisible( )
+    @parts.each do |p|
+      self.components[p].iterate {|elem| elem.visible = false}
+    end
+  end
 end

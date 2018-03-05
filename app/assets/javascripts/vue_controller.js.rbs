@@ -15,8 +15,9 @@ class VueController < Vue
     @animated = false
   end
   def set_anim(arg)
+    eco_que.clear();
     eco_frame.invisible()
-    eco_frame.update(@frame)
+    eco_frame.update()
   end
   def set_scale(num)
     diff = @scale - num
@@ -25,7 +26,7 @@ class VueController < Vue
   end
   def set_truss(arg)
     eco_frame.set_truss(arg)
-    eco_frame.update(@frame)
+    eco_frame.update()
   end
   def set_posts(num)
     return if @posts == num
