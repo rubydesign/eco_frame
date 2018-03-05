@@ -19,8 +19,12 @@
         %b {{scale}}
     .rangeslider
       %span
+        %b Animate
+        %input{type:"checkbox", "v-model":"animated"}
+      %br
+      %span
         %b Braces
-        %input{type:"checkbox", "v-model":"braces"}
+        %input{type:"checkbox", "v-model":"frame.braced"}
       %br
       %span
         %select{"v-model":"truss"}

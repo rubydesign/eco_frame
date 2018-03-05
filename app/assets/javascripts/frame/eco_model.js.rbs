@@ -38,8 +38,12 @@ class EcoModel < xeogl.Model
     pause = Math.ceil(60 / max )
     0.upto(max - 1) do |i|
       index = i #local copy
-      eco_que <<  lambda{what.apply(self, [update_function , index ])}
-      0.upto(pause) {|ii| eco_que << ii }
+      if(@data.animated)
+        eco_que << lambda{what.apply(self, [update_function , index ])}
+        0.upto(pause) {|ii| eco_que << ii }
+      else
+        what.apply(self, [update_function , index ])
+      end
     end
     max += 1 while(self.check_remove(prefix + max))
   end
@@ -119,6 +123,7 @@ class EcoModel < xeogl.Model
   def harja_at(thick)
     return self.tan * self.width + 2*thick/self.cos
   end
+  def braced  ;return @data.frame.braced;     end
   def spacing ;return @data.frame.spacing;end
   def size    ;return @data.frame.size;   end
   def height  ;return @data.frame.height; end

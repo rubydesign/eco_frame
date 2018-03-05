@@ -1,7 +1,6 @@
 class PostBeam < EcoModel
-  def initialize( data   , braced )
+  def initialize( data )
     super(data, "posts")
-    @braced = braced
   end
   def update()
     self.update_pairs( self.posts , "foot" , "grey")
@@ -25,7 +24,7 @@ class PostBeam < EcoModel
     post.trans(side * self.width , 0 , self.offset(i))
   end
   def update_brace( brace , i, side )
-    brace.visible = @braced
+    brace.visible = self.braced
     brace.b_scale(-side,self.size, self.brace_size, self.size)
     brace.rotZ(side*45)
     brace.trans(side*( self.width - 2*self.size),
