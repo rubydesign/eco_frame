@@ -1,13 +1,17 @@
 .graph_app
   .post_control
     %range-slider{"v-model":"frame.angle" , ":min":"5", ":max":"46" }
-      %b Truss Angle {{frame.angle}}&deg; (Height: {{Math.floor(truss_height)}}cm)
+      %b Truss Angle {{frame.angle}}&deg;
+      %br
+      (Height: {{Math.floor(truss_height)}}cm)
     %range-slider{"v-model":"frame.height" , ":min":"50", ":max":"180" }
       %b Post Height {{frame.height*2}}
     %range-slider{"v-model":"frame.width" ,":min":"50", ":max":"330"}
       %b Width {{frame.width*2}}
     %range-slider{"v-model":"frame.spacing" , ":min":"50", ":max":"330"}
-      %b Length {{length*2}} (Spacing: {{frame.spacing*2}})
+      %b Length {{length*2}}
+      %br
+      (Spacing: {{frame.spacing*2}})
     %range-slider{"v-bind:value":"posts" , "v-on:input":"set_posts($event)",
                   ":min":"2", ":max":"11"}
       %b Posts {{posts}}
@@ -31,6 +35,9 @@
         %option{ value:"harja", selected:"selected"} Harja
         %option{ value:"pulp"} Pulpetti
       %br
+    %range-slider{"v-bind:value":"level" , "v-on:input":"set_level($event)",
+                  ":min":"0", ":max":"9"}
+      %b Level {{get_level(1)}}
     .rangeslider
       Joints
       %b {{joins}}

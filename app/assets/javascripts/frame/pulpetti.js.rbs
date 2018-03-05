@@ -1,7 +1,7 @@
 class Pulpetti < EcoModel
 
-  def initialize( data  )
-    super(data)
+  def initialize( data )
+    super(data, "pulp")
   end
 
   def update()

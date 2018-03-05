@@ -11,8 +11,24 @@ class VueController < Vue
     @wall_ins = 20
     @floor_ins = 25
     @posts = 4
+    @level = 2
     @truss = :harja
     @animated = false
+  end
+  def get_level(_)
+    if(defined? eco_frame)
+      return eco_frame.parts[@level]
+    else
+      return "harja"
+    end
+  end
+  def level_max(_)
+    return eco_frame.parts.length
+  end
+  def set_level(level)
+    @level = level
+    eco_frame.invisible()
+    eco_frame.update()
   end
   def set_anim(arg)
     eco_frame.invisible()

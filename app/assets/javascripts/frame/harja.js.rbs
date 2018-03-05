@@ -1,7 +1,7 @@
   class Harja < EcoModel
 
-  def initialize( data  )
-    super(data)
+  def initialize( data )
+    super(data, "harja")
   end
   def update()
     self.update_list(  self.posts , "king" )

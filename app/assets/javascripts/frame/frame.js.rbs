@@ -6,6 +6,9 @@ class Frame < EcoModel
         Slope,Tuuli,Space,Shell].each {|part| self.add_part(part)}
     self.update()
   end
+  def parts
+    return @parts
+  end
   def add_part(name)
     p = name.new(@data)
     self.add( p )
@@ -28,7 +31,7 @@ class Frame < EcoModel
     self.update()
   end
   def update( )
-    @parts.each {|p| self.components[p].update() }
+    0.upto(@data.level) {|i| self.components[@parts[i]].update() }
   end
   def invisible( )
     @parts.each do |p|
