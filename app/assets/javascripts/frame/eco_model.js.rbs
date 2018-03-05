@@ -16,7 +16,7 @@ class EcoModel < xeogl.Model
   def for(id , side , color)
     id += "_" + side if side
     obj = self.at(id) || self.cube(id , color)
-    obj.visible = true #re-enable removed ones
+    obj.visible = true #re-enable removed or hiiden ones
     return obj
   end
   def at(id)
@@ -61,18 +61,12 @@ class EcoModel < xeogl.Model
       update_function.apply(self, [obj,i])
     end
   end
-  def transforms
-    translate = xeogl.Translate.new( id: "pos" + Math.random())
-    rotate = xeogl.Rotate.new({xyz: [0,0,1] , parent: translate, id: "rot" + Math.random()})
-    return xeogl.Scale.new( {parent: rotate, id: "scale" + Math.random()})
-  end
   def cubes(ids , color)
     ids.each {|id| self.cube(id, color)}
   end
   def cube( id , color  )
     color ="wood" unless color
-    args = {  transform: self.transforms ,
-              material:  self.material(color),
+    args = {  material:  self.material(color),
               id: id + self.id  }
     return self.add(xeogl.Entity.new( args ))
   end
