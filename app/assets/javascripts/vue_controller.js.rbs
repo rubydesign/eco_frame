@@ -1,7 +1,6 @@
 class VueController < Vue
   el ".graph_app"
-  options watch:  { frame: {handler: lambda{|arg| eco_frame.update(@frame) } ,deep: true },
-                    animated: {handler: lambda{|arg| self.set_anim(arg)}} ,
+  options watch:  { frame: {handler: lambda{|arg| self.rerender() } ,deep: true },
                     scale: {handler: lambda{|arg| self.set_scale(arg)}} ,
                     truss: {handler: lambda{|arg| self.set_truss(arg)}}}
   def initialize
@@ -13,7 +12,7 @@ class VueController < Vue
     @posts = 4
     @level = 2
     @truss = :harja
-    @animated = false
+    @animated = 0
   end
   def get_level(_)
     if(defined? eco_frame)
@@ -27,12 +26,20 @@ class VueController < Vue
   end
   def set_level(level)
     @level = level
-    eco_frame.invisible()
-    eco_frame.update()
+    self.rerender()
   end
   def set_anim(arg)
-    eco_frame.invisible()
-    eco_frame.update()
+    was = @animated
+    @animated = arg
+    if( was == 0 )
+      eco_frame.invisible()
+      eco_frame.update()
+    else
+      if( @animated == 0 )
+        eco_frame.invisible()
+        eco_frame.update()
+      end
+    end
   end
   def set_scale(num)
     diff = @scale - num
@@ -49,15 +56,21 @@ class VueController < Vue
     space = 150 if space < 150
     space = 650 if space > 650
     @posts = num
+    @animated = 0
     #avoid double rerender
     if @frame.spacing == space
-      eco_frame.update(@frame)
+      eco_frame.update()
     else
       @frame.spacing = space
     end
   end
   def length
     return @frame.spacing * (@posts - 1 )
+  end
+  def rerender(_)
+    @animated = 0
+    eco_frame.invisible()
+    eco_frame.update()
   end
   def estimate
     base =  joins * (25 + 10 * @frame.size)

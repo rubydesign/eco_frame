@@ -21,10 +21,8 @@
       %span
         Scale
         %b {{scale}}
-    .rangeslider
-      %b Animate
-      %input{type:"checkbox", "v-model":"animated"}
-      %br
+    %range-slider{"v-bind:value":"animated" , "v-on:input":"set_anim($event)", ":min":"0", ":max":"10" , ":step":"1"}
+      %b Animate {{animated}}
     .rangeslider
       %b Braces
       %input{type:"checkbox", "v-model":"frame.braced"}
@@ -36,7 +34,7 @@
         %option{ value:"pulp"} Pulpetti
       %br
     %range-slider{"v-bind:value":"level" , "v-on:input":"set_level($event)",
-                  ":min":"0", ":max":"9"}
+                  ":min":"0", ":max":"8"}
       %b Level {{get_level(1)}}
     .rangeslider
       Joints

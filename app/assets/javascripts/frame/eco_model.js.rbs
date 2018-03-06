@@ -35,7 +35,7 @@ class EcoModel < xeogl.Model
   end
   def _do_update(max , prefix , color , what)
     update_function = self.__proto__["update_"+prefix]
-    pause = Math.ceil(60 / max )
+    pause = Math.ceil(500 / max )
     0.upto(max - 1) do |i|
       index = i #local copy
       eco_que << lambda{what.apply(self, [update_function , index ])}
