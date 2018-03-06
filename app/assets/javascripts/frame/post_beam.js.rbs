@@ -7,6 +7,7 @@ class PostBeam < EcoModel
     self.update_pairs(self.posts ,"post")
     self.update_list(self.posts ,"beam")
     self.update_pairs(self.posts ,"brace")
+    self.update_pairs(self.posts - 1, "plate")
   end
   def update_foot(foot, i , side)
     foot.b_scale( side , 2*self.size, 2*self.size, 2*self.size)
@@ -30,6 +31,11 @@ class PostBeam < EcoModel
     brace.trans(side*( self.width - 2*self.size),
                       -2*self.brace_size/1.41 - 2*self.size ,
                        self.offset(i))
+  end
+  def update_plate(plate , index , side)
+    plate.b_scale(side, self.size, self.size , self.spacing )
+    plate.trans(side * self.width  , -2*self.size ,
+                self.offset(index ) )
   end
   def braces
     return @braced

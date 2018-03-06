@@ -2,7 +2,7 @@ class Frame < EcoModel
   def initialize()
     super(VueController._data ,  "frame")
     @parts = []
-    [Floor,PostBeam,Harja,FloorBeams,Plate,Walls,
+    [Floor,PostBeam,Harja,FloorBeams,Walls,
         Slope,Tuuli,Space,Shell].each {|part| self.add_part(part)}
     self.update()
   end
