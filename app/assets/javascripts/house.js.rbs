@@ -1,0 +1,36 @@
+class House < EcoModel
+  def initialize()
+    super(VueController._data ,  "frame")
+    @parts = []
+    @subparts = []
+    [Floor,PostBeam,Harja,FloorBeams,Walls,
+        Slope,Tuuli,Space,Shell].each {|part| self.add_part(part)}
+    self.update()
+  end
+  def subparts
+    return @subparts
+  end
+  def add_part(name)
+    p = name.new(@data)
+    self.add( p )
+    @parts << p.id
+    p.parts.each {|pp|
+      puts p.id
+      puts pp
+      @subparts << pp
+    }
+  end
+  def update( )
+    0.upto(@data.level) do |i|
+      puts i
+      puts @subparts[i]
+      next unless @subparts[i]
+      @subparts[i].func.call()
+    end
+  end
+  def invisible( )
+    @parts.each do |p|
+      self.components[p].iterate {|elem| elem.visible = false}
+    end
+  end
+end

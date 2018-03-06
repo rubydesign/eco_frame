@@ -10,6 +10,9 @@ class EcoModel < xeogl.Model
       grey:  xeogl.LambertMaterial.new({ color: [50/255, 50/255, 50/255]})
     }
   end
+  def parts
+    return []
+  end
   def material(kind)
     return @materials[kind]
   end

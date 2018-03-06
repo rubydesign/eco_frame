@@ -9,6 +9,7 @@
 //=require range_slider
 
 //=require_directory ./frame
+//=require house
 
 //= require_self
 
@@ -33,7 +34,7 @@ xeogl.scene.on("tick" , function(){
   }
 });
 
-var eco_frame = new Frame();
+var eco_frame = new House();
 // xeogl.scene.clips.clips = [
 //     new xeogl.Clip({
 //         pos: [0, 0, -300.0],

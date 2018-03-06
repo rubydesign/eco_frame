@@ -4,8 +4,9 @@ class Floor < EcoModel
     super(data,  "floor")
   end
 
-  def update()
-    self.update_list(  1 , "ground" , "floor")
+  def parts
+    that = self
+    return [ {id: "ground" , func: lambda{that.update_list(  1 , "ground" , "floor")}} ]
   end
   def update_ground(ground , i )
     ground.b_scale(1, self.x_size , self.size , self.z_size )
