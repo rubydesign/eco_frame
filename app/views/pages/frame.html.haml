@@ -21,8 +21,6 @@
       %span
         Scale
         %b {{scale}}
-    %range-slider{"v-bind:value":"animated" , "v-on:input":"set_anim($event)", ":min":"0", ":max":"10" , ":step":"1"}
-      %b Animate {{animated}}
     .rangeslider
       %b Braces
       %input{type:"checkbox", "v-model":"frame.braced"}
@@ -30,12 +28,9 @@
     .rangeslider
       %select{"v-model":"truss"}
         %option{ value:"none"} No Truss
-        %option{ value:"harja", selected:"selected"} Harja
-        %option{ value:"pulp"} Pulpetti
+        %option{ value:"harja"} Harja
+        %option{ value:"pulp", selected:"selected"} Pulpetti
       %br
-    %range-slider{"v-bind:value":"level" , "v-on:input":"set_level($event)",
-                  ":min":"0", ":max":"8"}
-      %b Level {{get_level(1)}}
     .rangeslider
       Joints
       %b {{joins}}
@@ -53,3 +48,5 @@
     %canvas#xeocanvas
 
 = javascript_include_tag 'application'
+:javascript
+  var eco_frame = new Frame();

@@ -30,9 +30,12 @@
   end
 end
 
-class NoTruss < xeogl.Model
-  def initialize( frame  )
-    super()
+class NoTruss < EcoModel
+  def initialize( data )
+    super(data , "none")
+  end
+  def parts
+    return []
   end
   def update()
   end

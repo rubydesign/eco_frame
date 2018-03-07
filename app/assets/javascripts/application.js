@@ -33,5 +33,3 @@ xeogl.scene.on("tick" , function(){
     while(eco_que.length > 0 ) once();
   }
 });
-
-var eco_frame = new House();

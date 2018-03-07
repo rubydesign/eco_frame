@@ -1,11 +1,8 @@
-class House < EcoModel
-  def initialize()
-    super(VueController._data ,  "frame")
+class Structure < EcoModel
+  def initialize(name)
+    super(VueController._data ,  "name")
     @parts = []
     @subparts = []
-    [Floor,PostBeam,Harja,FloorBeams,Walls,
-        Slope,Tuuli,Space,Shell].each {|part| self.add_part(part)}
-    self.update()
   end
   def subparts
     return @subparts
@@ -28,5 +25,36 @@ class House < EcoModel
     @parts.each do |p|
       self.components[p].iterate {|elem| elem.visible = false}
     end
+  end
+end
+
+class House < Structure
+  def initialize()
+    super("house")
+    [Floor,PostBeam,Harja,FloorBeams,Walls,
+        Slope,Tuuli,Space,Shell].each {|part| self.add_part(part)}
+    self.update()
+  end
+end
+class Frame < Structure
+  def initialize()
+    super("frame")
+    [Floor,PostBeam,Pulpetti].each {|part| self.add_part(part)}
+    self.set_truss(:pulp)
+  end
+  def set_truss(arg)
+    if(arg == :pulp && @data.frame.angle > 15)
+      @data.frame.angle = 10
+    end
+    if(arg == :harja && @data.frame.angle < 15)
+      @data.frame.angle = 30
+    end
+    [2].each do |roof|
+#      self.components[@parts[roof]].iterate {|elem| elem.visible = false}
+      puts self.components[@parts[roof]]
+    end
+#    self.components[arg].iterate {|elem| elem.visible = true}
+    puts self.components[arg]
+#    self.update()
   end
 end
