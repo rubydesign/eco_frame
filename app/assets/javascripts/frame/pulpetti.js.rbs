@@ -7,25 +7,30 @@ class Pulpetti < EcoModel
     that = self
     return [
       {id: "king_pulp" , func: lambda{that.update_list(that.posts ,"king_pulp")}},
-      {id: "rafter_pulp" , func: lambda{that.update_pairs(that.posts ,"rafter_pulp")}}]
+      {id: "rafter_pulp" , func: lambda{that.update_list(that.posts ,"rafter_pulp")}},
+      {id: "rafter_overhang" , func: lambda{that.update_list(that.posts ,"rafter_overhang")}}]
   end
 
   def update_king_pulp(king,i)
-    puts "called king3"
     truss_height = self.tan * self.width
-    puts truss_height
-    king.b_scale( self.size,truss_height,  self.size )
-    puts "called king1"
-    king.trans( 0, 0, self.offset(i))
-    puts "called king"
+    king.b_scale( -1, self.size,truss_height,  self.size )
+    king.trans( -self.width, 0, self.offset(i))
   end
-  def update_rafter_pulp(rafter , i , side)
-    rafter.b_scale( self.size, self.rafter_length + 70 ,  self.size )
-    rafter.rotZ( (90 - self.angle)  )
-    rafter.trans( self.cos*self.size,
-                   self.width  ,
-                   self.offset(i) )
-     puts "called rafter"
+  def update_rafter_pulp(rafter , i)
+    rafter.b_scale(1, self.size, self.rafter_length + 50,  self.size)
+    rafter.rotZ(-90-self.angle)
+    rafter.trans( -self.width ,
+                  2*self.tan*self.width,
+                  self.offset(i))
+
+  end
+  def update_rafter_overhang(rafter , i)
+    rafter.b_scale(-1, self.size, 50,  self.size)
+    rafter.rotZ(90-self.angle)
+    rafter.trans( -self.width  ,
+                  2*self.tan*self.width ,
+                  self.offset(i))
+
   end
   def brace_rad
     return 45* Math.PI / 180
