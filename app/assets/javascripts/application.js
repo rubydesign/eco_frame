@@ -35,10 +35,3 @@ xeogl.scene.on("tick" , function(){
 });
 
 var eco_frame = new House();
-// xeogl.scene.clips.clips = [
-//     new xeogl.Clip({
-//         pos: [0, 0, -300.0],
-//         dir: [1, -1, 1.0],
-//         active: true
-//     })
-// ];

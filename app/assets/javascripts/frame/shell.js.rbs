@@ -3,11 +3,12 @@ class Shell < EcoModel
   def initialize(data)
     super(data,  "shell")
   end
-
-  def update()
-    self.update_pairs( self.board_num , "cladding" , "red")
-    self.update_pairs( self.wall_num - 1 , "sheet" , "black")
-    self.update_pairs( self.wall_num  , "roof" , "black")
+  def parts
+    that = self
+    return [
+      {id: "cladding" , func: lambda{that.update_pairs(that.board_num ,"cladding","red")}},
+      {id: "sheet" , func: lambda{that.update_pairs(that.wall_num - 1 ,"sheet","black")}},
+      {id: "roof" , func: lambda{that.update_pairs(that.wall_num ,"roof","black")}}]
   end
   def update_cladding(wall, i,side)
     wall.b_scale(-side, self.one_inch/2,

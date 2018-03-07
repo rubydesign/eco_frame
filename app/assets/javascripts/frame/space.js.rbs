@@ -3,10 +3,11 @@ class Space < EcoModel
   def initialize(data)
     super(data,  "space")
   end
-
-  def update()
-    self.update_pairs( self.wall_num , "ceil_space" )
-    self.update_pairs( self.space_num , "wall_space" )
+  def parts
+    that = self
+    return [
+      {id: "ceil_space" , func: lambda{that.update_pairs(that.wall_num  ,"ceil_space")}},
+      {id: "wall_space" , func: lambda{that.update_pairs(that.space_num ,"wall_space")}}]
   end
   def update_ceil_space(ceil, i , side)
     ceil.b_scale( side , self.two_inch ,
