@@ -7,7 +7,8 @@ class EcoModel < xeogl.Model
       floor: xeogl.LambertMaterial.new({ color: [0/255, 6/255, 0/255]}),
       red: xeogl.LambertMaterial.new({ color: [6/255, 0/255, 0/255]}),
       black: xeogl.LambertMaterial.new({ color: [2/255, 2/255, 2/255]}),
-      grey:  xeogl.LambertMaterial.new({ color: [50/255, 50/255, 50/255]})
+      inner: xeogl.LambertMaterial.new({ color: [100/255, 100/255, 100/255]}),
+      grey:  xeogl.LambertMaterial.new({ color: [30/255, 30/255, 30/255]})
     }
   end
   def parts

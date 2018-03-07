@@ -6,8 +6,8 @@ class Walls < EcoModel
   def parts
     that = self
     return [
-      {id: "inner_wall" , func: lambda{that.update_pairs(that.wall_num - 1 ,"inner_wall","grey")}},
-      {id: "inner_ceil" , func: lambda{that.update_pairs(that.wall_num - 1 ,"inner_ceil","grey")}},
+      {id: "inner_wall" , func: lambda{that.update_pairs(that.wall_num - 1 ,"inner_wall","inner")}},
+      {id: "inner_ceil" , func: lambda{that.update_pairs(that.wall_num - 1 ,"inner_ceil","inner")}},
       {id: "inner_stud" , func: lambda{that.update_pairs(that.wall_num ,"inner_stud")}},
       {id: "tie1_stud" , func: lambda{that.update_pairs(that.wall_num ,"tie1_stud")}},
       {id: "tie2_stud" , func: lambda{that.update_pairs(that.wall_num ,"tie2_stud")}},
@@ -17,13 +17,13 @@ class Walls < EcoModel
 
   def update_inner_wall(inner, i , side)
     inner.b_scale( side , 0.6, self.height, self.wall_spacing/2 )
-    inner.trans(side*(self.width + 1.25), -2*self.height , self.wall_offset(i))
+    inner.trans(side*self.width, -2*self.height , self.wall_offset(i))
   end
   def update_inner_ceil(ceil, i , side)
-    ceil.b_scale( -side , 0.6 , self.width / (2*self.cos) + 0.6,
+    ceil.b_scale( -side , 0.6 , self.width / (2*self.cos),
                             self.wall_spacing/2)
     ceil.rotZ(side* (90 - self.angle)  )
-    ceil.trans(side*(self.width + 0.5) , 0 , self.wall_offset(i) )
+    ceil.trans(side*self.width , 0 , self.wall_offset(i) )
   end
   def update_tie1_stud(tie , i , side) self.update_tie(tie , i , side , 1);end
   def update_tie2_stud(tie , i , side) self.update_tie(tie , i , side , 2);end

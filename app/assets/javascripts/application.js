@@ -13,7 +13,7 @@
 
 //= require_self
 
-xeogl.scene = new xeogl.Scene({ canvas: "xeocanvas" });
+xeogl.scene = new xeogl.Scene({ canvas: "xeocanvas" , transparent: true});
 xeogl.scene.material.diffuse = [ 0.6, 0.6, 0.7 ] ;
 xeogl.scene.camera.view.eye = [-830, 50, -780];
 xeogl.scene.camera.view.look = [80, -170, -100];
