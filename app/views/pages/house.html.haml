@@ -41,6 +41,9 @@
       Price Estimate
       %b {{estimate}}
       %br
+    %range-slider{"v-bind:value":"value" , "v-on:input":"set_value($event)", ":min":"0", ":max":"100" , ":step":"1"}
+      %b val {{value}}
+
   .canvas_wrapper
     %canvas#xeocanvas
 

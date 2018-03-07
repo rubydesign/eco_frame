@@ -2,20 +2,12 @@ class EcoModel < xeogl.Model
   def initialize(data , id)
     super({id: id})
     @data = data
-    @materials = {
-      wood:  xeogl.LambertMaterial.new({ color: [230/300, 145/300, 60/300]}),
-      floor: xeogl.LambertMaterial.new({ color: [0/255, 6/255, 0/255]}),
-      red: xeogl.LambertMaterial.new({ color: [6/255, 0/255, 0/255]}),
-      black: xeogl.LambertMaterial.new({ color: [2/255, 2/255, 2/255]}),
-      inner: xeogl.LambertMaterial.new({ color: [100/255, 100/255, 100/255]}),
-      grey:  xeogl.LambertMaterial.new({ color: [30/255, 30/255, 30/255]})
-    }
   end
   def parts
     return []
   end
   def material(kind)
-    return @materials[kind]
+    return materials[kind]
   end
   def for(id , side , color)
     id += "_" + side if side

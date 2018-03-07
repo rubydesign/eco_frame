@@ -13,6 +13,7 @@ class VueController < Vue
     @level = 32
     @truss = :harja
     @animated = 0
+    @value = 50
   end
   def get_level(_)
     if(defined? eco_frame)
@@ -23,6 +24,10 @@ class VueController < Vue
   end
   def level_max(_)
     return eco_frame.parts.length
+  end
+  def set_value(level)
+    materials.red.glossiness = level / 100
+    self.rerender()
   end
   def set_level(level)
     @level = level
