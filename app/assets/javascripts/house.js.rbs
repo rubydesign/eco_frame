@@ -1,0 +1,65 @@
+class Structure < EcoModel
+  def initialize(name)
+    super(VueController._data ,  "name")
+    @parts = []
+    @subparts = []
+  end
+  def subparts
+    return @subparts
+  end
+  def add_part(name)
+    p = name.new(@data)
+    self.add( p )
+    @parts << p.id
+    p.parts.each {|pp|
+      @subparts << pp
+    }
+  end
+  def update( )
+    0.upto(@data.level) do |i|
+      next unless @subparts[i]
+      @subparts[i].func.call()
+    end
+  end
+  def invisible( )
+    @parts.each do |p|
+      self.components[p].iterate {|elem| elem.visible = false}
+    end
+  end
+end
+
+class House < Structure
+  def initialize()
+    super("house")
+    [Floor,PostBeam,Harja,FloorBeams,Walls,
+        Slope,Tuuli,Space,Shell].each {|part| self.add_part(part)}
+    self.update()
+  end
+end
+class Frame < Structure
+  def initialize()
+    super("frame")
+    [Floor,PostBeam].each {|part| self.add_part(part)}
+    @trusses = { harja: Harja.new(@data) , pulp: Pulpetti.new(@data), none: NoTruss.new()}
+    self.set_truss(:harja)
+    self.update()
+  end
+  def set_truss(arg)
+    if(arg == :pulp && @data.frame.angle > 15)
+      @data.frame.angle = 10
+    end
+    if(arg == :harja && @data.frame.angle < 15)
+      @data.frame.angle = 30
+    end
+    @trusses.keys().each do |roof|
+      @trusses[roof].iterate {|elem| elem.visible = false}
+    end
+    @trusses[arg].iterate {|elem| elem.visible = true}
+  end
+  def update()
+    super()
+    @trusses[@data.truss].parts.each {|pp|
+      pp.func.call()
+    }
+  end
+end

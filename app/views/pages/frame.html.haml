@@ -1,0 +1,52 @@
+.graph_app
+  .post_control
+    %range-slider{"v-model":"frame.angle" , ":min":"5", ":max":"46" }
+      %b Truss Angle {{frame.angle}}&deg;
+      %br
+      (Height: {{Math.floor(truss_height)}}cm)
+    %range-slider{"v-model":"frame.height" , ":min":"50", ":max":"180" }
+      %b Post Height {{frame.height*2}}
+    %range-slider{"v-model":"frame.width" ,":min":"50", ":max":"330"}
+      %b Width {{frame.width*2}}
+    %range-slider{"v-model":"frame.spacing" , ":min":"50", ":max":"330"}
+      %b Length {{length*2}}
+      %br
+      (Spacing: {{frame.spacing*2}})
+    %range-slider{"v-bind:value":"posts" , "v-on:input":"set_posts($event)",
+                  ":min":"2", ":max":"11"}
+      %b Posts {{posts}}
+    %range-slider{"v-model":"frame.size" ,":min":"5", ":max":"12.5" , ":step":"1.25"}
+      %b Size {{frame.size*2}}cm ({{(frame.size*2/2.5).toFixed(0)}}in)
+    %range-slider{"v-bind:value":"scale", "v-on:input":"set_scale($event)",":min":30, ":max":150}
+      %span
+        Scale
+        %b {{scale}}
+    .rangeslider
+      %b Braces
+      %input{type:"checkbox", "v-model":"frame.braced"}
+      %br
+    .rangeslider
+      %select{"v-model":"truss"}
+        %option{ value:"none"} No Truss
+        %option{ value:"harja"} Harja
+        %option{ value:"pulp"} Pulpetti
+      %br
+    .rangeslider
+      Joints
+      %b {{joins}}
+      %br
+    .rangeslider
+      Cubic meters
+      %b {{cubes}}
+      %br
+    %br
+    .rangeslider
+      Price Estimate
+      %b {{estimate}}
+      %br
+  .canvas_wrapper
+    %canvas#xeocanvas
+
+= javascript_include_tag 'application'
+:javascript
+  var eco_frame = new Frame();

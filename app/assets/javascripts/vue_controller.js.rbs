@@ -1,18 +1,49 @@
 class VueController < Vue
   el ".graph_app"
   options watch:  { frame: {handler: lambda{|arg| self.rerender() } ,deep: true },
-                    braces: {handler: lambda{|arg| self.set_brace(arg)}} ,
                     scale: {handler: lambda{|arg| self.set_scale(arg)}} ,
                     truss: {handler: lambda{|arg| self.set_truss(arg)}}}
   def initialize
     @frame = {angle: 30 ,size: 7.5 ,height: 125,
-              spacing: 150, width: 200  }
+              spacing: 150, width: 200  , braced: true}
     @scale = 100
     @wall_ins = 20
     @floor_ins = 25
     @posts = 4
-    @braces = true
+    @level = 32
     @truss = :harja
+    @animated = 0
+  end
+  def get_level(_)
+    if(defined? eco_frame)
+      return eco_frame.subparts[@level].id
+    else
+      return "floor"
+    end
+  end
+  def level_max(_)
+    return eco_frame.parts.length
+  end
+  def set_level(level)
+    @level = level
+    self.rerender()
+  end
+  def anim_level
+    return "off" if @animated == 0
+    return "Speed: " + (11 - @animated)
+  end
+  def set_anim(arg)
+    was = @animated
+    @animated = arg
+    if( was == 0 )
+      eco_frame.invisible()
+      eco_frame.update()
+    else
+      if( @animated == 0 )
+        eco_frame.invisible()
+        eco_frame.update()
+      end
+    end
   end
   def set_scale(num)
     diff = @scale - num
@@ -21,11 +52,7 @@ class VueController < Vue
   end
   def set_truss(arg)
     eco_frame.set_truss(arg)
-    self.rerender()
-  end
-  def set_brace(on)
-    eco_frame.set_brace(on)
-    self.rerender()
+    eco_frame.update()
   end
   def set_posts(num)
     return if @posts == num
@@ -33,18 +60,21 @@ class VueController < Vue
     space = 150 if space < 150
     space = 650 if space > 650
     @posts = num
+    @animated = 0
     #avoid double rerender
     if @frame.spacing == space
-      self.rerender()
+      eco_frame.update()
     else
       @frame.spacing = space
     end
   end
-  def rerender(_)
-    eco_frame.update(@frame)
-  end
   def length
     return @frame.spacing * (@posts - 1 )
+  end
+  def rerender(_)
+    @animated = 0
+    eco_frame.invisible()
+    eco_frame.update()
   end
   def estimate
     base =  joins * (25 + 10 * @frame.size)
@@ -57,7 +87,7 @@ class VueController < Vue
   end
   def post_cubes
     meters =  @frame.height
-    meters += 1.5 if @braces
+    meters += 1.5 if @frame.braced
     return 2 * @posts * @frame.size * @frame.size * meters
   end
   def truss_height

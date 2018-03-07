@@ -9,27 +9,27 @@
 //=require range_slider
 
 //=require_directory ./frame
+//=require house
 
 //= require_self
 
-xeogl.scene = new xeogl.Scene({ canvas: "xeocanvas" });
+xeogl.scene = new xeogl.Scene({ canvas: "xeocanvas" , transparent: true});
 xeogl.scene.material.diffuse = [ 0.6, 0.6, 0.7 ] ;
 xeogl.scene.camera.view.eye = [-830, 50, -780];
 xeogl.scene.camera.view.look = [80, -170, -100];
 var camera_control = new xeogl.CameraControl();
 var eco_que = new fQueue();
-xeogl.scene.on("tick" , function(){
+function once(){
   first = eco_que.shift();
   if (typeof first == "function"){
     first.call()
   }
+}
+xeogl.scene.on("tick" , function(){
+  if(VueController._data.animated){
+    i = VueController._data.animated;
+    while(i < 11 ) {once(); i += 1}
+  }else{
+    while(eco_que.length > 0 ) once();
+  }
 });
-
-var eco_frame = new Frame();
-// xeogl.scene.clips.clips = [
-//     new xeogl.Clip({
-//         pos: [0, 0, -300.0],
-//         dir: [1, -1, 1.0],
-//         active: true
-//     })
-// ];

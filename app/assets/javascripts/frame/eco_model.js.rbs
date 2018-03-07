@@ -7,8 +7,12 @@ class EcoModel < xeogl.Model
       floor: xeogl.LambertMaterial.new({ color: [0/255, 6/255, 0/255]}),
       red: xeogl.LambertMaterial.new({ color: [6/255, 0/255, 0/255]}),
       black: xeogl.LambertMaterial.new({ color: [2/255, 2/255, 2/255]}),
-      grey:  xeogl.LambertMaterial.new({ color: [50/255, 50/255, 50/255]})
+      inner: xeogl.LambertMaterial.new({ color: [100/255, 100/255, 100/255]}),
+      grey:  xeogl.LambertMaterial.new({ color: [30/255, 30/255, 30/255]})
     }
+  end
+  def parts
+    return []
   end
   def material(kind)
     return @materials[kind]
@@ -16,7 +20,7 @@ class EcoModel < xeogl.Model
   def for(id , side , color)
     id += "_" + side if side
     obj = self.at(id) || self.cube(id , color)
-    obj.visible = true #re-enable removed ones
+    obj.visible = true #re-enable removed or hiiden ones
     return obj
   end
   def at(id)
@@ -35,11 +39,13 @@ class EcoModel < xeogl.Model
   end
   def _do_update(max , prefix , color , what)
     update_function = self.__proto__["update_"+prefix]
-    pause = Math.ceil(60 / max )
+    pause = Math.ceil(500 / max )
     0.upto(max - 1) do |i|
       index = i #local copy
-      eco_que <<  lambda{what.apply(self, [update_function , index ])}
-      0.upto(pause) {|ii| eco_que << ii }
+      eco_que << lambda{what.apply(self, [update_function , index ])}
+      if(@data.animated)
+        0.upto(pause) {|ii| eco_que << ii }
+      end
     end
     max += 1 while(self.check_remove(prefix + max))
   end
@@ -57,18 +63,12 @@ class EcoModel < xeogl.Model
       update_function.apply(self, [obj,i])
     end
   end
-  def transforms
-    translate = xeogl.Translate.new( id: "pos" + Math.random())
-    rotate = xeogl.Rotate.new({xyz: [0,0,1] , parent: translate, id: "rot" + Math.random()})
-    return xeogl.Scale.new( {parent: rotate, id: "scale" + Math.random()})
-  end
   def cubes(ids , color)
     ids.each {|id| self.cube(id, color)}
   end
   def cube( id , color  )
     color ="wood" unless color
-    args = {  transform: self.transforms ,
-              material:  self.material(color),
+    args = {  material:  self.material(color),
               id: id + self.id  }
     return self.add(xeogl.Entity.new( args ))
   end
@@ -119,6 +119,7 @@ class EcoModel < xeogl.Model
   def harja_at(thick)
     return self.tan * self.width + 2*thick/self.cos
   end
+  def braced  ;return @data.frame.braced;     end
   def spacing ;return @data.frame.spacing;end
   def size    ;return @data.frame.size;   end
   def height  ;return @data.frame.height; end

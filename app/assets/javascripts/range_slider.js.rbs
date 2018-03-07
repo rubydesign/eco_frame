@@ -2,6 +2,7 @@ class RangeSlider < Vue
   template <<-EOS
                 <div class="rangeslider">
                   <slot> <b> {{value}} </b> </slot>
+                  <br/>
                   <input :min="min_v" :max="max" :step="step" type="range"
                         v-bind:value = "value"
                         v-on:input = "handleValue($event)"/>

@@ -1,12 +1,14 @@
   class Harja < EcoModel
 
-  def initialize( data  )
-    super(data)
+  def initialize( data )
+    super(data, "harja")
   end
-  def update()
-    self.update_list(  self.posts , "king" )
-    self.update_pairs( self.posts , "rafter" )
-    self.update_pairs( self.posts , "king_brace" )
+  def parts
+    that = self
+    return [
+      {id: "king" , func: lambda{that.update_list( that.posts , "king")}},
+      {id: "rafter" , func: lambda{that.update_pairs(that.posts ,"rafter")}},
+      {id: "king_brace" , func: lambda{that.update_pairs(that.posts ,"king_brace")}}]
   end
   def update_king(king,i)
     truss_h = self.truss_height - self.size
@@ -28,9 +30,12 @@
   end
 end
 
-class NoTruss < xeogl.Model
-  def initialize( frame  )
-    super()
+class NoTruss < EcoModel
+  def initialize( data )
+    super(data , "none")
+  end
+  def parts
+    return []
   end
   def update()
   end

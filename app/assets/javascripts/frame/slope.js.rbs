@@ -4,12 +4,14 @@ class Slope < EcoModel
     super(data,"slope")
   end
 
-  def update()
-    self.update_pairs(self.wall_num, "inner_ceil")
-    self.update_pairs(self.wall_num, "tie1_ceil")
-    self.update_pairs(self.wall_num, "tie2_ceil")
-    self.update_pairs(self.wall_num, "tie3_ceil")
-    self.update_pairs(self.wall_num, "outer_ceil")
+  def parts
+    that = self
+    return [
+      {id: "inner_ceil" , func: lambda{that.update_pairs(that.wall_num ,"inner_ceil")}},
+      {id: "tie2_ceil" , func: lambda{that.update_pairs(that.wall_num ,"tie2_ceil")}},
+      {id: "tie3_ceil" , func: lambda{that.update_pairs(that.wall_num ,"tie3_ceil")}},
+      {id: "tie1_ceil" , func: lambda{that.update_pairs(that.wall_num ,"tie1_ceil")}},
+      {id: "outer_ceil" , func: lambda{that.update_pairs(that.wall_num ,"outer_ceil")}}]
   end
 
   def update_inner_ceil(ceil , i , side)
