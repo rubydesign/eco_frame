@@ -1,7 +1,7 @@
 // This is a manifest file that'll be compiled into application, which will include all the files
 // listed below.
 
-//=require xeo
+//=require xeogl.min
 //=require vue
 //=require fque
 //=require range_slider
