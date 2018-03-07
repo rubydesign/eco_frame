@@ -3,13 +3,16 @@ class FloorBeams < EcoModel
   def initialize(data)
     super(data,"floor_beams")
   end
-  def update()
-    self.update_pairs(self.posts - 1, "floor_plate")
-    self.update_list(self.beam_num , "floor_beam")
-    self.update_list(self.joist_num , "joist")
-    self.update_pairs( self.wall_num - 1 , "outer_floor" , "grey")
-    self.update_list( self.board_num , "floor_boards" )
+  def parts
+    that = self
+    return [
+      {id: "floor_plate" , func: lambda{that.update_pairs(that.posts-1 ,"floor_plate")}},
+      {id: "floor_beam" , func: lambda{that.update_list( that.beam_num , "floor_beam")}},
+      {id: "joist" , func: lambda{that.update_list( that.joist_num , "joist")}},
+      {id: "outer_floor" , func: lambda{that.update_pairs(that.wall_num - 1 ,"outer_floor","grey")}},
+      {id: "floor_boards" , func: lambda{that.update_list( that.board_num , "floor_boards")}} ]
   end
+
   def update_floor_boards(board, i)
     board.b_scale(1 , self.width,
                      self.one_inch/2,
