@@ -28,7 +28,6 @@
 //= require component.js
 //= require scene.js
 
-//= require animation/morphTargets.js
 //= require animation/cameraFlightAnimation.js
 
 //= require camera/camera.js
@@ -39,22 +38,12 @@
 //= require clipping/clips.js
 //= require controls/cameraControl.js
 
-//= require controls/cameraController.js
-//= require controls/keyboardAxisCamera.js
-//= require controls/keyboardRotateCamera.js
-//= require controls/keyboardPanCamera.js
-//= require controls/keyboardZoomCamera.js
-//= require controls/mouseRotateCamera.js
-//= require controls/mousePanCamera.js
-//= require controls/mousePickEntity.js
-//= require controls/mouseZoomCamera.js
-
 //= require geometry/geometry.js
 //= require geometry/boxGeometry.js
 //= require geometry/obbGeometry.js
 //= require geometry/aabbGeometry.js
 //= require geometry/cylinderGeometry.js
-//= require geometry/planeGeometry.js
+
 //= require input/input.js
 //= require lighting/lights.js
 //= require lighting/ambientLight.js
