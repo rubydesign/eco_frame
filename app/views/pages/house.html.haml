@@ -22,7 +22,7 @@
         Scale
         %b {{scale}}
     %range-slider{"v-bind:value":"animated" , "v-on:input":"set_anim($event)", ":min":"0", ":max":"10" , ":step":"1"}
-      %b Animate {{animated}}
+      %b Animate {{anim_level}}
     .rangeslider
       %b Braces
       %input{type:"checkbox", "v-model":"frame.braced"}

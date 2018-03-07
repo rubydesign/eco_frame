@@ -28,7 +28,7 @@ function once(){
 xeogl.scene.on("tick" , function(){
   if(VueController._data.animated){
     i = VueController._data.animated;
-    while(i > 0 ) {once(); i -= 1}
+    while(i < 11 ) {once(); i += 1}
   }else{
     while(eco_que.length > 0 ) once();
   }

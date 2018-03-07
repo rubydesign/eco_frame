@@ -28,6 +28,10 @@ class VueController < Vue
     @level = level
     self.rerender()
   end
+  def anim_level
+    return "off" if @animated == 0
+    return "Speed: " + (11 - @animated)
+  end
   def set_anim(arg)
     was = @animated
     @animated = arg
