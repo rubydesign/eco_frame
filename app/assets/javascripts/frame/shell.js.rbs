@@ -13,7 +13,7 @@ class Shell < EcoModel
   def update_cladding(wall, i,side)
     wall.b_scale(-side, self.one_inch/2,
                         self.height + self.cos*self.floor_ins,
-                        self.three_inch - 0.2)
+                        self.three_inch )
     wall.trans(side*(self.width + 2*self.wall_ins + 3),
                     - 2*self.height - self.two_inch,
                     - self.board_offset(i))

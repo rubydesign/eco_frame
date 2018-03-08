@@ -26,7 +26,7 @@ class VueController < Vue
     return eco_frame.parts.length
   end
   def set_value(level)
-    materials.red.glossiness = level / 100
+    materials.black.metallic = level / 100 
     self.rerender()
   end
   def set_level(level)

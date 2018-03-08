@@ -19,12 +19,15 @@ xeogl.scene.camera.view.eye = [-830, 50, -780];
 xeogl.scene.camera.view.look = [80, -170, -100];
 var camera_control = new xeogl.CameraControl();
 var materials = {
-  wood:  new xeogl.LambertMaterial({ color: [230/300, 145/300, 60/300]}),
+  wood:  new xeogl.MetallicMaterial({ baseColor: [230/250, 145/250, 60/250],
+    metallic: 0, roughness: 0.55,
+    baseColorMap: { src: "wood.jpg" },emissiveMap: { src: "wood.jpg" },}),
   floor: new xeogl.LambertMaterial({ color: [0/255, 6/255, 0/255]}),
-  red:   new xeogl.SpecularMaterial({ emissive: [6/255, 0/255, 0/255], glossiness: 0.33,
-               specular: [6/255, 0/255, 0/255], diffuse: [6/255, 0/255, 0/255],}),
+  red:   new xeogl.MetallicMaterial({ baseColor: [66/255, 0/255, 0/255],
+          metallic: 0, roughness: 0.55,
+          baseColorMap: { src: "puna.jpg"},emissiveMap: {src: "puna.jpg"},}),
   black: new xeogl.MetallicMaterial({ baseColor: [2/255, 2/255, 2/255],
-            roughness: 0.5 }),
+            roughness: 0.67 }),
   inner: new xeogl.LambertMaterial({ color: [100/255, 100/255, 100/255]}),
   grey:  new xeogl.LambertMaterial({ color: [30/255, 30/255, 30/255]})
 };
