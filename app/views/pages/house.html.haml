@@ -21,10 +21,6 @@
         %b {{scale}}
     %range-slider{"v-bind:value":"animated" , "v-on:input":"set_anim($event)", ":min":"0", ":max":"10" , ":step":"1"}
       %b Animate {{anim_level}}
-    .rangeslider
-      %b Braces
-      %input{type:"checkbox", "v-model":"frame.braced"}
-      %br
     %range-slider{"v-bind:value":"level" , "v-on:input":"set_level($event)",
                   ":min":"0", ":max":"32"}
       %b Level {{get_level(1)}}
@@ -49,4 +45,9 @@
 
 = javascript_include_tag 'application'
 :javascript
+  VueController._data.posts = 5;
+  VueController._data.frame.size = 10;
+  VueController._data.frame.width = 370;
+  xeogl.scene.camera.look =  [131, -158, -158]
+  xeogl.scene.camera.eye = [-797, 39, -1061]
   var eco_frame = new House();

@@ -4,12 +4,12 @@ class VueController < Vue
                     scale: {handler: lambda{|arg| self.set_scale(arg)}} ,
                     truss: {handler: lambda{|arg| self.set_truss(arg)}}}
   def initialize
-    @frame = {angle: 30 ,size: 7.5 ,height: 125,
-              spacing: 150, width: 200  , braced: true}
+    @frame = {angle: 30 ,size: 7.5 ,height: 140,
+              spacing: 180, width: 200  , braced: true}
     @scale = 100
     @wall_ins = 20
     @floor_ins = 25
-    @posts = 4
+    @posts = 3
     @level = 32
     @truss = :harja
     @animated = 0
@@ -26,7 +26,7 @@ class VueController < Vue
     return eco_frame.parts.length
   end
   def set_value(level)
-    materials.black.metallic = level / 100 
+    materials.black.metallic = level / 100
     self.rerender()
   end
   def set_level(level)
