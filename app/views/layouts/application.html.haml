@@ -18,6 +18,16 @@
           \&vert;
           tel 040 730 8052
       .form
-        Form
+        .form-container
+          %form{:action => "action_page.php"}
+            %label{:for => "fname"} Name
+            %input#fname{:name => "firstname", :placeholder => "Your name..", :type => "text"}/
+            %label{:for => "email"} Email
+            %input#email{:email => "lastname", :placeholder => "Your email address..", :type => "text"}/
+            %label{:for => "phone"} Phone
+            %input#email{:phone => "phone", :placeholder => "Your phone number..", :type => "text"}/
+            %label{:for => "message"} Message
+            %textarea#subject{:name => "subject", :placeholder => "Write something..", :style => "height:100px"}
+            %input{:type => "submit", :value => "Submit"}/
       .map
         Map
