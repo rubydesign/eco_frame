@@ -17,17 +17,18 @@
           info@ecoframe.house
           \&vert;
           tel 040 730 8052
-      .form
-        .form-container
-          %form{:action => "action_page.php"}
-            %label{:for => "fname"} Name
-            %input#fname{:name => "firstname", :placeholder => "Your name..", :type => "text"}/
-            %label{:for => "email"} Email
-            %input#email{:email => "lastname", :placeholder => "Your email address..", :type => "text"}/
-            %label{:for => "phone"} Phone
-            %input#email{:phone => "phone", :placeholder => "Your phone number..", :type => "text"}/
-            %label{:for => "message"} Message
-            %textarea#subject{:name => "subject", :placeholder => "Write something..", :style => "height:100px"}
-            %input{:type => "submit", :value => "Submit"}/
-      .map
-        %iframe{:allowfullscreen => "", :frameborder => "0", :height => "380", :border-radius => "6",:src => "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d416.3123161179529!2d23.58320509249325!3d60.16571568355092!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x468db1dd250b8865%3A0xd8a1683fcdff6039!2sFiskarsintie+509%2C+10480+Raasepori!5e0!3m2!1sfi!2sfi!4v1521322214118", :style => "border:0", :width => "600"}
+      .footer-box
+        .form
+          .form-container
+            %form{:action => "action_page.php"}
+              %label{:for => "fname"} Name
+              %input#fname{:name => "firstname", :placeholder => "Your name..", :type => "text"}/
+              %label{:for => "email"} Email
+              %input#email{:email => "lastname", :placeholder => "Your email address..", :type => "text"}/
+              %label{:for => "phone"} Phone
+              %input#email{:phone => "phone", :placeholder => "Your phone number..", :type => "text"}/
+              %label{:for => "message"} Message
+              %textarea#subject{:name => "subject", :placeholder => "Write something..", :style => "height:100px"}
+              %input{:type => "submit", :value => "Submit"}/
+        .map
+          %iframe{:frameborder => "0", :height => "380", :marginheight => "0", :marginwidth => "0", :scrolling => "no", :src => "https://maps.google.com/maps?width=100%&height=380&hl=en&q=Fiskarsintie%20847+(EcoFrameHouse)&ie=UTF8&t=&z=8&iwloc=B&output=embed", :width => "100%"}
