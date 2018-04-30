@@ -26,6 +26,10 @@ class Structure < EcoModel
       self.components[p].iterate {|elem| elem.visible = false}
     end
   end
+
+  def joins
+    2
+  end
 end
 
 class House < Structure

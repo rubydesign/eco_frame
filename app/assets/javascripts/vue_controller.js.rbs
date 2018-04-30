@@ -11,7 +11,7 @@ class VueController < Vue
     @floor_ins = 25
     @posts = 3
     @level = 32
-    @truss = :harja
+    @truss = :collar
     @animated = 0
     @value = 50
   end
@@ -22,9 +22,7 @@ class VueController < Vue
       return "floor"
     end
   end
-  def level_max(_)
-    return eco_frame.parts().length
-  end
+
   def set_value(level)
     materials.black.metallic = level / 100
     self.rerender()
@@ -82,11 +80,13 @@ class VueController < Vue
     eco_frame.update()
   end
   def estimate
+    return 0
     base =  joins * (25 + 10 * @frame.size)
     base += cubes * 1000
     return 100*Math.floor(base/100) + " - " + 100*Math.floor((base*1.09)/100)
   end
   def cubes
+    return 0
     sum = post_cubes + truss_cubes + plate_cubes
     return (sum / (100*100*100)).toFixed(2)
   end
@@ -109,16 +109,11 @@ class VueController < Vue
     return @frame.size * @frame.size * 2 * meter_price(self.length)
   end
   def joins
-    return post_joins + truss_joins + plate_joins
-  end
-  def post_joins
-    return @posts * (@braces ? 4 : 2)
-  end
-  def plate_joins
-    return 2 * (@posts - 1)
-  end
-  def truss_joins
-    return @truss == :harja ?  @posts * 9 : 0
+    if(defined? eco_frame)
+      return eco_frame.joins
+    else
+      return 0
+    end
   end
 
   def meter_price(meters)

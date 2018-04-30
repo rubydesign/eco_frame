@@ -10,30 +10,36 @@ class Collar < EcoModel
       {id: "beam" , func: lambda{that.update_pairs( that.posts , "beam")}},
       {id: "rafter" , func: lambda{that.update_pairs(that.posts ,"rafter")}},
       {id: "colar" , func: lambda{that.update_pairs(that.posts ,"collar")}},
-      {id: "king_brace" , func: lambda{that.update_pairs(that.posts ,"king_brace")}}]
+      {id: "king_brace" , func: lambda{that.update_pairs(that.posts ,"collar_brace")}}]
   end
   def update_beam(beam,i , side)
-    truss_h = self.truss_height - self.size
-    beam.b_scale( 0 , self.size, truss_h/2,  self.size )
+    beam.b_scale( side , self.size, self.collar_width,  self.size )
     beam.rotZ(side*90)
-    beam.trans( 0 , truss_h/2 , self.offset(i) )
+    beam.trans( 0 , self.collar_height , self.offset(i) )
   end
   def update_rafter(rafter , i , side)
     rafter.b_scale(side , self.size, self.rafter_length / 2,  self.size)
     rafter.rotZ(side*(90+self.angle))
     rafter.trans( 0, self.truss_height , self.offset(i))
   end
-  def update_collar(rafter , i , side)
-    rafter.b_scale(side , self.size, self.rafter_length / 2,  self.size)
-    rafter.rotZ(side*(90+self.angle))
-    rafter.trans( 0, self.truss_height - 50 , self.offset(i))
+  def update_collar_brace(brace , i , side)
+    brace.b_scale(-side , self.size, self.rafter_length / 2,  self.size)
+    brace.rotZ(-side*(90+self.angle))
+    brace.trans( 0, self.truss_height - self.collar_offset , self.offset(i))
   end
-  def update_king_brace( brace , i , side )
-    brace.b_scale(side, self.size, self.brace_length, self.size)
-    brace.rotZ( - side*45 )
-    brace.trans( side*self.size, self.size/2, self.offset(i) )
+  def update_collar( collar , i , side )
+    collar.b_scale(side, self.size, self.sin * self.width / 2 - self.size, self.size)
+    collar.rotZ( side*90 )
+    collar.trans( side*self.width , self.size/2, self.offset(i) )
   end
-  def brace_length
-    return  self.sin * self.width / 2 - self.size
+  def collar_offset
+    100
   end
+  def collar_width
+    self.width / 4
+  end
+  def collar_height
+    return self.truss_height / 2
+  end
+
 end
