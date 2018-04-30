@@ -3,7 +3,7 @@ class FloorBeams < EcoModel
   def initialize(data)
     super(data,"floor_beams")
   end
-  def parts
+  def parts()
     that = self
     return [
       {id: "floor_plate" , func: lambda{that.update_pairs(that.posts-1 ,"floor_plate")}},

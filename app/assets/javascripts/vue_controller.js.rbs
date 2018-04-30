@@ -23,7 +23,7 @@ class VueController < Vue
     end
   end
   def level_max(_)
-    return eco_frame.parts.length
+    return eco_frame.parts().length
   end
   def set_value(level)
     materials.black.metallic = level / 100

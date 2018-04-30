@@ -3,7 +3,7 @@ class Walls < EcoModel
   def initialize(data)
     super(data,"walls")
   end
-  def parts
+  def parts()
     that = self
     return [
       {id: "inner_wall" , func: lambda{that.update_pairs(that.wall_num - 1 ,"inner_wall","inner")}},

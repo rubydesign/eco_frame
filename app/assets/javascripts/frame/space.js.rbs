@@ -3,7 +3,7 @@ class Space < EcoModel
   def initialize(data)
     super(data,  "space")
   end
-  def parts
+  def parts()
     that = self
     return [
       {id: "ceil_space" , func: lambda{that.update_pairs(that.wall_num  ,"ceil_space")}},

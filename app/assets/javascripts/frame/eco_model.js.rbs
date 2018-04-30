@@ -3,7 +3,7 @@ class EcoModel < xeogl.Model
     super({id: id})
     @data = data
   end
-  def parts
+  def parts()
     return []
   end
   def material(kind)

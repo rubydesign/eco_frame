@@ -4,7 +4,7 @@ class Tuuli < EcoModel
     super(data, "tuuli")
   end
 
-  def parts
+  def parts()
     that = self
     return [
       {id: "outer_wall" , func: lambda{that.update_pairs(that.wall_num - 1 ,"outer_wall","grey")}},

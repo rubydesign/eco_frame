@@ -4,7 +4,7 @@ class Floor < EcoModel
     super(data,  "floor")
   end
 
-  def parts
+  def parts()
     that = self
     return [ {id: "ground" , func: lambda{that.update_list(  1 , "ground" , "floor")}} ]
   end

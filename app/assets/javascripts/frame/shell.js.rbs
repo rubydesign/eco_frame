@@ -3,7 +3,7 @@ class Shell < EcoModel
   def initialize(data)
     super(data,  "shell")
   end
-  def parts
+  def parts()
     that = self
     return [
       {id: "cladding" , func: lambda{that.update_pairs(that.board_num ,"cladding","red")}},
