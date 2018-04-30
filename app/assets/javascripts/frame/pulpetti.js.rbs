@@ -1,11 +1,12 @@
-class Pulpetti < EcoModel
+
+class Pulpetti < NoTruss
 
   def initialize( data )
     super(data, "pulp")
   end
-  def parts
+  def parts()
     that = self
-    return [
+    return super().concat [
       {id: "king_pulp" , func: lambda{that.update_list(that.posts ,"king_pulp")}},
       {id: "rafter_pulp" , func: lambda{that.update_list(that.posts ,"rafter_pulp")}},
       {id: "rafter_overhang" , func: lambda{that.update_list(that.posts ,"rafter_overhang")}}]

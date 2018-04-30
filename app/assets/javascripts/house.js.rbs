@@ -11,7 +11,7 @@ class Structure < EcoModel
     p = name.new(@data)
     self.add( p )
     @parts << p.id
-    p.parts.each {|pp|
+    p.parts().each {|pp|
       @subparts << pp
     }
   end
@@ -40,7 +40,9 @@ class Frame < Structure
   def initialize()
     super("frame")
     [Floor,PostBeam].each {|part| self.add_part(part)}
-    @trusses = { harja: Harja.new(@data) , pulp: Pulpetti.new(@data), none: NoTruss.new()}
+    @trusses = {  harja: Harja.new(@data) ,
+                  pulp: Pulpetti.new(@data),
+                  none: NoTruss.new(@data , "none")}
     self.set_truss(:harja)
     self.update()
   end
@@ -58,7 +60,8 @@ class Frame < Structure
   end
   def update()
     super()
-    @trusses[@data.truss].parts.each {|pp|
+    truss = @trusses[@data.truss]
+    truss.parts().each {|pp|
       pp.func.call()
     }
   end

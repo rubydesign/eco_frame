@@ -1,11 +1,11 @@
-  class Harja < EcoModel
+class Harja < NoTruss
 
   def initialize( data )
     super(data, "harja")
   end
-  def parts
+  def parts()
     that = self
-    return [
+    return super().concat [
       {id: "king" , func: lambda{that.update_list( that.posts , "king")}},
       {id: "rafter" , func: lambda{that.update_pairs(that.posts ,"rafter")}},
       {id: "king_brace" , func: lambda{that.update_pairs(that.posts ,"king_brace")}}]
@@ -27,18 +27,5 @@
   end
   def brace_length
     return  self.sin * self.width / 2 - self.size
-  end
-end
-
-class NoTruss < EcoModel
-  def initialize( data )
-    super(data , "none")
-  end
-  def parts
-    return []
-  end
-  def update()
-  end
-  def remove()
   end
 end
