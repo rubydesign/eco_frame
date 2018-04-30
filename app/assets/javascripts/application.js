@@ -8,7 +8,21 @@
 //=require vue_controller
 //=require range_slider
 
-//=require_directory ./frame
+//=require frame/eco_model
+//=require frame/entity_transforms
+//=require frame/floor
+//=require frame/floor_beams
+//=require frame/post_beam
+
+//=require frame/no_truss
+//=require frame/harja
+//=require frame/pulpetti
+//=require frame/shell
+//=require frame/slope
+//=require frame/space
+//=require frame/tuuli
+//=require frame/walls
+
 //=require house
 
 //= require_self
