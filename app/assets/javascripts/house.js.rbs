@@ -42,6 +42,7 @@ class Frame < Structure
     [Floor,PostBeam].each {|part| self.add_part(part)}
     @trusses = {  harja: Harja.new(@data) ,
                   pulp: Pulpetti.new(@data),
+                  collar: Collar.new(@data),
                   none: NoTruss.new(@data , "none")}
     self.set_truss(:harja)
     self.update()

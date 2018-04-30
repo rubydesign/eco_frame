@@ -15,6 +15,7 @@
 //=require frame/post_beam
 
 //=require frame/no_truss
+//=require frame/collar
 //=require frame/harja
 //=require frame/pulpetti
 //=require frame/shell
