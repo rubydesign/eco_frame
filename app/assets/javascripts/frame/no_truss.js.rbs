@@ -1,0 +1,32 @@
+# base class for trusses with tie beams
+
+class NoTruss < EcoModel
+
+  def parts()
+    that = self
+    return [
+      {id: "beam" , func: lambda{that.update_list(that.posts ,"beam")}},
+      {id: "brace" , func: lambda{that.update_pairs(that.posts ,"brace")}} ]
+  end
+
+  def update_brace( brace , i, side )
+    brace.visible = self.braced
+    brace.b_scale(-side,self.size, self.brace_size, self.size)
+    brace.rotZ(side*45)
+    brace.trans(side*( self.width - 2*self.size),
+                      -2*self.brace_size/1.41 - 2*self.size ,
+                       self.offset(i))
+  end
+
+  def update_beam(beam , i)
+    beam.b_scale(1,self.size, self.width, self.size)
+    beam.rotZ(90)
+    beam.trans(self.width , 0 ,self.offset(i))
+  end
+
+  def brace_size
+    size = Math.min(self.width , self.height)
+    return Math.max(size / 3 , 50)
+  end
+
+end

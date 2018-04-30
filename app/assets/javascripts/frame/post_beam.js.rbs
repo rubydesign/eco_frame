@@ -2,13 +2,11 @@ class PostBeam < EcoModel
   def initialize( data )
     super(data, "posts")
   end
-  def parts
+  def parts()
     that = self
     return [
       {id: "foot" , func: lambda{that.update_pairs( that.posts , "foot" , "grey")}},
       {id: "post" , func: lambda{that.update_pairs(that.posts ,"post")}},
-      {id: "beam" , func: lambda{that.update_list(that.posts ,"beam")}},
-      {id: "brace" , func: lambda{that.update_pairs(that.posts ,"brace")}},
       {id: "plate" , func: lambda{that.update_pairs(that.posts - 1, "plate")}} ]
   end
   def update_foot(foot, i , side)
@@ -26,14 +24,6 @@ class PostBeam < EcoModel
     post.rotZ(180)
     post.trans(side * self.width , 0 , self.offset(i))
   end
-  def update_brace( brace , i, side )
-    brace.visible = self.braced
-    brace.b_scale(-side,self.size, self.brace_size, self.size)
-    brace.rotZ(side*45)
-    brace.trans(side*( self.width - 2*self.size),
-                      -2*self.brace_size/1.41 - 2*self.size ,
-                       self.offset(i))
-  end
   def update_plate(plate , index , side)
     plate.b_scale(side, self.size, self.size , self.spacing )
     plate.trans(side * self.width  , -2*self.size ,
@@ -44,9 +34,5 @@ class PostBeam < EcoModel
   end
   def set_brace(on)
     @braced = on
-  end
-  def brace_size
-    size = Math.min(self.width , self.height)
-    return Math.max(size / 3 , 50)
   end
 end
