@@ -4,6 +4,11 @@ class Pulpetti < NoTruss
   def initialize( data )
     super(data, "pulp")
   end
+
+  def joins
+    return self.posts*4
+  end
+
   def parts()
     that = self
     return super().concat [

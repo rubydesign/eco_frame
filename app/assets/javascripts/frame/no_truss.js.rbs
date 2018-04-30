@@ -9,6 +9,9 @@ class NoTruss < EcoModel
       {id: "brace" , func: lambda{that.update_pairs(that.posts ,"brace")}} ]
   end
 
+  def joins
+    return self.posts*4
+  end
   def update_brace( brace , i, side )
     brace.visible = self.braced
     brace.b_scale(-side,self.size, self.brace_size, self.size)

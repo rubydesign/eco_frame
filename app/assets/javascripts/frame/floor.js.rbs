@@ -3,6 +3,9 @@ class Floor < EcoModel
   def initialize(data)
     super(data,  "floor")
   end
+  def joins
+    return 0
+  end
 
   def parts()
     that = self

@@ -3,6 +3,9 @@ class Harja < NoTruss
   def initialize( data )
     super(data, "harja")
   end
+  def joins
+    return self.posts*9
+  end
   def parts()
     that = self
     return super().concat [

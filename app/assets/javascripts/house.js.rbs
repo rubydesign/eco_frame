@@ -26,16 +26,17 @@ class Structure < EcoModel
       self.components[p].iterate {|elem| elem.visible = false}
     end
   end
-
   def joins
-    2
+    sum = 0
+    @parts.each { |p| sum = sum + self.components[p].joins }
+    return sum + @trusses[@data.truss].joins
   end
 end
 
 class House < Structure
   def initialize()
     super("house")
-    [Floor,PostBeam,Harja,FloorBeams,Walls,
+    [Floor,Post,Harja,FloorBeams,Walls,
         Slope,Tuuli,Space,Shell].each {|part| self.add_part(part)}
     self.update()
   end
@@ -43,7 +44,7 @@ end
 class Frame < Structure
   def initialize()
     super("frame")
-    [Floor,PostBeam].each {|part| self.add_part(part)}
+    [Floor,Post].each {|part| self.add_part(part)}
     @trusses = {  harja: Harja.new(@data) ,
                   pulp: Pulpetti.new(@data),
                   collar: Collar.new(@data),

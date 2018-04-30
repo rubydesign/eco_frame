@@ -12,7 +12,7 @@
 //=require frame/entity_transforms
 //=require frame/floor
 //=require frame/floor_beams
-//=require frame/post_beam
+//=require frame/post
 
 //=require frame/no_truss
 //=require frame/collar

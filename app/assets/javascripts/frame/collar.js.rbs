@@ -4,6 +4,10 @@ class Collar < EcoModel
     super(data, "collar")
   end
 
+  def joins
+    return self.posts*11
+  end
+
   def parts()
     that = self
     return super().concat [

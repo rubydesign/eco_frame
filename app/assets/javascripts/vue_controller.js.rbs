@@ -108,7 +108,7 @@ class VueController < Vue
   def plate_cubes
     return @frame.size * @frame.size * 2 * meter_price(self.length)
   end
-  def joins
+  def joins(_)
     if(defined? eco_frame)
       return eco_frame.joins
     else
@@ -116,9 +116,4 @@ class VueController < Vue
     end
   end
 
-  def meter_price(meters)
-    meters *= 1.1 if meters > 500
-    meters *= 1.1 if meters > 600
-    return meters
-  end
 end

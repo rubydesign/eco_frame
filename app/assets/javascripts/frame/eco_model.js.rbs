@@ -3,6 +3,12 @@ class EcoModel < xeogl.Model
     super({id: id})
     @data = data
   end
+  def meter_price(meters)
+    meters *= 1.1 if meters > 500
+    meters *= 1.1 if meters > 600
+    return meters
+  end
+
   def parts()
     return []
   end
