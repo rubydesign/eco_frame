@@ -110,7 +110,7 @@ class VueController < Vue
   end
   def joins(_)
     if(defined? eco_frame)
-      return eco_frame.joins
+      return eco_frame.joins()
     else
       return 0
     end

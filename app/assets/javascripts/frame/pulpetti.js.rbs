@@ -5,8 +5,8 @@ class Pulpetti < NoTruss
     super(data, "pulp")
   end
 
-  def joins
-    return self.posts*4
+  def joins()
+    return self.posts*4 + super()
   end
 
   def parts()

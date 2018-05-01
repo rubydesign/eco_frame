@@ -2,7 +2,7 @@ class Post < EcoModel
   def initialize( data )
     super(data, "posts")
   end
-  def joins
+  def joins()
     return self.posts*2
   end
 

@@ -26,10 +26,10 @@ class Structure < EcoModel
       self.components[p].iterate {|elem| elem.visible = false}
     end
   end
-  def joins
+  def joins()
     sum = 0
-    @parts.each { |p| sum = sum + self.components[p].joins }
-    return sum + @trusses[@data.truss].joins
+    @parts.each { |p| sum = sum + self.components[p].joins() }
+    return sum + @trusses[@data.truss].joins()
   end
 end
 

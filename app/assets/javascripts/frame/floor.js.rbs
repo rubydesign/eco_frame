@@ -3,7 +3,7 @@ class Floor < EcoModel
   def initialize(data)
     super(data,  "floor")
   end
-  def joins
+  def joins()
     return 0
   end
 
