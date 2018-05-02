@@ -79,26 +79,8 @@ class VueController < Vue
     eco_frame.invisible()
     eco_frame.update()
   end
-  def estimate
-    return 0
-    base =  joins * (25 + 10 * @frame.size)
-    base += cubes * 1000
-    return 100*Math.floor(base/100) + " - " + 100*Math.floor((base*1.09)/100)
-  end
-  def cubes
-    return 0
-    sum = post_cubes + truss_cubes + plate_cubes
-    return (sum / (100*100*100)).toFixed(2)
-  end
   def truss_height
     return @frame.width * Math.tan(@frame.angle * (Math.PI/180)) / 2
-  end
-  def joins(_)
-    if(defined? eco_frame)
-      return eco_frame.joins()
-    else
-      return 0
-    end
   end
   def joins(_)
     if(defined? eco_frame)
@@ -116,11 +98,15 @@ class VueController < Vue
   end
   def cubes(_)
     if(defined? eco_frame)
-      base =  1.1 * 4 * @frame.size * @frame.size / 1000000 
+      base =  1.1 * 4 * @frame.size * @frame.size / 1000000
       return base * eco_frame.lengths()
     else
       return 0
     end
   end
-
+  def estimate(_)
+    base =  self.joins() * (25 + 10 * @frame.size)*1.24
+    base += self.cubes() * 1000
+    return 100*Math.floor(base/100) + " - " + 100*Math.floor((base*1.09)/100)
+  end
 end

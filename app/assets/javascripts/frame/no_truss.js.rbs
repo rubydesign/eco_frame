@@ -10,10 +10,14 @@ class NoTruss < EcoModel
   end
 
   def joins()
-    return self.posts*6
+    sum = self.posts * 2
+    sum += self.posts * 4 if self.braced
+    return sum
   end
   def pieces()
-    return self.posts * 3
+    sum = self.posts * 3
+    sum += self.posts * 2 if self.braced
+    return sum
   end
   def lengths()
     sum = self.posts * self.width/2
