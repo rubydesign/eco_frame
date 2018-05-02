@@ -14,36 +14,44 @@ class Collar < EcoModel
       {id: "beam" , func: lambda{that.update_pairs( that.posts , "beam")}},
       {id: "rafter" , func: lambda{that.update_pairs(that.posts ,"rafter")}},
       {id: "colar" , func: lambda{that.update_pairs(that.posts ,"collar")}},
-      {id: "king_brace" , func: lambda{that.update_pairs(that.posts ,"collar_brace")}}]
+      {id: "collar_brace" , func: lambda{that.update_pairs(that.posts ,"brace")}}]
   end
   def update_beam(beam,i , side)
     beam.b_scale( side , self.size, self.collar_width,  self.size )
     beam.rotZ(side*90)
-    beam.trans( 0 , self.collar_height , self.offset(i) )
+    beam.trans( 0 , self.collar_height  , self.offset(i) )
   end
   def update_rafter(rafter , i , side)
     rafter.b_scale(side , self.size, self.rafter_length / 2,  self.size)
     rafter.rotZ(side*(90+self.angle))
     rafter.trans( 0, self.truss_height , self.offset(i))
   end
-  def update_collar_brace(brace , i , side)
+  def update_brace(brace , i , side)
     brace.b_scale(-side , self.size, self.rafter_length / 2,  self.size)
-    brace.rotZ(-side*(90+self.angle))
-    brace.trans( 0, self.truss_height - self.collar_offset , self.offset(i))
+    brace.rotZ(side*(self.collar_angle))
+    brace.trans( side*(self.width - 2*self.size), -self.collar_offset , self.offset(i))
   end
   def update_collar( collar , i , side )
-    collar.b_scale(side, self.size, self.sin * self.width / 2 - self.size, self.size)
+    collar.b_scale(side, self.size, self.collar_length / 2, self.size)
     collar.rotZ( side*90 )
     collar.trans( side*self.width , self.size/2, self.offset(i) )
   end
+  def collar_length
+    return Math.tan(Math.radians(self.collar_angle)) * self.collar_offset
+  end
   def collar_offset
-    100
+    120
+  end
+  def brace_offset
+    return self.collar_width * 0.8
   end
   def collar_width
-    self.width / 4
+    self.width / 4.8
   end
   def collar_height
-    return self.truss_height / 2
+    return self.truss_height * 0.6
   end
-
+  def collar_angle
+    Math.degrees(Math.atan (self.width - self.brace_offset)/(self.collar_height + self.collar_offset))
+  end
 end
