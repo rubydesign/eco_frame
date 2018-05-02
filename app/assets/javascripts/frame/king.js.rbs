@@ -1,7 +1,7 @@
-class Harja < NoTruss
+class King < NoTruss
 
   def initialize( data )
-    super(data, "harja")
+    super(data, "king")
   end
   def joins()
     return self.posts * 9 + super()
