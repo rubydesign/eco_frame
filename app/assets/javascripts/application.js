@@ -7,9 +7,9 @@
 //=require range_slider
 //=require vue_controller
 //=require range_slider
+//=require entity_transforms
 
 //=require frame/eco_model
-//=require frame/entity_transforms
 //=require frame/floor
 //=require frame/floor_beams
 //=require frame/post
