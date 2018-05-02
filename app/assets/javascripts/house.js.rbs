@@ -31,6 +31,20 @@ class Structure < EcoModel
     @parts.each { |p| sum = sum + self.components[p].joins() }
     return sum + @trusses[@data.truss].joins()
   end
+  def pieces()
+    sum = 0
+    @parts.each { |p| sum = sum + self.components[p].pieces() }
+    return sum + @trusses[@data.truss].pieces()
+  end
+  def lengths()
+    sum = 0
+    @parts.each { |p| sum = sum + self.components[p].lengths() }
+    sum += @trusses[@data.truss].lengths()
+    sum += self.pieces() * 0.2 #cracked ends
+    # we use the lengths for scaling, which are half the real, and assume pairs
+    sum *= 2 * 2
+    return sum
+  end
 end
 
 class House < Structure

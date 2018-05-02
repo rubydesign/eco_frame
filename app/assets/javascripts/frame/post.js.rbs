@@ -5,7 +5,12 @@ class Post < EcoModel
   def joins()
     return self.posts*2
   end
-
+  def pieces()
+    return self.posts * 7
+  end
+  def lengths()
+    return self.posts*self.height + (self.posts - 1) * self.spacing
+  end
   def parts()
     that = self
     return [

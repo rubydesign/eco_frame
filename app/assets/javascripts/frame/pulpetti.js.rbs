@@ -8,6 +8,12 @@ class Pulpetti < NoTruss
   def joins()
     return self.posts*4 + super()
   end
+  def pieces()
+    return self.posts * 2 + super()
+  end
+  def lengths()
+    return self.posts*(self.truss_height/2 + self.rafter_length + 50) + super()
+  end
 
   def parts()
     that = self
@@ -18,8 +24,7 @@ class Pulpetti < NoTruss
   end
 
   def update_king_pulp(king,i)
-    truss_height = self.tan * self.width
-    king.b_scale( -1, self.size,truss_height,  self.size )
+    king.b_scale( -1, self.size, self.truss_height,  self.size )
     king.trans( -self.width, 0, self.offset(i))
   end
   def update_rafter_pulp(rafter , i)
@@ -37,6 +42,9 @@ class Pulpetti < NoTruss
                   2*self.tan*self.width ,
                   self.offset(i))
 
+  end
+  def truss_height
+    self.tan * self.width
   end
   def brace_rad
     return 45* Math.PI / 180

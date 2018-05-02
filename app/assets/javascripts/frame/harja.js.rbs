@@ -6,6 +6,13 @@ class Harja < NoTruss
   def joins()
     return self.posts * 9 + super()
   end
+  def pieces()
+    return self.posts * 5 + super()
+  end
+  def lengths()
+    sum = self.truss_height + self.rafter_length + self.brace_length
+    return self.posts * sum + super()
+  end
   def parts()
     that = self
     return super().concat [

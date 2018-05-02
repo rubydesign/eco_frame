@@ -6,6 +6,12 @@ class Floor < EcoModel
   def joins()
     return 0
   end
+  def pieces()
+    return 0
+  end
+  def lengths()
+    return 0
+  end
 
   def parts()
     that = self

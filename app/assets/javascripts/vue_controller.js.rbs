@@ -90,27 +90,34 @@ class VueController < Vue
     sum = post_cubes + truss_cubes + plate_cubes
     return (sum / (100*100*100)).toFixed(2)
   end
-  def post_cubes
-    meters =  @frame.height
-    meters += 1.5 if @frame.braced
-    return 2 * @posts * @frame.size * @frame.size * meters
-  end
   def truss_height
     return @frame.width * Math.tan(@frame.angle * (Math.PI/180)) / 2
-  end
-  def truss_cubes
-    meters = meter_price(@frame.width)
-    if @truss == :harja
-      meters += @frame.width + 3*truss_height
-    end
-    return @posts * @frame.size * @frame.size * meters
-  end
-  def plate_cubes
-    return @frame.size * @frame.size * 2 * meter_price(self.length)
   end
   def joins(_)
     if(defined? eco_frame)
       return eco_frame.joins()
+    else
+      return 0
+    end
+  end
+  def joins(_)
+    if(defined? eco_frame)
+      return eco_frame.joins()
+    else
+      return 0
+    end
+  end
+  def pieces(_)
+    if(defined? eco_frame)
+      return eco_frame.pieces()
+    else
+      return 0
+    end
+  end
+  def cubes(_)
+    if(defined? eco_frame)
+      base =  1.1 * 4 * @frame.size * @frame.size / 1000000 
+      return base * eco_frame.lengths()
     else
       return 0
     end
