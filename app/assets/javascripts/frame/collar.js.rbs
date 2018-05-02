@@ -13,13 +13,13 @@ class Collar < EcoModel
     return super().concat [
       {id: "beam" , func: lambda{that.update_pairs( that.posts , "beam")}},
       {id: "rafter" , func: lambda{that.update_pairs(that.posts ,"rafter")}},
-      {id: "colar" , func: lambda{that.update_pairs(that.posts ,"collar")}},
+      {id: "collar" , func: lambda{that.update_pairs(that.posts ,"collar")}},
       {id: "collar_brace" , func: lambda{that.update_pairs(that.posts ,"brace")}}]
   end
   def update_beam(beam,i , side)
-    beam.b_scale( side , self.size, self.collar_width,  self.size )
+    beam.b_scale( side , self.size, self.beam_width / 2,  self.size )
     beam.rotZ(side*90)
-    beam.trans( 0 , self.collar_height  , self.offset(i) )
+    beam.trans( 0 , self.beam_height  , self.offset(i) )
   end
   def update_rafter(rafter , i , side)
     rafter.b_scale(side , self.size, self.rafter_length / 2,  self.size)
@@ -27,8 +27,8 @@ class Collar < EcoModel
     rafter.trans( 0, self.truss_height , self.offset(i))
   end
   def update_brace(brace , i , side)
-    brace.b_scale(-side , self.size, self.rafter_length / 2,  self.size)
-    brace.rotZ(side*(self.collar_angle))
+    brace.b_scale(-side , self.size, self.brace_length / 2,  self.size)
+    brace.rotZ(side*(Math.degrees(self.collar_angle)))
     brace.trans( side*(self.width - 2*self.size), -self.collar_offset , self.offset(i))
   end
   def update_collar( collar , i , side )
@@ -36,22 +36,25 @@ class Collar < EcoModel
     collar.rotZ( side*90 )
     collar.trans( side*self.width , self.size/2, self.offset(i) )
   end
+  def beam_width
+    self.width / 2.4
+  end
+  def beam_height
+    return 0.6 * self.truss_height
+  end
+  def brace_length
+    return (self.beam_height + self.collar_offset)/Math.cos(self.collar_angle)
+  end
   def collar_length
-    return Math.tan(Math.radians(self.collar_angle)) * self.collar_offset
+    return Math.tan(self.collar_angle) * self.collar_offset
   end
   def collar_offset
     120
   end
   def brace_offset
-    return self.collar_width * 0.8
-  end
-  def collar_width
-    self.width / 4.8
-  end
-  def collar_height
-    return self.truss_height * 0.6
+    return self.beam_width * 0.8
   end
   def collar_angle
-    Math.degrees(Math.atan (self.width - self.brace_offset)/(self.collar_height + self.collar_offset))
+    Math.atan (self.width - self.brace_offset - self.size)/(self.beam_height + self.collar_offset)
   end
 end
