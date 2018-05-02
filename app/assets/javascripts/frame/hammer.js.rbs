@@ -11,9 +11,10 @@ class Hammer < EcoModel
     return self.posts * 11
   end
   def lengths()
-    #sum  = self.beam_width + self.rafter_length
-    #sum += self.brace_length + self.hammer_length
-    return self.posts * 5# sum
+    sum  = self.rafter_length + self.beam_width
+    sum += self.collar_length + self.brace_length
+    sum += self.hammer_post_height + self.hammer_brace_length
+    return self.posts * sum
   end
 
   def parts()
