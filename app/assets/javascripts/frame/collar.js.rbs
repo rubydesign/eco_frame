@@ -37,13 +37,13 @@ class Collar < EcoModel
     collar.trans( side*self.width , self.size/2, self.offset(i) )
   end
   def beam_width
-    self.width / 2.4
+    self.width / 2.5
   end
   def beam_height
     return 0.6 * self.truss_height
   end
   def brace_length
-    return (self.beam_height + self.collar_offset)/Math.cos(self.collar_angle)
+    return (self.beam_height + self.collar_offset)/Math.cos(self.collar_angle) - self.size
   end
   def collar_length
     return Math.tan(self.collar_angle) * self.collar_offset
@@ -52,7 +52,7 @@ class Collar < EcoModel
     120
   end
   def brace_offset
-    return self.beam_width * 0.8
+    return self.beam_width * 0.6
   end
   def collar_angle
     Math.atan (self.width - self.brace_offset - self.size)/(self.beam_height + self.collar_offset)
