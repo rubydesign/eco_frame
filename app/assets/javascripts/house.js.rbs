@@ -62,6 +62,7 @@ class Frame < Structure
     @trusses = {  harja: Harja.new(@data) ,
                   pulp: Pulpetti.new(@data),
                   collar: Collar.new(@data),
+                  hammer: Hammer.new(@data),
                   none: NoTruss.new(@data , "none")}
     self.set_truss(:harja)
     self.update()
@@ -70,7 +71,7 @@ class Frame < Structure
     if(arg == :pulp && @data.frame.angle > 15)
       @data.frame.angle = 10
     end
-    if(arg == :harja && @data.frame.angle < 15)
+    if(arg != :pulp && @data.frame.angle < 15)
       @data.frame.angle = 30
     end
     @trusses.keys().each do |roof|

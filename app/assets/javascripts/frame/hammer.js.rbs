@@ -1,0 +1,86 @@
+class Hammer < EcoModel
+
+  def initialize( data )
+    super(data, "hammer")
+  end
+
+  def joins()
+    return self.posts*19
+  end
+  def pieces()
+    return self.posts * 11
+  end
+  def lengths()
+    #sum  = self.beam_width + self.rafter_length
+    #sum += self.brace_length + self.hammer_length
+    return self.posts * 5# sum
+  end
+
+  def parts()
+    that = self
+    return [{id: "rafter" , func: lambda{that.update_pairs(that.posts ,"rafter")}},
+            {id: "beam" , func: lambda{that.update_pairs( that.posts , "beam")}},
+            {id: "collar" , func: lambda{that.update_pairs(that.posts ,"collar")}},
+            {id: "brace" , func: lambda{that.update_pairs(that.posts ,"brace")}},
+            {id: "hammer_post" , func: lambda{that.update_pairs(that.posts ,"hammer_post")}},
+            {id: "hammer_brace" , func: lambda{that.update_pairs(that.posts ,"hammer_brace")}}]
+  end
+  def update_rafter(rafter , i , side)
+    rafter.b_scale(side , self.size, self.rafter_length / 2,  self.size)
+    rafter.rotZ(side*(90+self.angle))
+    rafter.trans( 0, self.truss_height , self.offset(i))
+  end
+  def update_beam(beam,i , side)
+    beam.b_scale( side , self.size, self.beam_width / 2,  self.size )
+    beam.rotZ(side*90)
+    beam.trans( 0 , self.beam_height  , self.offset(i) )
+  end
+  def update_collar( collar , i , side )
+    collar.b_scale(side, self.size, self.collar_length / 2, self.size)
+    collar.rotZ( side*90 )
+    collar.trans( side*self.width , self.size/2, self.offset(i) )
+  end
+  def update_brace( brace , i, side )
+    brace.b_scale(-side,self.size, self.brace_length, self.size)
+    brace.rotZ(side*45)
+    brace.trans(side*( self.width - 2*self.size),
+                      -2*self.brace_height ,
+                       self.offset(i))
+  end
+  def update_hammer_post( collar , i , side )
+    collar.b_scale(side, self.size, self.hammer_post_height / 2 , self.size)
+    collar.trans( side*(self.width - self.hammer_offset), self.size/2, self.offset(i) )
+  end
+  def update_hammer_brace( brace , i, side )
+    brace.b_scale(-side,self.size, self.hammer_brace_length / 2, self.size)
+    brace.rotZ(side*(90-self.angle))
+    brace.trans(side*( self.width - 2*self.size - self.hammer_offset),
+                       2*self.size ,
+                       self.offset(i))
+  end
+  def brace_height
+    return self.brace_length/1.41 + self.size / 2
+  end
+  def beam_width
+    self.width / 2.5
+  end
+  def beam_height
+    return 0.6 * self.truss_height
+  end
+  def brace_length
+    size = Math.min(self.width , self.height)
+    return Math.max(size / 3 , 70)
+  end
+  def hammer_brace_length
+    return (self.beam_height - 4*self.size) / self.sin #- self.size / 2
+  end
+  def hammer_post_height
+    return Math.tan(Math.radians(self.angle)) * (self.hammer_offset - self.size)
+  end
+  def collar_length
+    return 2 * Math.max( self.brace_height + self.size, 70)
+  end
+  def hammer_offset
+    self.collar_length - 4*self.size
+  end
+end

@@ -16,6 +16,7 @@
 
 //=require frame/no_truss
 //=require frame/collar
+//=require frame/hammer
 //=require frame/harja
 //=require frame/pulpetti
 //=require frame/shell
