@@ -9,6 +9,15 @@ class EcoModel < xeogl.Model
     return meters
   end
 
+  def joins()
+    return 0
+  end
+  def pieces()
+    return 0
+  end
+  def lengths()
+    return 0
+  end
   def parts()
     return []
   end

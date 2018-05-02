@@ -3,16 +3,6 @@ class Floor < EcoModel
   def initialize(data)
     super(data,  "floor")
   end
-  def joins()
-    return 0
-  end
-  def pieces()
-    return 0
-  end
-  def lengths()
-    return 0
-  end
-
   def parts()
     that = self
     return [ {id: "ground" , func: lambda{that.update_list(  1 , "ground" , "floor")}} ]

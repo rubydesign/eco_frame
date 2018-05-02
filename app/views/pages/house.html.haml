@@ -24,15 +24,6 @@
     %range-slider{"v-bind:value":"level" , "v-on:input":"set_level($event)",
                   ":min":"0", ":max":"32"}
       %b Level {{get_level(1)}}
-    .rangeslider
-      Cubic meters
-      %b {{cubes}}
-      %br
-    %br
-    .rangeslider
-      Price Estimate
-      %b {{estimate}}
-      %br
     %range-slider{"v-bind:value":"value" , "v-on:input":"set_value($event)", ":min":"0", ":max":"100" , ":step":"1"}
       %b val {{value}}
 
