@@ -17,6 +17,7 @@
 //=require frame/no_truss
 //=require frame/collar
 //=require frame/hammer
+//=require frame/stopped
 //=require frame/king
 //=require frame/pulpetti
 //=require frame/shell

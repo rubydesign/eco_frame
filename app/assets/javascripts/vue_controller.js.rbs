@@ -11,7 +11,7 @@ class VueController < Vue
     @floor_ins = 25
     @posts = 3
     @level = 32
-    @truss = :collar
+    @truss = :king
     @animated = 0
     @value = 50
   end
@@ -105,8 +105,8 @@ class VueController < Vue
     end
   end
   def estimate(_)
-    base =  self.joins() * (25 + 10 * @frame.size)*1.24
-    base += self.cubes() * 1000
+    base =  self.joins() * (30 + 12 * @frame.size)*1.24
+    base += self.cubes() * 850
     return 100*Math.floor(base/100) + " - " + 100*Math.floor((base*1.09)/100)
   end
 end

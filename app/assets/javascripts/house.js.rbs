@@ -63,6 +63,7 @@ class Frame < Structure
                   pulp: Pulpetti.new(@data),
                   collar: Collar.new(@data),
                   hammer: Hammer.new(@data),
+                  stopped: Stopped.new(@data),
                   none: NoTruss.new(@data , "none")}
     self.set_truss(:king)
     self.update()

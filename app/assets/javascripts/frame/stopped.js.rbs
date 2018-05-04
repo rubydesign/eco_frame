@@ -1,0 +1,71 @@
+class Stopped < EcoModel
+
+  def initialize( data )
+    super(data, "queen")
+  end
+
+  def joins()
+    return self.posts*15
+  end
+  def pieces()
+    return self.posts * 8
+  end
+  def lengths()
+    sum  = self.rafter_length + self.beam_width / 2 + self.width / 2
+    sum += self.collar_length + self.hammer_post_height
+    return self.posts * sum
+  end
+
+  def parts()
+    that = self
+    return [{id: "rafter" , func: lambda{that.update_pairs(that.posts ,"rafter")}},
+            {id: "beam" , func: lambda{that.update_pairs( that.posts , "beam")}},
+            {id: "tie" , func: lambda{that.update_list(that.posts ,"tie")}},
+            {id: "collar" , func: lambda{that.update_pairs(that.posts ,"collar")}},
+            {id: "hammer_post" , func: lambda{that.update_pairs(that.posts ,"hammer_post")}},
+          ]
+  end
+  def update_rafter(rafter , i , side)
+    rafter.b_scale(side , self.size, self.rafter_length / 2,  self.size)
+    rafter.rotZ(side*(90+self.angle))
+    rafter.trans( 0, self.truss_height , self.offset(i))
+  end
+  def update_beam(beam,i , side)
+    beam.b_scale( side , self.size, self.beam_width / 2,  self.size )
+    beam.rotZ(side*90)
+    beam.trans( 0 , self.beam_height  , self.offset(i) )
+  end
+  def update_tie(beam , i)
+    beam.b_scale(1,self.size, self.width, self.size)
+    beam.rotZ(90)
+    beam.trans(self.width , -self.beam_offset ,self.offset(i))
+  end
+  def update_collar( collar , i , side )
+    collar.b_scale(side, self.size, self.collar_length / 2, self.size)
+    collar.rotZ( side*90 )
+    collar.trans( side*self.width , self.size/2, self.offset(i) )
+  end
+  def update_hammer_post( collar , i , side )
+    collar.b_scale(side, self.size, self.hammer_post_height / 2 , self.size)
+    collar.trans( side*(self.width - self.hammer_offset),
+                  -self.beam_offset, self.offset(i) )
+  end
+  def hammer_post_height
+    return Math.tan(Math.radians(self.angle)) * self.hammer_offset + self.beam_offset
+  end
+    def beam_width
+    self.width / 2.5
+  end
+  def beam_height
+    return 0.6 * self.truss_height
+  end
+  def beam_offset
+    return 4*self.size
+  end
+  def collar_length
+    return 2 * 50
+  end
+  def hammer_offset
+    self.collar_length #- 4*self.size
+  end
+end
