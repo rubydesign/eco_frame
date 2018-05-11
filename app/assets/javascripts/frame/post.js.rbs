@@ -3,10 +3,10 @@ class Post < EcoModel
     super(data, "posts")
   end
   def joins()
-    return self.posts*2
+    return self.posts*2 + 2*Math.floor(self.length / 170)
   end
   def pieces()
-    return self.posts * 7
+    return self.posts * 2 + 2*Math.ceil(self.length / 170)
   end
   def lengths()
     return self.posts*self.height + (self.posts - 1) * self.spacing

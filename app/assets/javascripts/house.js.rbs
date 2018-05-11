@@ -50,7 +50,7 @@ end
 class House < Structure
   def initialize()
     super("house")
-    [Floor,Post,Harja,FloorBeams,Walls,
+    [Floor,Post,King,FloorBeams,Walls,
         Slope,Tuuli,Space,Shell].each {|part| self.add_part(part)}
     self.update()
   end

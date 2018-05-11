@@ -15,7 +15,7 @@ class NoTruss < EcoModel
     return sum
   end
   def pieces()
-    sum = self.posts * 3
+    sum = self.posts
     sum += self.posts * 2 if self.braced
     return sum
   end
