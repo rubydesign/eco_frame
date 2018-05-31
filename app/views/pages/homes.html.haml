@@ -23,6 +23,9 @@
       Building healthy structures and respecting the environment
       %br
       in the process is the north star that guide us.
+      %br
+
+    =image_tag "img/sisa.jpg"
 
   .text-border
     \ 
@@ -34,78 +37,9 @@
       %p
         We design each frame separately according to the purpose of the building. Timberframing enables creative structures where the sense of precise crafting and feeling of strenght is translated in to the finished building.
 
-  .text-page
-    / Container for the image gallery
-    .slide-container
-      / Full-width images with number text
-      .mySlides
-        .numbertext 1 / 5
-        =image_tag "img/slide1-11.jpg", {:width => "100%"}
-      .mySlides
-        .numbertext 2 / 6
-        =image_tag "img/slide1-1.jpg", {:width => "100%"}
-      .mySlides
-        .numbertext 3 / 6
-        =image_tag "img/slide1-2.jpg", {:width => "100%"}
-      .mySlides
-        .numbertext 4 / 6
-        =image_tag "img/slide1-3.jpg", {:width => "100%"}
-      .mySlides
-        .numbertext 5 / 6
-        =image_tag "img/slide1-4.jpg", {:width => "100%"}
-      / Next and previous buttons
-      %a.prev{:onclick => "plusSlides(-1)"} ❮
-      %a.next{:onclick => "plusSlides(1)"} ❯
-      / Image text
-      /  .caption-container
-      /    %p#caption
+  .text-page{:style => "height: 1450px;"}
 
-      / Thumbnail images
-      .left-2
-        %img.demo.cursor
-          =image_tag "img/slide1-11.jpg", {:alt => "The Woods", :onclick => "currentSlide(1)", :style => "width:100%"}
-      .left-2
-        %img.demo.cursor
-          =image_tag "img/slide1-1.jpg", {:alt => "The Woods", :onclick => "currentSlide(2)", :style => "width:100%"}
-      .left-2
-        %img.demo.cursor
-          =image_tag "img/slide1-2.jpg", {:alt => "The Woods", :onclick => "currentSlide(3)", :style => "width:100%"}
-      .left-2
-        %img.demo.cursor
-          =image_tag "img/slide1-3.jpg", {:alt => "The Woods", :onclick => "currentSlide(4)", :style => "width:100%"}
-      .left-2
-        %img.demo.cursor
-          =image_tag "img/slide1-4.jpg", {:alt => "The Woods", :onclick => "currentSlide(5)", :style => "width:100%"}
 
-:javascript
-  var slideIndex = 1;
-  showSlides(slideIndex);
-
-  function plusSlides(n) {
-    showSlides(slideIndex += n);
-  }
-
-  function currentSlide(n) {
-    showSlides(slideIndex = n);
-  }
-
-  function showSlides(n) {
-    var i;
-    var slides = document.getElementsByClassName("mySlides");
-    var dots = document.getElementsByClassName("demo");
-    var captionText = document.getElementById("caption");
-    if (n > slides.length) {slideIndex = 1}
-    if (n < 1) {slideIndex = slides.length}
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
-    slides[slideIndex-1].style.display = "block";
-    dots[slideIndex-1].className += " active";
-    captionText.innerHTML = dots[slideIndex-1].alt;
-  }
 
 
 .section.section2
