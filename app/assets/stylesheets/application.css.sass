@@ -58,6 +58,9 @@ body
 .left-4
   @include span(4)
 
+.left-5
+  @include span(5)
+
 .left-6
   @include span(6)
 
@@ -193,6 +196,46 @@ $button-tint: fadeout(#000, 90%)
     -webkit-animation: bounceright .3s alternate ease infinite
     animation: bounceright .3s alternate ease infinite
 
+/* -- button end
 
+/* -- Dropdown menu start
+.dropbtn
+  /* background-color: #4CAF50
+  background: url("menu.png") no-repeat
+  color: white
+  padding: 16px
+  font-size: 16px
+  border: none
+  cursor: pointer
+  position: relative
+  left: 45px
+  top: 8px
 
-/* -- button end -- */
+.dropdown
+  position: relative
+  display: inline-block
+
+.dropdown-content
+  display: none
+  position: absolute
+  background-color: #f9f9f9
+  min-width: 120px
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2)
+  z-index: 1
+
+.dropdown-content a
+  color: black
+  padding: 8px 12px
+  text-decoration: none
+  display: block
+  text-shadow: none
+  font-size: .6em
+  text-align: left
+
+.dropdown-content a:hover
+  background-color: #f1f1f1
+
+.dropdown:hover .dropdown-content
+  display: block
+
+/* -- Dropdown menu end
