@@ -1,11 +1,19 @@
 .title.header
-  .left-6
+  .left-7.header-logo
+    =image_tag "logo-valk-100.png"
     %h1 Eco Frame House
   .left-4
     %h3{:style => "margin-top: 43px;"}
       Beautifully crafted homes
-  .right-2
-    =image_tag "logo-valk-300.png"
+
+  .left-1
+    .dropdown
+      %button.dropbtn
+        \ 
+      .dropdown-content
+        %a{:href => "../"} Front page
+        %a{:href => "/homes"} Homes
+        %a{:href => "/house"} Design
 
 
 .graph_app
