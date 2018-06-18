@@ -1,53 +1,65 @@
 .title.section.header
-  %h1 Eco FrameHouse
-  %h2
-    Beautifully crafted homes
-  =image_tag "logo-valk-300.png" , width: 280
-  %h4
-    We offer unique, long lasting and affordable timberframed living spaces.
-    %br
-    Our work ranges from massive garden furniture to complete homes.
-.section1.section
-  .text
-    %h1 COMPLETE HOMES
-    %p
-      Our goal is to build healthy, ecological and beautiful living spaces.
-      The process of building a home is long and complex.
-      We provide you with the expertise of designing and building your dream home.
-      The use of massive wood has long traditions
-      in finnish building culture and is as relevant today as ever.
-    .text-center
-      =link_to "read more" , "/homes" , class: "button"
-%br/
-.section2.section
-  .text
-    %h1 GARDEN STRUCTURES
-    %p
-      Outdoor kitchens, roofed terasses, ateljé buildings, outhouses...
-      %br
-      Timberframing really enbles any sort of structures.
-      %br
-      As long as the wood is massive, we deliver.
-    .text-center
-      =link_to "read more" , "/homes" , class: "button"
+  .left-11.menu
+    \ 
+  .right-1.menu
+    .dropdown
+      %button.dropbtn
+        \ 
+      .dropdown-content
+        %a{:href => "../"} Front page
+        %a{:href => "/homes"} Homes
+        %a{:href => "/house"} Design
+  .left-12
 
-.section3.section
-  .text
-    %h1 WOODWORKING
-    %p
-      Our completely setup workshop allows us to offer a wide range of handcrafted customized wooden products.
+    %h1 Eco FrameHouse
+    %h2
+      Beautifully crafted homes
+    =image_tag "logo-valk-300.png" , width: 280
+    %h4
+      We offer unique, long lasting and affordable timberframed living spaces.
       %br
-      I.e tables, doors, frames etc.
-    .text-center
-      =link_to "read more" , "/homes" , class: "button"
+      Our work ranges from massive garden furniture to complete homes.
+  .section1.section
+    .text
+      %h1 COMPLETE HOMES
+      %p
+        Our goal is to build healthy, ecological and beautiful living spaces.
+        The process of building a home is long and complex.
+        We provide you with the expertise of designing and building your dream home.
+        The use of massive wood has long traditions
+        in finnish building culture and is as relevant today as ever.
+      .text-center
+        =link_to "read more" , "/homes" , class: "button"
+  %br/
+  .section2.section
+    .text
+      %h1 GARDEN STRUCTURES
+      %p
+        Outdoor kitchens, roofed terasses, ateljé buildings, outhouses...
+        %br
+        Timberframing really enbles any sort of structures.
+        %br
+        As long as the wood is massive, we deliver.
+      .text-center
+        =link_to "read more" , "/homes" , class: "button"
+
+  .section3.section
+    .text
+      %h1 WOODWORKING
+      %p
+        Our completely setup workshop allows us to offer a wide range of handcrafted customized wooden products.
+        %br
+        I.e tables, doors, frames etc.
+      .text-center
+        =link_to "read more" , "/homes" , class: "button"
 
 
-.section4.section
-  .text
-    %h1 DESIGNS
-    %p
-      Here you can test different options in building a frame that suits your needs.
-      %br
+  .section4.section
+    .text
+      %h1 DESIGNS
+      %p
+        Here you can test different options in building a frame that suits your needs.
+        %br
 
-    .text-center
-      =link_to "read more" , "/house" , class: "button"
+      .text-center
+        =link_to "read more" , "/house" , class: "button"
