@@ -17,12 +17,14 @@
 
 
 .section.section1
-  .text-page
+  .text-page.img75
     %h1 UUSI KOTISI
     %p
       EcoFramehouse rakentaa koteja jotka ovat kauniita, ekologisia ja pitkäikäisiä.
       %br
-      Kuvassa näkyvät rakenteet on tehty Timberframe -tekniikalla, jossa kantavat palkit liitetään toisiinsa loviliitoksin, ilman ruuveja tai nauloja.
+      Kuvassa näkyvät rakenteet on tehty Timberframe -tekniikalla, jossa
+      %br
+      kantavat palkit liitetään toisiinsa loviliitoksin, ilman ruuveja tai nauloja.
     =image_tag "img/sisa.jpg"
     %p
       Näin valmistettu rakenne on kestävä, kaunis ja ympäristöä kunnioittava.
@@ -32,7 +34,7 @@
   .text-page
     .right-6
       =image_tag "img/vih-2.jpg"
-    .left-6
+    .left-6.text-left
       %h2 Ekologinen talo
       %p
         Ecoframe -talo on lämmin ja tiivis. Se on rakennettu luonnollisesti, aidoista materiaaleista - runko on massiivipuuta ja eristeet ekologisia. Talo on hengittävä ja siellä on hyvä asua ja elää.
@@ -48,9 +50,10 @@
   .text-border
     \ 
   .text-page
-    .left-7
-      =image_tag "img/tammi-1.jpg"
-    .right-5.text-left
+    .left-6
+      =image_tag "img/frame.jpg"
+
+    .right-6.text-left.img75
       %h2 Timberframe-hirsirunko
       %p
         Rakennamme perinteisiä keskieurooppalaisia timberframe -rakenteita. Niissä talon kantava rakenne tehdään massiivipuusta, puupalkeista jotka liitetään toisiinsa loviliitoksin. Rakenne tehdään täysin ilman ruuveja ja nauloja, se perustuu tarkkoihin liitoksiin jotka lukittuvat toisiinsa ja varmistetaan puisin tapein.
@@ -58,6 +61,11 @@
 
         Voit itse kokeilla Timberframe -rungon suunnittelua
         =link_to "täällä." , "/house"
+        %br
+        %br
+
+        =image_tag "img/frame2.jpg"
+
 
   .text-border
     \ 
@@ -67,7 +75,18 @@
     .right-6.text-left
       %h2 Koti
       %p
-        Home is where your heart is...
+        Lopputuloksena on talo, joka on kaunis, moderni ja ekologinen. Ecoframe -talossa vahva ja kestävä rakenne.
+
+
+  .text-border
+    \ 
+  .text-page.text-right
+    .right-6
+      =image_tag "header_design.jpg"
+    .left-6
+      %h2 Suunnittelu ja toteutus
+      %p
+        Meiltä saat sekä suunnittelun että toteutuksen.
 
 
   .text-border
@@ -81,15 +100,3 @@
         Nämä rungot ovat täysin käsityötä. Kaikki perustuu tarkkoihin mittoihin, tekemisen iloon ja vuosien kokemukseen.
         Valmistamme käsityönä myös mm. pöytiä ja kaapistoja, lue lisää
         =link_to "täältä." , "/homes"
-
-
-
-  .text-border
-    \ 
-  .text-page.text-right
-    .right-6
-      =image_tag "header_design.jpg"
-    .left-6
-      %h2 Suunnittelu ja toteutus
-      %p
-        Meiltä saat sekä suunnittelun että toteutuksen.
