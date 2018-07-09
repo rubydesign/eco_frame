@@ -1,7 +1,8 @@
 .title.header
   .left-7.header-logo
-    =image_tag "logo-valk-100.png"
-    %h1 Eco Frame House
+    %a{:href => "/index", :style => "text-decoration: none;"}
+      =image_tag "logo-valk-100.png"
+      %h1 Eco Frame House
   .left-4
     %h3{:style => "margin-top: 43px;"}
       Beautifully crafted homes
@@ -19,7 +20,7 @@
 
 
 .section.section1
-  .text-page.img75
+  .text-page-top.img85
     %h1 TIMBERFRAME
 
     =image_tag "img/frames/DSC_0346-muok-2.jpg"
@@ -91,16 +92,14 @@
     &nbsp;
 
   .text-page
-    .left-6.text-left
-      %h2
-        Suunnittelusta toteutukseen
+    %h2
+      Suunnittelusta toteutukseen
 
-      %p
-        Tarvittaessa saat EcoFramehouselta koko paketin suunnittelusta toteutukseen. Yhteistyökumppaneistamme löytyy niin arkkitehteja ja rakennesuunnittelijoita,
-        %br
+    %p
+      Tarvittaessa saat EcoFramehouselta koko paketin suunnittelusta toteutukseen. Yhteistyökumppaneistamme löytyy niin arkkitehteja ja rakennesuunnittelijoita. Meillä on myös ammattitaitoiset ja luotettavat tekijät lähipiirissämme kaikkiin talonrakennuksen tehtäviin.
+      %br
 
-    .right-6
-      =image_tag "img/frames/kollaasi-frame-3.jpg"
+
 
   .text-border
     &nbsp;
@@ -108,11 +107,14 @@
   .text-page
     .left-6.text-left
       %h2
-        Testaa Suunnittelusta
+        Testaa suunnittelua
 
       %p
-        Täällä voit kokeilla työkalua...
+        Alla olevan linkin kautta voit kokeilla eri kokoisten hirsirunkojen suunnittelua. Työkalulla voi muuttaa mallin palkkien määrää, pituutta, leveyttä ja muita ominaisuuksia.
         %br
-
+        Käy kokeilemassa!
+        %br
+        %br
+        =link_to "testaa mallia" , "/house" , class: "button"
     .right-6
       =image_tag "img/frames/kollaasi-frame-3.jpg"
