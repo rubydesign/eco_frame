@@ -16,19 +16,19 @@
           %br
           info@ecoframe.house
           \&vert;
-          tel 040 730 8052
+          puh 040 730 8052
       .footer-box
         .form.left-6
           .form-container
             %form{:action => "action_page.php"}
-              %label{:for => "fname"} Name
-              %input#fname{:name => "firstname", :placeholder => "Your name..", :type => "text"}/
-              %label{:for => "email"} Email
-              %input#email{:email => "lastname", :placeholder => "Your email address..", :type => "text"}/
-              %label{:for => "phone"} Phone
-              %input#email{:phone => "phone", :placeholder => "Your phone number..", :type => "text"}/
-              %label{:for => "message"} Message
-              %textarea#subject{:name => "subject", :placeholder => "Write something..", :style => "height:100px"}
-              %input{:type => "submit", :value => "Submit"}/
+              %label{:for => "fname"} Nimi
+              %input#fname{:name => "nimi", :placeholder => "Nimesi", :type => "text"}/
+              %label{:for => "sposti"} Sähköposti
+              %input#email{:email => "lastname", :placeholder => "Sähköpostiosoite", :type => "text"}/
+              %label{:for => "puh"} Puhelin
+              %input#email{:phone => "phone", :placeholder => "Puhelinnumero", :type => "text"}/
+              %label{:for => "viesti"} Viesti
+              %textarea#subject{:name => "subject", :placeholder => "Viestikenttä", :style => "height:100px"}
+              %input{:type => "submit", :value => "Lähetä"}/
         .map.right-6
           %iframe{:frameborder => "0", :height => "380", :marginheight => "0", :marginwidth => "0", :scrolling => "no", :src => "https://maps.google.com/maps?width=100%&height=380&hl=en&q=Fiskarsintie%20847+(EcoFrameHouse)&ie=UTF8&t=&z=8&iwloc=B&output=embed", :width => "100%"}
