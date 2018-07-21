@@ -9,26 +9,56 @@
     %header
     = yield
     .section5.section.footer
-      .logo
-        %h3 ECOFRAMEHOUSE
-        %p.white
-          Fiskarsintie 847, 10480 Antskog
-          %br
-          info@ecoframe.house
-          \&vert;
-          puh 040 730 8052
       .footer-box
-        .form.left-6
+        .form.left-4
           .form-container
+            %h2 Ota yhteyttä
+
             %form{:action => "action_page.php"}
               %label{:for => "fname"} Nimi
               %input#fname{:name => "nimi", :placeholder => "Nimesi", :type => "text"}/
-              %label{:for => "sposti"} Sähköposti
+              %label{:for => "sposti"}
+                Sähkö-
+                %br
+                posti
               %input#email{:email => "lastname", :placeholder => "Sähköpostiosoite", :type => "text"}/
               %label{:for => "puh"} Puhelin
               %input#email{:phone => "phone", :placeholder => "Puhelinnumero", :type => "text"}/
               %label{:for => "viesti"} Viesti
-              %textarea#subject{:name => "subject", :placeholder => "Viestikenttä", :style => "height:100px"}
+              %textarea#subject{:name => "subject", :placeholder => "Viestikenttä", :style => "height:70px"}
               %input{:type => "submit", :value => "Lähetä"}/
-        .map.right-6
-          %iframe{:frameborder => "0", :height => "380", :marginheight => "0", :marginwidth => "0", :scrolling => "no", :src => "https://maps.google.com/maps?width=100%&height=380&hl=en&q=Fiskarsintie%20847+(EcoFrameHouse)&ie=UTF8&t=&z=8&iwloc=B&output=embed", :width => "100%"}
+        .footer-logo.left-4
+          %h2 ECOFRAMEHOUSE
+          =image_tag "logo-musta-100.png"
+          %p
+            puh 040 730 8052
+            %br
+            info@ecoframe.house
+            %br
+            Fiskarsintie 847
+            %br
+            10480 Antskog
+        .links.left-4.text-left
+          %br
+          %br
+          %br
+
+          %a{:href => "../"}
+            =image_tag "nappi.png"
+            Etusivu
+          %br
+          %a{:href => "/homes"}
+            =image_tag "nappi.png"
+            Kodit
+          %br
+          %a{:href => "/frames"}
+            =image_tag "nappi.png"
+            Timberframe
+          %br
+          %a{:href => "/wood"}
+            =image_tag "nappi.png"
+            Käsityö
+          %br
+          %a{:href => "/house"}
+            =image_tag "nappi.png"
+            Suunnittelu
