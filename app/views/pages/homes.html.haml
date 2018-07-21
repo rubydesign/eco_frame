@@ -12,8 +12,8 @@
         \ 
       .dropdown-content
         %a{:href => "../"} Etusivu
-        %a{:href => "/frames"} Timberframe
         %a{:href => "/homes"} Kodit
+        %a{:href => "/frames"} Timberframe
         %a{:href => "/wood"} Käsityö
         %a{:href => "/house"} Suunnittelu
 
@@ -37,7 +37,7 @@
     \ 
   .text-page
     .right-6
-      =image_tag "img/vih-2.jpg"
+      =image_tag "img/talo-malli.jpg"
     .left-6.text-left
       %h2 Ekologinen talo
       %p
@@ -47,9 +47,6 @@
         Olemme vuosien työn tuloksena kehittäneet rakenteen, jossa talon vankka ja kaunis Timberframe -runko jää talon sisäpuolelle näkyviin. Se antaa talon sisätiloille upean ja elävän ilmeen. Ulkovaippa eristetään tukevasti, ja muodostaa rungon ympärille lämpöisen, saumattoman kuoren.
         %br
         %br
-        Käyttämämme eristeet ovat puukuitua tai selluvillaa, höyrynsulkuna toimii paperi eikä muovi.
-        %br
-        Käyttämämme puu on peräisin kestävästi hoidetuista metsistä.
 
   .text-border
     \ 
@@ -62,13 +59,33 @@
       %p
         Rakennamme perinteisiä keskieurooppalaisia timberframe -rakenteita. Niissä talon kantava rakenne tehdään massiivipuusta, puupalkeista jotka liitetään toisiinsa loviliitoksin. Rakenne tehdään täysin ilman ruuveja ja nauloja, se perustuu tarkkoihin liitoksiin jotka lukittuvat toisiinsa ja varmistetaan puisin tapein.
         %br
-        %br
         Näin valmistettu rakenne on kestävä, kaunis ja ympäristöä kunnioittava.
+        %br
+        %br
+        =link_to "lue lisää" , "/frames" , class: "button"
+        %br
+        =image_tag "img/frame2.jpg" , width: 340
 
+  .text-border
+    &nbsp;
+  .text-page
+    .left-6.text-left
+      %h2
+        Lämpimät seinät
+      %p
+        Kun timberframe- eli pilari-palkkitekniikalla rakennetaan asuintaloja, on runkopalkkien välit ulkoseinissä perinteisesti täytetty esim. savi-olkipaalirakenteella. Näin saadaan hengittävä, kevyt ja kuitenkin lämmin ja kestävä seinä. Myös kalkin ja olkien sekoitusta on käytetty.
         %br
         %br
+        Kehittämässämme rakenteessa ulkoseinät tehdään pilari-palkkirakenteen ulkopuolelle, jolloin kaunis runko jää sisälle näkyviin. Ulkoverhous voidaan tehdä laudalla, sisäpintaan tulee esimerkiksi vaneri tms puulevy. Myös kipsilevyn käyttö on mahdollista.
         %br
-        =image_tag "img/frame2.jpg" , width: 370
+        Käyttämämme eristeet ovat puukuitua tai selluvillaa, höyrynsulkuna toimii paperi eikä muovi.
+        %br
+        Käyttämämme puu on peräisin kestävästi hoidetuista metsistä.  Näin rakennettu talo on ekologinen, lämmin, ja erittäin energiataloudellinen.
+
+    .left-6
+      =image_tag "img/frames/kollaasi-frame.jpg"
+
+
 
 
   .text-border
@@ -81,7 +98,6 @@
       %p
         Lopputuloksena on talo, joka on kaunis, moderni ja ekologinen. Ecoframe -talossa vahva ja kestävä rakenne, ja se antaa sisätiloille ainutlaatuisen ilmeen.
 
-
   .text-border
     \ 
   .text-page.text-right
@@ -91,16 +107,3 @@
       %h2 Suunnittelu ja toteutus
       %p
         Meiltä saat sekä suunnittelun että toteutuksen. Jos sinulla on idea rakennuksesta, pergolasta, parvekkeesta tms, me autamme suunnittelemaan rakenteen ja toteutamme sen. Kysy lisää!
-
-
-  .text-border
-    \ 
-  .text-page
-    .left-6
-      =image_tag "img/handcraft.jpg"
-    .right-6.text-left
-      %h2 Käsityö
-      %p
-        Nämä rungot ovat täysin käsityötä. Kaikki perustuu tarkkoihin mittoihin, tekemisen iloon ja vuosien kokemukseen.
-        Valmistamme käsityönä myös mm. pöytiä ja kaapistoja, lue lisää
-        =link_to "täältä." , "/wood"

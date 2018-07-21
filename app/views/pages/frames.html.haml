@@ -13,8 +13,8 @@
         \ 
       .dropdown-content
         %a{:href => "../"} Etusivu
-        %a{:href => "/frames"} Timberframe
         %a{:href => "/homes"} Kodit
+        %a{:href => "/frames"} Timberframe
         %a{:href => "/wood"} Käsityö
         %a{:href => "/house"} Suunnittelu
 
@@ -22,11 +22,8 @@
 .section.section1
   .text-page-top.img85
     %h1 TIMBERFRAME
-
-    =image_tag "img/frames/DSC_0346-muok-2.jpg"
-
-
-    %p
+    =image_tag "img/frames/Frame-aloitus.gif"
+    %p.t-padding-10
       Timberframe (joskus suomeksi pilari-palkkirakenne) on vanha rakennustapa, jossa talojen runko kootaan massiivipuisista pilareista ja palkeista puusepän liitoksin. Tällainen rakennustapa on ollut yleinen Keski-Euroopassa, Pohjois-Amerikassa ja myös Japanissa, jossa on ollut paljon korkeatasoista puurakentamista.
       %br
 
@@ -39,8 +36,6 @@
       %p
         Timberframe-runko rakennetaan kokopuisista, huolellisesti mittaan katkaistuista palkeista, jotka liitetään toisiinsa loviliitoksin.
         %br
-        Näin saatu runko on kaunis, tukeva ja kestävä, sekä ekologinen.
-        %br
         %br
         Työ on lähes täysin käsityötä. Mittauksen on oltava tarkkaa ja kaikki osat sovitetaan toisiinsa verstaalla valmistuksen jälkeen.
         %br
@@ -51,30 +46,23 @@
     .left-5.img85
       =image_tag "img/frames/_MG_1935.jpg"
 
-
-  .text-border
-    &nbsp;
-
   .text-page
-    .left-6.text-left
+    .left-4.text-left
       %h2
-        Lämpimät seinät
-
+        Tarkkaan sovitetut liitokset
       %p
-        Talonrakennuksessa runkopalkkien välit on ulkoseinissä täytetty perinteisesti esim. savi-olkipaalitekniikalla. Näin saadaan hengittävä, kevyt ja kuitenkin lämmin ja kestävä seinä. Myös kalkin ja olkien sekoitusta on käytetty.
-        %br
-        %br
-        Kehittämässämme rakenteessa ulkoseinät tehdään pilari-palkkirakenteen ulkopuolelle, jolloin kaunis runko jää sisälle näkyviin. Ulkoverhous voidaan tehdä laudalla, sisäpintaan käy esimerkiksi vaneri. Myös kipsilevyn käyttö on mahdollista.
-        %br
-        Eristeenä on silloin puukuituvilla tai selluvilla. Näin rakennettu talo on lämmin, ekologinen ja erittäin energiataloudellinen.
+        Liitoksissa ei käytetä nauloja tai ruuveja. Liitokset tehdään koloamalla palkkeihin, ja varmistetaan puutapein.
 
-    .left-6
-      =image_tag "img/frames/kollaasi-frame.jpg"
+    .left-8
+      =image_tag "img/frames/kollaasi-frame-4.jpg"
+  .left-12.t-padding-10.text-center
+    %p
+      Tällä tavoin valmistettu runko on kaunis, tukeva ja kestävä, sekä ekologinen.
+
 
 
   .text-border
     &nbsp;
-
   .text-page
     .left-6
       =image_tag "img/frames/kollaasi-frame-3.jpg"
@@ -82,7 +70,6 @@
     .right-6.text-left
       %h2
         Monenlaiset rakenteet mahdollisia
-
       %p
         Timberframe soveltuu moneen muuhunkin kuin talonrakennukseen. Parveke, kuisti, ulkovaja ja -huone, kasvihuone, pergola... ja monet muut rakenteet ovat mahdollisia tällä monipuolisella, ekologisella ja kustannustehokkaalla tekniikalla.
         %br
@@ -92,13 +79,14 @@
     &nbsp;
 
   .text-page
-    %h2
-      Suunnittelusta toteutukseen
-
-    %p
-      Tarvittaessa saat EcoFramehouselta koko paketin suunnittelusta toteutukseen. Yhteistyökumppaneistamme löytyy arkkitehteja ja rakennesuunnittelijoita. Meillä on myös ammattitaitoiset ja luotettavat tekijät lähipiirissämme kaikkiin talonrakennuksen tehtäviin.
-      %br
-
+    .left-8.text-left
+      %h2
+        Suunnittelusta toteutukseen
+      %p
+        Tarvittaessa saat EcoFramehouselta koko paketin suunnittelusta toteutukseen. Yhteistyökumppaneistamme löytyy arkkitehteja ja rakennesuunnittelijoita. Meillä on myös ammattitaitoiset ja luotettavat tekijät lähipiirissämme kaikkiin talonrakennuksen tehtäviin.
+        %br
+    .right-4
+      =image_tag "img/frames/handshake.jpg"
 
 
   .text-border
@@ -108,14 +96,13 @@
     .left-6.text-left
       %h2
         Testaa suunnittelua
-
       %p
-        Alla olevan linkin kautta voit kokeilla eri kokoisten hirsirunkojen suunnittelua. Työkalulla voi muuttaa mallin palkkien määrää, pituutta, leveyttä ja muita ominaisuuksia.
+        Alla olevan linkin kautta voit kokeilla erilaisten hirsirunkojen suunnittelua. Työkalulla voi muuttaa mallin palkkien määrää, pituutta ja leveyttä, sekä kokeilla eri tyyppisiä kattorakenteita. Malli kertoo myös paljonko puuta rakenteeseen tarvitaan, ja antaa alustavan hinta-arvion sille.
         %br
         Käy kokeilemassa!
         %br
         %br
-        =link_to "testaa mallia" , "/house" , class: "button"
+        =link_to "testaa mallia" , "/frame" , class: "button"
     .right-6
-      %a{:href => "/house"}
-        =image_tag "img/frames/screenshot.gif"
+      %a{:href => "/frame"}
+        =image_tag "img/frames/frame-animation.gif"

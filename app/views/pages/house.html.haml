@@ -12,14 +12,16 @@
         \ 
       .dropdown-content
         %a{:href => "../"} Etusivu
-        %a{:href => "/frames"} Timberframe
         %a{:href => "/homes"} Kodit
+        %a{:href => "/frames"} Timberframe
         %a{:href => "/wood"} Käsityö
         %a{:href => "/house"} Suunnittelu
 
 
 .graph_app
-  .post_control
+  .graph-header.left-7
+    %h1 Talon suunnittelu-työkalu
+  .graph-header.left-2
     .post-info.tooltip
       Mikä tämä on?
       %span.kysymys
@@ -35,9 +37,7 @@
         %b
           %i Kannattaa kokeilla!
 
-
-
-
+  .post_control.right-3
     %range-slider{"v-model":"frame.width" ,":min":"200", ":max":"800"}
       %b Rakennuksen leveys {{frame.width*2}}
     %range-slider{"v-model":"frame.spacing" , ":min":"50", ":max":"330"}

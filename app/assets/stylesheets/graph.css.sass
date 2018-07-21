@@ -1,11 +1,21 @@
 .canvas_wrapper
   position: relative
   float: left
-  width: 80%
+  width: 75%
   height: 600px
   canvas
     height: 100%
     width: 100%
+
+.house .graph_app
+  border-top: #a24b4c solid 12px
+  h1
+    color: #a24b4c
+.frame .graph_app
+  border-top: #1e7f28 solid 12px
+  h1
+    color: #1e7f28
+
 .graph_app
   height: 600px
   margin-left: 20px
@@ -40,7 +50,7 @@
   .center
     text-align: center
   .post_control
-    width: 16%
+    width: 19%
     float: right
     position: relative
     position: relative
@@ -50,6 +60,8 @@
       width: 90%
       position: relative
       float: left
+  h1
+    margin: 5px
 
 
 /* Slider Thumb start
@@ -229,3 +241,53 @@ input[type=range]:focus::-ms-fill-upper
   background: #64b5dc
 
 /* Slider Track END
+
+
+/*  tooltip START
+
+.house
+  .tooltiptext
+    background-color: #cf8d8d
+.house
+  .tooltip
+    background-color: #cf8d8d
+
+.frame
+  .tooltiptext
+    background-color: #86b283
+.frame
+  .tooltip
+    background-color: #86b283
+
+.tooltip
+  font-weight: bold
+  padding: 8px
+  margin: 12px 0px 10px 0px
+  margin-top: 12px
+  text-align: center
+  position: relative
+  border-bottom: 1px dotted black
+  &:hover .tooltiptext
+    visibility: visible
+  .kysymys img
+    width: 20px
+    position: relative
+    left: 4px
+    top: 4px
+
+  .tooltiptext
+    font-weight: 400
+    visibility: hidden
+    width: 300px
+    color: #000
+    text-align: left
+    border-radius: 2px
+    padding: 8px
+    /* Position the tooltip
+    position: absolute
+    z-index: 1
+    left: -350px
+    top: -3px
+
+
+  /*  tooltip END

@@ -1,5 +1,43 @@
+.title.header
+  .left-7.header-logo
+    =image_tag "logo-valk-100.png"
+    %h1 Eco Frame House
+  .left-4
+    %h3{:style => "margin-top: 43px;"}
+      Beautifully crafted homes
+
+  .left-1
+    .dropdown
+      %button.dropbtn
+        \ 
+      .dropdown-content
+        %a{:href => "../"} Etusivu
+        %a{:href => "/homes"} Kodit
+        %a{:href => "/frames"} Timberframe
+        %a{:href => "/wood"} Käsityö
+        %a{:href => "/house"} Suunnittelu
+
 .graph_app
-  .post_control
+  .graph-header.left-7
+    %h1 Rungon suunnittelu-työkalu
+  .graph-header.left-2
+    .post-info.tooltip
+      Mikä tämä on?
+      %span.kysymys
+        =image_tag "img/kysymys.png"
+      %span.tooltiptext
+        %b
+          Tämän sivun työkalulla voit itse suunnitella Timberframe -runkoa.
+        %br
+        Liukusäätimillä muutat rungon mittoja, kattotuolien määrää, katon kaltevuutta ja muita ominaisuuksia.
+        %br
+        Viemällä kursorin mallikuvan päälle voit zoomata sisään ja ulos. Tartu hiirellä niin voit kääntää taloa ja horisonttia.
+        %br
+        %b
+          %i Kannattaa kokeilla!
+
+
+  .post_control.right-3
     %range-slider{"v-model":"frame.angle" , ":min":"5", ":max":"46" }
       %b Truss Angle {{frame.angle}}&deg;
       %br
