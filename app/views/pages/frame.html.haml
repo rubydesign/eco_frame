@@ -1,10 +1,11 @@
 .title.header
   .left-7.header-logo
-    =image_tag "logo-valk-100.png"
-    %h1 Eco Frame House
+    %a{:href => "../"}
+      =image_tag "logo-valk-100.png"
+      %h1 Eco Frame House
   .left-4
     %h3{:style => "margin-top: 43px;"}
-      Beautifully crafted homes
+      Uniikkeja ekologisia koteja
 
   .left-1
     .dropdown
@@ -15,11 +16,10 @@
         %a{:href => "/homes"} Kodit
         %a{:href => "/frames"} Timberframe
         %a{:href => "/wood"} Käsityö
-        %a{:href => "/house"} Suunnittelu
 
 .graph_app
   .graph-header.left-7
-    %h1 Rungon suunnittelu-työkalu
+    %h1 Timberframe-rungon suunnittelutyökalu
   .graph-header.left-2
     .post-info.tooltip
       Mikä tämä on?
@@ -28,10 +28,29 @@
       %span.tooltiptext
         %b
           Tämän sivun työkalulla voit itse suunnitella Timberframe -runkoa.
-        %br
-        Liukusäätimillä muutat rungon mittoja, kattotuolien määrää, katon kaltevuutta ja muita ominaisuuksia.
+        Liukusäätimillä muutat rungon ominaisuuksia.
         %br
         Viemällä kursorin mallikuvan päälle voit zoomata sisään ja ulos. Tartu hiirellä niin voit kääntää taloa ja horisonttia.
+        %br
+        %br
+        %b Kattokulma
+        Muuta katon kaltevuutta, muuttaa myös katon korkeutta
+        %br
+        %b Pylvään korkeus
+        Muuttaa seinän korkeutta
+        %br
+        %b Leveys, pituus ja pylväiden määrä
+        Nämä määrittävät rungon mittasuhteet ja pylväiden välit
+        %br
+        %b Palkin koko
+        Miten isosta tavarasta runko tehdään
+        %br
+        %b Mittakaava
+        Muuta näkymää isommaksi tai pienemmäksi
+        %br
+        %b Rakenteen tyyppi
+        Kokeile eri tyyppisiä kattapalkkien rakenteita
+        %br
         %br
         %b
           %i Kannattaa kokeilla!
@@ -39,28 +58,28 @@
 
   .post_control.right-3
     %range-slider{"v-model":"frame.angle" , ":min":"5", ":max":"46" }
-      %b Truss Angle {{frame.angle}}&deg;
+      %b Kattokulma {{frame.angle}}&deg;
       %br
-      (Height: {{Math.floor(truss_height)}}cm)
+      (Korkeus: {{Math.floor(truss_height)}}cm)
     %range-slider{"v-model":"frame.height" , ":min":"50", ":max":"180" }
-      %b Post Height {{frame.height*2}}
+      %b Pylvään korkeus {{frame.height*2}}
     %range-slider{"v-model":"frame.width" ,":min":"50", ":max":"330"}
-      %b Width {{frame.width*2}}
+      %b Leveys {{frame.width*2}}
     %range-slider{"v-model":"frame.spacing" , ":min":"50", ":max":"330"}
-      %b Length {{length*2}}
+      %b Pituus {{length*2}}
       %br
-      (Spacing: {{frame.spacing*2}})
+      (Pylväiden väli: {{frame.spacing*2}})
     %range-slider{"v-bind:value":"posts" , "v-on:input":"set_posts($event)",
                   ":min":"2", ":max":"11"}
-      %b Posts {{posts}}
+      %b Pylväitä {{posts}}
     %range-slider{"v-model":"frame.size" ,":min":"5", ":max":"12.5" , ":step":"1.25"}
-      %b Size {{frame.size*2}}cm ({{(frame.size*2/2.5).toFixed(0)}}in)
+      %b Palkin koko {{frame.size*2}}cm ({{(frame.size*2/2.5).toFixed(0)}}in)
     %range-slider{"v-bind:value":"scale", "v-on:input":"set_scale($event)",":min":30, ":max":150}
       %span
-        Scale
+        %b Mittakaava
         %b {{scale}}
     .rangeslider
-      %b Braces
+      %b Rakenteen tyyppi
       %input{type:"checkbox", "v-model":"frame.braced"}
       %br
     .rangeslider
@@ -73,20 +92,20 @@
         %option{ value:"none"} No Truss
       %br
     .rangeslider
-      Joints
+      Liitoksia
       %b {{joins(1)}}
       %br
     .rangeslider
-      Pieces
+      Kappaleita
       %b {{pieces(1)}}
       %br
     .rangeslider
-      Cubes
+      Tilavuus
       %b {{cubes(1).toFixed(2)}}
       %br
     %br
     .rangeslider
-      Estimate
+      Hinta-arvio
       %b {{estimate(1)}}
       %br
   .canvas_wrapper
