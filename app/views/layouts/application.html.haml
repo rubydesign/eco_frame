@@ -10,7 +10,48 @@
     = yield
     .section5.section.footer
       .footer-box
-        .form.left-4
+        .left-4
+          %h2 ECOFRAMEHOUSE
+          %img{:src => "/assets/logo-musta-100.png", :width => "85"}/
+          %p
+            puh 040 730 8052
+            %br
+            %a{:href => "mailto: info@ecoframe.house"}
+              info@ecoframe.house
+            %br
+            Fiskarsintie 847
+            %br
+            10480 Antskog
+        .footer-links.left-2.text-center
+          %br
+
+          %h3
+            %a{:href => "../"}
+              =image_tag "oksa.png"
+              %br
+              Etusivu
+            %br
+            %br
+            %a{:href => "/homes"}
+              =image_tag "oksa.png"
+              %br
+              Kodit
+            %br
+            %br
+            %a{:href => "/frames"}
+              =image_tag "oksa.png"
+              %br
+              Timberframe
+            %br
+            %br
+            %a{:href => "/wood"}
+              =image_tag "oksa.png"
+              %br
+              Käsityö
+            %br
+
+
+        .form.left-6
           .form-container
             %h2 Ota yhteyttä
 
@@ -27,38 +68,3 @@
               %label{:for => "viesti"} Viesti
               %textarea#subject{:name => "subject", :placeholder => "Viestikenttä", :style => "height:70px"}
               %input{:type => "submit", :value => "Lähetä"}/
-        .footer-logo.left-4
-          %h2 ECOFRAMEHOUSE
-          =image_tag "logo-musta-100.png"
-          %p
-            puh 040 730 8052
-            %br
-            info@ecoframe.house
-            %br
-            Fiskarsintie 847
-            %br
-            10480 Antskog
-        .links.left-4.text-left
-          %br
-          %br
-          %br
-
-          %a{:href => "../"}
-            =image_tag "nappi.png"
-            Etusivu
-          %br
-          %a{:href => "/homes"}
-            =image_tag "nappi.png"
-            Kodit
-          %br
-          %a{:href => "/frames"}
-            =image_tag "nappi.png"
-            Timberframe
-          %br
-          %a{:href => "/wood"}
-            =image_tag "nappi.png"
-            Käsityö
-          %br
-          %a{:href => "/house"}
-            =image_tag "nappi.png"
-            Suunnittelu
