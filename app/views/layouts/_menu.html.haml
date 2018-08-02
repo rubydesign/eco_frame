@@ -1,0 +1,19 @@
+%header
+  .title.header
+    .left-7.header-logo
+      %a{:href => "../"}
+        =image_tag "logo-valk-100.png"
+        %h1= t("layout.title")
+    .left-4
+      %h3{:style => "margin-top: 43px;"}
+        =t("layout.sub_title")
+
+    .left-1
+      .dropdown
+        %button.dropbtn
+          \ 
+        .dropdown-content
+          %a{:href => "/"}= t("menu.home")
+          %a{:href => "/homes"}= t("menu.homes")
+          %a{:href => "/frames"}= t("menu.frames")
+          %a{:href => "/wood"}= t("menu.work")
