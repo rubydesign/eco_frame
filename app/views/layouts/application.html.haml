@@ -2,7 +2,7 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title EcoFrame
+    %title= t("layout.title")
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all'
   %body{class: params[:id]}
@@ -11,20 +11,20 @@
         .left-7.header-logo
           %a{:href => "../"}
             =image_tag "logo-valk-100.png"
-            %h1 Eco Frame House
+            %h1= t("layout.title")
         .left-4
           %h3{:style => "margin-top: 43px;"}
-            Uniikkeja ekologisia koteja
+            =t("layout.sub_title")
 
         .left-1
           .dropdown
             %button.dropbtn
               \ 
             .dropdown-content
-              %a{:href => "../"} Etusivu
-              %a{:href => "/homes"} Kodit
-              %a{:href => "/frames"} Timberframe
-              %a{:href => "/wood"} Käsityö
+              %a{:href => "/"}= t("menu.home")
+              %a{:href => "/homes"}= t("menu.homes")
+              %a{:href => "/frames"}= t("menu.frames")
+              %a{:href => "/wood"}= t("menu.work")
     = yield
     .section5.section.footer
       .footer-box
@@ -32,7 +32,8 @@
           %h2 ECOFRAMEHOUSE
           %img{:src => "/assets/logo-musta-100.png", :width => "85"}/
           %p
-            puh 040 730 8052
+            =t("layout.phone")
+            040 730 8052
             %br
             %a{:href => "mailto: info@ecoframe.house"}
               info@ecoframe.house
@@ -44,28 +45,28 @@
           %br
 
           %h3
-            %a{:href => "../"}
+            %a{:href => "/"}
               =image_tag "oksa.png"
               %br
-              Etusivu
+              = t("menu.home")
             %br
             %br
             %a{:href => "/homes"}
               =image_tag "oksa.png"
               %br
-              Kodit
+              = t("menu.homes")
             %br
             %br
             %a{:href => "/frames"}
               =image_tag "oksa.png"
               %br
-              Timberframe
+              = t("menu.frames")
             %br
             %br
             %a{:href => "/wood"}
               =image_tag "oksa.png"
               %br
-              Käsityö
+              = t("menu.work")
             %br
 
 
