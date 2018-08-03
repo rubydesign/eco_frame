@@ -1,7 +1,14 @@
 .title.section.header
-  .left-11.menu
-    \ 
-  .right-1.menu
+  .left-10.menu
+    &nbsp;
+
+
+  .right-2.menu
+    .flag
+      - I18n.available_locales.each do |lang|
+        =link_to "/#{lang}/#{params[:id]}" do
+          =image_tag "#{lang.to_s}.gif"
+
     = render "layouts/dropdown"
 
   .left-12
