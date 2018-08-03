@@ -2,63 +2,50 @@
   .left-11.menu
     \ 
   .right-1.menu
-    .dropdown
-      %button.dropbtn
-        \ 
-      .dropdown-content
-        %a{:href => "../"} Etusivu
-        %a{:href => "/homes"} Kodit
-        %a{:href => "/frames"} Timberframe
-        %a{:href => "/wood"} Käsityö
+    = render "layouts/dropdown"
 
   .left-12
-
-    %h1 Eco FrameHouse
+    %h1=t("index.main_head")
     %h2
-      Uniikkeja ekologisia koteja
+      =t("index.main_h2")
     =image_tag "logo-valk-300.png" , width: 280
     %h4
-      Valmistamme kauniita, kestäviä ja kohtuuhintaisia tiloja.
+      =t("index.main_h41")
       %br
-      Rakennamme sinulle ekologisen haaveittesi kodin tai ulkokeittiön -
+      =t("index.main_h42")
       %br
-      luonto ja korkea laatu inspiraationa.
+      =t("index.main_h43")
 
 
 .left-12
   .section1.section
     .text
-      %h1 VALMIIT KODIT
+      %h1=t("index.homes_head")
       %p
-        Rakennamme upeita, ekologisia tiloja joissa on hyvä elää.
-        Kodin rakentaminen on monivaiheinen tie. Meiltä saat ammattitaitoisen suunnittelun sekä toteutuksen unelmiesi kodille.
+        =t("index.homes_1")
         %br
         %br
-        Puinen rakenne on Suomessa luonnollinen ja ekologinen valinta.
-        Timberframe-tekniikka sopii täydellisesti suomalaiseen luontoon ja maisemaan.
-        Käsin tehdyt puuliitokset tuovat kodillesi tyylikkään ja uniikin ilmeen.
-        Sopii sekä moderniin että perinteiseen arkkitehtuuriin.
+        =t("index.homes_2")
       .text-center
-        =link_to "Lue lisää" , "/homes" , class: "button"
+        =link_to t("read_more") , "/homes" , class: "button"
   %br/
   .section2.section
     .text
-      %h1 TIMBERFRAME
+      %h1=t("index.frame_head")
       %p
-        Käsintehty Timberframe-rakenne on kaunis, kustannustehokas ja ekologinen tapa rakentaa.
-        Sillä voi luoda upeaa ilmettä monella lailla: tyylikäs talon kantava rakenne, terassi, kuisti, kasvihuone, parveke, portaikko... Käsintyöstetty puu on aina kauniin näköistä.
+        =t("index.frame_1")
         %br
         %br
-        Meidän käsityötaidoillamme ja sinun ideoillasi valmistamme sinulle ainutlaatuisen, hengittävän ja ekologisen kodin tai muun puurakenteen.
+        =t("index.frame_1")
       .text-center
-        =link_to "Lue lisää" , "/frames" , class: "button"
+        =link_to t("read_more") , "/frames" , class: "button"
 
   .section3.section
     .text
-      %h1 KÄSITYÖTÄ
+      %h1=t("index.work_head")
       %p
-        Verstaallamme valmistamme käsityönä monipuolisesti puusepäntöitä kokopuusta:
+        =t("index.work_1")
         %br
-        ovia, kaapistoja, portaita, ulkopöytiä ja -penkkejä.
+        =t("index.work_2")
       .text-center
-        =link_to "Lue lisää" , "/wood" , class: "button"
+        =link_to t("read_more") , "/wood" , class: "button"
