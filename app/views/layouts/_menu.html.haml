@@ -7,9 +7,10 @@
     .left-4
       %h3{:style => "margin-top: 43px;"}
         =t("layout.sub_title")
-    - I18n.available_locales.each do |lang|
-      =link_to "/#{lang}/#{params[:id]}" do
-        =image_tag "#{lang.to_s}.gif"
+    .flag
+      - I18n.available_locales.each do |lang|
+        =link_to "/#{lang}/#{params[:id]}" do
+          =image_tag "#{lang.to_s}.gif"
 
     .left-1
       = render "layouts/dropdown"
