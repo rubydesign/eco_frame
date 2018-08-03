@@ -1,9 +1,8 @@
 en:
-  custom:
-    title: TILAUSTYÖT
-    p1: Valmistamme tilaustyönä pöytäryhmiä, ovia, kaapistoja, portaita ja muita puusepäntöitä.
-    p2: Hyvin varustetulla verstaallamme pystymme tekemään kalusteita niin sisä- kuin ulkokäyttöön.
-  homes:
-  table:
-    p1: Käytämme materiaalina massiivipuuta,
-    p2: jotta tuloksena olisi kaunis, kestävä ja laadukas tuote.
+  wood:
+    custom_head: TILAUSTYÖT
+    custom_p1: Valmistamme tilaustyönä pöytäryhmiä, ovia, kaapistoja, portaita ja muita puusepäntöitä.
+    custom_p2: Hyvin varustetulla verstaallamme pystymme tekemään kalusteita niin sisä- kuin ulkokäyttöön.
+    table_head:
+    table_p1: Käytämme materiaalina massiivipuuta,
+    table_p2: jotta tuloksena olisi kaunis, kestävä ja laadukas tuote.
