@@ -3,48 +3,65 @@
     %h1 Talon suunnittelu-työkalu
   .graph-header.left-2
     .post-info.tooltip
-      Mikä tämä on?
+      =t("house.what")
       %span.kysymys
         =image_tag "img/kysymys.png"
       %span.tooltiptext
+        %b=t("house.tt1")
+        %br
+        =t("house.tt2")
+        %br
+        =t("house.tt3")
+        %br
         %b
-          Tämän sivun työkalulla voit itse suunnitella Timberframe -runkoa.
-        %br
-        Liukusäätimillä muutat rungon mittoja, kattotuolien määrää, katon kaltevuutta ja muita ominaisuuksia.
-        %br
-        Viemällä kursorin mallikuvan päälle voit zoomata sisään ja ulos. Tartu hiirellä niin voit kääntää taloa ja horisonttia.
-        %br
-        %b
-          %i Kannattaa kokeilla!
+          %i=t("house.try")
 
   .post_control.right-3
     %range-slider{"v-model":"frame.width" ,":min":"200", ":max":"800"}
-      %b Rakennuksen leveys {{frame.width*2}}
+      %b
+        =t("house.width")
+        {{frame.width*2}}
     %range-slider{"v-model":"frame.spacing" , ":min":"50", ":max":"330"}
-      %b Pituus {{length*2}}
+      %b
+        =t("house.lngth")
+        {{length*2}}
       %br
-      (Spacing: {{frame.spacing*2}})
+      (
+      =t("house.spacing")
+      \: {{frame.spacing*2}})
     %range-slider{"v-bind:value":"posts" , "v-on:input":"set_posts($event)",
                   ":min":"2", ":max":"11"}
-      %b Pylväitä {{posts}}
+      %b
+        =t("house.posts")
+        {{posts}}
 
     %range-slider{"v-model":"frame.angle" , ":min":"5", ":max":"46" }
-      %b Kattokulma {{frame.angle}}&deg;
+      %b
+        =t("house.pitch")
+        {{frame.angle}}&deg;
       %br
-      (Height: {{Math.floor(truss_height)}}cm)
+      (
+      =t("house.height")
+      \: {{Math.floor(truss_height)}}cm)
     %range-slider{"v-model":"frame.height" , ":min":"50", ":max":"180" }
-      %b Pylväiden korkeus {{frame.height*2}}
+      %b
+        =t("house.height")
+        {{frame.height*2}}
     %range-slider{"v-bind:value":"scale", "v-on:input":"set_scale($event)",":min":30, ":max":150}
       %span
-        Scale
+        =t("house.scale")
         %b {{scale}}
     %range-slider{"v-bind:value":"animated" , "v-on:input":"set_anim($event)", ":min":"0", ":max":"10" , ":step":"1"}
-      %b Animoi {{anim_level}}
+      %b
+        =t("house.animate")
+        {{anim_level}}
     %range-slider{"v-bind:value":"level" , "v-on:input":"set_level($event)",
                   ":min":"0", ":max":"32"}
-      %b Vaihe {{get_level(1)}}
-    %range-slider{"v-bind:value":"value" , "v-on:input":"set_value($event)", ":min":"0", ":max":"100" , ":step":"1"}
-      %b val {{value}}
+      %b
+        =t("house.level")
+        {{get_level(1)}}
+    //%range-slider{"v-bind:value":"value" , "v-on:input":"set_value($event)", ":min":"0", ":max":"100" , ":step":"1"}
+    //  %b val {{value}}
 
   .canvas_wrapper
     %canvas#xeocanvas
