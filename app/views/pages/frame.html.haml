@@ -3,64 +3,66 @@
     %h1 Timberframe-rungon suunnittelutyökalu
   .graph-header.left-2
     .post-info.tooltip
-      Mikä tämä on?
+      =t("frame.what")
       %span.kysymys
         =image_tag "img/kysymys.png"
       %span.tooltiptext
+        %b= t("frame.tt1")
+        = t("frame.tt2")
+        %br
+        = t("frame.tt2")
+        %br
+        %br
+        -[:pitch ,:height , :width_etc, :size , :scale , :type ].each do |type|
+          %b= t("frame.#{type}")
+          = t("frame.#{type}_desc")
+          %br
         %b
-          Tämän sivun työkalulla voit itse suunnitella Timberframe -runkoa.
-        Liukusäätimillä muutat rungon ominaisuuksia.
-        %br
-        Viemällä kursorin mallikuvan päälle voit zoomata sisään ja ulos. Tartu hiirellä niin voit kääntää taloa ja horisonttia.
-        %br
-        %br
-        %b Kattokulma
-        Muuta katon kaltevuutta, muuttaa myös katon korkeutta
-        %br
-        %b Pylvään korkeus
-        Muuttaa seinän korkeutta
-        %br
-        %b Leveys, pituus ja pylväiden määrä
-        Nämä määrittävät rungon mittasuhteet ja pylväiden välit
-        %br
-        %b Palkin koko
-        Miten isosta tavarasta runko tehdään
-        %br
-        %b Mittakaava
-        Muuta näkymää isommaksi tai pienemmäksi
-        %br
-        %b Rakenteen tyyppi
-        Kokeile eri tyyppisiä kattapalkkien rakenteita
-        %br
-        %br
-        %b
-          %i Kannattaa kokeilla!
+          %i=t("frame.try")
 
 
   .post_control.right-3
     %range-slider{"v-model":"frame.angle" , ":min":"5", ":max":"46" }
-      %b Kattokulma {{frame.angle}}&deg;
+      %b
+        = t("frame.pitch")
+        {{frame.angle}}&deg;
       %br
-      (Korkeus: {{Math.floor(truss_height)}}cm)
+      (
+      =t("frame.height")
+      \:
+      {{Math.floor(truss_height)}}cm)
     %range-slider{"v-model":"frame.height" , ":min":"50", ":max":"180" }
-      %b Pylvään korkeus {{frame.height*2}}
+      %b
+        =t("frame.height")
+        {{frame.height*2}}
     %range-slider{"v-model":"frame.width" ,":min":"50", ":max":"330"}
-      %b Leveys {{frame.width*2}}
+      %b
+        =t("frame.width")
+        {{frame.width*2}}
     %range-slider{"v-model":"frame.spacing" , ":min":"50", ":max":"330"}
-      %b Pituus {{length*2}}
+      %b
+        =t("frame.length")
+        {{length*2}}
       %br
-      (Pylväiden väli: {{frame.spacing*2}})
+      (
+      =t("frame.spacing")
+      \:
+      {{frame.spacing*2}})
     %range-slider{"v-bind:value":"posts" , "v-on:input":"set_posts($event)",
                   ":min":"2", ":max":"11"}
-      %b Pylväitä {{posts}}
+      %b
+        =t("frame.posts")
+        {{posts}}
     %range-slider{"v-model":"frame.size" ,":min":"5", ":max":"12.5" , ":step":"1.25"}
-      %b Palkin koko {{frame.size*2}}cm ({{(frame.size*2/2.5).toFixed(0)}}in)
+      %b
+        =t("frame.size")
+        {{frame.size*2}}cm ({{(frame.size*2/2.5).toFixed(0)}}in)
     %range-slider{"v-bind:value":"scale", "v-on:input":"set_scale($event)",":min":30, ":max":150}
       %span
-        %b Mittakaava
+        %b=t("frame.scale")
         %b {{scale}}
     .rangeslider
-      %b Rakenteen tyyppi
+      %b=t("frame.type")
       %input{type:"checkbox", "v-model":"frame.braced"}
       %br
     .rangeslider
