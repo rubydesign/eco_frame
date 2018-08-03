@@ -1,13 +1,13 @@
 .section.section1
   .text-page-top.img75
-    %h1 UUSI KOTISI
+    %h1=t("homes.new_home_head")
     %p
       %b
-        EcoFramehouse rakentaa koteja jotka ovat tyylikäitä, ekologisia ja kestäviä.
+        =t("homes.new_home_1")
         %br
-        Kuvassa näkyvät rakenteet on käsin tehty Timberframe -tekniikalla, jossa
+        =t("homes.new_home_2")
         %br
-        kantavat palkit liitetään toisiinsa loviliitoksin, ilman ruuveja tai nauloja.
+        =t("homes.new_home_3")
     =image_tag "img/sisa.jpg"
     %p
       %b
@@ -19,12 +19,12 @@
     .right-6
       =image_tag "img/talo-malli.jpg"
     .left-6.text-left
-      %h2 Ekologinen talo
+      %h2=t("homes.eco_head")
       %p
-        Ecoframe -talo on hengittävä mutta hyvin eristetty. Se on rakennettu luonnollisista aidoista materiaaleista - runko on massiivipuuta ja eristeet ekologisia. Näin rakennetussa talossa on hyvä asua ja elää.
+        =t("homes.eco_1")
         %br
         %br
-        Olemme vuosien työn tuloksena kehittäneet rakenteen, jossa talon vankka ja kaunis Timberframe -runko jää talon sisäpuolelle näkyviin. Se antaa talon sisätiloille upean ja elävän ilmeen. Ulkovaippa eristetään tukevasti, ja muodostaa rungon ympärille lämpöisen, saumattoman kuoren.
+        =t("homes.eco_2")
         %br
         %br
 
@@ -35,14 +35,14 @@
       =image_tag "img/frame.jpg"
 
     .right-5.text-left
-      %h2 Timberframe-hirsirunko
+      %h2=t("homes.tf_head")
       %p
-        Rakennamme perinteisiä keskieurooppalaisia timberframe -rakenteita. Niissä talon kantava rakenne tehdään massiivipuusta, puupalkeista jotka liitetään toisiinsa loviliitoksin. Rakenne tehdään käsityönä, täysin ilman ruuveja ja nauloja. Se perustuu tarkkoihin liitoksiin jotka lukittuvat toisiinsa ja varmistetaan puisin tapein.
+        =t("homes.tf_1")
         %br
-        Näin valmistettu rakenne on kestävä, kaunis ja ympäristöä kunnioittava.
+        =t("homes.tf_2")
         %br
         %br
-        =link_to "lue lisää" , "/frames" , class: "button"
+        =link_to t("read_more") , "/frames" , class: "button"
         %br
         =image_tag "img/frame2.jpg" , width: 340
 
@@ -50,17 +50,16 @@
     &nbsp;
   .text-page
     .left-6.text-left
-      %h2
-        Lämpimät seinät
+      %h2=t("homes.walls_head")
       %p
-        Kun timberframe- eli pilari-palkkitekniikalla rakennetaan asuintaloja, on runkopalkkien välit ulkoseinissä perinteisesti täytetty esim. savi-olkipaalirakenteella. Näin saadaan hengittävä, kevyt ja kuitenkin lämmin ja kestävä seinä. Myös kalkin ja olkien sekoitusta on käytetty.
+        =t("homes.walls_1")
         %br
         %br
-        Kehittämässämme rakenteessa ulkoseinät tehdään pilari-palkkirakenteen ulkopuolelle, jolloin kaunis runko jää sisälle näkyviin. Ulkoverhous voidaan tehdä laudalla, sisäpintaan tulee esimerkiksi vaneri tms puulevy. Myös kipsilevyn käyttö on mahdollista.
+        =t("homes.walls_2")
         %br
-        Käyttämämme eristeet ovat puukuitua tai selluvillaa, höyrynsulkuna toimii paperi eikä muovi.
+        =t("homes.walls_3")
         %br
-        Käyttämämme puu on peräisin kestävällä kehityksellä hoidetuista metsistä.  Näin rakennettu talo on ekologinen, lämmin, ja erittäin energiataloudellinen.
+        =t("homes.walls_4")
 
     .left-6
       =image_tag "img/frames/kollaasi-frame.jpg"
@@ -74,9 +73,9 @@
     .left-6
       =image_tag "img/huone-800.jpg"
     .right-6.text-left
-      %h2 Koti
+      %h2=t("homes.home_head")
       %p
-        Lopputuloksena on talo, joka on kaunis, moderni ja ekologinen. Ecoframe -talossa vahva ja kestävä rakenne, ja se antaa sisätiloille ainutlaatuisen ilmeen.
+        =t("homes.home_1")
 
   .text-border
     \ 
@@ -84,6 +83,5 @@
     .right-6
       =image_tag "header_design.jpg"
     .left-6
-      %h2 Suunnittelu ja toteutus
-      %p
-        Meiltä saat sekä suunnittelun että toteutuksen. Jos sinulla on idea rakennuksesta, pergolasta, parvekkeesta tms, me autamme suunnittelemaan rakenteen ja toteutamme sen. Ota yhteyttä!
+      %h2=t("homes.design_head")
+      %p=t("homes.design_1")
