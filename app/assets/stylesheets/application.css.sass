@@ -3,9 +3,6 @@
  * listed below.
  *
  *= require_self
- *= require index
- *= require graph
- *= require page
  */
 
 @import "susy"
@@ -13,6 +10,10 @@
 @import url('https://fonts.googleapis.com/css?family=Open Sans:400,400i,700,700i')
 
 $susy: layout(12 1/2 fluid float split center)
+
+@import "index"
+@import "graph"
+@import "page"
 
 html
   height: 100%

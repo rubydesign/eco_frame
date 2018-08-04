@@ -2,6 +2,9 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    / mobile settings
+    %meta{:content => "width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0", :name => "viewport"}/
     %title= t("layout.title")
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all'
