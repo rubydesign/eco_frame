@@ -1,4 +1,20 @@
 .page
+  @include container(100%)
+  .footer
+    clear: both
+  .topic
+    @include span(12)
+    clear: both
+  .head
+    @include span(12)
+  .body
+    @include span(12)
+  .img_100
+    width: 100%
+  .text-border
+    border-bottom: 1px dotted #5b615c
+    margin: 10px 130px
+
   p
     font-size: 1.2em
     line-height: 150%
@@ -35,64 +51,24 @@
     .backgr-wh
       background: white
 
-  .section
-    position: relative
-    /* padding: 20% 10%
-    min-height: 100%
-    width: 100%
-    box-sizing: border-box
-    box-shadow: 0 10px 1px white, 0 -10px 1px white
-    background-position: 50% 50%
-    background-size: cover
-    /* overflow: auto
+  .text
+    width: 50%
+    padding: 10px 50px
+    border-radius: 1px
+    background: rgba(200, 200, 200, 0.7)
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.4)
 
-    .text
-      width: 50%
-      padding: 10px 50px
-      border-radius: 1px
-      background: rgba(200, 200, 200, 0.7)
-      box-shadow: 0 0 7px rgba(0, 0, 0, 0.4)
+  .text-page
+    padding: 50px 120px 20px
+    text-align: center
+    /* min-height: 280px
+    overflow: auto
+    img
+      max-width: 90%
 
-    .text-page
-      padding: 50px 120px 20px
-      text-align: center
-      /* min-height: 280px
-      overflow: auto
-      img
-        max-width: 90%
-
-    .text-page-top
-      padding: 0px 120px 20px
-      text-align: center
-      overflow: auto
-      img
-        max-width: 90%
-
-    .text-border
-      border-bottom: 1px dotted #5b615c
-      margin: 10px 130px
-
-  .section1
-    .text
-      margin: 200px
-      margin-left: 200px
-      margin-right: 200px
-      background-image: image-url("header_homes.jpg")
-      transform: translateZ(-1px) scale(2)
-
-  .section2
-    .text
-      margin-left: 0
-      margin-right: auto
-
-  .section3
-    .text
-      margin-left: auto
-      margin-right: 0
-
-  .section1
-    background-color: white
-
-  .section2
-    background-image: image-url("header_garden.jpg")
-    background-attachment: fixed
+  .text-page-top
+    padding: 0px 120px 20px
+    text-align: center
+    overflow: auto
+    img
+      max-width: 90%
