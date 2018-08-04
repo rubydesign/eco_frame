@@ -8,7 +8,7 @@
     %title= t("layout.title")
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all'
-  %body{class: params[:id]}
+  %body{class: body_class}
     = render "layouts/menu" unless params[:id] == "index"
     = yield
     .section5.section.footer
