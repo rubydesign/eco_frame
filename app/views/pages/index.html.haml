@@ -1,9 +1,14 @@
 .title.section.header
   .main_box
-    .left-11.menu
-      \ 
-    .right-1.menu
-      = render "layouts/dropdown"
+  .left-10.menu
+    &nbsp;
+  .right-2.menu
+    .flag
+      - I18n.available_locales.each do |lang|
+        =link_to "/#{lang}/#{params[:id]}" do
+          =image_tag "#{lang.to_s}.gif"
+
+    = render "layouts/dropdown"
 
     .left-12
       %h1=t("index.main_head")
