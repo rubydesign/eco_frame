@@ -1,87 +1,74 @@
-.section.section1
-  .text-page-top.img85
+.topic
+  .head
     %h1=t("frames.timberframe")
+  .body
     =image_tag "img/frames/Frame-aloitus.gif"
-    %p.t-padding-10
+    %p
       =t("frames.explanation")
+
+.topic
+  .left-up.text-left
+    %h2
+      =t("frames.in_house_head")
+    %p
+      =t("frames.in_house_1")
       %br
+      %br
+      =t("frames.in_house_2")
+      %br
+      %br
+      %br
+      =image_tag "img/frames/kollaasi-frame-2.jpg"
 
-  .text-border
-    &nbsp;
-  .text-page
-    .left-7.text-left
-      %h2
-        =t("frames.in_house_head")
-      %p
-        =t("frames.in_house_1")
-        %br
-        %br
-        =t("frames.in_house_2")
-        %br
-        %br
-        %br
-        =image_tag "img/frames/kollaasi-frame-2.jpg"
+  .right-down.img85.invisible-phone
+    =image_tag "img/frames/many_joins.jpg"
 
-    .left-5.img85
-      =image_tag "img/frames/_MG_1935.jpg"
+.topic
+  .right-up-wide
+    =image_tag "img/frames/kollaasi-frame-4.jpg"
+  .left-down-narrow.text-left
+    %h2
+      =t("frames.joins_head")
+    %p
+      =t("frames.joins_1")
 
-  .text-page
-    .left-4.text-left
-      %h2
-        =t("frames.joins_head")
-      %p
-        =t("frames.joins_1")
-
-    .left-8
-      =image_tag "img/frames/kollaasi-frame-4.jpg"
-  .left-12.t-padding-10.text-center
+  .all.text-left
     %p
       =t("frames.sum_1")
 
+.topic
+  .right-up
+    =image_tag "img/frames/kollaasi-frame-3.jpg"
+
+  .left-down.text-left
+    %h2
+      =t("frames.poss_head")
+    %p
+      =t("frames.poss_1")
+      %br
+
+.topic
+  .left-up.text-left
+    %h2
+      =t("frames.design_head")
+    %p
+      =t("frames.design_1")
+      %br
+  .right-down
+    =image_tag "img/frames/handshake.jpg"
 
 
-  .text-border
-    &nbsp;
-  .text-page
-    .left-6
-      =image_tag "img/frames/kollaasi-frame-3.jpg"
-
-    .right-6.text-left
-      %h2
-        =t("frames.poss_head")
-      %p
-        =t("frames.poss_1")
-        %br
-
-
-  .text-border
-    &nbsp;
-
-  .text-page
-    .left-8.text-left
-      %h2
-        =t("frames.design_head")
-      %p
-        =t("frames.design_1")
-        %br
-    .right-4
-      =image_tag "img/frames/handshake.jpg"
-
-
-  .text-border
-    &nbsp;
-
-  .text-page
-    .left-6.text-left
-      %h2
-        =t("frames.tool_head")
-      %p
-        =t("frames.tool_1")
-        %br
-        =t("frames.tool_2")
-        %br
-        %br
-        =link_to t("frames.test") , "/frame" , class: "button"
-    .right-6
-      %a{:href => "/frame"}
-        =image_tag "img/frames/frame-animation.gif"
+.topic
+  .right-up
+    %a{:href => "/frame"}
+      =image_tag "img/frames/frame-animation.gif"
+  .left-down.text-left
+    %h2
+      =t("frames.tool_head")
+    %p
+      =t("frames.tool_1")
+      %br
+      =t("frames.tool_2")
+      %br
+      %br
+      =link_to t("frames.test") , "/frame" , class: "button"

@@ -2,6 +2,10 @@
   @include container(100%)
   .footer
     clear: both
+  .all
+    &::before
+      clear: both
+    @include span(12)
   .topic
     &:first-of-type
       padding-top: 0px
@@ -67,6 +71,26 @@
       float: right
     @media only screen and (max-width: 1080px)
       @include span(4)
+      float: right
+    @media only screen and (max-width: 880px)
+      @include span(12)
+
+  .left-down-narrow
+    @include span(4)
+    @media only screen and (max-width: 1280px)
+      @include span(5)
+    @media only screen and (max-width: 1080px)
+      @include span(6)
+    @media only screen and (max-width: 880px)
+      @include span(12)
+  .right-up-wide
+    @include span(8)
+    float: right
+    @media only screen and (max-width: 1280px)
+      @include span(7)
+      float: right
+    @media only screen and (max-width: 1080px)
+      @include span(6)
       float: right
     @media only screen and (max-width: 880px)
       @include span(12)
