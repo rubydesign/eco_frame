@@ -12,8 +12,8 @@
     = render "layouts/menu" unless params[:id] == "index"
     = yield
     .section5.section.footer
-      .footer-box
-        .left-4
+      .footer-box.footer-left
+        .left-8
           %h2 ECOFRAMEHOUSE
           %img{:src => "/assets/logo-musta-100.png", :width => "85"}/
           %p
@@ -26,7 +26,7 @@
             Fiskarsintie 847
             %br
             10480 Antskog
-        .footer-links.left-2.text-center
+        .footer-links.left-4.text-center
           %br
 
           %h3
@@ -55,20 +55,20 @@
             %br
 
 
-        .form.left-6
-          .form-container
-            %h2 Ota yhteyttä
+      .footer-box.form.footer-right
+        .form-container
+          %h2 Ota yhteyttä
 
-            %form{:action => "action_page.php"}
-              %label{:for => "fname"} Nimi
-              %input#fname{:name => "nimi", :placeholder => "Nimesi", :type => "text"}/
-              %label{:for => "sposti"}
-                Sähkö-
-                %br
-                posti
-              %input#email{:email => "lastname", :placeholder => "Sähköpostiosoite", :type => "text"}/
-              %label{:for => "puh"} Puhelin
-              %input#email{:phone => "phone", :placeholder => "Puhelinnumero", :type => "text"}/
-              %label{:for => "viesti"} Viesti
-              %textarea#subject{:name => "subject", :placeholder => "Viestikenttä", :style => "height:70px"}
-              %input{:type => "submit", :value => "Lähetä"}/
+          %form{:action => "action_page.php"}
+            %label{:for => "fname"} Nimi
+            %input#fname{:name => "nimi", :placeholder => "Nimesi", :type => "text"}/
+            %label{:for => "sposti"}
+              Sähkö-
+              %br
+              posti
+            %input#email{:email => "lastname", :placeholder => "Sähköpostiosoite", :type => "text"}/
+            %label{:for => "puh"} Puhelin
+            %input#email{:phone => "phone", :placeholder => "Puhelinnumero", :type => "text"}/
+            %label{:for => "viesti"} Viesti
+            %textarea#subject{:name => "subject", :placeholder => "Viestikenttä", :style => "height:70px"}
+            %input{:type => "submit", :value => "Lähetä"}/

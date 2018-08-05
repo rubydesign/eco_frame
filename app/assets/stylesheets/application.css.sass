@@ -51,6 +51,11 @@ body
   a
     text-decoration: none
     color: #000
+  padding-bottom: 40px
+
+  min-height: 500px
+  @media only screen and (max-width: 880px)
+    min-height: 900px
 
   .footer-div
     border-right: 4px dotted #fff
@@ -63,9 +68,18 @@ body
   .footer-box
     height: 400px
     padding: 13px 0px 0px 0px
-    border-radius: 1px
+    border-radius: 3px
     background: rgba(255, 255, 255, 0.8)
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2)
+
+  .footer-left
+    @include span(6)
+    @media only screen and (max-width: 880px)
+      @include span(12)
+  .footer-right
+    @include span(6)
+    @media only screen and (max-width: 880px)
+      @include span(12)
 
 .white
   color: #fff
