@@ -1,16 +1,15 @@
 %header
-  .title.header
-    .left-7.header-logo
-      %a{:href => "../"}
-        =image_tag "logo-valk-100.png"
-        %h1= t("layout.title")
-    .left-4
-      %h3{:style => "margin-top: 43px;"}
-        =t("layout.sub_title")
-    .flag
-      - I18n.available_locales.each do |lang|
+  .header-logo
+    %a{:href => "../"}
+      =image_tag "logo-valk-100.png"
+      %h1= t("layout.title")
+  .sub-title
+    %h3{:style => "margin-top: 43px;"}
+      =t("layout.sub_title")
+  .right
+    - I18n.available_locales.each do |lang|
+      .flag
         =link_to "/#{lang}/#{params[:id]}" do
           =image_tag "#{lang.to_s}.gif"
-
-    .left-1
+    .menu
       = render "layouts/dropdown"

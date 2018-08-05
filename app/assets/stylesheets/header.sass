@@ -1,0 +1,97 @@
+header
+  background-image: image-url("header_index.jpg")
+  @include container(100%)
+  font-size: 175%
+  color: #fff
+  text-shadow: 0 2px 2px #000
+  h1
+    text-align: left
+    margin-left: 150px
+    @media only screen and (max-width: 680px)
+      font-size: 40px
+  h3
+    text-align: right
+    @media only screen and (max-width: 1180px)
+      font-size: 30px
+    @media only screen and (max-width: 1080px)
+      font-size: 24px
+  .header-logo
+    margin-left: 50px
+    img
+      width: 100px
+      float: left
+    a
+      color: #ffffff
+      text-decoration: none
+    @include span(7)
+    @media only screen and (max-width: 1080px)
+      @include span(10)
+  .sub-title
+    @include span(4)
+    @media only screen and (max-width: 1080px)
+      display: none
+  .right
+    min-height: 60px
+    @include span(1)
+    @media only screen and (max-width: 1080px)
+      @include span(2)
+    .flag
+      @include gallery(4)
+    .menu
+      @include span(12)
+    @media only screen and (max-width: 80px)
+      @include span(1)
+    @media only screen and (max-width: 80px)
+      @include span(1)
+.flag
+  margin-top: 5px
+  img
+    width: 100%
+    box-shadow: 1px 1px 15px white
+  a
+    text-decoration: none
+
+
+/* -- Dropdown menu start
+.dropbtn
+  /* background-color: #4CAF50
+  background: url("menu.png") no-repeat
+  min-height: 40px
+  color: white
+  padding-left: 16px
+  padding-right: 16px
+  font-size: 16px
+  border: none
+  cursor: pointer
+  position: relative
+  left: 45px
+  top: 28px
+
+.dropdown
+  position: relative
+  display: inline-block
+
+.dropdown-content
+  display: none
+  position: absolute
+  background-color: #f9f9f9
+  min-width: 120px
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2)
+  z-index: 1
+
+.dropdown-content a
+  color: black
+  padding: 8px 12px
+  text-decoration: none
+  display: block
+  text-shadow: none
+  font-size: .6em
+  text-align: left
+
+.dropdown-content a:hover
+  background-color: #f1f1f1
+
+.dropdown:hover .dropdown-content
+  display: block
+
+/* -- Dropdown menu end
