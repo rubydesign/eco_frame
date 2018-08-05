@@ -3,17 +3,36 @@
   .footer
     clear: both
   .topic
-    @include span(12)
-    clear: both
-  .head
-    @include span(12)
-  .body
+    &:first-of-type
+      padding-top: 0px
+      border-top: none
+    @include span(10)
+    padding-top: 50px
+    padding-bottom: 50px
+    padding-left: span(1)
+    padding-right: span(1)
+    text-align: center
+    /* min-height: 280px
+    overflow: auto
+    img
+      width: 100%
+    border-top: 1px dotted #5b615c
+    &::after
+      content: "\00a0"
+      margin: 10px 130px
+      clear: both
+    h1 , h2
+      margin-top: 0px
+  .head, .body
     @include span(12)
   .img_100
     width: 100%
   .text-border
     border-bottom: 1px dotted #5b615c
     margin: 10px 130px
+  .invisible-phone
+    @media only screen and (max-width: 1080px)
+      display: none
 
   p
     font-size: 1.2em
@@ -27,11 +46,45 @@
     text-shadow: 0 2px 2px #000
 
     h1
-      margin-top: 10px
-      margin-bottom: 0px
+      margin: 0px
       font-size: 250%
     h2
       line-height: 0%
+
+  .left-down
+    @include span(4)
+    @media only screen and (max-width: 1280px)
+      @include span(6)
+    @media only screen and (max-width: 1080px)
+      @include span(8)
+    @media only screen and (max-width: 880px)
+      @include span(12)
+  .right-up
+    @include span(8)
+    float: right
+    @media only screen and (max-width: 1280px)
+      @include span(6)
+      float: right
+    @media only screen and (max-width: 1080px)
+      @include span(4)
+      float: right
+    @media only screen and (max-width: 880px)
+      @include span(12)
+
+
+  .left-up
+    @include span(9)
+    @media only screen and (max-width: 1280px)
+      @include span(8)
+    @media only screen and (max-width: 880px)
+      @include span(12)
+  .right-down
+    @include span(3)
+    @media only screen and (max-width: 1280px)
+      @include span(4)
+    @media only screen and (max-width: 880px)
+      @include span(12)
+
 
   .title
     background-image: image-url("header_index.jpg")

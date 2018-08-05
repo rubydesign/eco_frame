@@ -9,81 +9,64 @@
         =t("homes.new_home_2")
         %br
         =t("homes.new_home_3")
-    =image_tag "img/sisa.jpg" , class: :img_100
+    =image_tag "img/sisa.jpg"
+
+.topic
+  .right-up
+    =image_tag "img/talo-malli.jpg"
+  .left-down.text-left
+    %h2=t("homes.eco_head")
+    %p
+      =t("homes.eco_1")
+      %br
+      %br
+      =t("homes.eco_2")
+      %br
+      %br
+
+.topic
+  .left-up
+    =image_tag "img/frame.jpg"
+  .right-down.text-left
+    %h2=t("homes.tf_head")
+    %p
+      =t("homes.tf_1")
+      %br
+      =t("homes.tf_2")
+      %br
+      %br
+      =link_to t("read_more") , "/frames" , class: "button"
+      .invisible-phone
+        %br
+        =image_tag "img/frame2.jpg"
+
+.topic
+  .right-up
+    =image_tag "img/frames/kollaasi-frame.jpg"
+  .left-down.text-left
+    %h2=t("homes.walls_head")
+    %p
+      =t("homes.walls_1")
+      %br
+      %br
+      =t("homes.walls_2")
+      %br
+      =t("homes.walls_3")
+      %br
+      =t("homes.walls_4")
 
 .topic
 
-  .text-border
-    \ 
-  .text-page
-    .right-6
-      =image_tag "img/talo-malli.jpg"
-    .left-6.text-left
-      %h2=t("homes.eco_head")
-      %p
-        =t("homes.eco_1")
-        %br
-        %br
-        =t("homes.eco_2")
-        %br
-        %br
+  .left-up
+    =image_tag "img/huone-800.jpg"
+  .right-down
+    %h2=t("homes.home_head")
+    %p.text-left
+      =t("homes.home_1")
 
 .topic
-  .text-border
-    \ 
-  .text-page
-    .left-7
-      =image_tag "img/frame.jpg"
-
-    .right-5.text-left
-      %h2=t("homes.tf_head")
-      %p
-        =t("homes.tf_1")
-        %br
-        =t("homes.tf_2")
-        %br
-        %br
-        =link_to t("read_more") , "/frames" , class: "button"
-        %br
-        =image_tag "img/frame2.jpg" , width: 340
-
-  .text-border
-    &nbsp;
-  .text-page
-    .left-6.text-left
-      %h2=t("homes.walls_head")
-      %p
-        =t("homes.walls_1")
-        %br
-        %br
-        =t("homes.walls_2")
-        %br
-        =t("homes.walls_3")
-        %br
-        =t("homes.walls_4")
-
-    .left-6
-      =image_tag "img/frames/kollaasi-frame.jpg"
-
-
-.topic
-
-
-  .text-border
-    \ 
-  .text-page
-    .left-6
-      =image_tag "img/huone-800.jpg"
-    .right-6.text-left
-      %h2=t("homes.home_head")
-      %p
-        =t("homes.home_1")
-
-  .text-border
-    \ 
-  .text-page.text-right
-    .right-6
-      =image_tag "header_design.jpg"
-    .left-6
-      %h2=t("homes.design_head")
-      %p=t("homes.design_1")
+  .left-up
+    =image_tag "header_design.jpg"
+  .right-down
+    %h2=t("homes.design_head")
+    %p=t("homes.design_1")
