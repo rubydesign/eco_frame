@@ -37,11 +37,11 @@ var camera_control = new xeogl.CameraControl();
 var materials = {
   wood:  new xeogl.MetallicMaterial({ baseColor: [230/250, 145/250, 60/250],
     metallic: 0, roughness: 0.55,
-    baseColorMap: { src: "wood.jpg" },emissiveMap: { src: "wood.jpg" },}),
+    baseColorMap: { src: "/wood.jpg" },emissiveMap: { src: "/wood.jpg" },}),
   floor: new xeogl.LambertMaterial({ color: [0/255, 6/255, 0/255]}),
   red:   new xeogl.MetallicMaterial({ baseColor: [66/255, 0/255, 0/255],
           metallic: 0, roughness: 0.55,
-          baseColorMap: { src: "puna.jpg"},emissiveMap: {src: "puna.jpg"},}),
+          baseColorMap: { src: "/puna.jpg"},emissiveMap: {src: "/puna.jpg"},}),
   black: new xeogl.MetallicMaterial({ baseColor: [2/255, 2/255, 2/255],
             roughness: 0.67 }),
   inner: new xeogl.LambertMaterial({ color: [100/255, 100/255, 100/255]}),
