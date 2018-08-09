@@ -1,38 +1,42 @@
 en:
   frames:
     timberframe: TIMBERFRAME
-    explanation: Timberframe (joskus suomeksi pilari-palkkirakenne) on
-                 vanha perinteinen rakennustapa, jossa talojen runko kootaan
-                 massiivipuisista pilareista ja palkeista puusepän liitoksin.
-                 Tällainen rakennustapa on ollut yleinen Keski-Euroopassa,
-                 Pohjois-Amerikassa ja Japanissa, joissa on ollut paljon
-                 korkeatasoista puurakentamista.
-    in_house_head: Timberframe talonrakennuksessa
-    in_house_1: Timberframe-runko rakennetaan kokopuisista, huolellisesti
-                mittaan katkaistuista palkeista, jotka liitetään toisiinsa
-                käsintehdyin loviliitoksin.
-    in_house_2: Mittauksen on oltava tarkkaa ja kaikki osat sovitetaan toisiinsa
-                verstaalla valmistuksen jälkeen.
-    joins_head: Tarkkaan sovitetut liitokset
-    joins_1: Liitoksissa ei käytetä nauloja tai ruuveja. Liitokset tehdään
-             koloamalla palkkeihin, ja varmistetaan puutapein.
-    sum_1: Tällä tavoin valmistettu runko on kaunis, tukeva ja kestävä, sekä ekologinen.
-    poss_head: Monenlaiset rakenteet mahdollisia
-    poss_1: Timberframe soveltuu moneen muuhunkin kuin talonrakennukseen.
-            Parveke, kuisti, ulkovaja ja -huone, kasvihuone, pergola...
-            ja monet muut rakenteet ovat mahdollisia tällä monipuolisella
-            tekniikalla.
-    design_head: Suunnittelusta toteutukseen
-    design_1: Tarvittaessa saat EcoFramehouselta koko paketin suunnittelusta
-              toteutukseen. Yhteistyökumppaneistamme löytyy arkkitehteja ja
-              rakennesuunnittelijoita. Meillä on myös ammattitaitoiset ja
-              luotettavat tekijät lähipiirissämme kaikkiin talonrakennuksen
-              tehtäviin.
-    tool_head: Testaa suunnittelua
-    tool_1: Alla olevan linkin kautta voit kokeilla erilaisten hirsirunkojen
-            suunnittelua. Työkalulla voi muuttaa mallin palkkien määrää,
-            pituutta ja leveyttä, sekä kokeilla eri tyyppisiä kattorakenteita.
-            Malli kertoo myös paljonko puuta rakenteeseen tarvitaan,
-            ja antaa alustavan hinta-arvion sille.
-    tool_2: Käy kokeilemassa!
-    test: testaa mallia
+    explanation: Timberframing is an old english technique, used in thousand years
+                 old churches and also boats. In Timberframing, large wood is joined
+                 without nails, only using woorden pegs, the most common join being a
+                 mortise and tennon.
+                 The Timberframe revival started in America in the 70's, and
+                 nowadays Timberframe houses are built again all over the world,
+                 bringing together traditional techniques with modern architecture.
+    in_house_head: Timberframe houses
+    in_house_1: Timberframes are built from whole wood, usually quite large beams
+                that we source locally. The frame is created by hand
+                in our workshop and can be erected quite quickly on site.
+    in_house_2: Precise work, and test fitting in the workshop, make for
+                a very smooth raising process and allow to go from foundation
+                to finished roof in a very short time.
+    joins_head: Precise joins (mortise and tennon)
+    joins_1: The diagram shows the most common join, a mortise and tennon.
+             In this join, the tennon, created on one side, is inserted into the
+             mortise (the hole) on the other side. The join is secured with
+             wooden pins.
+    sum_1: Using this and other joins we create beautiful, strong and long lasting
+           structures that are both functional and ecological.
+
+    poss_head: Solutions for many needs
+    poss_1: The Timberframe can be used for many other structures, not just houses.
+            Terasses, outhouses, greehouses and garages can all be created
+            as timberframe structures.
+    design_head: From design to execution
+    design_1: EcoFrameHouse will help you all the way from inception to execution.
+              If you have not found an Architect, we can help you. We know
+              the Enigineerers and neccessary steps to get your dream house
+              onto paper and realized.
+    tool_head: Try yourself
+    tool_1: The tool that you find behind the link below let's you plan
+            timberframes. You can change the size and amount of posts, and
+            also change the kind of roof trusses. All in all it can give
+            you a good idea of how a timberframe will look in your project,
+            and also give a rough idea of price for it.
+    tool_2: Try it out!
+    test: goto tool
