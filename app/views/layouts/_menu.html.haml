@@ -6,10 +6,10 @@
   .sub-title
     %h3
       =t("layout.sub_title")
-  .right
-    - I18n.available_locales.each do |lang|
-      .flag
+  .menu.text-center
+    .flag
+      - I18n.available_locales.each do |lang|
         =link_to "/#{lang}/#{params[:id]}" do
           =image_tag "#{lang.to_s}.gif"
-    .menu
-      = render "layouts/dropdown"
+
+    = render "layouts/dropdown"
