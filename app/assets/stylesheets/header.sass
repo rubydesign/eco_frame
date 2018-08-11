@@ -6,11 +6,12 @@ header
   text-shadow: 0 2px 2px #000
   h1
     text-align: left
-    margin-left: 150px
+    margin: 25px 0px 20px 150px
     @media only screen and (max-width: 680px)
       font-size: 40px
   h3
     text-align: right
+    margin: 47px 0px 0px 0px
     @media only screen and (max-width: 1180px)
       font-size: 30px
     @media only screen and (max-width: 1080px)
@@ -18,12 +19,14 @@ header
   .header-logo
     margin-left: 50px
     img
-      width: 100px
+      width: 90px
       float: left
     a
       color: #ffffff
       text-decoration: none
-    @include span(7)
+    @include span(6)
+    @media only screen and (max-width: 1150px)
+      @include span(7)
     @media only screen and (max-width: 1080px)
       @include span(10)
   .sub-title
@@ -32,7 +35,9 @@ header
       display: none
   .right
     min-height: 60px
-    @include span(1)
+    @include span(2)
+    @media only screen and (max-width: 1150px)
+      @include span(1)
     @media only screen and (max-width: 1080px)
       @include span(2)
     .flag
@@ -46,11 +51,14 @@ header
 .flag
   margin-top: 5px
   img
+    max-width: 27px
     width: 100%
     box-shadow: 1px 1px 15px white
   a
     text-decoration: none
 
+.menu
+  padding-top: 6px
 
 /* -- Dropdown menu start
 .dropbtn
@@ -64,8 +72,6 @@ header
   border: none
   cursor: pointer
   position: relative
-  left: 45px
-  top: 28px
 
 .dropdown
   position: relative
