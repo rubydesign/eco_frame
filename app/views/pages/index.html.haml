@@ -1,8 +1,6 @@
 .title.section.header
   .main_box
-    .left-10.menu
-      &nbsp;
-    .right-2.menu
+    .left-12.menu.text-right
       .flag
         - I18n.available_locales.each do |lang|
           =link_to "/#{lang}/#{params[:id]}" do

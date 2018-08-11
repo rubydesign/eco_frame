@@ -1,7 +1,7 @@
 .index
   .header
     .menu
-      margin-top: 40px
+      padding-top: 40px
     text-align: center
     font-size: 175%
     color: #fff
@@ -9,11 +9,21 @@
       text-shadow: 0 2px 6px #000
     h1
       margin-top: 0px
-      font-size: 3em
       margin-bottom: 3px
+      font-size: 3em
+      @media only screen and (max-width: 605px)
+        font-size: 2.7em
+      @media only screen and (max-width: 460px)
+        font-size: 2.4em
+
     h2
       margin-top: 0px
       margin-bottom: 3px
+      font-size: 1.8em
+      @media only screen and (max-width: 460px)
+        font-size: 1.6em
+
+
     h4
       text-shadow: 0 2px 2px #000
       margin-top: 3px
@@ -31,11 +41,6 @@
     box-shadow:  0 10px 1px #602407, 0 -10px 1px #4a6616
     background: 50% 50% / cover
 
-    h2
-      margin-bottom: 3px
-      font-size: 1.8em
-
-
     .section_box
       @media only screen and (max-width: 800px)
         width: 60%
@@ -52,6 +57,7 @@
         text-align: center
     .main_box
       @include container(90%)
+
 
   .section1, section4
     .section_box
