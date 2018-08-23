@@ -1,50 +1,61 @@
 en:
   homes:
-    new_home_head: UUSI KOTISI
-    new_home_1: EcoFramehouse rakentaa koteja jotka ovat tyylikäitä,
-                ekologisia ja kestäviä.
-    new_home_2: Kuvassa näkyvät rakenteet on käsin tehty
-                Timberframe -tekniikalla, jossa
-    new_home_3: kantavat palkit liitetään toisiinsa loviliitoksin,
-                ilman ruuveja tai nauloja.
-    eco_head: Ekologinen talo
-    eco_1: Ecoframe -talo on hengittävä mutta hyvin eristetty.
-           Se on rakennettu luonnollisista aidoista materiaaleista -
-           runko on massiivipuuta ja eristeet ekologisia. Näin rakennetussa
-           talossa on hyvä asua ja elää.
-    eco_2: Olemme vuosien työn tuloksena kehittäneet rakenteen, jossa talon
-           vankka ja kaunis Timberframe -runko jää talon sisäpuolelle
-           näkyviin. Se antaa talon sisätiloille upean ja elävän ilmeen.
-           Ulkovaippa eristetään tukevasti, ja muodostaa rungon ympärille
-           lämpöisen, saumattoman kuoren.
-    tf_head: Timberframe-hirsirunko
-    tf_1: Rakennamme perinteisiä keskieurooppalaisia timberframe -rakenteita.
-          Niissä talon kantava rakenne tehdään massiivipuusta, puupalkeista
-          jotka liitetään toisiinsa loviliitoksin. Rakenne tehdään käsityönä,
-          täysin ilman ruuveja ja nauloja. Se perustuu tarkkoihin liitoksiin
-          jotka lukittuvat toisiinsa ja varmistetaan puisin tapein.
-    tf_2: Näin valmistettu rakenne on kestävä, kaunis ja ympäristöä kunnioittava.
-    walls_head: Lämpimät seinät
-    walls_1: Kun timberframe- eli pilari-palkkitekniikalla rakennetaan asuintaloja,
-             on runkopalkkien välit ulkoseinissä perinteisesti täytetty esim.
-             savi-olkipaalirakenteella. Näin saadaan hengittävä, kevyt ja
-             kuitenkin lämmin ja kestävä seinä. Myös kalkin ja olkien sekoitusta
-             on käytetty.
-    walls_2: Kehittämässämme rakenteessa ulkoseinät tehdään pilari-palkkirakenteen
-             ulkopuolelle, jolloin kaunis runko jää sisälle näkyviin.
-             Ulkoverhous voidaan tehdä laudalla, sisäpintaan tulee esimerkiksi
-             vaneri tms puulevy. Myös kipsilevyn käyttö on mahdollista.
-    walls_3: Käyttämämme eristeet ovat puukuitua tai selluvillaa, höyrynsulkuna
-             toimii paperi eikä muovi.
-    walls_4: Käyttämämme puu on peräisin kestävällä kehityksellä hoidetuista
-             metsistä.  Näin rakennettu talo on ekologinen, lämmin, ja
-             erittäin energiataloudellinen.
-    home_head: Koti
-    home_1: Lopputuloksena on talo, joka on kaunis, moderni ja ekologinen.
-            Ecoframe -talossa vahva ja kestävä rakenne, ja se antaa sisätiloille
-            ainutlaatuisen ilmeen.
-    design_head: Suunnittelu ja toteutus
-    design_1: Meiltä saat sekä suunnittelun että toteutuksen.
-              Jos sinulla on idea rakennuksesta, pergolasta, parvekkeesta
-              tms, me autamme suunnittelemaan rakenteen ja toteutamme sen.
-              Ota yhteyttä!
+    new_home_head: New Homes
+    new_home_1: EcoFramehouse builds stylish, ecological and sustainable
+                houses.
+    new_home_2: The pictures show the hand made timberframes that are the core
+                structure of an eco frame house.
+    new_home_3: In the traditional english Timberframe technique large wood is
+                joined without the use of metal.
+    eco_head: Ecological House
+    eco_1: Ecoframe houses are built from natural materials only, completely
+           diffusion open, but very well insulated.
+           The core structure, the timberframe, is made from large whole timber,
+           and around it a light (but thick) insulation layer keeps the house warm.
+           Since all materials are wood based (wood, paper etc, no plastic), the
+           air is clean and healthy.
+    eco_2: We have devloped the EcoFrameHouse concept from years of building
+           experience, to unite both traditional techiques and materials, with
+           modern high standards.
+           The visible timberframe on the inside gives the house a solid feel and
+           beautiful look. While the unbroken thick insulation layer (no cold bridges)
+           gives the house outstanding thermal qualities. This in turn means
+           a lovely warm feeling inside, and very low heating costs.
+    tf_head: Timberframe structure
+    tf_1: Timberframe is a very old english technique of making structural joins
+          on large timber. The technique has been used to build houses and churches,
+          some of which are almost a thousand years old.
+          The main join of the technique is the tennon and mortise join, in which
+          the tennon is inserted into the mortise and secured by wooden pegs.
+          Metal, like screws, nails or brackets are not used.
+          The joins are excuted very precisely using a mix of power and hand-tools,
+          and test fitted in the workshop for tight fit.
+    tf_2: A frame that may take many weeks, even months to craft, may be assembled
+          on site in one or two days.
+    walls_head: Thick insulation layer
+    walls_1: Since the timberframe is the structure of the house, the insulation
+             layer does not need to carry the house.
+             Thus it can be very lightweight and cost effective and provide a
+             relatively large space for insulation, creating almost a passive house.
+             Among the ecologic blown insulations available the most popular are
+             paper based EcoVilla, or wood-fiber based Hunton.
+             The diffusion barrier used in both cases in paper based, not plastic.
+
+    walls_2: Since the insulation is completely outside the frame, the
+             beautiful timberframe stays completely visible on the inside.
+             The outer cladding can be any kind of wood panneling.
+             Also the inside surfaces may be clad with wood panelling, but also
+             other board solutions may be used, including eg. clay finishes.
+    walls_3:
+    walls_4: We source as much of the wood as possible locally from sustainable
+             forests.
+    home_head: Home
+    home_1: The resulting house is ecological, beautiful and very energy efficient.
+            The frame gives the space a very unique feel, that can be tailored
+            to look more traditional or modern depending on finish.
+
+    design_head: From design to execution
+    design_1: EcoFrameHouse will help you all the way from inception to execution.
+              If you have not found an Architect, we can help you. We know
+              the Enigineers and neccessary steps to get your dream house
+              onto paper and realized.

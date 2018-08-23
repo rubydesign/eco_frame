@@ -1,24 +1,29 @@
 en:
   frame:
-    what: Mikä tämä on?
-    tt1: Tämän sivun työkalulla voit itse suunnitella Timberframe -runkoa.
-    tt2: Liukusäätimillä muutat rungon ominaisuuksia.
-    tt2: Viemällä kursorin mallikuvan päälle voit zoomata sisään ja ulos. Tartu hiirellä niin voit kääntää taloa ja horisonttia.
-    pitch: Kattokulma
-    pitch_desc: Muuta katon kaltevuutta, muuttaa myös katon korkeutta
-    height: Pylvään korkeus
-    height_desc: Muuttaa seinän korkeutta
-    width_etc: Leveys, pituus ja pylväiden määrä
-    width_etc__desc: Nämä määrittävät rungon mittasuhteet ja pylväiden välit
-    size:  Palkin koko
-    size_desc: Miten isosta tavarasta runko tehdään
-    scale: Mittakaava
-    scale_desc: Muuta näkymää isommaksi tai pienemmäksi
-    type: Rakenteen tyyppi
-    type_desc: Kokeile eri tyyppisiä kattapalkkien rakenteita
-    try: Kannattaa kokeilla!
-    width: Leveys
-    posts: Pylväitä
-    height: Korkeus
-    length: Pituus
-    spacing: Pylväiden väli
+    what: Info
+    tt1: This tool let's you design your own frame, see how it looks
+         and get an idea of the price.
+    tt2: With the sliders you can change the properties of the frame.
+    tt2: And by using the mouse on top of the picture, you can turn and scale the frame.
+    pitch: Pitch
+    pitch_desc: Changing the angle of the roof also changes the hight of the trusses.
+    height: Post hight
+    height_desc: This changes the wall, or room hight.
+    width_etc: Width, Length and number of posts
+    width_etc__desc: Changes those properties
+    size:  Wood size
+    size_desc: Changes the size of the wood used for the frame.
+               Standard size is 8x8 inch, or 20x20cm, about a hand span.
+    scale: Scale
+    scale_desc: Change the scale at which the frame is displayed
+    type: Truss style (uses braces)
+    type_desc: Let's you switch between different stlyes of trusses.
+               Different trusses can be used for different things, like a Pulpetti
+               is often used on terraces or garages, Collor trusses create large open
+               spaces and Stopped braces can make an upstairs space usable.
+    try: Try it!
+    width: Width
+    posts: Posts
+    height: Height
+    length: Length
+    spacing: Distance between Posts

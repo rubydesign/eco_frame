@@ -1,11 +1,11 @@
 en:
   layout:
     title: Eco Frame House
-    sub_title: Uniikkeja ekologisia koteja
-    phone: puh
+    sub_title: Unique ecolocical homes
+    phone: tel
   menu:
-    home: Etusivu
-    homes: Kodit
+    home: Homepage
+    homes: Homes
     frames: Timberframe
-    work: Käsityö
-  read_more: lue lisää
+    work: Woodwork
+  read_more: read more
