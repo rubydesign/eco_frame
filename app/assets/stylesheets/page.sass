@@ -25,8 +25,14 @@
       content: "\00a0"
       margin: 10px 130px
       clear: both
-    h1 , h2
+    h1
       margin-top: 0px
+    h2
+      margin-top: 0px
+      @media only screen and (max-width: 880px)
+        margin-top: 18px
+
+
   .head, .body
     @include span(12)
     h1
