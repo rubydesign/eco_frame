@@ -2,96 +2,41 @@ se:
   homes:
     new_home_head: DITT NYA HEM
     new_home_1: EcoFramehouse bygger hem som är stiliga, ekologiska och hållbara.
-    new_home_2: Konstruktionen i bilden är gjorda med Timberframe (stolpverk) -tekniken där
-    new_home_3: kantavat palkit träfogar utan skruvar eller spikar.
-    new_home_1: EcoFramehouse rakentaa koteja jotka ovat tyylikäitä,
-                ekologisia ja kestäviä.
-    new_home_2: Kuvassa näkyvät rakenteet on käsin tehty
-                Timberframe -tekniikalla, jossa
-    new_home_3: kantavat palkit liitetään toisiinsa loviliitoksin,
-                ilman ruuveja tai nauloja.
+    new_home_2: Konstruktionen i bilden är ett exempel på Timberframe (stolpverk) -tekniken där
+    new_home_3: de bärande balkarna är infällda i varandra och fogas utan skruvar eller spikar.
 
     eco_head: Ekologiska hus
-    eco_1: Ecoframe -huset är andningsbar men ändå bra insulerat.
+    eco_1: Ecoframe -huset andas men är ändå bra isolerat.
            Det är byggt av äkta naturliga materialer -
-           runko/strukturet är massivt virke och insulationen ekologiska.
-           Det är bra att bo i ett hus byggt med det här sättet.
-    eco_1: Ecoframe -talo on hengittävä mutta hyvin eristetty.
-           Se on rakennettu luonnollisista aidoista materiaaleista -
-           runko on massiivipuuta ja eristeet ekologisia. Näin rakennetussa
-           talossa on hyvä asua ja elää.
-    eco_2: .. flera år har vi utvecklat en konstruktion, där husets stadiga och
-           vackra Timberframe -struktus blir synbar inomhus.
-           Den ger husets interiör en underbar och levande uttryck.
-           Ulkovaippa ?? blir bra isolerat, och ...
-           Ulkovaippa eristetään tukevasti, ja muodostaa rungon ympärille
-           lämpöisen, saumattoman kuoren.
-    eco_2: Olemme vuosien työn tuloksena kehittäneet rakenteen, jossa talon
-           vankka ja kaunis Timberframe -runko jää talon sisäpuolelle
-           näkyviin. Se antaa talon sisätiloille upean ja elävän ilmeen.
-           Ulkovaippa eristetään tukevasti, ja muodostaa rungon ympärille
-           lämpöisen, saumattoman kuoren.
+           stolpverket utgörs av massivt virke och isoleringen är ekologisk.
+           Detta skapar förutsättningar för hälsosamt boende.
+    eco_2: Vi har under flera års tid utvecklat en konstruktion, där husets robusta och
+           vackra Stolpverks-struktur blir synligt inomhus.
+           Detta ger husets interiör ett fint och levande uttryck.
+           Ytterväggen blir väl isolerad och bildar ett foglöst varmt skal.
     tf_head: Timberframe-struktur
-    tf_head: Timberframe-hirsirunko
-    tf_1: Vi bygger traditionella mellaneuropeiska Timberframe-struktur.
-          Husets bärande struktur byggs av massivt virke, stockar som blir sammanfogade
-          ...
+    tf_1: Vi bygger traditionella Stolpverks-konstruktioner, en teknik som varit mera vanlig i Mellaneuropa.
+          Husets bärande struktur byggs av massivt virke, stockar som blir sammanfogade.
           Strukturen är handgjord, och byggs helt utan skruv eller spikar. Den är baserad
-          på exakta fogar som  ... lukittuvat toisiinsa ..
-          jotka lukittuvat toisiinsa ja varmistetaan puisin tapein.
-    tf_1: Rakennamme perinteisiä keskieurooppalaisia timberframe -rakenteita.
-          Niissä talon kantava rakenne tehdään massiivipuusta, puupalkeista
-          jotka liitetään toisiinsa loviliitoksin. Rakenne tehdään käsityönä,
-          täysin ilman ruuveja ja nauloja. Se perustuu tarkkoihin liitoksiin
-          jotka lukittuvat toisiinsa ja varmistetaan puisin tapein.
-    tf_2: Den här strukturen är hållbar, vacker on med respekt till naturen.
-    tf_2: Näin valmistettu rakenne on kestävä, kaunis ja ympäristöä kunnioittava.
+          på exakta, noggrant timrade fogar som pusslas ihop och försäkras med tappar i trä.
+    tf_2: Stolpverket är hållbart, vackert och tar hänsyn till naturen.
 
     walls_head: Varma väggar
     walls_1: När man bygger ett hus med stolpverkstekniken, har man traditionellt fyllt
-             rummet mellan timmerbalk med t.ex halm och lera. Så får man en hälsosam och lätt
+             rummet mellan timmerbalkarna med t.ex halm och lera. Så får man en hälsosam
              men ändå varm och hållbar vägg.
              Man har också använt en blandning av halm och kalk.
-    walls_2: Vi har utvecklat en konstruktion där man bygger yttre väggar utanför stolpverket.
-             Då blir den vackra stolpverken kvar inomhus. Yttre väggar kan man sedan beklä med panel,
-             innanför ofta faner eller annan träskiva. Också kan man använda gipsskivor.
-    walls_3: Isoleringen vi använder är träfiber eller cellulosa,
-              Käyttämämme eristeet ovat puukuitua tai selluvillaa, höyrynsulkuna
-             toimii paperi eikä muovi.
-    walls_4: Virke som vi använder kommer från skogar i hållbart skogsbruk.
-             Etthus byggt med denna sätt är ekologisk, varm och mycket ekonomiskt.
+    walls_2: Vi har utvecklat en konstruktion där man bygger ytterväggen utanför stolpverket.
+             Då blir det vackra stolpverket synligt inifrån. Ytterväggar kan exempelvis brädfodras,
+             innanför används gärna någon diffusionsöppen lösning.
+    walls_3: Isoleringen vi använder är träfiber eller selluvilla, istället för plastade ångslut använder vi papper eller dylikt.
+    walls_4: Virket vi använder kommer från ekologiskt hållbara skogsbruk.
+             Ett hus byggt på detta sätt är ekologiskt, varmt och mycket ekonomiskt.
 
-    walls_head: Lämpimät seinät
-    walls_1: Kun timberframe- eli pilari-palkkitekniikalla rakennetaan asuintaloja,
-             on runkopalkkien välit ulkoseinissä perinteisesti täytetty esim.
-             savi-olkipaalirakenteella. Näin saadaan hengittävä, kevyt ja
-             kuitenkin lämmin ja kestävä seinä. Myös kalkin ja olkien sekoitusta
-             on käytetty.
-    walls_2: Kehittämässämme rakenteessa ulkoseinät tehdään pilari-palkkirakenteen
-             ulkopuolelle, jolloin kaunis runko jää sisälle näkyviin.
-             Ulkoverhous voidaan tehdä laudalla, sisäpintaan tulee esimerkiksi
-             vaneri tms puulevy. Myös kipsilevyn käyttö on mahdollista.
-    walls_3: Käyttämämme eristeet ovat puukuitua tai selluvillaa, höyrynsulkuna
-             toimii paperi eikä muovi.
-    walls_4: Käyttämämme puu on peräisin kestävällä kehityksellä hoidetuista
-             metsistä.  Näin rakennettu talo on ekologinen, lämmin, ja
-             erittäin energiataloudellinen.
+    home_head: Ett hem
+    home_1: Resultatet är ett hus, som är vackert, modernt ock ekologiskt.
+            Ecoframe -huset är starkt och hållbart och har ett unikt uttryck.
 
-    home_head: Hemmet
-    home_1: Till slut blir det ett hus, som är vacker, modern ock ekologisk.
-            Ecoframe -huset har en stark och hållbar konstruktion, som ger huset innanför en unik uttryck.
-
-    design_head: Planering och realisering
-    design_1: Hos oss får du både planer och byggandet. Har du ideer om till exempel en byggnad,
-              pergola, balkong eller annat, hjälper vi att planera konstruktionen och bygga den.
-              Tag gärna kontakt!
-
-    home_head: Koti
-    home_1: Lopputuloksena on talo, joka on kaunis, moderni ja ekologinen.
-            Ecoframe -talossa vahva ja kestävä rakenne, ja se antaa sisätiloille
-            ainutlaatuisen ilmeen.
-    design_head: Suunnittelu ja toteutus
-    design_1: Meiltä saat sekä suunnittelun että toteutuksen.
-              Jos sinulla on idea rakennuksesta, pergolasta, parvekkeesta
-              tms, me autamme suunnittelemaan rakenteen ja toteutamme sen.
-              Ota yhteyttä!
+    design_head: Planering och genomförande
+    design_1: Vi sköter om både planerandet och byggandet. Har du ideer om till exempel en byggnad,
+              pergola, terass eller annat, ber vi dig att ta kontakt!

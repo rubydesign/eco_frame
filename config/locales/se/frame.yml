@@ -1,25 +1,24 @@
 se:
   frame:
     what: Vad är det här?
-    tt1: Tämän sivun työkalulla voit itse suunnitella Timberframe -runkoa.
-    tt1: Med den här verktygen kan du själv planera en stolpverk.
-    tt2: Liukusäätimillä muutat rungon ominaisuuksia.
-    tt2: Viemällä kursorin mallikuvan päälle voit zoomata sisään ja ulos. Tartu hiirellä niin voit kääntää taloa ja horisonttia.
-    pitch: Kattokulma
-    pitch_desc: Muuta katon kaltevuutta, muuttaa myös katon korkeutta
-    height: Pylvään korkeus
-    height_desc: Muuttaa seinän korkeutta
-    width_etc: Leveys, pituus ja pylväiden määrä
-    width_etc__desc: Nämä määrittävät rungon mittasuhteet ja pylväiden välit
-    size:  Palkin koko
-    size_desc: Miten isosta tavarasta runko tehdään
-    scale: Mittakaava
-    scale_desc: Muuta näkymää isommaksi tai pienemmäksi
-    type: Rakenteen tyyppi
-    type_desc: Kokeile eri tyyppisiä kattapalkkien rakenteita
-    try: Kannattaa kokeilla!
-    width: Leveys
-    posts: Pylväitä
-    height: Korkeus
-    length: Pituus
-    spacing: Pylväiden väli
+    tt1: Med detta verktyg kan du själv planera ett stolpverk.
+    tt2: Du kan fritt justera stommens egenskaper.
+    tt2: Genom att för kursorn på modellen kan du zooma in eller ut. Klicka på modellen och rör på musen för att vända på konstruktionen och horisonten.
+    pitch: Takvinkel
+    pitch_desc: Ändra på takvinkel, ändrar då även åshöjd
+    height: Höjd på pelare
+    height_desc: Ändrar på väggens höjd
+    width_etc: Brädd, längd och mängd pelare
+    width_etc__desc: Dessa determinerar stommens mått och distans mellan pelare
+    size:  Balkens storlek
+    size_desc: Storleken på virket som används för stommen
+    scale: Skala
+    scale_desc: Föstora eller förminska perspektivet
+    type: Stommens stil
+    type_desc: Prova olika typer av takstols-typer
+    try: Lönar sig att prova
+    width: Bredd
+    posts: Pelare
+    height: Höjd
+    length: Längd
+    spacing: Mellanrum mellan pelare

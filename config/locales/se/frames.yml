@@ -1,82 +1,45 @@
 se:
   frames:
     timberframe: TIMBERFRAME eller STOLPVERK
-    explanation: Timberframe (på svenska stolpverk) är en traditionell
-                 byggnadssätt, där den bärande stommen består av timmer som är fogad
+    explanation: Timberframe (på svenska stolpverk) är ett traditionellt
+                 byggnadssätt, där den bärande stommen består av timmer som är fogade
                  utan skruvar eller spikar.
-                 Det här är en byggnadssätt som har varit allmän i Mitteleuropa,
-                 Norra Amerika och Japan, där det har funnits mycket med högklassigt
-                 byggande med trä.
-                 ??Också Skandinavien har en tradition med stolpverk. ??
+                 Detta byggnadssätt stöter man oftare på i mellaneuropa,
+                 Nord Amerika och Japan, där det har långa traditioner i högklassigt hantverk
+                och byggande med trä.
+                 Dock mera sällsynt, men även Skandinavien har en tradition att bygga stolpverk.
 
-    timberframe: TIMBERFRAME
-    explanation: Timberframe (suomeksi pilari-palkkirakenne) on
-                 vanha perinteinen rakennustapa, jossa talojen runko kootaan
-                 massiivipuisista pilareista ja palkeista puusepän liitoksin.
-                 Tällainen rakennustapa on ollut yleinen Keski-Euroopassa,
-                 Pohjois-Amerikassa ja Japanissa, joissa on ollut paljon
-                 korkeatasoista puurakentamista.
 
     in_house_head: Stolpverk och hus
-    in_house_1: Stolpverk byggs av trästoch som är noggrannt mätad.
+    in_house_1: Stolpverk byggs av balkade stockar som är noggrannt mätta.
                 Alla fogar är handgjorda.
-    in_house_2: Mätningen måste vara exakt, och alla fogar provas på verkstaden
+    in_house_2: Mätningen måste vara exakt, och alla fogar beprövas på verkstaden
                 under tillverkningen.
 
-    in_house_head: Timberframe talonrakennuksessa
-    in_house_1: Timberframe-runko rakennetaan kokopuisista, huolellisesti
-                mittaan katkaistuista palkeista, jotka liitetään toisiinsa
-                käsintehdyin loviliitoksin.
-    in_house_2: Mittauksen on oltava tarkkaa ja kaikki osat sovitetaan toisiinsa
-                verstaalla valmistuksen jälkeen.
 
     joins_head: Exakta fogar
-    joins_1: Fogar blir helt utan spikar eller naglar.
-             Dom blir mejslade i stolparna, och säkras med tapp av trä.
-    sum_1: En bärande stom tillverkad med stolpverk blir vacker, stadig och hållbar, samt ekologisk.
+    joins_1: Skruvar eller spikar används inte vid fogandet.
+             Fogarna infälls och säkras med trätappar.
+    sum_1: En bärande stomme tillverkad med stolpverks-tekniken blir vacker, stadig och hållbar, samt ekologisk.
 
-    joins_head: Tarkkaan sovitetut liitokset
-    joins_1: Liitoksissa ei käytetä nauloja tai ruuveja. Liitokset tehdään
-             koloamalla palkkeihin, ja varmistetaan puutapein.
-    sum_1: Tällä tavoin valmistettu runko on kaunis, tukeva ja kestävä, sekä ekologinen.
 
     poss_head: Mångsidig teknik med möjligheter
-    poss_1: Man kan bygga mycket mera än hus med stolpverk. En balkong, terass,
+    poss_1: Man kan bygga mycket mera än hus med stolpverks-tekniken. En balkong, terass,
             skjul, utedass, växthus eller pergola...
             och många andra konstruktioner är möjliga med denna mångsidiga teknik.
 
-    poss_head: Monenlaiset rakenteet mahdollisia
-    poss_1: Timberframe soveltuu moneen muuhunkin kuin talonrakennukseen.
-            Parveke, kuisti, ulkovaja ja -huone, kasvihuone, pergola...
-            ja monet muut rakenteet ovat mahdollisia tällä monipuolisella
-            tekniikalla.
 
     design_head: Från planer till verklighet
     design_1: Du får hela byggnadsprojektet från EcoFramehouse, från planering till byggandet.
-              Vi har arkitekter och byggnadsingenjör i vår samarbetsnätverk.
+              Vi har arkitekter och byggnadsingenjörer i vårt samarbetsnätverk.
               Dessutom har vi professionella partners till alla uppgifter inom husbygget.
 
-    design_head: Suunnittelusta toteutukseen
-    design_1: Tarvittaessa saat EcoFramehouselta koko paketin suunnittelusta
-              toteutukseen. Yhteistyökumppaneistamme löytyy arkkitehteja ja
-              rakennesuunnittelijoita. Meillä on myös ammattitaitoiset ja
-              luotettavat tekijät lähipiirissämme kaikkiin talonrakennuksen
-              tehtäviin.
 
     tool_head: Prova planeringsverktyget
-    tool_1: Med linken nedan kan du själv prova att planera ett stolpverk.
+    tool_1: Med linken nedan kan du själv prova planerandet av ett stolpverk.
             Du kan variera modellens mängd av stolpar, bredd och längd, eller
             pröva olika tak-konstruktioner.
-            Verktyken berättar till och med hur mycket timmer som behövs, och ger dig
-            en preliminär beräkning om priset.
+            Verktyget berättar vidare hur mycket timmer som behövs, och ger dig
+            en preliminär prisuppfattning.
     tool_2: Kom och pröva!
     test: pröva modellen
-
-    tool_head: Testaa suunnittelua
-    tool_1: Alla olevan linkin kautta voit kokeilla erilaisten hirsirunkojen
-            suunnittelua. Työkalulla voi muuttaa mallin palkkien määrää,
-            pituutta ja leveyttä, sekä kokeilla eri tyyppisiä kattorakenteita.
-            Malli kertoo myös paljonko puuta rakenteeseen tarvitaan,
-            ja antaa alustavan hinta-arvion sille.
-    tool_2: Käy kokeilemassa!
-    test: testaa mallia
