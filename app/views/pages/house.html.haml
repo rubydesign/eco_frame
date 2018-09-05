@@ -1,83 +1,84 @@
-.graph_app
-  .graph-header.left-7
-    %h1 Talon suunnittelu-työkalu
-  .graph-header.left-2
-    .post-info.tooltip
-      =t("house.what")
-      %span.kysymys
-        =image_tag "img/kysymys.png"
-      %span.tooltiptext
-        %b=t("house.tt1")
-        %br
-        =t("house.tt2")
-        %br
-        =t("house.tt3")
-        %br
-        -[:pitch ,:height , :width_etc, :size , :scale ].each do |type|
-          %b= t("frame.#{type}")
-          = t("frame.#{type}_desc")
+.house
+  .graph_app
+    .graph-header.left-7
+      %h1 Talon suunnittelu-työkalu
+    .graph-header.left-2
+      .post-info.tooltip
+        =t("house.what")
+        %span.kysymys
+          =image_tag "img/kysymys.png"
+        %span.tooltiptext
+          %b=t("house.tt1")
           %br
-        %b=t("house.level")
-        %br
-          =t("house.level_desc")
+          =t("house.tt2")
+          %br
+          =t("house.tt3")
+          %br
+          -[:pitch ,:height , :width_etc, :size , :scale ].each do |type|
+            %b= t("frame.#{type}")
+            = t("frame.#{type}_desc")
+            %br
+          %b=t("house.level")
+          %br
+            =t("house.level_desc")
+          %b
+            %i=t("frame.try")
+
+    .post_control.right-3
+      %range-slider{"v-model":"frame.width" ,":min":"200", ":max":"800"}
         %b
-          %i=t("frame.try")
+          =t("frame.width")
+          {{frame.width*2}}
+      %range-slider{"v-model":"frame.spacing" , ":min":"50", ":max":"330"}
+        %b
+          =t("frame.length")
+          {{length*2}}
+        %br
+        (
+        =t("frame.spacing")
+        \: {{frame.spacing*2}})
+      %range-slider{"v-bind:value":"posts" , "v-on:input":"set_posts($event)",
+                    ":min":"2", ":max":"11"}
+        %b
+          =t("frame.posts")
+          {{posts}}
 
-  .post_control.right-3
-    %range-slider{"v-model":"frame.width" ,":min":"200", ":max":"800"}
-      %b
-        =t("frame.width")
-        {{frame.width*2}}
-    %range-slider{"v-model":"frame.spacing" , ":min":"50", ":max":"330"}
-      %b
-        =t("frame.length")
-        {{length*2}}
-      %br
-      (
-      =t("frame.spacing")
-      \: {{frame.spacing*2}})
-    %range-slider{"v-bind:value":"posts" , "v-on:input":"set_posts($event)",
-                  ":min":"2", ":max":"11"}
-      %b
-        =t("frame.posts")
-        {{posts}}
-
-    %range-slider{"v-model":"frame.angle" , ":min":"5", ":max":"46" }
-      %b
-        =t("frame.pitch")
-        {{frame.angle}}&deg;
-      %br
-      (
-      =t("frame.height")
-      \: {{Math.floor(truss_height)}}cm)
-    %range-slider{"v-model":"frame.height" , ":min":"50", ":max":"180" }
-      %b
+      %range-slider{"v-model":"frame.angle" , ":min":"5", ":max":"46" }
+        %b
+          =t("frame.pitch")
+          {{frame.angle}}&deg;
+        %br
+        (
         =t("frame.height")
-        {{frame.height*2}}
-    %range-slider{"v-bind:value":"scale", "v-on:input":"set_scale($event)",":min":30, ":max":150}
-      %span
-        =t("frame.scale")
-        %b {{scale}}
-    %range-slider{"v-bind:value":"animated" , "v-on:input":"set_anim($event)", ":min":"0", ":max":"10" , ":step":"1"}
-      %b
-        =t("house.animate")
-        {{anim_level}}
-    %range-slider{"v-bind:value":"level" , "v-on:input":"set_level($event)",
-                  ":min":"0", ":max":"32"}
-      %b
-        =t("house.level")
-        {{get_level(1)}}
-    //%range-slider{"v-bind:value":"value" , "v-on:input":"set_value($event)", ":min":"0", ":max":"100" , ":step":"1"}
-    //  %b val {{value}}
+        \: {{Math.floor(truss_height)}}cm)
+      %range-slider{"v-model":"frame.height" , ":min":"50", ":max":"180" }
+        %b
+          =t("frame.height")
+          {{frame.height*2}}
+      %range-slider{"v-bind:value":"scale", "v-on:input":"set_scale($event)",":min":30, ":max":150}
+        %span
+          =t("frame.scale")
+          %b {{scale}}
+      %range-slider{"v-bind:value":"animated" , "v-on:input":"set_anim($event)", ":min":"0", ":max":"10" , ":step":"1"}
+        %b
+          =t("house.animate")
+          {{anim_level}}
+      %range-slider{"v-bind:value":"level" , "v-on:input":"set_level($event)",
+                    ":min":"0", ":max":"32"}
+        %b
+          =t("house.level")
+          {{get_level(1)}}
+      //%range-slider{"v-bind:value":"value" , "v-on:input":"set_value($event)", ":min":"0", ":max":"100" , ":step":"1"}
+      //  %b val {{value}}
 
-  .canvas_wrapper
-    %canvas#xeocanvas
+    .canvas_wrapper
+      %canvas#xeocanvas
 
-= javascript_include_tag 'application'
-:javascript
-  VueController._data.posts = 5;
-  VueController._data.frame.size = 10;
-  VueController._data.frame.width = 370;
-  xeogl.scene.camera.look =  [131, -158, -158]
-  xeogl.scene.camera.eye = [-797, 39, -1061]
-  var eco_frame = new House();
+  = javascript_include_tag 'application'
+  :javascript
+    VueController._data.posts = 5;
+    VueController._data.frame.size = 10;
+    VueController._data.frame.width = 370;
+    xeogl.scene.camera.look =  [131, -158, -158]
+    xeogl.scene.camera.eye = [-797, 39, -1061]
+    var eco_frame = new House();

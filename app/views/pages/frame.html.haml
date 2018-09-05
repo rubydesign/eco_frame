@@ -1,99 +1,100 @@
-.graph_app
-  .graph-header.left-7
-    %h1 Timberframe-rungon suunnittelutyökalu
-  .graph-header.left-2
-    .post-info.tooltip
-      =t("frame.what")
-      %span.kysymys
-        =image_tag "img/kysymys.png"
-      %span.tooltiptext
-        %b= t("frame.tt1")
-        = t("frame.tt2")
-        %br
-        = t("frame.tt2")
-        %br
-        %br
-        -[:pitch ,:height , :width_etc, :size , :scale , :type ].each do |type|
-          %b= t("frame.#{type}")
-          = t("frame.#{type}_desc")
+.frame
+  .graph_app
+    .graph-header.left-7
+      %h1 Timberframe-rungon suunnittelutyökalu
+    .graph-header.left-2
+      .post-info.tooltip
+        =t("frame.what")
+        %span.kysymys
+          =image_tag "img/kysymys.png"
+        %span.tooltiptext
+          %b= t("frame.tt1")
+          = t("frame.tt2")
           %br
+          = t("frame.tt2")
+          %br
+          %br
+          -[:pitch ,:height , :width_etc, :size , :scale , :type ].each do |type|
+            %b= t("frame.#{type}")
+            = t("frame.#{type}_desc")
+            %br
+          %b
+            %i=t("frame.try")
+
+
+    .post_control.right-3
+      %range-slider{"v-model":"frame.angle" , ":min":"5", ":max":"46" }
         %b
-          %i=t("frame.try")
-
-
-  .post_control.right-3
-    %range-slider{"v-model":"frame.angle" , ":min":"5", ":max":"46" }
-      %b
-        = t("frame.pitch")
-        {{frame.angle}}&deg;
-      %br
-      (
-      =t("frame.height")
-      \:
-      {{Math.floor(truss_height)}}cm)
-    %range-slider{"v-model":"frame.height" , ":min":"50", ":max":"180" }
-      %b
+          = t("frame.pitch")
+          {{frame.angle}}&deg;
+        %br
+        (
         =t("frame.height")
-        {{frame.height*2}}
-    %range-slider{"v-model":"frame.width" ,":min":"50", ":max":"330"}
-      %b
-        =t("frame.width")
-        {{frame.width*2}}
-    %range-slider{"v-model":"frame.spacing" , ":min":"50", ":max":"330"}
-      %b
-        =t("frame.length")
-        {{length*2}}
+        \:
+        {{Math.floor(truss_height)}}cm)
+      %range-slider{"v-model":"frame.height" , ":min":"50", ":max":"180" }
+        %b
+          =t("frame.height")
+          {{frame.height*2}}
+      %range-slider{"v-model":"frame.width" ,":min":"50", ":max":"330"}
+        %b
+          =t("frame.width")
+          {{frame.width*2}}
+      %range-slider{"v-model":"frame.spacing" , ":min":"50", ":max":"330"}
+        %b
+          =t("frame.length")
+          {{length*2}}
+        %br
+        (
+        =t("frame.spacing")
+        \:
+        {{frame.spacing*2}})
+      %range-slider{"v-bind:value":"posts" , "v-on:input":"set_posts($event)",
+                    ":min":"2", ":max":"11"}
+        %b
+          =t("frame.posts")
+          {{posts}}
+      %range-slider{"v-model":"frame.size" ,":min":"5", ":max":"12.5" , ":step":"1.25"}
+        %b
+          =t("frame.size")
+          {{frame.size*2}}cm ({{(frame.size*2/2.5).toFixed(0)}}in)
+      %range-slider{"v-bind:value":"scale", "v-on:input":"set_scale($event)",":min":30, ":max":150}
+        %span
+          %b=t("frame.scale")
+          %b {{scale}}
+      .rangeslider
+        %b=t("frame.type")
+        %input{type:"checkbox", "v-model":"frame.braced"}
+        %br
+      .rangeslider
+        %select{"v-model":"truss"}
+          %option{ value:"king"} King
+          %option{ value:"collar"} Collar
+          %option{ value:"hammer"} Hammer
+          %option{ value:"stopped"} Stopped
+          %option{ value:"pulp"} Pulpetti
+          %option{ value:"none"} No Truss
+        %br
+      .rangeslider
+        Liitoksia
+        %b {{joins(1)}}
+        %br
+      .rangeslider
+        Kappaleita
+        %b {{pieces(1)}}
+        %br
+      .rangeslider
+        Tilavuus
+        %b {{cubes(1).toFixed(2)}}
+        %br
       %br
-      (
-      =t("frame.spacing")
-      \:
-      {{frame.spacing*2}})
-    %range-slider{"v-bind:value":"posts" , "v-on:input":"set_posts($event)",
-                  ":min":"2", ":max":"11"}
-      %b
-        =t("frame.posts")
-        {{posts}}
-    %range-slider{"v-model":"frame.size" ,":min":"5", ":max":"12.5" , ":step":"1.25"}
-      %b
-        =t("frame.size")
-        {{frame.size*2}}cm ({{(frame.size*2/2.5).toFixed(0)}}in)
-    %range-slider{"v-bind:value":"scale", "v-on:input":"set_scale($event)",":min":30, ":max":150}
-      %span
-        %b=t("frame.scale")
-        %b {{scale}}
-    .rangeslider
-      %b=t("frame.type")
-      %input{type:"checkbox", "v-model":"frame.braced"}
-      %br
-    .rangeslider
-      %select{"v-model":"truss"}
-        %option{ value:"king"} King
-        %option{ value:"collar"} Collar
-        %option{ value:"hammer"} Hammer
-        %option{ value:"stopped"} Stopped
-        %option{ value:"pulp"} Pulpetti
-        %option{ value:"none"} No Truss
-      %br
-    .rangeslider
-      Liitoksia
-      %b {{joins(1)}}
-      %br
-    .rangeslider
-      Kappaleita
-      %b {{pieces(1)}}
-      %br
-    .rangeslider
-      Tilavuus
-      %b {{cubes(1).toFixed(2)}}
-      %br
-    %br
-    .rangeslider
-      Hinta-arvio
-      %b {{estimate(1)}}
-      %br
-  .canvas_wrapper
-    %canvas#xeocanvas
+      .rangeslider
+        Hinta-arvio
+        %b {{estimate(1)}}
+        %br
+    .canvas_wrapper
+      %canvas#xeocanvas
 
-= javascript_include_tag 'application'
-:javascript
-  var eco_frame = new Frame();
+  = javascript_include_tag 'application'
+  :javascript
+    var eco_frame = new Frame();
