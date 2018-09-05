@@ -1,6 +1,14 @@
 .title.section.header
   .main_box
-    .left-12.menu.text-right
+    .left-2
+      &nbsp;
+
+    .left-8
+      %h1=t("index.main_head")
+      %h2
+        =t("index.main_h2")
+
+    .right-2.menu.text-right
       .flag
         - I18n.available_locales.each do |lang|
           =link_to "/#{lang}/#{params[:id]}" do
@@ -8,10 +16,8 @@
 
       = render "layouts/dropdown"
 
-    .left-12
-      %h1=t("index.main_head")
-      %h2
-        =t("index.main_h2")
+
+    .left-12        
       =image_tag "logo-valk-300.png" , width: 280
       %h4
         =t("index.main_h41")
@@ -19,6 +25,7 @@
         =t("index.main_h42")
         %br
         =t("index.main_h43")
+
 
 
 .section1.section
