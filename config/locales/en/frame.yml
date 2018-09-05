@@ -4,13 +4,13 @@ en:
     tt1: This tool let's you design your own frame, see how it looks
          and get an idea of the price.
     tt2: With the sliders you can change the properties of the frame.
-    tt2: And by using the mouse on top of the picture, you can turn and scale the frame.
+    tt3: And by using the mouse on top of the picture, you can turn and scale the frame.
     pitch: Pitch
     pitch_desc: Changing the angle of the roof also changes the hight of the trusses.
     height: Post hight
     height_desc: This changes the wall, or room hight.
     width_etc: Width, Length and number of posts
-    width_etc__desc: Changes those properties
+    width_etc_desc: Changes those properties
     size:  Wood size
     size_desc: Changes the size of the wood used for the frame.
                Standard size is 8x8 inch, or 20x20cm, about a hand span.

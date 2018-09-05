@@ -3,13 +3,13 @@ se:
     what: Vad är det här?
     tt1: Med detta verktyg kan du själv planera ett stolpverk.
     tt2: Du kan fritt justera stommens egenskaper.
-    tt2: Genom att för kursorn på modellen kan du zooma in eller ut. Klicka på modellen och rör på musen för att vända på konstruktionen och horisonten.
+    tt3: Genom att för kursorn på modellen kan du zooma in eller ut. Klicka på modellen och rör på musen för att vända på konstruktionen och horisonten.
     pitch: Takvinkel
     pitch_desc: Ändra på takvinkel, ändrar då även åshöjd
     height: Höjd på pelare
     height_desc: Ändrar på väggens höjd
     width_etc: Brädd, längd och mängd pelare
-    width_etc__desc: Dessa determinerar stommens mått och distans mellan pelare
+    width_etc_desc: Dessa determinerar stommens mått och distans mellan pelare
     size:  Balkens storlek
     size_desc: Storleken på virket som används för stommen
     scale: Skala

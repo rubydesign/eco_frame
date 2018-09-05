@@ -3,13 +3,13 @@ fi:
     what: Mikä tämä on?
     tt1: Tämän sivun työkalulla voit itse suunnitella Timberframe -runkoa.
     tt2: Liukusäätimillä muutat rungon ominaisuuksia.
-    tt2: Viemällä kursorin mallikuvan päälle voit zoomata sisään ja ulos. Tartu hiirellä niin voit kääntää taloa ja horisonttia.
+    tt3: Viemällä kursorin mallikuvan päälle voit zoomata sisään ja ulos. Tartu hiirellä niin voit kääntää taloa ja horisonttia.
     pitch: Kattokulma
     pitch_desc: Muuta katon kaltevuutta, muuttaa myös katon korkeutta
     height: Pylvään korkeus
     height_desc: Muuttaa seinän korkeutta
     width_etc: Leveys, pituus ja pylväiden määrä
-    width_etc__desc: Nämä määrittävät rungon mittasuhteet ja pylväiden välit
+    width_etc_desc: Nämä määrittävät rungon mittasuhteet ja pylväiden välit
     size:  Palkin koko
     size_desc: Miten isosta tavarasta runko tehdään
     scale: Mittakaava
