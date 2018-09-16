@@ -1,20 +1,20 @@
 en:
   homes:
-    new_home_head: New Homes
-    new_home_1: EcoFramehouse builds stylish, ecological and sustainable
+    new_home_head: YOUR NEW HOME
+    new_home_1: EcoFrameHouse builds ecological, unique and sustainable
                 houses.
-    new_home_2: The pictures show the hand made timberframes that are the core
+    new_home_2: Handcrafted timberframes are the load bearing
                 structure of an eco frame house.
     new_home_3: In the traditional english Timberframe technique large wood is
                 joined without the use of metal.
     eco_head: Ecological House
-    eco_1: Ecoframe houses are built from natural materials only, completely
-           diffusion open, but very well insulated.
+    eco_1: EcoFrameHouse is built completely from natural materials,
+           diffusion open, and very well insulated.
            The core structure, the timberframe, is made from large whole timber,
-           and around it a light (but thick) insulation layer keeps the house warm.
+           and around it a light, but thick, insulation layer keeps the house warm.
            Since all materials are wood based (wood, paper etc, no plastic), the
            air is clean and healthy.
-    eco_2: We have devloped the EcoFrameHouse concept from years of building
+    eco_2: We have developed the EcoFrameHouse concept from years of building
            experience, to unite both traditional techiques and materials, with
            modern high standards.
            The visible timberframe on the inside gives the house a solid feel and
@@ -22,7 +22,7 @@ en:
            gives the house outstanding thermal qualities. This in turn means
            a lovely warm feeling inside, and very low heating costs.
     tf_head: Timberframe structure
-    tf_1: Timberframe is a very old english technique of making structural joins
+    tf_1: Timberframe is an old english technique of making structural joins
           on large timber. The technique has been used to build houses and churches,
           some of which are almost a thousand years old.
           The main join of the technique is the tennon and mortise join, in which
@@ -38,7 +38,7 @@ en:
              Thus it can be very lightweight and cost effective and provide a
              relatively large space for insulation, creating almost a passive house.
              Among the ecologic blown insulations available the most popular are
-             paper based EcoVilla, or wood-fiber based Hunton.
+             paper based Ekovilla, or wood-fiber based Hunton.
              The diffusion barrier used in both cases in paper based, not plastic.
 
     walls_2: Since the insulation is completely outside the frame, the
@@ -46,7 +46,7 @@ en:
              The outer cladding can be any kind of wood panneling.
              Also the inside surfaces may be clad with wood panelling, but also
              other board solutions may be used, including eg. clay finishes.
-    walls_3:
+    walls_3: ""
     walls_4: We source as much of the wood as possible locally from sustainable
              forests.
     home_head: Home
