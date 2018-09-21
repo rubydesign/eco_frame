@@ -9,3 +9,10 @@ en:
     frames: Timberframe
     work: Woodwork
   read_more: read more
+  form:
+    contact: Contact
+    name: Name
+    email1: Email
+    email2:  
+    phone: Phone
+    message: Message

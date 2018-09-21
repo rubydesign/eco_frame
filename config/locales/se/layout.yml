@@ -9,3 +9,10 @@ se:
     frames: Stolpverk
     work: Hantverk
   read_more: Läs mera
+  form:
+    contact: Kontakta oss
+    name: Namn
+    email1: E-post
+    email2:
+    phone: Telefon
+    message: Meddelande

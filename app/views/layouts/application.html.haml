@@ -14,7 +14,7 @@
     .section5.section.footer
       .footer-box.footer-left
         .left-8
-          %h2 Ecoframe House00
+          %h2 Ecoframe House
           %img{:src => "/assets/logo-musta-100.png", :width => "85"}/
           %p
             =t("layout.phone")
@@ -57,18 +57,22 @@
 
       .footer-box.form.footer-right
         .form-container
-          %h2 Ota yhteyttä
+          %h2
+            = t("form.contact")
 
           %form{:action => "action_page.php"}
-            %label{:for => "fname"} Nimi
+            %label{:for => "fname"}
+              = t("form.name")
             %input#fname{:name => "nimi", :placeholder => "Nimesi", :type => "text"}/
             %label{:for => "sposti"}
-              Sähkö-
+              = t("form.email1")
               %br
-              posti
+              = t("form.email2")
             %input#email{:email => "lastname", :placeholder => "Sähköpostiosoite", :type => "text"}/
-            %label{:for => "puh"} Puhelin
+            %label{:for => "puh"}
+              = t("form.phone")
             %input#email{:phone => "phone", :placeholder => "Puhelinnumero", :type => "text"}/
-            %label{:for => "viesti"} Viesti
+            %label{:for => "viesti"}
+              = t("form.message")
             %textarea#subject{:name => "subject", :placeholder => "Viestikenttä", :style => "height:70px"}
             %input{:type => "submit", :value => "Lähetä"}/

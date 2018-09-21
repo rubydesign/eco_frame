@@ -9,3 +9,10 @@ fi:
     frames: Timberframe
     work: Käsityö
   read_more: lue lisää
+  form:
+    contact: Ota yhteyttä
+    name: Nimi
+    email1: Sähkö-
+    email2: posti
+    phone: Puhelin
+    message: Viesti
