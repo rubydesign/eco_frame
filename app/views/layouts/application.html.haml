@@ -60,19 +60,4 @@
           %h2
             = t("form.contact")
 
-          %form{:action => "action_page.php"}
-            %label{:for => "fname"}
-              = t("form.name")
-            %input#fname{:name => "nimi", :placeholder => "Nimesi", :type => "text"}/
-            %label{:for => "sposti"}
-              = t("form.email1")
-              %br
-              = t("form.email2")
-            %input#email{:email => "lastname", :placeholder => "Sähköpostiosoite", :type => "text"}/
-            %label{:for => "puh"}
-              = t("form.phone")
-            %input#email{:phone => "phone", :placeholder => "Puhelinnumero", :type => "text"}/
-            %label{:for => "viesti"}
-              = t("form.message")
-            %textarea#subject{:name => "subject", :placeholder => "Viestikenttä", :style => "height:70px"}
-            %input{:type => "submit", :value => "Lähetä"}/
+          = render 'form', message: Message.new

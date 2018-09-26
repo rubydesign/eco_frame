@@ -13,6 +13,6 @@ en:
     contact: Contact
     name: Name
     email1: Email
-    email2:
+    email2: ""
     phone: Phone
     message: Message
