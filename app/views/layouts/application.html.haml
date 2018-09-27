@@ -30,25 +30,25 @@
           %br
 
           %h3
-            %a{:href => "/"}
+            = link_to page_path(:index) do
               =image_tag "oksa.png"
               %br
               = t("menu.home")
             %br
             %br
-            %a{:href => "/homes"}
+            = link_to page_path(:homes) do
               =image_tag "oksa.png"
               %br
               = t("menu.homes")
             %br
             %br
-            %a{:href => "/frames"}
+            = link_to page_path(:frames) do
               =image_tag "oksa.png"
               %br
               = t("menu.frames")
             %br
             %br
-            %a{:href => "/wood"}
+            = link_to page_path(:wood) do
               =image_tag "oksa.png"
               %br
               = t("menu.work")

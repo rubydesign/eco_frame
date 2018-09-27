@@ -9,11 +9,7 @@
         =t("index.main_h2")
 
     .right-2.menu.text-right
-      .flag
-        - I18n.available_locales.each do |lang|
-          =link_to "/#{lang}/#{params[:id]}" do
-            =image_tag "#{lang.to_s}.gif"
-
+      = render "layouts/flags"
       = render "layouts/dropdown"
 
 
@@ -37,7 +33,7 @@
       %br
       =t("index.homes_2")
     .text-center
-      =link_to t("read_more") , "homes" , class: "button"
+      =link_to t("read_more") , page_path(:homes) , class: "button"
 %br/
 .section2.section
   .section_box
@@ -48,7 +44,7 @@
       %br
       =t("index.frame_2")
     .text-center
-      =link_to t("read_more") , "frames" , class: "button"
+      =link_to t("read_more") , page_path(:frames) , class: "button"
 
 .section3.section
   .section_box
@@ -56,4 +52,4 @@
     %p
       =t("index.work_1")
     .text-center
-      =link_to t("read_more") , "wood" , class: "button"
+      =link_to t("read_more") , page_path(:wood) , class: "button"

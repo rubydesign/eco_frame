@@ -2,7 +2,7 @@
   %button.dropbtn
     \ 
   .dropdown-content
-    %a{:href => "index"}= t("menu.home")
-    %a{:href => "homes"}= t("menu.homes")
-    %a{:href => "frames"}= t("menu.frames")
-    %a{:href => "wood"}= t("menu.work")
+    =link_to t("menu.home") , page_path(:index)
+    =link_to t("menu.homes") , page_path(:homes)
+    =link_to t("menu.frames") , page_path(:frames)
+    =link_to t("menu.work") , page_path(:wood)
