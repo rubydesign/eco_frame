@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
 
   def extract_locale
     candidates = request.env['HTTP_ACCEPT_LANGUAGE']
+    puts "LANG #{candidates}"
     return I18n.default_locale unless candidates
     if I18n.available_locales.include?(candidates.scan(/^[a-z]{2}/).first)
       browser_locale
