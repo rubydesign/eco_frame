@@ -19,10 +19,16 @@ class ApplicationController < ActionController::Base
     candidates = request.env['HTTP_ACCEPT_LANGUAGE']
     puts "LANG #{candidates}"
     return I18n.default_locale unless candidates
-    if I18n.available_locales.include?(candidates.scan(/^[a-z]{2}/).first)
-      browser_locale
+    if I18n.available_locales.include?(candidates[0,2].downcase.to_sym)
+      candidates[0,2].downcase
     else
       I18n.default_locale
     end
+
   end
+
+  def default_url_options
+    { locale: I18n.locale }
+  end
+
 end

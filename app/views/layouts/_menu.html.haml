@@ -1,15 +1,12 @@
 %header
   .header-logo
-    %a{:href => "../"}
+    = link_to page_path(:index) do
       =image_tag "logo-valk-100b.png"
       %h1= t("layout.title")
   .sub-title
     %h3
       =t("layout.sub_title")
   .menu.text-center
-    .flag
-      - I18n.available_locales.each do |lang|
-        =link_to "/#{lang}/#{params[:id]}" do
-          =image_tag "#{lang.to_s}.gif"
+    = render "layouts/flags"
 
     = render "layouts/dropdown"

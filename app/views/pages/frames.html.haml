@@ -61,7 +61,7 @@
 
 .topic
   .right-up
-    %a{:href => "/frame"}
+    = link_to page_path(:frame) do
       =image_tag "img/frames/frame-animation.gif"
   .left-down.text-left
     %h2
@@ -72,4 +72,4 @@
       =t("frames.tool_2")
       %br
       %br
-      =link_to t("frames.test") , "frame" , class: "button"
+      = link_to t("frames.test") , page_path("frame") , class: "button"

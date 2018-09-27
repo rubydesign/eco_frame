@@ -1,0 +1,4 @@
+.flag
+  - I18n.available_locales.each do |lang|
+    =link_to page_path(params[:id] || :index , locale: lang) do
+      =image_tag "#{lang.to_s}.gif"
