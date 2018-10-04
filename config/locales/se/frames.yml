@@ -1,40 +1,31 @@
 se:
   frames:
     timberframe: TIMBERFRAME eller STOLPVERK
-    explanation: Timberframe (på svenska stolpverk) är ett traditionellt
-                 byggnadssätt, där den bärande stommen består av timmer som är fogade
+    explanation: Timberframe (på svenska stolpverk) är ett traditionellt engelsk
+                 byggnadssätt, som man kan träffa på i tusen år gamla kyrkor.
+                 Stolpverkstekniken bygger på fogarbete där den bärande stommen består av timmer som är fogade
                  utan skruvar eller spikar.
-                 Detta byggnadssätt stöter man oftare på i mellaneuropa,
-                 Nord Amerika och Japan, där det har långa traditioner i högklassigt hantverk
-                och byggande med trä.
-                 Dock mera sällsynt, men även Skandinavien har en tradition att bygga stolpverk.
-
-
+                 Sedan 70-talet har byggnadssättet upplevt en ny intresse med ursprung i Amerika. Nuförtiden bygger man med stolpverk runtom i världen sammanfogande traditionell teknik och modern arkitektur.
     in_house_head: Stolpverk och hus
     in_house_1: Stolpverk byggs av balkade stockar som är noggrannt mätta.
                 Alla fogar är handgjorda.
     in_house_2: Mätningen måste vara exakt, och alla fogar beprövas på verkstaden
                 under tillverkningen.
-
-
     joins_head: Exakta fogar
     joins_1: Skruvar eller spikar används inte vid fogandet.
              Fogarna infälls och säkras med trätappar.
     sum_1: En bärande stomme tillverkad med stolpverks-tekniken blir vacker, stadig och hållbar, samt ekologisk.
-
-
     poss_head: Mångsidig teknik med möjligheter
     poss_1: Man kan bygga mycket mera än hus med stolpverks-tekniken. En balkong, terass,
             skjul, utedass, växthus eller pergola...
             och många andra konstruktioner är möjliga med denna mångsidiga teknik.
-
-
     design_head: Från planer till verklighet
+
+
+
     design_1: Du får hela byggnadsprojektet från EcoFrameHouse, från planering till byggandet.
               Vi har arkitekter och byggnadsingenjörer i vårt samarbetsnätverk.
               Dessutom har vi professionella partners till alla uppgifter inom husbygget.
-
-
     tool_head: Prova planeringsverktyget
     tool_1: Med linken nedan kan du själv prova planerandet av ett stolpverk.
             Du kan variera modellens mängd av stolpar, bredd och längd, eller
