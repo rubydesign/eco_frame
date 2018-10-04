@@ -2,19 +2,16 @@
   .main_box
     .left-2
       &nbsp;
-
-    .left-8
-      %h1=t("index.main_head")
-      %h2
-        =t("index.main_h2")
+    .left-8.main-logo
+      =image_tag "Logo.png"
 
     .right-2.menu.text-right
       = render "layouts/flags"
       = render "layouts/dropdown"
 
 
-    .left-12
-      =image_tag "logo-valk-300b.png" , width: 280
+    .left-12.clear-both
+
       %h4
         =t("index.main_h41")
         %br
