@@ -1,22 +1,22 @@
 se:
   message:
-    sent: Viesti ok, vastataan kohta
+    sent: Meddelande sckickat, vi svarar snart.
   activemodel:
     models:
-      message: Viesti
+      message: meddelande
     attributes:
       message:
-        name: Nimi
-        email: S-Posti
-        message: Viesti
-        phone: Puh.
+        name: Namn *
+        email: E-post *
+        message: Medd. *
+        phone: Tel
     errors:
       models:
         message:
           attributes:
             email:
-              blank: Sposti ei saa olla tyhja
+              blank: Ditt e-post-address fattas.
             name:
-              blank: Nimi ei saa olla tyhja
+              blank: Din namn fattas.
             message:
-              blank: Viesti ei saa olla tyhja
+              blank: Meddelandet fattas.
