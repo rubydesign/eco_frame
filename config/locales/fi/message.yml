@@ -20,3 +20,6 @@ fi:
               blank: Nimesi puuttuu.
             message:
               blank: Viesti puuttuu.
+  form:
+    submit: Lähetä
+    error: virhettä esti tätä viestiä lähtemästä

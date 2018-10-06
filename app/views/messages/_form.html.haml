@@ -3,8 +3,9 @@
   - if message.errors.any?
     #error_explanation
       %h2
-        = pluralize(message.errors.count, "error")
-        prohibited this message from being sent:
+        = pluralize(message.errors.count, " ")
+        =t("form.error")
+
       %ul
         - message.errors.full_messages.each do |message|
           %li= message
@@ -21,4 +22,4 @@
     = form.label :phone
     = form.text_field :phone
   .actions
-    = form.submit
+    = form.submit t("form.submit")

@@ -20,3 +20,6 @@ se:
               blank: Din namn fattas.
             message:
               blank: Meddelandet fattas.
+  form:
+    submit: Skicka
+    error: fel hindrade att denna meddelande blev skickat
