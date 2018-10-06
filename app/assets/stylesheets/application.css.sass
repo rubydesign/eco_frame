@@ -8,6 +8,7 @@
 @import "susy"
 @import url('https://fonts.googleapis.com/css?family=Cormorant:400,400i,700,700i')
 @import url('https://fonts.googleapis.com/css?family=Open Sans:400,400i,700,700i')
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans')
 
 $susy: layout(12 1/2 fluid float split center)
 
@@ -26,8 +27,7 @@ body
   height: 100%
   overflow-y: scroll
   overflow-x: hidden
-  /* font-family: Oswald
-  font-family: 'Cormorant', serif
+  font-family: 'Nunito Sans', sans-serif
   perspective: 1px
 
 .footer
@@ -75,6 +75,9 @@ body
     @media only screen and (max-width: 880px)
       @include span(12)
       margin-top: 30px
+
+.font-nunito
+  font-family: 'Nunito Sans', sans-serif
 
 .white
   color: #fff
