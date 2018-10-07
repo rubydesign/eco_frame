@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.2.0.beta2'
+gem 'rails', '~> 5.2'
 gem 'sqlite3'
 gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
@@ -17,6 +17,12 @@ gem 'ruby2js'  , git: "https://github.com/rubydesign/ruby2js"
 #gem "xeogl" , "1.0.0" , git: "https://github.com/xeolabs/xeogl" , require: false
 #gem "xeogl" , "1.0.0" , path: "../xeogl" , require: false
 
+group  :production do
+  gem 'mini_racer'
+  gem "libv8"
+  gem "mysql2"
+end
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.15'
@@ -28,4 +34,10 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'guard-livereload', '~> 2.5', require: false
+
+  gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rails-console'
+  gem 'capistrano-passenger'
 end
