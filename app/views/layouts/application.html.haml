@@ -8,6 +8,13 @@
     %title= t("layout.title")
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all'
+    %link{:href => "http://fonts.googleapis.com/css?family=Cormorant:400,400i,700,700i",
+          :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "http://fonts.googleapis.com/css?family=Open Sans:400,400i,700,700i",
+          :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "http://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900",
+          :rel => "stylesheet", :type => "text/css"}
+
   %body{class: body_class}
     = render "layouts/menu" unless params[:id] == "index"
     = yield
