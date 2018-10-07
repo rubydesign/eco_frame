@@ -1,5 +1,6 @@
 fi:
   house:
+    title: Talon suunnittelu-työkalu
     what: Mikä tämä on?
     tt1: Tämän sivun työkalulla voit itse suunnitella Timberframe -runkoa.
     tt2: Liukusäätimillä muutat rungon ominaisuuksia.
