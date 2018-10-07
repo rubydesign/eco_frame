@@ -23,3 +23,7 @@ se:
     height: Höjd
     length: Längd
     spacing: Mellanrum mellan pelare
+    joins: Joins
+    pieces: Pieces
+    cubes: Cubic meters
+    estimate: Price estimate

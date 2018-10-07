@@ -23,3 +23,7 @@ fi:
     height: Korkeus
     length: Pituus
     spacing: Pylväiden väli
+    joins: Liitoksia
+    pieces: Kappaleita
+    cubes: Tilavuus
+    estimate: Hinta-arvio
