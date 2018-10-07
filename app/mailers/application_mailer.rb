@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  default from: "info@ecoframe.house" , bcc: "info@ecoframe.house"
   layout 'mailer'
 end
