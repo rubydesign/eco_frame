@@ -28,7 +28,7 @@ body
   perspective: 1px
 
 .footer
-  background-image: image-url("header_work.jpg")
+  background-image: image-url("index/work_1800.jpg")
   background-size: 125%
   text-align: center
   color: #000
@@ -43,6 +43,12 @@ body
   a
     text-decoration: none
     color: #000
+  @media only screen and (max-width: 1281px)
+    background-image: image-url("index/work_1280.jpg")
+
+  @media only screen and (max-width: 801px)
+    background-image: image-url("index/work_800.jpg")
+
   @media only screen and (max-width: 880px)
     min-height: 900px
 
