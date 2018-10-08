@@ -80,32 +80,43 @@
 
 
   .title
-    background-image: image-url("header_index.jpg")
+    background-image: image-url("index/index_1800.jpg")
     background-attachment: fixed
     z-index: 20
     padding-bottom: 10%
     padding-top: 0px
 
-
   .section1
-    background-image: image-url("header_homes.jpg")
+    background-image: image-url("index/homes_1800.jpg")
     transform: translateZ(-1px) scale(2)
     z-index: 10
 
   .section2
-    background-image: image-url("kitchen-copy2.jpg")
+    background-image: image-url("index/kitchen_1800.jpg")
     z-index: 20
 
   .section3
-    background-image: image-url("header_wood.jpg")
+    background-image: image-url("index/wood_1800.jpg")
     transform: translateZ(-1px) scale(2)
     z-index: 10
 
-  .section4
-    background-image: image-url("header_design.jpg")
-    z-index: 10
-
   .section5
-    background-image: image-url("header_work.jpg")
+    background-image: image-url("index/work_1800.jpg")
     z-index: 10
     padding: 10% 10%
+
+  @media only screen and (max-width: 800px)
+    .title
+      background-image: image-url("index/index_1800.jpg")
+    .section1
+      background-image: image-url("index/homes_1800.jpg")
+    .section2
+      background-image: image-url("index/kitchen_1800.jpg")
+    .section3
+      background-image: image-url("index/wood_1800.jpg")
+    .section5
+      background-image: image-url("index/work_1800.jpg")
+
+  @media only screen and (max-width: 605px)
+    width: 70%
+  @media only screen and (max-width: 455px)
