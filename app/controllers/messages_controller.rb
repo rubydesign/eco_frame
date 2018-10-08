@@ -14,7 +14,8 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
 
     if @message.valid?
-      redirect_to message_sent_path(locale: I18n.locale) , notice: 'Message was successfully created.'
+      MessageMailer.submit( @message ).deliver_now
+      redirect_to message_sent_path(locale: I18n.locale) , notice: 'Message was successfully sent.'
     else
       render :new
     end

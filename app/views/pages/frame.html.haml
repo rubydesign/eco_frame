@@ -76,22 +76,23 @@
           %option{ value:"none"} No Truss
         %br
       .rangeslider
-        Liitoksia
+        =t("frame.joins")
         %b {{joins(1)}}
         %br
       .rangeslider
-        Kappaleita
+        =t("frame.pieces")
         %b {{pieces(1)}}
         %br
       .rangeslider
-        Tilavuus
+        =t("frame.cubes")
         %b {{cubes(1).toFixed(2)}}
         %br
       %br
       .rangeslider
-        Hinta-arvio
+        =t("frame.estimate")
         %b {{estimate(1)}}
         %br
+
     .canvas_wrapper
       %canvas#xeocanvas
 

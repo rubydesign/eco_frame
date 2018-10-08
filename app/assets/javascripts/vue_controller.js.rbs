@@ -86,14 +86,14 @@ class VueController < Vue
     if(defined? eco_frame)
       return eco_frame.joins()
     else
-      return 0
+      return 55
     end
   end
   def pieces(_)
     if(defined? eco_frame)
       return eco_frame.pieces()
     else
-      return 0
+      return 36
     end
   end
   def cubes(_)
@@ -101,7 +101,7 @@ class VueController < Vue
       base =  1.1 * 4 * @frame.size * @frame.size / 1000000
       return base * eco_frame.lengths()
     else
-      return 0
+      return 2.47
     end
   end
   def estimate(_)
