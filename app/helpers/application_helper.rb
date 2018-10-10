@@ -11,4 +11,10 @@ module ApplicationHelper
     "page"
   end
 
+  def frame_paths
+    [image_path('frame/aloitus-1.jpg') ,
+    image_path('frame/aloitus-2.jpg') ,
+    image_path('frame/aloitus-3.jpg') ,
+    image_path('frame/aloitus-4.jpg')]
+  end
 end

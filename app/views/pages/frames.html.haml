@@ -4,9 +4,19 @@
     %br
   .body
     .img85.img-frame
-      =image_tag "img/frames/Frame-aloitus.gif"
+      =image_tag "frame/aloitus-1.jpg" , id: "aloitus"
     %p
       =t("frames.explanation")
+:javascript
+  var currentSlide = 0;
+  var slideInterval = setInterval(nextSlide,3000);
+  var slideNames = #{frame_paths.to_json().html_safe} ;
+
+  function nextSlide() {
+    var slides = document.querySelectorAll('#aloitus');
+    slides[0].src = slideNames[currentSlide];
+    currentSlide = (currentSlide + 1) % slideNames.length;
+  }
 
 .topic
   .left-up.text-left
