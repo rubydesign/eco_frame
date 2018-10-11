@@ -39,3 +39,9 @@ fi:
               rakennesuunnittelijoita. Meillä on myös ammattitaitoiset ja
               luotettavat tekijät lähipiirissämme kaikkiin talonrakennuksen
               tehtäviin.
+    tool_head: Testaa suunnittelua
+    tool_1: Alla olevan linkin kautta voit kokeilla EcoFrame-talon
+            suunnittelua. Työkalu luo sinulle ensin rungon ja sitten talon toiveittesi mukaan.
+            Voit muuttaa mallin pituutta ja leveyttä, palkkien määrää sekä kokeilla erilaisia kattokulmia. Animaatio -toiminto näyttää EcoFrame-talon rakentamisen vaiheet.
+    tool_2: Käy kokeilemassa!
+    test: testaa mallia

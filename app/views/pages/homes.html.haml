@@ -69,3 +69,19 @@
   .right-down.text-left
     %h2=t("homes.design_head")
     %p=t("homes.design_1")
+
+.topic
+  .right-up
+    = link_to page_path(:house) do
+      =image_tag "img/frames/frame-animation.gif"
+  .left-down.text-left
+    %h2
+      =t("homes.tool_head")
+    %p
+      =t("homes.tool_1")
+      %br
+      %strong
+        =t("homes.tool_2")
+      %br
+      %br
+      = link_to t("homes.test") , page_path("house") , class: "button"
