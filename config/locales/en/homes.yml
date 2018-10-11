@@ -59,3 +59,9 @@ en:
               If you have not found an architect, we can help you. We know
               the engineers and neccessary steps to get your dream house
               onto paper and realized.
+
+    tool_head: Try yourself
+    tool_1: The tool that you find behind the link below let's you plan
+            an EcoFrameHouse. You can change the width and length, amount of posts, and change the angle of the roof. All in all it can give you a good idea of how an EcoFrameHouse will be built for your project.
+    tool_2: Try it out!
+    test: go to tool
