@@ -16,8 +16,8 @@ se:
     scale: Skala
     scale_desc: Föstora eller förminska perspektivet
     type: Stommens stil
-    type_desc: Prova olika typer av takstols-typer
-    try: Lönar sig att prova
+    type_desc: Testa olika typer av takstols-typer
+    try: Lönar sig att testa
     animate: Animera
     level: Fas
     width: Bredd
