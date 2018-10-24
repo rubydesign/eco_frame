@@ -14,7 +14,7 @@ header
     text-align: right
     margin: 60px 0px 0px 0px
     @media only screen and (max-width: 1180px)
-      font-size: 30px
+      font-size: 28px
     @media only screen and (max-width: 1080px)
       font-size: 24px
   .header-logo
@@ -23,15 +23,21 @@ header
     img
       float: left
       padding-top: 3px
-      width: 75%
+      width: 95%
     a
       color: #ffffff
       text-decoration: none
-    @include span(6)
-    @media only screen and (max-width: 1080px)
-      @include span(8)
-  .sub-title
     @include span(4)
+    @media only screen and (max-width: 1280px)
+      @include span(5)
+    @media only screen and (max-width: 1080px)
+      @include span(7)
+    @media only screen and (max-width: 880px)
+      @include span(9)
+  .sub-title
+    @include span(6)
+    @media only screen and (max-width: 1280px)
+      @include span(5)
     @media only screen and (max-width: 1080px)
       display: none
   .right
