@@ -1,6 +1,6 @@
 .index
   .footer
-    padding-top: 50%
+    padding-top: 100%
 
   .header
     text-align: center
@@ -34,23 +34,15 @@
 
     .main-logo
       background-color: rgba(53, 99, 25, 0.7)
+      min-height: 80%
 
     .headline1
       @media only screen and (max-width: 1000px)
         display: none
     .headline2
-      @media only screen and (min-width: 1000px)
-        display: none
-
-    .logo02-1
+      display: none
       @media only screen and (max-width: 1000px)
-        display: none
-    .logo02-2
-      @media only screen and (min-width: 1000px)
-        display: none
-    .logo02-3
-      @media only screen and (min-width: 700px)
-        display: none
+        display: block
 
   p
     font-size: 1.2em
@@ -59,7 +51,10 @@
 
   .section
     position: relative
-    padding: 20% 10%
+    padding-top: 20%
+    padding-right: 10%
+    padding-bottom: 20%
+    padding-left: 10%
     min-height: 100%
     width: 100%
     box-sizing: border-box
@@ -93,7 +88,15 @@
         text-align: center
     .main_box
       @include container(90%)
+      @media only screen and (max-width: 800px)
+        @include container(95%)
+      @media only screen and (max-width: 605px)
+        @include container(100%)
 
+  .section1
+    .section_box p
+      @media only screen and (max-width: 605px)
+        font-size: 1em
 
   .section1 , .section4
     .section_box
