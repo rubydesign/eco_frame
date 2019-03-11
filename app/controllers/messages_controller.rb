@@ -12,7 +12,6 @@ class MessagesController < ApplicationController
   # POST /messages
   def create
     @message = Message.new(message_params)
-    return if @message.email.downcase.include?("qq.com")
     if @message.valid?
       MessageMailer.submit( @message ).deliver_now
       redirect_to message_sent_path(locale: I18n.locale) , notice: 'Message was successfully sent.'
