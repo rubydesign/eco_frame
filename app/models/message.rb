@@ -6,20 +6,27 @@ class Message
 
   validates :name, :email , :message, presence: true
 
-  validate :email_name
+  validate :email_name , :email_domain , :codes
 
   def email_name
-    puts "called"
     errors.add(:email, "needs at") unless email.index("@")
-    name , domain = email.split("@")
+    name = email.split("@").first || ""
     if name.squeeze.length == 1
       errors.add(:email, "single char name")
     end
-    if domain && domain.split(".").first.to_i != 0
+  end
+  def email_domain
+    domain = (email.split("@").last || "").split(".").first || ""
+    if domain.to_i != 0
       errors.add(:email, "numeric domain")
     end
-    if domain && domain.split(".").first.downcase == "qq"
+    if domain.downcase == "qq"
       errors.add(:email, "spam elsewhere qq.")
+    end
+  end
+  def codes
+    message.codepoints.each do |code|
+      return errors.add(:message, "latin only") if code > 1000
     end
   end
 end
