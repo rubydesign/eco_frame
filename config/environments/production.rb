@@ -63,19 +63,19 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
           :address              => "smtp.yandex.com",
           :port                 => 465,
-          :domain               => Rails.application.credentials.domain_name,
-          :user_name            => Rails.application.credentials.admin_email,
-          :password             => Rails.application.credentials.admin_pass,
+          :domain               => "ecoframe.house",
+          :user_name            => ENV["admin_email"],
+          :password             => ENV["admin_pass"],
           :ssl                  => true,
           :tls                  => true,
           :authentication       => :login,
           :enable_starttls_auto => true
     }
-    config.action_mailer.default_url_options = { :host => Rails.application.credentials.domain_name }
+    config.action_mailer.default_url_options = { :host => "ecoframe.house" }
     config.action_mailer.perform_deliveries = true
     config.action_mailer.raise_delivery_errors = true
-    config.action_mailer.default_options = {  from: Rails.application.credentials.admin_email ,
-                                              bcc:  Rails.application.credentials.admin_email }
+    config.action_mailer.default_options = {  from: ENV["admin_email"] ,
+                                              bcc:  ENV["admin_email"] }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
