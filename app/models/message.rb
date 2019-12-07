@@ -4,7 +4,8 @@ class Message
 
   attr_accessor :name, :email , :phone , :message
 
-  validates :name, :email , :message, presence: true
+  validates :name, length: { in: 6..30 }
+  validates :message, length: { in: 30..500 }
 
   validate :email_name , :email_domain , :codes
 
