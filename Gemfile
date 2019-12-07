@@ -11,6 +11,7 @@ gem "pry-rails"
 gem "high_voltage"
 gem "haml"
 gem 'ruby2js'  , git: "https://github.com/rubydesign/ruby2js"
+gem 'valid_email'
 
 gem 'mini_racer'
 gem "libv8"

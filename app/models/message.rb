@@ -7,15 +7,10 @@ class Message
   validates :name, length: { in: 6..30 }
   validates :message, length: { in: 30..500 }
 
-  validate :email_name , :email_domain , :codes
+  validates :email, :presence => true, :email =>  {:mx => true , :ban_disposable_email => true}
 
-  def email_name
-    errors.add(:email, "needs at") unless email.index("@")
-    name = email.split("@").first || ""
-    if name.squeeze.length == 1
-      errors.add(:email, "single char name")
-    end
-  end
+  validate :email_domain , :codes
+
   def email_domain
     domain = (email.split("@").last || "").split(".").first || ""
     if domain.to_i != 0
