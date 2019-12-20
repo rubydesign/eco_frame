@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby "2.6.5"
 
 gem 'rails', '~> 5.2'
 gem 'puma', '~> 3.12'
@@ -11,7 +12,8 @@ gem "pry-rails"
 gem "high_voltage"
 gem "haml"
 gem 'ruby2js'  , git: "https://github.com/rubydesign/ruby2js"
-gem 'valid_email'
+gem 'valid_email2'
+gem 'invisible_captcha'
 
 gem 'mini_racer'
 gem "libv8"

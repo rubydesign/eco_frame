@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  invisible_captcha only: :create, honeypot: :title
 
   # GET /messages/1
   def show

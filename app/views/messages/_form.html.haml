@@ -1,4 +1,5 @@
 = form_with(model: message, local: true , url: "/#{I18n.locale}/messages") do |form|
+  = form.invisible_captcha :title
   = hidden_field_tag( :locale , I18n.locale)
   - if message.errors.any?
     #error_explanation
