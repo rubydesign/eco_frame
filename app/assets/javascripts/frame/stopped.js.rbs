@@ -5,7 +5,7 @@ class Stopped < EcoModel
   end
 
   def joins()
-    return self.posts*15
+    return self.posts * 16
   end
   def pieces()
     return self.posts * 8

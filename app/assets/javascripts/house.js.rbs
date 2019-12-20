@@ -50,8 +50,8 @@ end
 class House < Structure
   def initialize()
     super("house")
-    [Floor,Post,King,FloorBeams,Walls,
-        Slope,Tuuli,Space,Shell].each {|part| self.add_part(part)}
+    [Floor , FloorBeams , Post , King , Walls,
+     Slope , Tuuli , Space , Shell].each {|part| self.add_part(part)}
     self.update()
   end
 end
@@ -60,10 +60,10 @@ class Frame < Structure
     super("frame")
     [Floor,Post].each {|part| self.add_part(part)}
     @trusses = {  king: King.new(@data) ,
-                  pulp: Pulpetti.new(@data),
+                  stopped: Stopped.new(@data),
                   collar: Collar.new(@data),
                   hammer: Hammer.new(@data),
-                  stopped: Stopped.new(@data),
+                  pulp: Pulpetti.new(@data),
                   none: NoTruss.new(@data , "none")}
     self.set_truss(:king)
     self.update()

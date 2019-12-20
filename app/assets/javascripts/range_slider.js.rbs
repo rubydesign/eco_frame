@@ -3,26 +3,22 @@ class RangeSlider < Vue
                 <div class="rangeslider">
                   <slot> <b> {{value}} </b> </slot>
                   <br/>
-                  <input :min="min_v" :max="max" :step="step" type="range"
+                  <input :min="min_v" :max="max" :step="step_v" type="range"
                         v-bind:value = "value"
                         v-on:input = "handleValue($event)"/>
                 </div>
               EOS
-  props [:value , :max , :text , :min , :type ]
+  props [:value , :max , :text , :min , :type , :step]
   def initialize
   end
   def min_v
     return (self.min == null) ? 0 : self.min
   end
-  def step
-    return (self.max  > 100) ? 5 : 1
+  def step_v
+    return (self.min == null) ? 1 : self.step
   end
   def handleValue(event)
     value = event.target.value
-    if( self.type == null)
-      Vue.emit('input', parseInt(value))
-    else
-      Vue.emit('input', parseFloat(value))
-    end
+    Vue.emit('input', parseFloat(value))
   end
 end

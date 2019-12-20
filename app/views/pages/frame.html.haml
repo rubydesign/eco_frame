@@ -23,7 +23,7 @@
 
 
     .post_control
-      %range-slider{"v-model":"frame.angle" , ":min":"5", ":max":"46" }
+      %range-slider{"v-model":"frame.angle" , ":min":"5", ":max":"46" , ":step": "1"}
         %b
           = t("frame.pitch")
           {{frame.angle}}&deg;
@@ -32,15 +32,15 @@
         =t("frame.height")
         \:
         {{Math.floor(truss_height)}}cm)
-      %range-slider{"v-model":"frame.height" , ":min":"50", ":max":"180" }
+      %range-slider{"v-model":"frame.height" , ":min":"50", ":max":"180" , ":step": "1"}
         %b
           =t("frame.height")
           {{frame.height*2}}
-      %range-slider{"v-model":"frame.width" ,":min":"50", ":max":"330"}
+      %range-slider{"v-model":"frame.width" ,":min":"50", ":max":"330", ":step": "5"}
         %b
           =t("frame.width")
           {{frame.width*2}}
-      %range-slider{"v-model":"frame.spacing" , ":min":"50", ":max":"330"}
+      %range-slider{"v-model":"frame.spacing" , ":min": "50", ":max": "330" , ":step": "5"}
         %b
           =t("frame.length")
           {{length*2}}
@@ -50,15 +50,17 @@
         \:
         {{frame.spacing*2}})
       %range-slider{"v-bind:value":"posts" , "v-on:input":"set_posts($event)",
-                    ":min":"2", ":max":"11"}
+                    ":min":"2", ":max":"11" , ":step": "1"}
         %b
           =t("frame.posts")
           {{posts}}
-      %range-slider{"v-model":"frame.size" ,":min":"5", ":max":"12.5" , ":step":"1.25"}
+      %range-slider{"v-model": "frame.size" ,":min": "5.1", ":max": "13.1" ,
+                    ":step": "1.25" , ":type": "range"}
         %b
           =t("frame.size")
-          {{frame.size*2}}cm ({{(frame.size*2/2.5).toFixed(0)}}in)
-      %range-slider{"v-bind:value":"scale", "v-on:input":"set_scale($event)",":min":30, ":max":150}
+          {{(frame.size*2.0/2.5).toFixed(0)}} in ({{(frame.size*2.0/2.5).toFixed(0) * 2.5}} cm)
+      %range-slider{"v-bind:value":"scale", "v-on:input":"set_scale($event)",
+                    ":min":30, ":max":150 ,  ":step": "1"}
         %span
           %b=t("frame.scale")
           %b {{scale}}
@@ -69,9 +71,9 @@
       .rangeslider
         %select{"v-model":"truss"}
           %option{ value:"king"} King
+          %option{ value:"stopped"} Stopped
           %option{ value:"collar"} Collar
           %option{ value:"hammer"} Hammer
-          %option{ value:"stopped"} Stopped
           %option{ value:"pulp"} Pulpetti
           %option{ value:"none"} No Truss
         %br

@@ -105,8 +105,8 @@ class VueController < Vue
     end
   end
   def estimate(_)
-    base =  self.joins() * (30 + 12 * @frame.size)*1.24
-    base += self.cubes() * 850
-    return 100*Math.floor(base/100) + " - " + 100*Math.floor((base*1.09)/100)
+    base =  self.joins() * (40 + 14 * @frame.size)*1.24
+    base += self.cubes() * 900
+    return 100*Math.floor(base/100) + " - " + 100*Math.floor((base*1.1)/100)
   end
 end

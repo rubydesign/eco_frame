@@ -5,7 +5,7 @@ class Hammer < EcoModel
   end
 
   def joins()
-    return self.posts*19
+    return self.posts * 20
   end
   def pieces()
     return self.posts * 11
